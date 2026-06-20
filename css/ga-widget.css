@@ -72,6 +72,12 @@
   color: #999;
   font-size: 0.88rem;
 }
+.ga-collecting {
+  text-align: center;
+  color: #888;
+  font-size: 0.95rem;
+  padding: 0.6rem 0 0.2rem;
+}
 
 /* 暗色模式 */
 [data-user-color-scheme='dark'] .ga-board {

@@ -55,6 +55,14 @@
         new Date(data.updated).toLocaleDateString('zh-CN')
       : '';
 
+    if (!refs.length && !posts.length) {
+      // 数据全空（GA 刚接入、还没攒到数据）时，显示友好提示而非空榜单
+      box.innerHTML =
+        '<div class="ga-collecting">📊 访问统计收集中，稍后再来看看～</div>' +
+        (note ? '<div class="ga-note">' + esc(note) + '</div>' : '');
+      return box;
+    }
+
     box.innerHTML =
       '<div class="ga-board-inner">' +
         '<div class="ga-col">' +
@@ -78,8 +86,12 @@
                 document.querySelector('main');
     if (!board) return;
     var firstCard = board.querySelector('.index-card');
-    if (firstCard) board.insertBefore(node, firstCard);
-    else board.appendChild(node);
+    if (firstCard && firstCard.parentNode) {
+      // 插到第一张卡片自身父节点内的它前面（firstCard 未必是 board 的直接子节点）
+      firstCard.parentNode.insertBefore(node, firstCard);
+    } else {
+      board.insertBefore(node, board.firstChild);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
