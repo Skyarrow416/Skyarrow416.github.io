@@ -519,7 +519,7 @@
 <blockquote>
 <p>BloodHound分析 - 第一个关键权限：</p>
 <ul>
-<li><a href="mailto:&#x4f;&#79;&#x52;&#x45;&#78;&#68;&#x40;&#x52;&#69;&#x42;&#x4f;&#85;&#x4e;&#68;&#x2e;&#x48;&#x54;&#x42;">OOREND@REBOUND.HTB</a>对<a href="mailto:&#83;&#69;&#82;&#86;&#73;&#67;&#69;&#77;&#x47;&#x4d;&#x54;&#64;&#x52;&#x45;&#x42;&#x4f;&#x55;&#78;&#x44;&#46;&#x48;&#84;&#66;">SERVICEMGMT@REBOUND.HTB</a>拥有AddSelf权限</li>
+<li><a href="mailto:&#x4f;&#79;&#82;&#69;&#x4e;&#x44;&#x40;&#82;&#x45;&#66;&#79;&#85;&#78;&#68;&#46;&#72;&#x54;&#66;">OOREND@REBOUND.HTB</a>对<a href="mailto:&#83;&#69;&#82;&#x56;&#x49;&#67;&#69;&#x4d;&#71;&#x4d;&#x54;&#64;&#82;&#69;&#x42;&#79;&#85;&#x4e;&#x44;&#x2e;&#72;&#x54;&#x42;">SERVICEMGMT@REBOUND.HTB</a>拥有AddSelf权限</li>
 <li>AddSelf权限：允许将自己添加到目标组中</li>
 </ul>
 </blockquote>
@@ -527,11 +527,11 @@
 <blockquote>
 <p>BloodHound分析 - 第二个关键权限：</p>
 <ul>
-<li><a href="mailto:&#x53;&#69;&#x52;&#86;&#73;&#x43;&#69;&#x4d;&#x47;&#77;&#84;&#64;&#x52;&#69;&#x42;&#x4f;&#85;&#x4e;&#68;&#x2e;&#72;&#84;&#x42;">SERVICEMGMT@REBOUND.HTB</a>组对SERVICE <a href="mailto:&#85;&#x53;&#x45;&#82;&#x53;&#x40;&#x52;&#69;&#66;&#x4f;&#85;&#x4e;&#68;&#46;&#72;&#84;&#x42;">USERS@REBOUND.HTB</a>拥有GenericAll权限</li>
+<li><a href="mailto:&#83;&#69;&#x52;&#86;&#73;&#x43;&#x45;&#x4d;&#x47;&#77;&#84;&#x40;&#x52;&#x45;&#66;&#x4f;&#85;&#x4e;&#x44;&#x2e;&#72;&#84;&#66;">SERVICEMGMT@REBOUND.HTB</a>组对SERVICE <a href="mailto:&#85;&#83;&#69;&#82;&#x53;&#x40;&#82;&#69;&#x42;&#x4f;&#x55;&#x4e;&#68;&#x2e;&#72;&#x54;&#66;">USERS@REBOUND.HTB</a>拥有GenericAll权限</li>
 <li>GenericAll：完全控制权限，可以修改组成员、属性等</li>
 </ul>
 </blockquote>
-<p>查看SERVICE <a href="mailto:&#x55;&#x53;&#x45;&#x52;&#83;&#64;&#82;&#69;&#66;&#79;&#x55;&#x4e;&#68;&#x2e;&#x48;&#x54;&#x42;">USERS@REBOUND.HTB</a>，发现<a href="mailto:&#87;&#x49;&#78;&#82;&#x4d;&#95;&#x53;&#x56;&#x43;&#64;&#82;&#69;&#66;&#x4f;&#x55;&#78;&#68;&#x2e;&#72;&#84;&#x42;">WINRM_SVC@REBOUND.HTB</a>在此组中，该成员可以远程登录主机。</p>
+<p>查看SERVICE <a href="mailto:&#x55;&#x53;&#x45;&#82;&#x53;&#x40;&#82;&#69;&#x42;&#79;&#85;&#x4e;&#68;&#x2e;&#72;&#x54;&#66;">USERS@REBOUND.HTB</a>，发现<a href="mailto:&#87;&#73;&#x4e;&#82;&#77;&#95;&#83;&#x56;&#x43;&#64;&#82;&#x45;&#x42;&#79;&#x55;&#x4e;&#68;&#46;&#72;&#x54;&#x42;">WINRM_SVC@REBOUND.HTB</a>在此组中，该成员可以远程登录主机。</p>
 <blockquote>
 <p>攻击路径分析：</p>
 <ol>
@@ -542,7 +542,7 @@
 </ol>
 </blockquote>
 <p>那么利用链已经清晰，开始利用</p>
-<p>首先将<a href="mailto:&#x4f;&#79;&#82;&#x45;&#x4e;&#68;&#x40;&#82;&#x45;&#x42;&#x4f;&#x55;&#78;&#68;&#x2e;&#x48;&#84;&#x42;">OOREND@REBOUND.HTB</a>加入<a href="mailto:&#83;&#69;&#x52;&#86;&#x49;&#x43;&#x45;&#x4d;&#x47;&#x4d;&#x54;&#64;&#82;&#x45;&#x42;&#x4f;&#85;&#78;&#68;&#x2e;&#x48;&#84;&#x42;">SERVICEMGMT@REBOUND.HTB</a></p>
+<p>首先将<a href="mailto:&#x4f;&#x4f;&#x52;&#x45;&#78;&#x44;&#x40;&#x52;&#69;&#x42;&#x4f;&#x55;&#78;&#x44;&#46;&#72;&#84;&#66;">OOREND@REBOUND.HTB</a>加入<a href="mailto:&#83;&#x45;&#82;&#86;&#73;&#x43;&#x45;&#x4d;&#71;&#x4d;&#84;&#64;&#x52;&#69;&#x42;&#79;&#x55;&#x4e;&#68;&#x2e;&#72;&#x54;&#x42;">SERVICEMGMT@REBOUND.HTB</a></p>
 <blockquote>
 <p>使用bloodyAD工具执行权限提升链：</p>
 <ul>
